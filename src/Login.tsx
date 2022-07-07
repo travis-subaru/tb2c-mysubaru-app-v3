@@ -22,14 +22,22 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
     return (
         <View style={{ backgroundColor: Colors.background, flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text style={{color: Colors.copyPrimary, padding: 20, fontSize: 34}}>// MySUBARU Logo //</Text>
+            <Text style={{color: Colors.copyPrimary, paddingVertical: 40, fontSize: 34}}>// MySUBARU Logo //</Text>
             <MyTextInput label="Username" text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
-            <MyTextInput label="Password" text={password} onChangeText={text => setPassword(text)} secureTextEntry={true}></MyTextInput>
+            <MyTextInput label="Password" text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} paddingBottom={false}></MyTextInput>
             <MyCheckBox label="Remember Username/Password" checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
             <MyPrimaryButton style={{width: 350}} title="Log In"></MyPrimaryButton>
             <MyLinkButton style={{width: 350}} title="Forgot Something?"></MyLinkButton>
-            <MyAlternateButton style={{width: 350}} title="Try it in Demo Mode"></MyAlternateButton>
-            <MyText>V. 2.0.0c</MyText>
+            <View style={{flexGrow:1}}></View>
+            <MyText>V. 2.0.0c-longVersion</MyText>
+            <View style={{width: 350, paddingVertical: 20}}>
+                <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"  }}>
+                    <MyAlternateButton title="Try it in\nDemo Mode"></MyAlternateButton>
+                    <MyAlternateButton title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
+                </View>
+            </View>
+            
+            
         </View>
     );
 };

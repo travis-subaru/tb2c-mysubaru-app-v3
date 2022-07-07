@@ -8,12 +8,13 @@ import { useColors, Palette } from './MyColors';
 export const baseFontSize = 14;
 
 export interface MyTextProps {
-    children?: any;
+    style?: any
+    children?: any
 }
 
 export const MyText = (props: MyTextProps) => {
     const Colors: Palette = useColors();
-    return (<Text style={{ color: Colors.copyPrimary}}>
+    return (<Text style={[props.style, { color: Colors.copyPrimary }]}>
         {props.children}
     </Text>);
 }

@@ -12,6 +12,7 @@ export interface MyButtonProps {
     style?: any
 }
 
+
 /** Primary (blue, filled) button. Use in layouts with 2-3 buttons */
 export const MyPrimaryButton = (props: MyButtonProps) => {
     const Colors: Palette = useColors();
@@ -50,9 +51,12 @@ export const MyAlternateButton = (props: MyButtonProps) => {
     const Colors: Palette = useColors();
     const [pressed, setPressed] = useState(false);
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
+    const lines = (props.title?.split('\\n') ?? []).map((line) => {
+        return <Text style={{color: staticWhite, fontSize: baseFontSize, fontWeight: 'bold' }}>{line}</Text>
+    })
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} style={[MyStyles.roundedEdge, { backgroundColor: Colors.copySecondary }, props.style]}>
-        <Text style={{color: staticWhite, fontSize: baseFontSize, fontWeight: 'bold'}}>{props.title}</Text>
+        {lines}
     </MyPressable>); 
 }
 
