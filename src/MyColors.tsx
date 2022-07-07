@@ -6,9 +6,15 @@ import { Appearance } from 'react-native';
 
 export interface Palette { background: string; copyPrimary: string; copySecondary: string; error: string; link: string; buttonPrimary: string; buttonSecondary: string }
 
-const midnight: Palette = {
-    background: "#1D252C", // Midnight
-    copyPrimary: "#FFF", // White
+/** Always dark. Ignores light/dark mode setting. */
+export const staticMidnight = "#1D252C";
+
+/** Always light. Ignores light/dark mode setting. */
+export const staticWhite = "#FFF";
+
+const midnightPalette: Palette = {
+    background: staticMidnight,
+    copyPrimary: staticWhite,
     copySecondary: "#91979A", // Light Grey
     error: "#E95756", // Light Red
     link: "#3A8EEE", // Light Blue
@@ -16,9 +22,9 @@ const midnight: Palette = {
     buttonSecondary: "#3A8EEE", // Light Blue
 };
 
-const white: Palette = {
-    background: "#FFF", // White
-    copyPrimary: "#1D252C", // Midnight
+const whitePalette: Palette = {
+    background: staticWhite,
+    copyPrimary: staticMidnight, 
     copySecondary: "#5C6163", // Grey
     error: "#E22828", // Red
     link: "#1971D4", // Blue
@@ -27,10 +33,10 @@ const white: Palette = {
 };
 
 export const useColors = () => {
-    const initialColors = Appearance.getColorScheme() === "dark" ? midnight : white;
+    const initialColors = Appearance.getColorScheme() === "dark" ? midnightPalette : whitePalette;
     const [colors, setColors] = useState(initialColors);
     const callback = ({colorScheme}: any) => {
-        setColors(colorScheme === "dark" ? midnight : white);
+        setColors(colorScheme === "dark" ? midnightPalette : whitePalette);
     }
     useEffect(() => {
         const appearanceSubscription = Appearance.addChangeListener(callback);

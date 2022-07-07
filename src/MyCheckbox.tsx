@@ -1,6 +1,9 @@
 import React from 'react';
-import { Text, View, Pressable, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { useColors, Palette } from './MyColors';
+import { MyPressable } from './MyPressable';
+import { MyStyles } from './MyStyles';
+import { MyText } from './MyText';
 
 // TODO: Get checkmark from style assets
 
@@ -17,12 +20,12 @@ export const MyCheckBox = (props: MyCheckBoxProps) => {
     const outerColor = isChecked ? Colors.buttonPrimary : Colors.copySecondary;
     const image = isChecked ? <Image style={{ width: 20, height: 20 }} source={ require("../img/checkmark.png")}></Image> : undefined
 
-    return (<Pressable style={{ flexDirection: 'row', maxWidth: 350 }} onPress={() => props.onChangeValue(!isChecked)}>
+    return (<MyPressable style={{ flexDirection: 'row', minHeight: 50 }} onPress={() => props.onChangeValue(!isChecked)}>
         <View style={{ width: 25, height: 25, backgroundColor: innerColor, borderColor: outerColor, borderWidth: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             {image}
         </View>
         <View style={{ height: 25, flexDirection: 'column', justifyContent: 'center', paddingHorizontal: 10 }}> 
-            <Text style={{ color: Colors.copyPrimary }}>{props.label}</Text>
+            <MyText>{props.label}</MyText>
         </View>
-    </Pressable>);
+    </MyPressable>);
 }
