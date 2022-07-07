@@ -11,6 +11,7 @@ import { MyTextField } from './MyTextField'
 // TODO: Network
 // TODO: Safe Area
 // TODO: Actual app version
+// TODO: Environment select
 
 const Login = () => {
     const Colors: Palette = useColors();
@@ -22,7 +23,7 @@ const Login = () => {
             <Text style={{color: Colors.copyPrimary, padding: 20, fontSize: 34}}>// MySUBARU Logo //</Text>
             <MyTextField label="Username" text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextField>
             <MyTextField label="Password" text={password} onChangeText={text => setPassword(text)} secureTextEntry={true}></MyTextField>
-            <MyCheckBox label="Remember Username/Password"></MyCheckBox>
+            <MyCheckBox label="Remember Username/Password" checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
             <MyButton title="Log In"></MyButton>
             <MyButton title="Forgot Something?"></MyButton>
             <MyButton title="Try it in Demo Mode"></MyButton>

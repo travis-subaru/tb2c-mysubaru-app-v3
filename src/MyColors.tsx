@@ -4,7 +4,7 @@ import { Appearance } from 'react-native';
 // Colors are from page 17 of style guide
 // NOTE: "Light Background" fails ADA checker (https://adasitecompliance.com/ada-color-contrast-checker/)
 
-interface Palette { background: string; copyPrimary: string; copySecondary: string; error: string; link: string; buttonPrimary: string; buttonSecondary: string }
+export interface Palette { background: string; copyPrimary: string; copySecondary: string; error: string; link: string; buttonPrimary: string; buttonSecondary: string }
 
 const midnight: Palette = {
     background: "#1D252C", // Midnight
@@ -26,7 +26,7 @@ const white: Palette = {
     buttonSecondary: "#1971D4", // Blue
 };
 
-function useColors() {
+export const useColors = () => {
     const initialColors = Appearance.getColorScheme() === "dark" ? midnight : white;
     const [colors, setColors] = useState(initialColors);
     const callback = ({colorScheme}: any) => {
@@ -38,5 +38,3 @@ function useColors() {
     });
     return colors;
 }
-
-export { Palette, useColors };

@@ -5,7 +5,15 @@ import { baseFontSize } from './MyFonts';
 
 // TODO: (Not used in login) Disabled fields, Multiline, Errors, Character count 
 
-const MyTextField = (props) => {
+export interface MyTextFieldProps { 
+    onChangeText: (text: string) => void
+    text?: string
+    label?: string
+    autoCapitalize?: string // Used by Username
+    secureTextEntry?: boolean // Used by password
+}
+
+export const MyTextField = (props: MyTextFieldProps) => {
     const Colors: Palette = useColors();
     const [isFocused, setIsFocused] = useState(false);
     const text = props.text ?? '';
@@ -29,5 +37,3 @@ const MyTextField = (props) => {
         </View>
     </View>);
 }
-
-export { MyTextField }; 

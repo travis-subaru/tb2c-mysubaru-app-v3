@@ -6,7 +6,7 @@ import { useColors, Palette } from './MyColors';
 
 const MyButton = (props) => {
     const Colors: Palette = useColors();
-    return (<Button {...props}>{props.children}</Button>);
+    return (<Button style={{}} {...props}>{props.children}</Button>);
 }
 
 export { MyButton }; 
