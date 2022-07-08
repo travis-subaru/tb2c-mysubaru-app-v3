@@ -5,7 +5,7 @@ import { MyAlternateButton, MyPrimaryButton, MyLinkButton } from './MyButton';
 import { MyCheckBox } from './MyCheckbox';
 import { MyTextInput } from './MyTextInput'
 import { MyText } from './MyText';
-import { net_getEnviroment, net_login } from './NETLogin';
+import { net_login } from './NETLogin';
 
 // TODO: MySubaru Logo
 // TODO: Helvetica Neue Font Collection
@@ -26,13 +26,13 @@ const Login = () => {
 
     const onPressLogin = async () => {
         setRes("ok, button");
-        const response = await net_login(net_getEnviroment());
-        if (response.data == null) {
-            setRes("response.data == null");
+        const response = await net_login({loginUsername: username, password: password, rememberUserCheck: rememberMe ? "on" : "off"});
+        if (response.success && response.dataName == "sessionData") {
+            setRes(response.data?.deviceRegistered ? "Device Registered :: Proceed to App" : "Device Not Registered :: Proceed to 2FA");
         } else {
-            setRes(JSON.stringify(response.data.account));
+            setRes(JSON.stringify(response));
         }
-        
+
     };
 
     return (
@@ -52,7 +52,7 @@ const Login = () => {
                 </View>
             </View>
             <Text style={{width: 350, paddingVertical: 20}}>{res}</Text>
-            
+
         </View>
     );
 };
