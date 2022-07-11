@@ -25,7 +25,7 @@ export const setLanguage = (lang: LanguageID) => {
     listeners.forEach((l) => { l.fn(); });
 }
 
-setLanguage("fr"); // TODO: Infer or load
+setLanguage("en"); // TODO: Infer or load
 
 export const useLanguage = () => {
     const [get, set] = useState(languageData);

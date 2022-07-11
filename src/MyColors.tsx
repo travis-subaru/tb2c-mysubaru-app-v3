@@ -24,7 +24,7 @@ const midnightPalette: Palette = {
 
 const whitePalette: Palette = {
     background: staticWhite,
-    copyPrimary: staticMidnight, 
+    copyPrimary: staticMidnight,
     copySecondary: "#5C6163", // Grey
     error: "#E22828", // Red
     link: "#1971D4", // Blue
@@ -32,15 +32,24 @@ const whitePalette: Palette = {
     buttonSecondary: "#1971D4", // Blue
 };
 
-export const useColors = () => {
-    const initialColors = Appearance.getColorScheme() === "dark" ? midnightPalette : whitePalette;
-    const [colors, setColors] = useState(initialColors);
-    const callback = ({colorScheme}: any) => {
-        setColors(colorScheme === "dark" ? midnightPalette : whitePalette);
-    }
+/** Dynamic version of useColorScheme.
+ *
+ *  Cycles on setting change.
+ */
+ export const useColorSchemeDynamic = () => {
+    const colorMode = Appearance.getColorScheme();
+    const [get, set] = useState(colorMode);
     useEffect(() => {
-        const appearanceSubscription = Appearance.addChangeListener(callback);
+        const appearanceSubscription = Appearance.addChangeListener(() => {
+            set(Appearance.getColorScheme());
+        });
         return () => appearanceSubscription.remove();
     });
-    return colors;
+    return get;
+};
+
+export const useColors = () => {
+    return useColorSchemeDynamic() === "dark" ? midnightPalette : whitePalette;
 }
+
+
