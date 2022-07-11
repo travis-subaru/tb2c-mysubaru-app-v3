@@ -11,6 +11,7 @@ const environments: { [key in NETEnvironmentID]: NETEnvironment } = {
     cloudqa: { env: "cloudqa", domain: "mobileapi.qa.subarucs.com" },
     cloudprod: { env: "cloudprod", domain: "mobileapi.prod.subarucs.com" },
     clouddr: { env: "clouddr", domain: "mobileapi.dr-prod.subarucs.com" },
+    // TODO: Demo
 }
 
 let _env: NETEnvironmentID = "cloudqa";

@@ -1,12 +1,11 @@
 import { getEnviroment } from "./NETEnvironment";
 
-// TODO: Standardize these
+// TODO: Document these
 export type ErrorCode = "networkError" | "jsonError" | "parseError" | "invalidAccount";
 
-// TODO: Standardize these
-export type DataName = "sessionData";
+// TODO: Document these
+export type DataName = "sessionData" | "error";
 
-// ????: Do all responses have this shape?
 export interface NETResponse {
     success: "true" | "false"
     errorCode: null | ErrorCode
@@ -72,17 +71,40 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
             response.json().then((json) => {
                 parseResponse(json).then((responseObject) => {
-                    resolve(responseObject);
+                    resolve(responseObject);  // Success
                 }).catch((reason) => {
-                    resolve({success: "false", errorCode: "parseError", dataName: "sessionData", data: reason, endpoint: endpoint});
+                    resolve({success: "false", errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint});
                 });;
             }).catch((reason) => {
-                resolve({success: "false", errorCode: "jsonError", dataName: "sessionData", data: reason, endpoint: endpoint});
+                resolve({success: "false", errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint});
             });
         }).catch((reason) => {
-            resolve({success: "false", errorCode: "networkError", dataName: "sessionData", data: reason, endpoint: endpoint});
+            resolve({success: "false", errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint});
         });
     });
+}
+
+type RequestID = number
+type ListenerID = number
+
+export const startRequest = (endpoint: string, init?: RequestInit | undefined): RequestID => {
+    // Start a request object
+    // Add to process table
+    // Return RequestID
+}
+
+export const stopRequest = (id: RequestID): void => {
+    // Find process in table
+    // Abort request object
+}
+
+export const addListener(pattern: number | object, handler: (response: NETResponse) => void): ListenerID => {
+    // Add to listener table
+    // Return ListenerID
+}
+
+export const removeListener(id: ListenerID): void => {
+    // Remove listener from table
 }
 
 /* Success response sample
