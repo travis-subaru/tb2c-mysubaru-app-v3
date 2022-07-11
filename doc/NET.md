@@ -21,7 +21,6 @@ Removes the "throwing" colors, but sync / async are still present.
 
     export const myFetch = async (url: string, init?: RequestInit | undefined): Promise<NETResponse> => {
         // Roll errors into "successful failure"
-        // Abstract over any kind of error
     }
  
 ## Proposed Option #4 (request / listen):
@@ -29,6 +28,8 @@ Covers all cases, fully disconnects UI from network
 
     type RequestID = number
     type ListenerID = number
+
+    export type DataName = "sessionData" | "error"; // etc...
 
     export const startRequest = (url: string, init?: RequestInit | undefined): RequestID => {
         // Start a request object
@@ -41,7 +42,7 @@ Covers all cases, fully disconnects UI from network
         // Abort request object
     }
 
-    export const addListener(pattern: number | object, handler: (response: NETResponse) => void): ListenerID => {
+    export const addListener(pattern: RequestID | DataName, handler: (response: NETResponse) => void): ListenerID => {
         // Add to listener table
         // Optional: immediately fire handler with current cached data
         // Return ListenerID
