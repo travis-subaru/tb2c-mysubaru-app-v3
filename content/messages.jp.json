@@ -1,0 +1,10 @@
+{
+    "login": {
+        "username": "ユーザー名",
+        "password": "パスワード",
+        "welcome": "こんにちは"
+    },
+    "demoFill": {
+        "retailer": "こんにちは"
+    }
+}
