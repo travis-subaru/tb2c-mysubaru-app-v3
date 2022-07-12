@@ -1,38 +1,32 @@
 import { useEffect, useState } from 'react';
+import { addListener, getItem, removeListener, setItem } from './Local';
 
 type LanguageID = "en" | "es" | "fr" | "jp"
-interface Listener {
-    id: number
-    fn: () => void
-}
-
-let currentLanguage: LanguageID;
-let languageData: Language;
-let listeners: Listener[] = [];
 
 export const getLanguages = (): LanguageID[] => {
     return ["en", "fr"];
 }
 
 export const setLanguage = (lang: LanguageID) => {
-    if (lang == "en") {
-        languageData = require("../content/messages.en.json");
-    }
-    if (lang == "fr") {
-        languageData = require("../content/messages.fr.json");
-    }
-    currentLanguage = lang;
-    listeners.forEach((l) => { l.fn(); });
+    setItem("language", lang);
 }
 
-setLanguage("en"); // TODO: Infer or load
+const getLanguageData = (lang: LanguageID): Language => {
+    switch (lang) {
+        case "en": return require("../content/messages.en");
+        case "es": return require("../content/messages.es");
+        case "fr": return require("../content/messages.fr");
+        case "jp": return require("../content/messages.jp");
+    }
+}
+
+addListener("language", (lang) => setItem("languageData", getLanguageData(lang)));
 
 export const useLanguage = () => {
-    const [get, set] = useState(languageData);
+    const [get, set] = useState(getItem("languageData"));
     useEffect(() => {
-        const id = Math.random();
-        listeners.push({ id: id, fn: () => set(languageData) })
-        return () => { listeners = listeners.filter((l) => l.id == id) }
+        const id = addListener("languageData", (value) => set(value));
+        return () => removeListener(id)
     });
     return get;
 }
