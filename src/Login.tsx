@@ -49,7 +49,7 @@ const Login = () => {
         <View style={{ backgroundColor: Colors.background, flex: 1, justifyContent: "center", alignItems: "center" }}>
             <Text style={{color: Colors.copyPrimary, paddingVertical: 40, fontSize: 34}}>// MySUBARU Logo //</Text>
             <MyTextInput name="username" label={L.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
-            <MyTextInput name="password" label={L.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} paddingBottom={false}></MyTextInput>
+            <MyTextInput name="password" label={L.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} usePaddingBottom={false}></MyTextInput>
             <MyCheckBox label={L.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
             <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={L.login.logIn}></MyPrimaryButton>
             <MyLinkButton style={{width: 350}} title={L.login.forgotSomething}></MyLinkButton>
