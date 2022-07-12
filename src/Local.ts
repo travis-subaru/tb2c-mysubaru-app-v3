@@ -5,7 +5,7 @@
  * */
 
 export type ListenerID = number;
-export type ListenerKey = "appState" | "language" | "languageData";
+export type ListenerKey = "appState" | "environment" | "language" | "languageData";
 
 interface Listener {
     id: ListenerID
@@ -15,12 +15,13 @@ interface Listener {
 
 let store = {};
 let listeners: Listener[] = [];
+let sequenceObject = 0;
 
 /** Begin listening for changes to a specific key.
  *
  *  May reply immediately if key already has data. */
 export const addListener = (key: ListenerKey, handler: (data: any) => void): ListenerID => {
-    const id: ListenerID = Math.random();
+    const id: ListenerID = sequenceObject++;
     listeners.push({id: id, key: key, fn: handler})
     const existing = store[key];
     if (existing) {
@@ -31,7 +32,7 @@ export const addListener = (key: ListenerKey, handler: (data: any) => void): Lis
 
 /** Remove a listener. */
 export const removeListener = (id: ListenerID): void => {
-    listeners = listeners.filter((l) => l.id == id);
+    listeners = listeners.filter((l) => l.id != id);
 }
 
 /** Return current value of stored key, if present. */

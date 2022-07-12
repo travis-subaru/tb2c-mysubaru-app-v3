@@ -1,3 +1,5 @@
+import { getItem } from "./Local";
+
 export type NETEnvironmentID = "local8080" | "local8084" | "cloudqa" | "cloudprod" | "clouddr";
 
 export interface NETEnvironment {
@@ -14,12 +16,7 @@ const environments: { [key in NETEnvironmentID]: NETEnvironment } = {
     // TODO: Demo
 }
 
-let _env: NETEnvironmentID = "cloudqa";
-
-export const setEnvironment = (name: NETEnvironmentID) => {
-    _env = name;
-}
-
-export const getEnviroment = (name?: NETEnvironmentID): NETEnvironment => {
-    return environments[name ?? _env];
+export const getEnviroment = (): NETEnvironment => {
+    const env: NETEnvironmentID = getItem('environment') ?? "cloudqa"
+    return environments[env];
 }

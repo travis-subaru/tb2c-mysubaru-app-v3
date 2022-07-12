@@ -3,7 +3,6 @@ import { Text  } from 'react-native';
 import { useColors, Palette, staticWhite } from './MyColors';
 import { MyPressable } from './MyPressable';
 import { MyStyles } from './MyStyles';
-import { baseFontSize } from './MyText';
 
 export interface MyButtonProps {
     title?: string
@@ -21,7 +20,7 @@ export const MyPrimaryButton = (props: MyButtonProps) => {
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyles.roundedEdge, { backgroundColor: Colors.buttonPrimary }, props.style]}>
-        <Text style={{color: staticWhite, fontSize: baseFontSize, fontWeight: 'bold'}}>{props.title}</Text>
+        <Text style={[MyStyles.buttonText, { color: staticWhite }]}>{props.title}</Text>
     </MyPressable>);
 }
 
@@ -32,7 +31,7 @@ export const MySecondaryButton = (props: MyButtonProps) => {
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[{ borderColor: Colors.buttonSecondary }, MyStyles.roundedEdge, props.style]}>
-        <Text style={{color: Colors.buttonSecondary, fontSize: baseFontSize, fontWeight: 'bold'}}>{props.title}</Text>
+        <Text style={[MyStyles.buttonText, { color: Colors.buttonSecondary }]}>{props.title}</Text>
     </MyPressable>);
 }
 
@@ -42,8 +41,8 @@ export const MyLinkButton = (props: MyButtonProps) => {
     const [pressed, setPressed] = useState(false);
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
 
-    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[,props.style]}>
-        <Text style={{color: Colors.buttonSecondary, fontSize: baseFontSize, fontWeight: 'bold'}}>{props.title}</Text>
+    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[props.style]}>
+        <Text style={[MyStyles.buttonText, { color: Colors.buttonSecondary }]}>{props.title}</Text>
     </MyPressable>);
 }
 
@@ -53,7 +52,7 @@ export const MyAlternateButton = (props: MyButtonProps) => {
     const [pressed, setPressed] = useState(false);
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
     const lines = (props.title?.split('\\n') ?? []).map((line, i) => {
-        return <Text key={i} style={{color: staticWhite, fontSize: baseFontSize, fontWeight: 'bold' }}>{line}</Text>
+        return <Text key={i} style={[MyStyles.buttonText, { color: staticWhite }]}>{line}</Text>
     })
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyles.roundedEdge, { backgroundColor: Colors.copySecondary }, props.style]}>
