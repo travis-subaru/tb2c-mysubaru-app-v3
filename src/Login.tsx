@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View } from 'react-native';
 import { Palette, useColors } from './MyColors';
 import { MyAlternateButton, MyPrimaryButton, MyLinkButton } from './MyButton';
 import { MyCheckBox } from './MyCheckbox';
@@ -10,10 +10,9 @@ import { useLanguage, Language } from './MyLanguage';
 
 // TODO: MySubaru Logo
 // TODO: Helvetica Neue Font Collection
-// TODO: Safe Area
 // TODO: Actual app version
 // TODO: Environment select
-// TODO: Need native hooks to password apps
+// TODO: Native hooks to password apps
 
 const Login = () => {
     const Colors: Palette = useColors();
@@ -47,13 +46,13 @@ const Login = () => {
 
     return (
         <View style={{ backgroundColor: Colors.background, flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text style={{color: Colors.copyPrimary, paddingVertical: 40, fontSize: 34}}>// MySUBARU Logo //</Text>
+            <Text style={{ color: Colors.copyPrimary, paddingVertical: 40, fontSize: 34}}>// MySUBARU Logo //</Text>
             <MyTextInput name="username" label={L.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
             <MyTextInput name="password" label={L.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} usePaddingBottom={false}></MyTextInput>
             <MyCheckBox label={L.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
             <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={L.login.logIn}></MyPrimaryButton>
             <MyLinkButton style={{width: 350}} title={L.login.forgotSomething}></MyLinkButton>
-            <View style={{flexGrow:1}}></View>
+            <View style={{ flexGrow:1 }}></View>
             <View>
                 <MyText>V. 2.0.0c-longVersion</MyText>
             </View>
