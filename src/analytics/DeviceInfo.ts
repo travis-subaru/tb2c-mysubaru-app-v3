@@ -23,7 +23,7 @@ export const UUID = (): string => {
 
 // TODO: Get hardware UUID (where able)
 // TODO: Create a UUID (and save) for react-native-web
-// TODO: Talk to Brian about web fingerprint
+// ????: Talk to Brian about web fingerprint
 
 export interface DeviceInfo {
     deviceId: string

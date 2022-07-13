@@ -11,7 +11,7 @@ export interface NETLoginParameters {
     pushToken?: string
 }
 
-export const net_login = async (params: NETLoginParameters): Promise<NETResponse> => {
+export const requestLogin = async (params: NETLoginParameters): Promise<NETResponse> => {
     const d = getDeviceInfo();
     const e = getEnviroment();
     const loginUsername = encodeURIComponent(params.loginUsername);

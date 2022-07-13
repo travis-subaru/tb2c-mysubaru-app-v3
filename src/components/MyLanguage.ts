@@ -32,6 +32,9 @@ export const useLanguage = () => {
 }
 
 export interface Language {
+    modernizationNew: {
+        contactPhone: string
+    },
     common: {
         next: string
         submit: string

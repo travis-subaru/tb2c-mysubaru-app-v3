@@ -1,5 +1,7 @@
 # Decoloring the network
 
+TODO: Update write-up for combination of options 3 (net) and 4 (store).
+
 ![Colored Functions](colored-functions.png)
 
 ## Existing Option #1 (async / await):
@@ -20,7 +22,7 @@ Covers all cases, but can lead to callback pyramids
 Removes the "throwing" colors, but sync / async are still present.
 
     export const myFetch = async (url: string, init?: RequestInit | undefined): Promise<NETResponse> => {
-        // Roll errors into "successful failure"
+        // Roll errors into "successful failures"
     }
  
 ## Proposed Option #4 (request / listen):

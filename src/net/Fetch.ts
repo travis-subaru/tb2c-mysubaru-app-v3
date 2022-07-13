@@ -10,7 +10,7 @@ export interface NETResponse {
     success: "true" | "false"
     errorCode: null | ErrorCode
     dataName: null | DataName
-    data: null | SessionData
+    data: any
     endpoint: string
 }
 
@@ -35,49 +35,50 @@ export interface Customer {
     phone: null
 }
 
+// ????: Need types
 export interface Vehicle {
     customer: Customer,
     features: null,
-    vin: "4S3BMAA66D1038385",
+    vin: string,
     modelYear: null,
     modelCode: null,
     engineSize: null,
-    nickname: "2013 Legacy 2.5i",
-    vehicleKey: 119677,
-    active: true,
-    licensePlate: "",
-    licensePlateState: "",
+    nickname: string,
+    vehicleKey: number,
+    active: boolean,
+    licensePlate: string,
+    licensePlateState: string,
     email: null,
     firstName: null,
     lastName: null,
     subscriptionFeatures: null,
     accessLevel: -1,
     zip: null,
-    oemCustId: "CRM-9-TBIJ3VFG",
+    oemCustId: string,
     vehicleMileage: null,
     phone: null,
-    timeZone: "America/New_York",
-    stolenVehicle: false,
-    vehicleName: "2013 Legacy 2.5i",
-    userOemCustId: "CRM-9-TBIJ3VFG",
+    timeZone: string,
+    stolenVehicle: boolean,
+    vehicleName: string,
+    userOemCustId: string,
     subscriptionStatus: null,
     authorizedVehicle: false,
     preferredDealer: null,
-    cachedStateCode: "NJ",
-    subscriptionPlans: [], // TODO: ???
-    crmRightToRepair: false,
-    needMileagePrompt: false,
+    cachedStateCode: string,
+    subscriptionPlans: [], // ????: Need structure
+    crmRightToRepair: boolean,
+    needMileagePrompt: boolean,
     phev: null,
     extDescrip: null,
     intDescrip: null,
     modelName: null,
     transCode: null,
-    provisioned: true,
-    remoteServicePinExist: true,
-    needEmergencyContactPrompt: false,
+    provisioned: boolean,
+    remoteServicePinExist: boolean,
+    needEmergencyContactPrompt: boolean,
     vehicleGeoPosition: null,
-    show3gSunsetBanner: false,
-    sunsetUpgraded: true
+    show3gSunsetBanner: boolean,
+    sunsetUpgraded: boolean
 }
 
 export interface SessionData {
@@ -125,6 +126,7 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
     return new Promise<NETResponse>((resolve, _) => {
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
             response.json().then((json) => {
+                debugger;
                 parseResponse(json).then((responseObject) => {
                     resolve(responseObject);  // Success
                 }).catch((reason) => {
