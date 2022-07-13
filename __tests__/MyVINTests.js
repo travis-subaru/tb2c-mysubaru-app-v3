@@ -14,4 +14,5 @@ it('Rejects Invalid VINs', () => {
 it('Accepts Valid VINs', () => {
     expect(validateVIN("1FADP3F20EL425205")).toBe("ok"); // My old ford
     expect(validateVIN("5GZCZ43D13S812715")).toBe("ok"); // From Wikipedia
+    expect(validateVIN("4S3BMAA66D1038385")).toBe("ok"); // QA vehicle
 });

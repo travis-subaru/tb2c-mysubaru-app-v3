@@ -1,4 +1,3 @@
-
 import { myFetch, NETResponse } from "./NETFetch";
 import { getEnviroment } from "./NETEnvironment";
 import { getDeviceInfo } from "./UtilDeviceInfo"

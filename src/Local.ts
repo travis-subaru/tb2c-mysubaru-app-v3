@@ -5,7 +5,7 @@
  * */
 
 export type ListenerID = number;
-export type ListenerKey = "appState" | "environment" | "language" | "languageData";
+export type ListenerKey = "appState" | "environment" | "invalidVINs" | "language" | "languageData";
 
 interface Listener {
     id: ListenerID
@@ -45,6 +45,15 @@ export const setItem = (key: ListenerKey, value: any) => {
     store[key] = value;
     listeners.filter(l => l.key == key).forEach(l => l.fn(value));
 }
+
+/** Set initial value for key, and notify all listeners. */
+export const setInitialValue = (key: ListenerKey, value: any) => {
+    if (!store[key]) {
+        store[key] = value;
+    }
+    listeners.filter(l => l.key == key).forEach(l => l.fn(value));
+}
+
 
 // TODO: Should react-isms go to a separate file?
 

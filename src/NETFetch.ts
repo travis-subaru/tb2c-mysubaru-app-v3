@@ -129,7 +129,7 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
                     resolve(responseObject);  // Success
                 }).catch((reason) => {
                     resolve({success: "false", errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint});
-                });;
+                });
             }).catch((reason) => {
                 resolve({success: "false", errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint});
             });

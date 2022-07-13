@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { setItem } from './Local';
+import { setItem, useItem } from './Local';
 import { MyLinkButton, MyPrimaryButton } from './MyButton';
 import { Palette, useColors } from './MyColors';
 import { validateEmail } from './MyEmail';
@@ -9,12 +9,20 @@ import { MyStyles } from './MyStyles';
 import { MyText } from './MyText';
 import { MyTextErrors, MyTextInput } from './MyTextInput';
 import { validateVIN } from './MyVIN';
+import { requestVINVerify } from './NETVINVerify';
 
 export const ForgotInfo = () => {
     const L: Language = useLanguage();
     const C: Palette = useColors();
     const [username, setUsername] = useState("");
-    const [VIN, setVIN] = useState("");
+    const [VIN, setVIN] = useState(""); // 4S3BMAA66D1038385
+    const invalidVINs: string[] = useItem("invalidVINs");
+
+    const checkForAccount = async () => {
+        const vinOk = await requestVINVerify(VIN);
+        if (!vinOk) { return }
+        const accounts = [];
+    }
     const [actionButton, formErrors] = (() => {
         let button = <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>;
         let errors: MyTextErrors[] = [];
@@ -28,7 +36,7 @@ export const ForgotInfo = () => {
         if (VIN != "") {
             switch (validateVIN(VIN)) {
                 case "ok": {
-                    button = <MyPrimaryButton title="Check for Account" style={{ width: 350 }}></MyPrimaryButton>;
+                    button = <MyPrimaryButton onPress={checkForAccount} title="Check for Account" style={{ width: 350 }}></MyPrimaryButton>;
                     break;
                 }
                 case "length": {
@@ -40,6 +48,10 @@ export const ForgotInfo = () => {
                     break;
                 }
             }
+        }
+        if (invalidVINs.includes(VIN)) {
+            // ????: Is this the right message?
+            errors.push({name: "vin", description: L.forgotSomethingPanel.forgotUsernameFormValidateMessages.vin.remote });
         }
         return [button, errors];
     })();
@@ -57,7 +69,7 @@ export const ForgotInfo = () => {
             <MyText style={MyStyles.boldCopyText}>What is my username?</MyText>
             <MyText style={{ paddingBottom: 10 }}>Your username is the primary email address on your account.</MyText>
             <MyText style={MyStyles.boldCopyText}>How do I find my VIN?</MyText>
-            <MyText>Your VIN is the 17-character vehicle identification number that can be found on your vehicle registration, insurance card, or by looking through the windshield on the driver's side of the dashboard, or on a plate inside the doorjamb.</MyText>
+            <MyText>{L.forgotUsernamePanel.vinDescription}</MyText>
         </View>
 
     </View>

@@ -4,7 +4,7 @@ import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { Dashboard } from './Dashboard';
 import { ForgotInfo } from './ForgotInfo';
-import { setItem, useItem } from './Local';
+import { setInitialValue, useItem } from './Local';
 import Login from './Login';
 import { Palette, useColorSchemeDynamic, useColors } from './MyColors'
 import { PINCheck } from './PINCheck';
@@ -13,9 +13,10 @@ import { TwoStepVerify } from './TwoStepVerify';
 type AppState = 'login' | '2fa' | 'forgot' | 'pin' | 'dashboard' ;
 
 // App Defaults
-setItem("appState", "login"); // TODO: Replace with navigation / session data
-setItem("environment", "cloudqa");
-setItem("language", "en"); // TODO: Infer or load
+setInitialValue("appState", "login"); // TODO: Replace with navigation / session data
+setInitialValue("environment", "cloudqa");
+setInitialValue("invalidVINs", []);
+setInitialValue("language", "en"); // TODO: Infer or load
 
 const App = () => {
     const Colors: Palette = useColors();
