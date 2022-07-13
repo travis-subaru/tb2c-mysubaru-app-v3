@@ -1,5 +1,5 @@
-import { setItem } from "./Local";
-import { getEnviroment } from "./NETEnvironment";
+import { setItem } from "../stores/Local";
+import { getEnviroment } from "./Environment";
 
 // ????: Are there other endpoints that return a simple bool?
 // ????: Does this endpoint only exist because VINs are not validated locally?

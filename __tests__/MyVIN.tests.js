@@ -1,4 +1,4 @@
-import { computeVINCheckDigit, validateVIN } from "../src/MyVIN";
+import { computeVINCheckDigit, validateVIN } from "../src/model/VIN";
 
 it('Checks standard VIN', () => {
     expect(computeVINCheckDigit("11111111111111111")).toBe("1"); // Standard test

@@ -1,4 +1,3 @@
-
 /** Compute checksum for a VIN
  *  Source: https://en.wikipedia.org/wiki/Vehicle_identification_number
  */

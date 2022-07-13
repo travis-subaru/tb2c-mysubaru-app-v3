@@ -1,4 +1,4 @@
-import { getEnviroment } from "./NETEnvironment";
+import { getEnviroment } from "./Environment";
 
 // TODO: Document these
 export type ErrorCode = "networkError" | "jsonError" | "parseError" | "invalidAccount";

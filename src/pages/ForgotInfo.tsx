@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { setItem, useItem } from './Local';
-import { MyLinkButton, MyPrimaryButton } from './MyButton';
-import { Palette, useColors } from './MyColors';
-import { validateEmail } from './MyEmail';
-import { Language, useLanguage } from './MyLanguage';
-import { MyStyles } from './MyStyles';
-import { MyText } from './MyText';
-import { MyTextErrors, MyTextInput } from './MyTextInput';
-import { validateVIN } from './MyVIN';
-import { requestVINVerify } from './NETVINVerify';
+import { setItem, useItem } from '../stores/Local';
+import { MyLinkButton, MyPrimaryButton } from '../components/MyButton';
+import { Palette, useColors } from '../components/MyColors';
+import { validateEmail } from '../model/Email';
+import { Language, useLanguage } from '../components/MyLanguage';
+import { MyStyles } from '../components/MyStyles';
+import { MyText } from '../components/MyText';
+import { MyTextErrors, MyTextInput } from '../components/MyTextInput';
+import { validateVIN } from '../model/VIN';
+import { requestVINVerify } from '../net/VINVerify';
 
 export const ForgotInfo = () => {
     const L: Language = useLanguage();

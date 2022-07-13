@@ -4,9 +4,9 @@ import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { Dashboard } from './Dashboard';
 import { ForgotInfo } from './ForgotInfo';
-import { setInitialValue, useItem } from './Local';
+import { setInitialValue, useItem } from '../stores/Local';
 import Login from './Login';
-import { Palette, useColorSchemeDynamic, useColors } from './MyColors'
+import { Palette, useColorSchemeDynamic, useColors } from '../components/MyColors'
 import { PINCheck } from './PINCheck';
 import { TwoStepVerify } from './TwoStepVerify';
 

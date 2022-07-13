@@ -1,6 +1,6 @@
-import { myFetch, NETResponse } from "./NETFetch";
-import { getEnviroment } from "./NETEnvironment";
-import { getDeviceInfo } from "./UtilDeviceInfo"
+import { myFetch, NETResponse } from "./Fetch";
+import { getEnviroment } from "./Environment";
+import { getDeviceInfo } from "../analytics/DeviceInfo"
 
 export interface NETLoginParameters {
     loginUsername: string

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import { Palette, staticWhite, useColors } from './MyColors';
-import { MyAlternateButton, MyPrimaryButton, MyLinkButton } from './MyButton';
-import { MyCheckBox } from './MyCheckbox';
-import { MyTextErrors, MyTextInput } from './MyTextInput'
-import { MyText } from './MyText';
-import { net_login } from './NETLogin';
-import { useLanguage, Language } from './MyLanguage';
-import { setItem } from './Local';
-import { MyStyles } from './MyStyles';
+import { Palette, staticWhite, useColors } from '../components/MyColors';
+import { MyAlternateButton, MyPrimaryButton, MyLinkButton } from '../components/MyButton';
+import { MyCheckBox } from '../components/MyCheckbox';
+import { MyTextErrors, MyTextInput } from '../components/MyTextInput'
+import { MyText } from '../components/MyText';
+import { net_login } from '../net/Login';
+import { useLanguage, Language } from '../components/MyLanguage';
+import { setItem } from '../stores/Local';
+import { MyStyles } from '../components/MyStyles';
 
 // TODO: MySubaru Logo
 // TODO: Helvetica Neue Font Collection

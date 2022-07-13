@@ -1,4 +1,4 @@
-import { getItem } from "./Local";
+import { getItem } from "../stores/Local";
 
 export type NETEnvironmentID = "local8080" | "local8084" | "cloudqa" | "cloudprod" | "clouddr";
 

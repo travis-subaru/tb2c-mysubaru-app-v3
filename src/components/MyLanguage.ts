@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { addListener, getItem, removeListener, setItem } from './Local';
+import { addListener, getItem, removeListener, setItem } from '../stores/Local';
 
 type LanguageID = "en" | "es" | "fr" | "jp"
 
@@ -13,10 +13,10 @@ export const setLanguage = (lang: LanguageID) => {
 
 const getLanguageData = (lang: LanguageID): Language => {
     switch (lang) {
-        case "en": return require("../content/messages.en");
-        case "es": return require("../content/messages.es");
-        case "fr": return require("../content/messages.fr");
-        case "jp": return require("../content/messages.jp");
+        case "en": return require("../../content/messages.en");
+        case "es": return require("../../content/messages.es");
+        case "fr": return require("../../content/messages.fr");
+        case "jp": return require("../../content/messages.jp");
     }
 }
 

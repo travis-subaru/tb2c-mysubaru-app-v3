@@ -28,7 +28,7 @@ fetch("https://mobileapi.qa.subarucs.com/g2v23/twoStepAuthVerify.json;jsessionid
   "credentials": "omit"
 });
 
-import { myFetch, NETResponse } from "./NETFetch";
+import { myFetch, NETResponse } from "./Fetch";
 
 export interface NETTwoStepAuthSendVerificationParameters {
     contactMethod: "userName" | "phone"

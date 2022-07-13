@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { MyText } from './MyText';
+import { MyText } from '../components/MyText';
 
 // TODO: PIN Check
 

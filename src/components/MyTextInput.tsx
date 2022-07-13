@@ -3,7 +3,7 @@ import { Text, View, TextInput } from 'react-native';
 import { useColors, Palette } from './MyColors';
 import { MyStyles } from './MyStyles';
 
-// TODO: (Not used in login) Disabled fields, Multiline, Errors, Character count
+// TODO: Disabled fields, Multiline, Character count
 
 export const textInputBottomPadding = 20;
 

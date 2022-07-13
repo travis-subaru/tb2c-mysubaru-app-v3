@@ -1,4 +1,4 @@
-import { myFetch, NETResponse } from "./NETFetch";
+import { myFetch, NETResponse } from "./Fetch";
 
 export interface NETTwoStepAuthSendVerificationParameters {
     contactMethod: "userName" | "phone"

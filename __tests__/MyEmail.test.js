@@ -1,4 +1,4 @@
-import { validateEmail } from "../src/MyEmail";
+import { validateEmail } from "../src/model/Email";
 
 it('Rejects Invalid Email Address', () => {
     expect(validateEmail("test")).toBe("error");

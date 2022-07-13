@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { setItem } from './Local';
-import { MyLinkButton } from './MyButton';
-import { MyText } from './MyText';
+import { setItem } from '../stores/Local';
+import { MyLinkButton } from '../components/MyButton';
+import { MyText } from '../components/MyText';
 
 // TODO: TwoStepVerify
 
