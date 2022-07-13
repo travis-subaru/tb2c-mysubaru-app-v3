@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Text, View, TextInput } from 'react-native';
 import { useColors, Palette } from './MyColors';
 import { MyStyles } from './MyStyles';
-import { baseFontSize } from './MyText';
 
 // TODO: (Not used in login) Disabled fields, Multiline, Errors, Character count
 

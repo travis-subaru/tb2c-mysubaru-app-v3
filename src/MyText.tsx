@@ -3,11 +3,6 @@ import { Text } from 'react-native';
 import { useColors, Palette } from './MyColors';
 import { MyStyles } from './MyStyles';
 
-// TODO: Primary / Secondary styling
-// TODO: Size groups
-
-export const baseFontSize = 14;
-
 export interface MyTextProps {
     key?: string
     style?: any

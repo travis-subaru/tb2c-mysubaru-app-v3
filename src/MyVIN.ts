@@ -17,9 +17,16 @@ export const computeVINCheckDigit = (vin: string): string => {
     return output[sum % output.length];
 }
 
-export const isVINValid = (vin: string): boolean => {
-    if (vin.length != 17) { return false; }
-    if (computeVINCheckDigit(vin) !== vin[8]) { return false; }
-    return true;
+export type VINValidationResult = "ok" | "checkdigit" | "length"
+
+/**
+ * Validates Vehicle Identification Number
+ * @param vin
+ * @returns "ok" or errorCode
+ */
+export const validateVIN = (vin: string): VINValidationResult => {
+    if (vin.length != 17) { return "length"; }
+    if (computeVINCheckDigit(vin) !== vin[8]) { return "checkdigit"; }
+    return "ok";
 }
 

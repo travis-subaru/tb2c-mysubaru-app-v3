@@ -3,25 +3,45 @@ import { View } from 'react-native';
 import { setItem } from './Local';
 import { MyLinkButton, MyPrimaryButton } from './MyButton';
 import { Palette, useColors } from './MyColors';
+import { validateEmail } from './MyEmail';
 import { Language, useLanguage } from './MyLanguage';
 import { MyStyles } from './MyStyles';
 import { MyText } from './MyText';
-import { MyTextInput } from './MyTextInput';
+import { MyTextErrors, MyTextInput } from './MyTextInput';
+import { validateVIN } from './MyVIN';
 
 export const ForgotInfo = () => {
     const L: Language = useLanguage();
     const C: Palette = useColors();
     const [username, setUsername] = useState("");
     const [VIN, setVIN] = useState("");
-    const [formErrors, setFormErrors] = useState([]); // TODO: Username / VIN validator
-    const actionButton = (() => {
+    const [actionButton, formErrors] = (() => {
+        let button = <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>;
+        let errors: MyTextErrors[] = [];
         if (username != "") {
-            return <MyPrimaryButton title="Reset Password" style={{ width: 350 }}></MyPrimaryButton>
+            if (validateEmail(username) === "ok") {
+                button = <MyPrimaryButton title="Reset Password" style={{ width: 350 }}></MyPrimaryButton>;
+            } else {
+                errors.push({name: "username", description: L.validation.email });
+            }
         }
         if (VIN != "") {
-            return <MyPrimaryButton title="Check for Account" style={{ width: 350 }}></MyPrimaryButton>
+            switch (validateVIN(VIN)) {
+                case "ok": {
+                    button = <MyPrimaryButton title="Check for Account" style={{ width: 350 }}></MyPrimaryButton>;
+                    break;
+                }
+                case "length": {
+                    errors.push({name: "vin", description: L.forgotSomethingPanel.forgotUsernameFormValidateMessages.vin.maxlength });
+                    break;
+                }
+                case "checkdigit": {
+                    errors.push({name: "vin", description: L.validation.vinUS1 });
+                    break;
+                }
+            }
         }
-        return <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>
+        return [button, errors];
     })();
 
     return <View style={{flex: 1, alignItems: 'center', justifyContent:'flex-start'}}>
