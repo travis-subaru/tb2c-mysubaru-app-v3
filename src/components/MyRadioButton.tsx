@@ -4,22 +4,30 @@ import { useColors, Palette } from './MyColors';
 import { MyPressable } from './MyPressable';
 import { MyText } from './MyText';
 
-// TODO: Get checkmark from style assets
-
-export interface MyCheckBoxProps {
-    onChangeValue: (newValue: boolean) => void,
+export interface MyRadioButtonProps {
+    onChangeValue: (newValue: string) => void,
     label?: string,
-    checked?: boolean
+    /** Value of *this* radio button. Reported on tap. */
+    value?: string,
+    /** Current selected value of the group.
+     *
+     * To make radio groups work, all controls in a group read from one value. */
+    selected?: string,
 };
 
-export const MyCheckBox = (props: MyCheckBoxProps) => {
+export const MyRadioButton = (props: MyRadioButtonProps) => {
     const Colors: Palette = useColors();
-    const isChecked = props.checked ?? false
+    const isChecked = !!props.value && props.value === props.selected
     const innerColor = isChecked ? Colors.buttonPrimary : undefined;
     const outerColor = isChecked ? Colors.buttonPrimary : Colors.copySecondary;
     const image = isChecked ? <Image style={{ width: 20, height: 20 }} source={ require("../../img/checkmark.png")}></Image> : undefined
+    const onPress = () => {
+        if (props.value) {
+            props.onChangeValue(props.value);
+        }
+    }
 
-    return (<MyPressable style={{ flexDirection: 'row', minHeight: 50 }} onPress={() => props.onChangeValue(!isChecked)}>
+    return (<MyPressable style={{ flexDirection: 'row', minHeight: 50 }} onPress={onPress}>
         <View style={{ width: 25, height: 25, backgroundColor: innerColor, borderColor: outerColor, borderWidth: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             {image}
         </View>

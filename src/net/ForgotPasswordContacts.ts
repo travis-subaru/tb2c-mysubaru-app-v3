@@ -16,7 +16,6 @@ export const requestForgotPasswordContact = async (email: string): Promise<DataM
     if (resp.success && resp.dataName === "dataMap") {
         return resp.data
     } else {
-        debugger; // TODO: Report error
         return null;
     }
 }

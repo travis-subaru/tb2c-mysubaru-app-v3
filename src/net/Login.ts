@@ -1,8 +1,8 @@
-import { myFetch, NETResponse } from "./Fetch";
+import { myFetch } from "./Fetch";
 import { getEnviroment } from "./Environment";
 import { getDeviceInfo } from "../analytics/DeviceInfo"
 
-export interface NETLoginParameters {
+export interface LoginParameters {
     loginUsername: string
     password: string
     passwordToken?: string
@@ -11,7 +11,7 @@ export interface NETLoginParameters {
     pushToken?: string
 }
 
-export const requestLogin = async (params: NETLoginParameters): Promise<NETResponse> => {
+export const requestLogin = async (params: LoginParameters) => {
     const d = getDeviceInfo();
     const e = getEnviroment();
     const loginUsername = encodeURIComponent(params.loginUsername);

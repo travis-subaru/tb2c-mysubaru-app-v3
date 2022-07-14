@@ -1,134 +1,31 @@
+import { NetworkResponse, postNetworkResponse } from "../stores/Response";
 import { getEnviroment } from "./Environment";
 
-// TODO: Document these
-export type ErrorCode = "networkError" | "jsonError" | "parseError" | "invalidAccount";
+export function parseResponse(json: any): Promise<NetworkResponse> {
+    return new Promise<NetworkResponse>((resolve, reject) => {
+        const parsed: NetworkResponse = json;
+        // TODO: Parse and validate JSON matches spec, error otherwise
+        if (parsed) {
+            resolve(parsed);
+        } else {
+            reject({missingKey: "foo"});
+        }
 
-// TODO: Document these
-export type DataName = "sessionData" | "dataMap" | "error";
-
-export interface NETResponse {
-    success: "true" | "false"
-    errorCode: null | ErrorCode
-    dataName: null | DataName
-    data: any
-    endpoint: string
-}
-
-export interface Account {
-    createdDate: number,
-    marketId: number,
-    firstName: string,
-    lastName: string,
-    zipCode: string,
-    accountKey: number,
-    lastLoginDate: number,
-    zipCode5: string
-}
-
-export interface Customer {
-    sessionCustomer: null,
-    email: null,
-    firstName: null,
-    lastName: null,
-    zip: null,
-    oemCustId: null,
-    phone: null
-}
-
-// ????: Need types
-export interface Vehicle {
-    customer: Customer,
-    features: null,
-    vin: string,
-    modelYear: null,
-    modelCode: null,
-    engineSize: null,
-    nickname: string,
-    vehicleKey: number,
-    active: boolean,
-    licensePlate: string,
-    licensePlateState: string,
-    email: null,
-    firstName: null,
-    lastName: null,
-    subscriptionFeatures: null,
-    accessLevel: -1,
-    zip: null,
-    oemCustId: string,
-    vehicleMileage: null,
-    phone: null,
-    timeZone: string,
-    stolenVehicle: boolean,
-    vehicleName: string,
-    userOemCustId: string,
-    subscriptionStatus: null,
-    authorizedVehicle: false,
-    preferredDealer: null,
-    cachedStateCode: string,
-    subscriptionPlans: [], // ????: Need structure
-    crmRightToRepair: boolean,
-    needMileagePrompt: boolean,
-    phev: null,
-    extDescrip: null,
-    intDescrip: null,
-    modelName: null,
-    transCode: null,
-    provisioned: boolean,
-    remoteServicePinExist: boolean,
-    needEmergencyContactPrompt: boolean,
-    vehicleGeoPosition: null,
-    show3gSunsetBanner: boolean,
-    sunsetUpgraded: boolean
-}
-
-export interface SessionData {
-    sessionChanged: boolean,
-    vehicleInactivated: boolean,
-    account: Account,
-    resetPassword: boolean,
-    deviceId: string,
-    sessionId: string,
-    deviceRegistered: false,
-    passwordToken: string,
-    vehicles: Vehicle[],
-    rightToRepairEnabled: boolean,
-    rightToRepairStartYear: number,
-    rightToRepairStates: string,
-    termsAndConditionsAccepted: true,
-    enableXtime: true,
-    digitalGlobeConnectId: string,
-    digitalGlobeImageTileService: string,
-    digitalGlobeTransparentTileService: string,
-    tomtomKey: string,
-    currentVehicleIndex: number,
-    handoffToken: string,
-    satelliteViewEnabled: true,
-    registeredDevicePermanent: false
-}
-
-
-export function parseResponse(json: any): Promise<NETResponse> {
-    /**
-     * TODO: Parse and validate JSON matches spec, error otherwise
-     *       On error, also check response codes (ex: clouddr is currently 501)
-     *       In all cases, construct a valid payload and return
-     *       {success: "false", errorCode: *something*, dataName: "parseError", data: null}
-     */
-    return new Promise<NETResponse>((resolve, _) => {
-        const parsed: NETResponse = json;
-        resolve(parsed);
     })
 }
 
-export const myFetch = async (endpoint: string, init?: RequestInit | undefined): Promise<NETResponse> => {
+/** Call endpoint with payload.
+ * @return Standard response body
+ */
+export const myFetch = async (endpoint: string, init?: RequestInit | undefined): Promise<NetworkResponse> => {
     const e = getEnviroment();
     // Using .then().catch() pyramids to roll in errors
-    return new Promise<NETResponse>((resolve, _) => {
+    return new Promise<NetworkResponse>((resolve, _) => {
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
             response.json().then((json) => {
-                debugger;
                 parseResponse(json).then((responseObject) => {
-                    resolve(responseObject);  // Success
+                    postNetworkResponse(responseObject);
+                    resolve(responseObject);
                 }).catch((reason) => {
                     resolve({success: "false", errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint});
                 });
@@ -136,9 +33,18 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
                 resolve({success: "false", errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint});
             });
         }).catch((reason) => {
+            // TODO: Construct a valid payload with response code (ex: clouddr is currently 501) and return
             resolve({success: "false", errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint});
         });
     });
 }
 
-
+/** Call endpoint with payload.
+ *
+ * Use this to call a series of endpoints. Returns true if next call is safe. Data and errors are still reported to stores and UI will update accordingly.
+ * @return Boolean if call succeed.
+ */
+export const myCheck = async (endpoint: string, init?: RequestInit | undefined): Promise<Boolean> => {
+    const resp = await myFetch(endpoint, init);
+    return resp.success === "true";
+}

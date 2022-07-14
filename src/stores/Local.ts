@@ -4,7 +4,8 @@
  * TODO: Multiple backends (in-memory, on-disk, secure keychain)
  * */
 
-export type ListenerID = number;
+import { getNextListenerID, ListenerID } from './Listener';
+
 export type ListenerKey = "appState" | "environment" | "invalidVINs" | "language" | "languageData";
 
 interface Listener {
@@ -15,13 +16,12 @@ interface Listener {
 
 let store = {};
 let listeners: Listener[] = [];
-let sequenceObject = 0;
 
 /** Begin listening for changes to a specific key.
  *
  *  May reply immediately if key already has data. */
-export const addListener = (key: ListenerKey, handler: (data: any) => void): ListenerID => {
-    const id: ListenerID = sequenceObject++;
+ export const addListener = (key: ListenerKey, handler: (data: any) => void): ListenerID => {
+    const id: ListenerID = getNextListenerID();
     listeners.push({id: id, key: key, fn: handler})
     const existing = store[key];
     if (existing) {

@@ -1,0 +1,99 @@
+/** Channel to send and receive updated session data. */
+import { getNextListenerID, ListenerID } from "./Listener";
+import { addNetworkListener } from "./Response"
+import { updateVehicle, Vehicle } from "./Vehicles"
+
+export interface Account {
+    createdDate: number,
+    marketId: number,
+    firstName: string,
+    lastName: string,
+    zipCode: string,
+    accountKey: number,
+    lastLoginDate: number,
+    zipCode5: string
+}
+
+export interface SessionData {
+    sessionChanged: boolean,
+    vehicleInactivated: boolean,
+    account: Account,
+    resetPassword: boolean,
+    deviceId: string,
+    sessionId: string,
+    deviceRegistered: boolean,
+    passwordToken: string,
+    vehicles: Vehicle[],
+    rightToRepairEnabled: boolean,
+    rightToRepairStartYear: number,
+    rightToRepairStates: string,
+    termsAndConditionsAccepted: boolean,
+    enableXtime: boolean,
+    digitalGlobeConnectId: string,
+    digitalGlobeImageTileService: string,
+    digitalGlobeTransparentTileService: string,
+    tomtomKey: string,
+    currentVehicleIndex: number,
+    handoffToken: string,
+    satelliteViewEnabled: boolean,
+    registeredDevicePermanent: false
+}
+
+export type Session = SessionData | undefined;
+
+addNetworkListener('sessionData', (response) => {
+    if (response.data.sessionId && response.data.vehicles) {
+        const session: SessionData = response.data; // TODO: Check all keys
+        _session = response.data;
+        session.vehicles.forEach(v => updateVehicle(v));
+    }
+});
+
+interface SessionListener {
+    id: ListenerID,
+    fn: (session: Session) => void,
+}
+
+let _session: Session = undefined;
+let _listeners: SessionListener[] = [];
+
+export const getSessionID = (): string => {
+    return _session?.sessionId ?? "";
+}
+
+export const setSession = (session: Session) => {
+    _session = session;
+    _listeners.forEach(l => l.fn(session));
+}
+
+/** Begin listening for changes to session data.
+ *
+ *  Replies immediately with current data. */
+export const addSessionListener = (handler: (session: Session) => void): ListenerID => {
+    const id: ListenerID = getNextListenerID();
+    _listeners.push({ id: id, fn: handler })
+    handler(_session);
+    return id;
+}
+
+/** Stop receiving session updates. */
+export const removeSessionListener = (id: ListenerID): void => {
+    _listeners = _listeners.filter((l) => l.id != id);
+}
+
+// TODO: Should react-isms go to a separate file?
+
+import { useEffect, useState } from 'react';
+
+/** React-friendly wrapper for stored data */
+export const useSession = (): Session => {
+    const [get, set] = useState(_session);
+    useEffect(() => {
+        const id = addSessionListener((data) => set(data));
+        return () => removeSessionListener(id);
+    });
+    return get;
+}
+
+
+

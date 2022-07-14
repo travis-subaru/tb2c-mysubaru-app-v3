@@ -9,6 +9,7 @@ import Login from './Login';
 import { Palette, useColorSchemeDynamic, useColors } from '../components/MyColors'
 import { PINCheck } from './PINCheck';
 import { TwoStepVerify } from './TwoStepVerify';
+import { SessionData, useSession } from '../stores/Session';
 
 type AppState = 'login' | '2fa' | 'forgot' | 'pin' | 'dashboard' ;
 
@@ -22,6 +23,7 @@ const App = () => {
     const Colors: Palette = useColors();
     const isDarkMode = useColorSchemeDynamic() === "dark";
     const appState: AppState = useItem("appState");
+    const session: SessionData = useSession();
     const content = (() => {
         switch (appState) {
             case "login": return <Login />;
