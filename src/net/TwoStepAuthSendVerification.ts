@@ -1,3 +1,4 @@
+import { LanguageID } from "../components/MyLanguage";
 import { myFetch, NETResponse } from "./Fetch";
 
 export interface NETTwoStepAuthSendVerificationParameters {

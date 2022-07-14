@@ -4,7 +4,7 @@ import { getEnviroment } from "./Environment";
 export type ErrorCode = "networkError" | "jsonError" | "parseError" | "invalidAccount";
 
 // TODO: Document these
-export type DataName = "sessionData" | "error";
+export type DataName = "sessionData" | "dataMap" | "error";
 
 export interface NETResponse {
     success: "true" | "false"

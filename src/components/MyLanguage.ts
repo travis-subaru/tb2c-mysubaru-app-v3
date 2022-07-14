@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { addListener, getItem, removeListener, setItem } from '../stores/Local';
 
-type LanguageID = "en" | "es" | "fr" | "jp"
+export type LanguageID = "en" | "es" | "fr" | "jp"
 
 export const getLanguages = (): LanguageID[] => {
     return ["en", "fr"];

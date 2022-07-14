@@ -12,32 +12,27 @@ import { validateVIN } from '../model/VIN';
 import { requestVINVerify } from '../net/VINVerify';
 import { requestForgotUsername } from '../net/ForgotUsername';
 
+
 export const ForgotInfo = () => {
     const i18n: Language = useLanguage();
     const C: Palette = useColors();
-    const [username, setUsername] = useState("");
-    const [VIN, setVIN] = useState("4S3BMAA66D1038385"); // 4S3BMAA66D1038385
+    const [username, setUsername] = useState(""); // mysubaruwatch@yahoo.com
+    const [VIN, setVIN] = useState(""); // 4S3BMAA66D1038385
     const invalidVINs: string[] = useItem("invalidVINs");
     const [foundAccounts, setFoundAccounts] = useState([]);
-
     const checkForAccount = async () => {
         const vinOk = await requestVINVerify(VIN);
         if (!vinOk) { return }
         const accounts = await requestForgotUsername(VIN);
         if (accounts.length > 0) {
             setFoundAccounts(accounts);
+        } else {
+            // TODO
         }
     }
     const [actionButton, formErrors] = (() => {
         let button = <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>;
         let errors: MyTextErrors[] = [];
-        if (username != "") {
-            if (validateEmail(username) === "ok") {
-                button = <MyPrimaryButton title="Reset Password" style={{ width: 350 }}></MyPrimaryButton>;
-            } else {
-                errors.push({name: "username", description: i18n.validation.email });
-            }
-        }
         if (VIN != "") {
             switch (validateVIN(VIN)) {
                 case "ok": {
@@ -57,6 +52,13 @@ export const ForgotInfo = () => {
         if (invalidVINs.includes(VIN)) {
             // ????: Is this the right message?
             errors.push({name: "vin", description: i18n.forgotSomethingPanel.forgotUsernameFormValidateMessages.vin.remote });
+        }
+        if (username != "") {
+            if (validateEmail(username) === "ok") {
+                button = <MyPrimaryButton title="Reset Password" style={{ width: 350 }}></MyPrimaryButton>;
+            } else {
+                errors.push({name: "username", description: i18n.validation.email });
+            }
         }
         return [button, errors];
     })();
