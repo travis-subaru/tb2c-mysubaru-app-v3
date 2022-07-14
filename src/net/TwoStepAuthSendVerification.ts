@@ -1,5 +1,6 @@
 import { LanguageID } from "../components/MyLanguage";
-import { myFetch, NETResponse } from "./Fetch";
+import { getSessionID } from "../stores/Session";
+import { myCheck } from "./Fetch";
 
 export interface NETTwoStepAuthSendVerificationParameters {
     contactMethod: "userName" | "phone"
@@ -7,9 +8,11 @@ export interface NETTwoStepAuthSendVerificationParameters {
     languageCode: LanguageID
 }
 
-export const net_twoStepAuthSendVerification = async ({contactMethod, verificationCode, languageCode}: NETTwoStepAuthSendVerificationParameters): Promise<NETResponse> => {
+
+export const requestTwoStepAuthSendVerification = async ({contactMethod, verificationCode, languageCode}: NETTwoStepAuthSendVerificationParameters) => {
+    const jsessionid = getSessionID();
     const body = `contactMethod=${contactMethod}&verificationCode=${verificationCode}&languageCode=${languageCode}`;
-    return myFetch("twoStepAuthSendVerification.json", {
+    return myCheck(`twoStepAuthSendVerification.json;jsessionid=${jsessionid}`, {
         "headers": {},
         "body": body,
         "method": "POST",

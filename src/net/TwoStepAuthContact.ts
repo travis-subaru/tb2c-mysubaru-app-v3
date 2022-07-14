@@ -6,7 +6,7 @@ export interface TwoStepContactInfo {
     userName?: string
 }
 
-export const requestTwoStepAuthContacts = async (): Promise<TwoStepContactInfo> => {
+export const requestTwoStepAuthContact = async (): Promise<TwoStepContactInfo> => {
     const jsessionid = getSessionID();
     const resp = await myFetch(`twoStepAuthContacts.json;jsessionid=${jsessionid}`, {
         "headers": {},

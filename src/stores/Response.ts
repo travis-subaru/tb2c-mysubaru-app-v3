@@ -9,7 +9,7 @@ export type ErrorCode = "networkError" | "jsonError" | "parseError" | "invalidAc
 export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error";
 
 export interface NetworkResponse {
-    success: "true" | "false"
+    success: boolean
     errorCode: null | ErrorCode
     dataName: null | DataName
     data: any

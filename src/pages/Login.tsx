@@ -9,7 +9,11 @@ import { requestLogin } from '../net/Login';
 import { useLanguage, Language } from '../components/MyLanguage';
 import { setItem } from '../stores/Local';
 import { MyStyles } from '../components/MyStyles';
-import { SessionData } from '../net/Fetch';
+import { SessionData } from '../stores/Session';
+import { requestSelectVehicle } from '../net/selectVehicle';
+import { requestMySAlerts } from '../net/MySAlerts';
+import { requestRefreshVehicles } from '../net/RefreshVehicles';
+import { requestTwoStepAuthContact } from '../net/TwoStepAuthContact';
 
 // TODO: MySubaru Logo
 // TODO: Helvetica Neue Font Collection
@@ -29,7 +33,7 @@ const Login = () => {
     const loading = (() => {
         if (!active) { return; }
         return (<View key="loading" style={[MyStyles.roundedEdge, { backgroundColor: Colors.copySecondary, justifyContent: "center", alignItems: "center", width: 350, padding: 20 }]}>
-            <MyText  style={{ color: staticWhite }}>Show Login Progress</MyText>
+            <MyText style={{ color: staticWhite }}>Show Login Progress</MyText>
         </View>);
     })();
 
@@ -53,19 +57,22 @@ const Login = () => {
         if (localErrors.length == 0) {
             setActive(true);
             const response = await requestLogin({loginUsername: username, password: password, rememberUserCheck: rememberMe ? "on" : "off"});
-            setActive(false);
-            if (response.success && response.dataName == "sessionData") {
-                const sessionData: SessionData = response.data;
-                if (sessionData.deviceRegistered) {
-                    setItem("appState", "dashboard");
+            if (response.success && response.dataName) {
+                const session: SessionData = response.data;
+                // ????: Following existing app, seems overkill
+                if (session.currentVehicleIndex < session.vehicles.length) {
+                    const vin = session.vehicles[session.currentVehicleIndex].vin;
+                    await requestSelectVehicle(vin) && await requestMySAlerts() && await requestRefreshVehicles();
+                    if (!session.deviceRegistered) {
+                        const contactInfo = await requestTwoStepAuthContact();
+                        setItem("contactInfo", contactInfo);
+                    }
                 } else {
-                    setItem("appState", "2fa");
+                    // ????: No vehicle error?
                 }
-            } else {
-                localErrors.push({name: "login", description: response.errorCode ?? "unknownError"});
             }
+            setActive(false);
         }
-        setFormErrors(localErrors);
     };
 
     const onPressForgot = () => {
@@ -73,7 +80,7 @@ const Login = () => {
     };
 
     return (
-        <View style={{ backgroundColor: Colors.background, flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <View style={MyStyles.screen}>
             <Text style={{ color: Colors.copyPrimary, paddingVertical: 40, fontSize: 34}}>// MySUBARU Logo //</Text>
             <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
             <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} style={{ paddingBottom: 0 }}></MyTextInput>

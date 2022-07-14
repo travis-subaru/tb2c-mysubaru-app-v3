@@ -24,17 +24,21 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
             response.json().then((json) => {
                 parseResponse(json).then((responseObject) => {
+                    debugger;
                     postNetworkResponse(responseObject);
                     resolve(responseObject);
                 }).catch((reason) => {
-                    resolve({success: "false", errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint});
+                    console.log(`Parser error :: ${JSON.stringify(reason)}`);
+                    resolve({success: false, errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint});
                 });
             }).catch((reason) => {
-                resolve({success: "false", errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint});
+                console.log(`JSON error :: ${JSON.stringify(reason)}`);
+                resolve({success: false, errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint});
             });
         }).catch((reason) => {
+            console.log(`Network error :: ${JSON.stringify(reason)}`);
             // TODO: Construct a valid payload with response code (ex: clouddr is currently 501) and return
-            resolve({success: "false", errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint});
+            resolve({success: false, errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint});
         });
     });
 }
@@ -46,5 +50,5 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
  */
 export const myCheck = async (endpoint: string, init?: RequestInit | undefined): Promise<Boolean> => {
     const resp = await myFetch(endpoint, init);
-    return resp.success === "true";
+    return resp.success == true;
 }

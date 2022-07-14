@@ -11,13 +11,22 @@ export const setLanguage = (lang: LanguageID) => {
     setItem("language", lang);
 }
 
-const getLanguageData = (lang: LanguageID): Language => {
+export const getLanguageDataNoCache = (lang: LanguageID): Language => {
     switch (lang) {
         case "en": return require("../../content/messages.en");
         case "es": return require("../../content/messages.es");
         case "fr": return require("../../content/messages.fr");
         case "jp": return require("../../content/messages.jp");
     }
+}
+
+let langaugeCache = {}
+
+export const getLanguageData = (lang: LanguageID): Language => {
+    if (!langaugeCache[lang]) {
+        langaugeCache[lang] = getLanguageDataNoCache(lang);
+    }
+    return langaugeCache[lang];
 }
 
 addListener("language", (lang) => setItem("languageData", getLanguageData(lang)));

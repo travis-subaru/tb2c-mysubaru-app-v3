@@ -12,4 +12,5 @@ export const MyStyles = StyleSheet.create({
     headlineText: { fontSize: 32},
     pressable: { alignItems: 'center', justifyContent: 'center', minWidth: 150, maxWidth: 350, minHeight: 50 },
     roundedEdge: { borderRadius: 5, borderWidth: 1 },
+    screen: { flex: 1, alignItems: 'center', justifyContent:'flex-start', paddingHorizontal: 20 },
 });

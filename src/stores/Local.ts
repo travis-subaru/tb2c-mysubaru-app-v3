@@ -5,22 +5,41 @@
  * */
 
 import { getNextListenerID, ListenerID } from './Listener';
+import { NETEnvironmentID } from '../net/Environment';
+import { TwoStepContactInfo } from '../net/TwoStepAuthContact';
+import { VIN } from './Vehicles';
+import { LanguageID } from '../components/MyLanguage';
 
-export type ListenerKey = "appState" | "environment" | "invalidVINs" | "language" | "languageData";
+export type AppState = 'login' | 'forgot' | 'pin' ;
+
+export interface LocalData {
+    appState: AppState
+    environment: NETEnvironmentID
+    invalidVINs: VIN[]
+    language: LanguageID
+    contactInfo?: TwoStepContactInfo
+}
+
+export type LocalDataKey = keyof LocalData;
 
 interface Listener {
     id: ListenerID
-    key: ListenerKey
+    key: LocalDataKey
     fn: (any) => void
 }
 
-let store = {};
+let store: LocalData = {
+    appState: "login",
+    environment: "cloudqa",
+    invalidVINs: [],
+    language: "en",
+};
 let listeners: Listener[] = [];
 
 /** Begin listening for changes to a specific key.
  *
  *  May reply immediately if key already has data. */
- export const addListener = (key: ListenerKey, handler: (data: any) => void): ListenerID => {
+ export const addListener = (key: LocalDataKey, handler: (data: any) => void): ListenerID => {
     const id: ListenerID = getNextListenerID();
     listeners.push({id: id, key: key, fn: handler})
     const existing = store[key];
@@ -36,31 +55,23 @@ export const removeListener = (id: ListenerID): void => {
 }
 
 /** Return current value of stored key, if present. */
-export const getItem = (key: ListenerKey): any => {
+export const getItem = (key: LocalDataKey): any => {
     return store[key];
 }
 
 /** Set key to new value, and notify all listeners. */
-export const setItem = (key: ListenerKey, value: any) => {
+export const setItem = (key: LocalDataKey, value: any) => {
+    // @ts-ignore :: key is alrady typechecked
     store[key] = value;
     listeners.filter(l => l.key == key).forEach(l => l.fn(value));
 }
-
-/** Set initial value for key, and notify all listeners. */
-export const setInitialValue = (key: ListenerKey, value: any) => {
-    if (!store[key]) {
-        store[key] = value;
-    }
-    listeners.filter(l => l.key == key).forEach(l => l.fn(value));
-}
-
 
 // TODO: Should react-isms go to a separate file?
 
 import { useEffect, useState } from 'react';
 
 /** React-friendly wrapper for stored data */
-export const useItem = (key: ListenerKey) => {
+export const useItem = (key: LocalDataKey) => {
     const [get, set] = useState(getItem(key));
     useEffect(() => {
         const id = addListener(key, (data) => set(data));

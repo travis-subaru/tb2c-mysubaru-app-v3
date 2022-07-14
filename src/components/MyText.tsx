@@ -10,13 +10,20 @@ export interface MyTextProps {
 }
 
 export const MyText = (props: MyTextProps) => {
-    if (props.children.includes("\\n")) {
-        return props.children.split("\\n").map((line, i) => {
+    let text: string = props.children;
+    text = text.replace("<br />", "\n");
+    text = text.replace("<nobr>", "\n");
+    text = text.replace("&nbsp;", " ");
+    text = text.replace("&amp;", "&");
+
+
+    if (text.includes("\\n")) {
+        return text.split("\\n").map((line, i) => {
             return <MyText {...props} key={i}>{line}</MyText>
         });
     }
     const Colors: Palette = useColors();
     return (<Text style={[{ color: Colors.copyPrimary }, MyStyles.text, props.style]}>
-        {props.children}
+        {text}
     </Text>);
 }

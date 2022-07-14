@@ -81,7 +81,7 @@ export const ForgotInfo = () => {
             </View>);
         }
     })();
-    return <View style={{flex: 1, alignItems: 'center', justifyContent:'flex-start'}}>
+    return <View style={MyStyles.screen}>
         <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
         <View style={{ paddingBottom: 10, alignItems: 'center' }}>
             <MyText style={MyStyles.headlineText}>Forgot Something?</MyText>
