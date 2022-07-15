@@ -3,7 +3,7 @@
 import { getNextListenerID, ListenerID } from './Listener';
 
 // TODO: Document these
-export type ErrorCode = "networkError" | "jsonError" | "parseError" | "invalidAccount";
+export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount";
 
 // TODO: Document these
 export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error";
@@ -25,7 +25,7 @@ interface NetworkResponseListener {
 let listeners: NetworkResponseListener[] = [];
 
 export const postNetworkResponse = (response: NetworkResponse) => {
-    console.log(`Network Debug :: ${JSON.stringify(response)}`)
+    console.log(`Network ${response.success ? "ok" : "ERROR"} :: ${JSON.stringify(response)}`)
     listeners.filter(l => l.dataName === response.dataName).forEach(l => l.fn(response));
 }
 

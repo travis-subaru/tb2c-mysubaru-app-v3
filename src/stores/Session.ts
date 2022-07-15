@@ -46,6 +46,7 @@ addNetworkListener('sessionData', (response) => {
         const session: SessionData = response.data; // TODO: Check all keys
         _session = response.data;
         session.vehicles.forEach(v => updateVehicle(v));
+        setSession(session);
     }
 });
 

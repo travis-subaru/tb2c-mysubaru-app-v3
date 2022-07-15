@@ -1,4 +1,4 @@
-import { NetworkResponse, postNetworkFailure, postNetworkResponse } from "../stores/Response";
+import { NetworkResponse, postNetworkResponse } from "../stores/Response";
 import { getEnviroment } from "./Environment";
 
 export function parseResponse(json: any): Promise<NetworkResponse> {
@@ -24,23 +24,29 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
     // Using .then().catch() pyramids to roll in errors
     return new Promise<NetworkResponse>((resolve, _) => {
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
-            response.json().then((json) => {
-                parseResponse(json).then((responseObject) => {
-                    postNetworkResponse(responseObject);
-                    resolve(responseObject);
+            if (response.status >= 200 && response.status <= 299) {
+                response.json().then((json) => {
+                    parseResponse(json).then((responseObject) => {
+                        postNetworkResponse(responseObject);
+                        resolve(responseObject);
+                    }).catch((reason) => {
+                        const error: NetworkResponse = {success: false, errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint};
+                        postNetworkResponse(error);
+                        resolve(error);
+                    });
                 }).catch((reason) => {
-                    const error: NetworkResponse = {success: false, errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint};
+                    const error: NetworkResponse = {success: false, errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint};
                     postNetworkResponse(error);
                     resolve(error);
                 });
-            }).catch((reason) => {
-                const error: NetworkResponse = {success: false, errorCode: "jsonError", dataName: "error", data: {original: response.text}, endpoint: endpoint};
+            } else {
+                // Construct a valid payload with response code (ex: clouddr is currently 501) and return
+                const error: NetworkResponse = {success: false, errorCode: "statusError", dataName: "error", data: {status: response.status}, endpoint: endpoint};
                 postNetworkResponse(error);
                 resolve(error);
-            });
+            }
         }).catch((reason) => {
-            // TODO: Construct a valid payload with response code (ex: clouddr is currently 501) and return
-            const response: NetworkResponse = {success: false, errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint};
+            const error: NetworkResponse = {success: false, errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint};
             postNetworkResponse(error);
             resolve(error);
         });

@@ -23,6 +23,7 @@ export interface MyTextInputProps {
     autoCapitalize?: string // Used by Username
     autoCorrect?: boolean  // Used by Username
     secureTextEntry?: boolean // Used by Password
+    style?: any
     usePaddingBottom?: boolean
 }
 
