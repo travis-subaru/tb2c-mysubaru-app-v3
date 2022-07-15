@@ -60,3 +60,16 @@ export const MyAlternateButton = (props: MyButtonProps) => {
     </MyPressable>);
 }
 
+/** Action Button for dashboard */
+export const MyActionButton = (props: MyButtonProps) => {
+    const Colors: Palette = useColors();
+    const [pressed, setPressed] = useState(false);
+    const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
+    const lines = (props.title?.split('\\n') ?? []).map((line, i) => {
+        return <Text key={i} style={[MyStyleSheet.buttonText, { color: staticWhite }]}>{line}</Text>
+    })
+
+    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.copySecondary, minWidth: 100, minHeight: 100 }, props.style]}>
+        {lines}
+    </MyPressable>);
+}

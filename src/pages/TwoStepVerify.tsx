@@ -22,6 +22,7 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     const [verificationCode, setVerificationCode] = useState("");
     const [showCodeEntry, setShowCodeEntry] = useState(false);
     const [rememberDevice, setRememberDevice] = useState(false);
+    const [showTerms, setShowTerms] = useState(false);
     const languageCode = useItem("language"); // TODO: remove useItem call
 
     const sendCodeRequest = async () => {
@@ -46,29 +47,48 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     }
 
     if (!showCodeEntry) {
-        return <View style={MyStyleSheet.screen}>
-            <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
-            <MyText style={MyStyleSheet.headlineText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
-            <MyText>{i18n.twoStepAuthentication.dontRecognize}</MyText>
-            <MyText>{i18n.twoStepAuthentication.pleaseVerify}</MyText>
-            <MyText>{i18n.twoStepAuthentication.chooseContactMethod}</MyText>
-            <MyRadioButton label={i18n.common.text + " " + props.contact?.phone} value="text" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
-            <MyRadioButton label={i18n.common.email + " " + props.contact?.userName} value="email" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
-            <MyPrimaryButton onPress={sendCodeRequest} title={i18n.common.next}></MyPrimaryButton>
-            <MyLinkButton title={i18n.twoStepAuthentication.termsToggle}></MyLinkButton>
-            <MyText>{i18n.forgotPasswordContactsPanel.termsConditions}</MyText>
+        return <View style={MyStyleSheet.screenOuter}>
+            <View style={MyStyleSheet.fauxNavBar}>
+                <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
+                <MyText>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
+                <MyLinkButton title= " "></MyLinkButton>
+            </View>
+            <View style={[MyStyleSheet.screenInner, {alignItems: 'flex-start'}]}>
+
+                <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.chooseContactMethod}</MyText>
+                <MyRadioButton label={i18n.common.text + " " + props.contact?.phone} value="text" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
+                <MyRadioButton label={i18n.common.email + " " + props.contact?.userName} value="email" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
+                <MyPrimaryButton onPress={sendCodeRequest} style={{ width: 350 }} title={i18n.common.next}></MyPrimaryButton>
+                <MyText style={[MyStyleSheet.boldCopyText, { paddingTop: 10 }]}>{i18n.twoStepAuthentication.dontRecognize}</MyText>
+                <MyText>{i18n.twoStepAuthentication.pleaseVerify}</MyText>
+                <View style={{ flexGrow: 1 }}></View>
+                <MyLinkButton onPress={() => setShowTerms(!showTerms)} title={i18n.twoStepAuthentication.termsToggle}></MyLinkButton>
+                <MyText>{showTerms ? i18n.forgotPasswordContactsPanel.termsConditions + '\n' : ''}</MyText>
+            </View>
+
         </View>
     } else {
-        return <View style={MyStyleSheet.screen}>
-            <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
-            <MyText style={MyStyleSheet.headlineText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
-            <MyText>{i18n.twoStepAuthentication.verifyInputTitle}</MyText>
-            <MyText>{i18n.twoStepAuthentication.verifyInputSubTitle}</MyText>
-            <MyTextInput label={i18n.twoStepAuthentication.verificationCodeLabel} onChangeText={text => setVerificationCode(text)} validate={validateVerificationCode}>{verificationCode}</MyTextInput>
-            <MyCheckBox label={i18n.twoStepAuthentication.rememberDevice} checked={rememberDevice} onChangeValue={(value) => setRememberDevice(value)}></MyCheckBox>
-            <MyText>{i18n.twoStepAuthentication.rememberHelperText}</MyText>
-            <MyPrimaryButton onPress={authorizeDevice} title={i18n.twoStepAuthentication.authorizeDevice}></MyPrimaryButton>
-            <MySecondaryButton onPress={sendCodeRequest} title={i18n.twoStepAuthentication.resend}></MySecondaryButton>
+        return <View style={MyStyleSheet.screenOuter}>
+            <View style={MyStyleSheet.fauxNavBar}>
+                <MyLinkButton onPress={() => setShowCodeEntry(false)} title= "< Contact"></MyLinkButton>
+                <MyText>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
+                <MyLinkButton title= ""></MyLinkButton>
+            </View>
+            <View style={[MyStyleSheet.screenInner, {alignItems: 'flex-start'}]}>
+                <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.verifyInputTitle}</MyText>
+                <MyText>{i18n.twoStepAuthentication.verifyInputSubTitle}</MyText>
+                <View style={{paddingTop: 10}}>
+                    <MyTextInput label={i18n.twoStepAuthentication.verificationCodeLabel} onChangeText={text => setVerificationCode(text)} validate={validateVerificationCode}>{verificationCode}</MyTextInput>
+                </View>
+                <MyCheckBox label={i18n.twoStepAuthentication.rememberDevice} checked={rememberDevice} onChangeValue={(value) => setRememberDevice(value)}></MyCheckBox>
+                <MyText>{i18n.twoStepAuthentication.rememberHelperText}</MyText>
+                <View style={{paddingTop: 10}}>
+                    <MyPrimaryButton style={{ width: 350 }} onPress={authorizeDevice} title={i18n.twoStepAuthentication.authorizeDevice}></MyPrimaryButton>
+                </View>
+                <View style={{paddingTop: 10}}>
+                    <MySecondaryButton style={{ width: 350 }} onPress={sendCodeRequest} title={i18n.twoStepAuthentication.resend}></MySecondaryButton>
+                </View>
+            </View>
         </View>
     }
 

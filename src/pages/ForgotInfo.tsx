@@ -3,12 +3,12 @@ import { View } from 'react-native';
 import { setItem, useItem } from '../stores/Local';
 import { MyLinkButton, MyPrimaryButton } from '../components/MyButton';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
-import { validateEmail } from '../model/Email';
+import { checkEmail } from '../model/Email';
 import { Language, useLanguage } from '../components/MyLanguage';
 import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';
 import { MyTextErrors, MyTextInput } from '../components/MyTextInput';
-import { validateVIN } from '../model/VIN';
+import { checkVIN } from '../model/VIN';
 import { requestVINVerify } from '../net/VINVerify';
 import { requestForgotUsername } from '../net/ForgotUsername';
 
@@ -34,7 +34,7 @@ export const ForgotInfo = () => {
         let button = <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>;
         let errors: MyTextErrors[] = [];
         if (VIN != "") {
-            switch (validateVIN(VIN)) {
+            switch (checkVIN(VIN)) {
                 case "ok": {
                     button = <MyPrimaryButton onPress={checkForAccount} title="Check for Account" style={{ width: 350 }}></MyPrimaryButton>;
                     break;
@@ -54,7 +54,7 @@ export const ForgotInfo = () => {
             errors.push({name: "vin", description: i18n.forgotSomethingPanel.forgotUsernameFormValidateMessages.vin.remote });
         }
         if (username != "") {
-            if (validateEmail(username) === "ok") {
+            if (checkEmail(username) === "ok") {
                 button = <MyPrimaryButton title="Reset Password" style={{ width: 350 }}></MyPrimaryButton>;
             } else {
                 errors.push({name: "username", description: i18n.validation.email });
@@ -81,15 +81,20 @@ export const ForgotInfo = () => {
             </View>);
         }
     })();
-    return <View style={MyStyleSheet.screen}>
-        <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
-        <View style={{ paddingBottom: 10, alignItems: 'center' }}>
-            <MyText style={MyStyleSheet.headlineText}>Forgot Something?</MyText>
-            <MyText>It happens sometimes.\nTell us what you can remember,\nand we'll look you up in our system.</MyText>
+    return <View style={MyStyleSheet.screenOuter}>
+        <View style={MyStyleSheet.fauxNavBar}>
+            <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
+            <MyText style={MyStyleSheet.fauxNavTitle}>Forgot Something?</MyText>
+            <MyLinkButton title= " "></MyLinkButton>
         </View>
-        <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
-        <MyTextInput name="vin" label={i18n.common.vin} errors={formErrors} text={VIN} onChangeText={text => setVIN(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
-        {actionButton}
-        {resultPanel}
+        <View style={MyStyleSheet.screenInner}>
+            <View style={{ paddingBottom: 10, alignItems: 'center' }}>
+                <MyText>It happens sometimes.\nTell us what you can remember,\nand we'll look you up in our system.</MyText>
+            </View>
+            <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
+            <MyTextInput name="vin" label={i18n.common.vin} errors={formErrors} text={VIN} onChangeText={text => setVIN(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
+            {actionButton}
+            {resultPanel}
+        </View>
     </View>
 }

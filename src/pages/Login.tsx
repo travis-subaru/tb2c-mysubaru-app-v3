@@ -66,6 +66,8 @@ const Login = () => {
                     if (!session.deviceRegistered) {
                         const contactInfo = await requestTwoStepAuthContact();
                         setItem("contactInfo", contactInfo);
+                    } else {
+                        debugger;
                     }
                 } else {
                     // ????: No vehicle error?
@@ -80,23 +82,29 @@ const Login = () => {
     };
 
     return (
-        <View style={MyStyleSheet.screen}>
-            <Text style={{ color: Colors.copyPrimary, paddingVertical: 40, fontSize: 34}}>// MySUBARU Logo //</Text>
-            <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
-            <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} style={{ paddingBottom: 0 }}></MyTextInput>
-            <MyCheckBox label={i18n.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
-            <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={i18n.login.logIn}></MyPrimaryButton>
-            <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>
-            {loading}
-            {otherErrors}
-            <View style={{ flexGrow: 1 }} />
-            <View>
-                <MyText>V. 2.0.0c-longVersion</MyText>
+        <View style={MyStyleSheet.screenOuter}>
+            <View style={MyStyleSheet.fauxNavBar}>
+                <MyLinkButton title= " "></MyLinkButton>
+                <MyText style={MyStyleSheet.fauxNavTitle}>// MySUBARU Logo //</MyText>
+                <MyLinkButton title= " "></MyLinkButton>
             </View>
-            <View style={{width: 350, paddingVertical: 20}}>
-                <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"  }}>
-                    <MyAlternateButton title={i18n.login.demoMode}></MyAlternateButton>
-                    <MyAlternateButton title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
+            <View style={MyStyleSheet.screenInner}>
+                <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
+                <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} style={{ paddingBottom: 0 }}></MyTextInput>
+                <MyCheckBox label={i18n.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
+                <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={i18n.login.logIn}></MyPrimaryButton>
+                <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>
+                {loading}
+                {otherErrors}
+                <View style={{ flexGrow: 1 }} />
+                <View>
+                    <MyText>V. 2.0.0c-longVersion</MyText>
+                </View>
+                <View style={{width: 350, paddingVertical: 20}}>
+                    <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"  }}>
+                        <MyAlternateButton title={i18n.login.demoMode}></MyAlternateButton>
+                        <MyAlternateButton title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
+                    </View>
                 </View>
             </View>
         </View>
