@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import { MyStyles } from '../components/MyStyles';
+import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';
 
 // TODO: PIN Check
 
 export const PINCheck = () => {
-    return <View style={MyStyles.screen}>
+    return <View style={MyStyleSheet.screen}>
         <MyText>Check or Set PIN</MyText>
     </View>
 }

@@ -3,9 +3,8 @@ import { StyleSheet } from 'react-native';
 /** Stylesheet for app
  *
  * NOTE: Because colors are dynamic, call useColor() to get relevant values
- * TODO: Primary / Secondary text styling
 */
-export const MyStyles = StyleSheet.create({
+export const MyStyleSheet = StyleSheet.create({
     boldCopyText: { fontSize: 14, fontWeight: 'bold' },
     bodyText: { fontSize: 14 },
     buttonText: { fontSize: 14, fontWeight: 'bold' },

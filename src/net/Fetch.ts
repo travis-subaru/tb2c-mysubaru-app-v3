@@ -14,6 +14,8 @@ export function parseResponse(json: any): Promise<NetworkResponse> {
     })
 }
 
+export const stdGETRequest: RequestInit = { headers: {}, body: null, method: "GET" }
+
 /** Call endpoint with payload.
  * @return Standard response body
  */
@@ -46,7 +48,7 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
 /** Call endpoint with payload.
  *
  * Use this to call a series of endpoints. Returns true if next call is safe. Data and errors are still reported to stores and UI will update accordingly.
- * @return Boolean if call succeed.
+ * @return Boolean if call succeeded.
  */
 export const myCheck = async (endpoint: string, init?: RequestInit | undefined): Promise<Boolean> => {
     const resp = await myFetch(endpoint, init);

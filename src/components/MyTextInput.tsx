@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput } from 'react-native';
 import { useColors, Palette } from './MyColors';
-import { MyStyles } from './MyStyles';
+import { MyStyleSheet } from './MyStyles';
 
 // TODO: Disabled fields, Multiline, Character count
 
@@ -37,7 +37,7 @@ export const MyTextInput = (props: MyTextInputProps) => {
     // Use a label or a placeholder but not both
     const [label, placeholder] = (() => {
         if (isFocused || text.length > 0) {
-            return [<Text style={[MyStyles.bodyText, textStyle]}>{props.label}</Text>, null];
+            return [<Text style={[MyStyleSheet.bodyText, textStyle]}>{props.label}</Text>, null];
         } else {
             return [null, props.label];
         }
@@ -51,9 +51,9 @@ export const MyTextInput = (props: MyTextInputProps) => {
     const onBlur = () => setIsFocused(false);
     const onFocus = () => setIsFocused(true);
     return (<View style={{ paddingBottom: usePaddingBottom ? textInputBottomPadding : 0 }}>
-        <View style={[MyStyles.roundedEdge, MyStyles.pressable, textViewStyle]}>
+        <View style={[MyStyleSheet.roundedEdge, MyStyleSheet.pressable, textViewStyle]}>
             {label}
-            <TextInput onBlur={onBlur} onFocus={onFocus} placeholder={placeholder} selectionColor={Colors.link} {...props} style={[MyStyles.bodyText, textInputStyle]}>{text}</TextInput>
+            <TextInput onBlur={onBlur} onFocus={onFocus} placeholder={placeholder} selectionColor={Colors.link} {...props} style={[MyStyleSheet.bodyText, textInputStyle]}>{text}</TextInput>
         </View>
         {errorControl}
     </View>);

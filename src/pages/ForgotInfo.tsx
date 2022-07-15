@@ -5,7 +5,7 @@ import { MyLinkButton, MyPrimaryButton } from '../components/MyButton';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { validateEmail } from '../model/Email';
 import { Language, useLanguage } from '../components/MyLanguage';
-import { MyStyles } from '../components/MyStyles';
+import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';
 import { MyTextErrors, MyTextInput } from '../components/MyTextInput';
 import { validateVIN } from '../model/VIN';
@@ -65,26 +65,26 @@ export const ForgotInfo = () => {
     const resultPanel = (() => {
         if (foundAccounts.length > 0) {
             return (<View style={{ paddingVertical: 10, width: 350 }}>
-                <View style={[MyStyles.roundedEdge, { padding: 10, backgroundColor: C.success, borderColor: C.success}]}>
-                    <MyText style={[ MyStyles.boldCopyText, { color: staticWhite }]}>{i18n.forgotUsernameSuccessPanel.pageDescription}</MyText>
+                <View style={[MyStyleSheet.roundedEdge, { padding: 10, backgroundColor: C.success, borderColor: C.success}]}>
+                    <MyText style={[ MyStyleSheet.boldCopyText, { color: staticWhite }]}>{i18n.forgotUsernameSuccessPanel.pageDescription}</MyText>
                     <MyText style={{ color: staticWhite, paddingVertical: 10 }}>{foundAccounts.join("\n")}</MyText>
                     <MyText style={{ color: staticWhite }}>{i18n.forgotUsernameSuccessPanel.pageDescription2}</MyText>
-                    <MyText style={[MyStyles.boldCopyText, { color: staticWhite, paddingTop: 5 }]}>{i18n.modernizationNew.contactPhone}</MyText>
+                    <MyText style={[MyStyleSheet.boldCopyText, { color: staticWhite, paddingTop: 5 }]}>{i18n.modernizationNew.contactPhone}</MyText>
                 </View>
             </View>);
         } else {
             return (<View style={{ padding: 20, width: 350}}>
-                <MyText style={MyStyles.boldCopyText}>What is my username?</MyText>
+                <MyText style={MyStyleSheet.boldCopyText}>What is my username?</MyText>
                 <MyText style={{ paddingBottom: 10 }}>Your username is the primary email address on your account.</MyText>
-                <MyText style={MyStyles.boldCopyText}>How do I find my VIN?</MyText>
+                <MyText style={MyStyleSheet.boldCopyText}>How do I find my VIN?</MyText>
                 <MyText>{i18n.forgotUsernamePanel.vinDescription}</MyText>
             </View>);
         }
     })();
-    return <View style={MyStyles.screen}>
+    return <View style={MyStyleSheet.screen}>
         <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
         <View style={{ paddingBottom: 10, alignItems: 'center' }}>
-            <MyText style={MyStyles.headlineText}>Forgot Something?</MyText>
+            <MyText style={MyStyleSheet.headlineText}>Forgot Something?</MyText>
             <MyText>It happens sometimes.\nTell us what you can remember,\nand we'll look you up in our system.</MyText>
         </View>
         <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>

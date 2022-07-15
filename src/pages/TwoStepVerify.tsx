@@ -4,7 +4,7 @@ import { setItem, useItem } from '../stores/Local';
 import { MyLinkButton, MyPrimaryButton, MySecondaryButton } from '../components/MyButton';
 import { MyText } from '../components/MyText';
 import { Language, useLanguage } from '../components/MyLanguage';
-import { MyStyles } from '../components/MyStyles';
+import { MyStyleSheet} from '../components/MyStyles';
 import { MyRadioButton } from '../components/MyRadioButton';
 import { MyCheckBox } from '../components/MyCheckbox';
 import { TwoStepContactInfo } from '../net/TwoStepAuthContact';
@@ -45,9 +45,9 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     };
 
     if (!showCodeEntry) {
-        return <View style={MyStyles.screen}>
+        return <View style={MyStyleSheet.screen}>
             <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
-            <MyText style={MyStyles.headlineText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
+            <MyText style={MyStyleSheet.headlineText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
             <MyText>{i18n.twoStepAuthentication.dontRecognize}</MyText>
             <MyText>{i18n.twoStepAuthentication.pleaseVerify}</MyText>
             <MyText>{i18n.twoStepAuthentication.chooseContactMethod}</MyText>
@@ -58,9 +58,9 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
             <MyText>{i18n.forgotPasswordContactsPanel.termsConditions}</MyText>
         </View>
     } else {
-        return <View style={MyStyles.screen}>
+        return <View style={MyStyleSheet.screen}>
             <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
-            <MyText style={MyStyles.headlineText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
+            <MyText style={MyStyleSheet.headlineText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
             <MyText>{i18n.twoStepAuthentication.verifyInputTitle}</MyText>
             <MyText>{i18n.twoStepAuthentication.verifyInputSubTitle}</MyText>
             <MyTextInput label={i18n.twoStepAuthentication.verificationCodeLabel} onChangeText={text => setVerificationCode(text)}>{verificationCode}</MyTextInput>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { useColors, Palette } from './MyColors';
-import { MyStyles } from './MyStyles';
+import { MyStyleSheet } from './MyStyles';
 
 export interface MyTextProps {
     key?: string
@@ -23,7 +23,7 @@ export const MyText = (props: MyTextProps) => {
         });
     }
     const Colors: Palette = useColors();
-    return (<Text style={[{ color: Colors.copyPrimary }, MyStyles.text, props.style]}>
+    return (<Text style={[{ color: Colors.copyPrimary }, MyStyleSheet.text, props.style]}>
         {text}
     </Text>);
 }

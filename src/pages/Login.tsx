@@ -8,9 +8,9 @@ import { MyText } from '../components/MyText';
 import { requestLogin } from '../net/Login';
 import { useLanguage, Language } from '../components/MyLanguage';
 import { setItem } from '../stores/Local';
-import { MyStyles } from '../components/MyStyles';
+import { MyStyleSheet } from '../components/MyStyles';
 import { SessionData } from '../stores/Session';
-import { requestSelectVehicle } from '../net/selectVehicle';
+import { requestSelectVehicle } from '../net/SelectVehicle';
 import { requestMySAlerts } from '../net/MySAlerts';
 import { requestRefreshVehicles } from '../net/RefreshVehicles';
 import { requestTwoStepAuthContact } from '../net/TwoStepAuthContact';
@@ -32,7 +32,7 @@ const Login = () => {
 
     const loading = (() => {
         if (!active) { return; }
-        return (<View key="loading" style={[MyStyles.roundedEdge, { backgroundColor: Colors.copySecondary, justifyContent: "center", alignItems: "center", width: 350, padding: 20 }]}>
+        return (<View key="loading" style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.copySecondary, justifyContent: "center", alignItems: "center", width: 350, padding: 20 }]}>
             <MyText style={{ color: staticWhite }}>Show Login Progress</MyText>
         </View>);
     })();
@@ -40,7 +40,7 @@ const Login = () => {
     const otherErrors = (() => {
         const otherErrors = formErrors.filter(e => e.name != "username" && e.name != "password");
         if (otherErrors.length == 0) { return; }
-        return (<View key="error" style={[MyStyles.roundedEdge, { backgroundColor: Colors.error, justifyContent: "center", alignItems: "center", width: 350, padding: 20 }]}>
+        return (<View key="error" style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.error, justifyContent: "center", alignItems: "center", width: 350, padding: 20 }]}>
             {otherErrors.map((e, i) => <MyText key={i} style={{ color: staticWhite }}>{e.description}</MyText>)}
         </View>);
     })()
@@ -80,7 +80,7 @@ const Login = () => {
     };
 
     return (
-        <View style={MyStyles.screen}>
+        <View style={MyStyleSheet.screen}>
             <Text style={{ color: Colors.copyPrimary, paddingVertical: 40, fontSize: 34}}>// MySUBARU Logo //</Text>
             <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
             <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} style={{ paddingBottom: 0 }}></MyTextInput>
