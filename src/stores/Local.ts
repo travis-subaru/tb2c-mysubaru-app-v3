@@ -6,7 +6,7 @@
 
 import { getNextListenerID, ListenerID } from './Listener';
 import { NETEnvironmentID } from '../net/Environment';
-import { TwoStepContactInfo } from '../net/TwoStepAuthContact';
+import { TwoStepContactInfo } from '../net/TwoStepAuth';
 import { VIN } from './Vehicles';
 import { LanguageID } from '../components/MyLanguage';
 

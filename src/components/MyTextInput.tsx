@@ -14,6 +14,8 @@ export interface MyTextErrors {
 
 export interface MyTextInputProps {
     onChangeText: (text: string) => void
+    /** Return any appropriate error messages */
+    validate?: () => string[];
     text?: string
     name?: string
     label?: string
@@ -27,7 +29,10 @@ export interface MyTextInputProps {
 export const MyTextInput = (props: MyTextInputProps) => {
     const Colors: Palette = useColors();
     const [isFocused, setIsFocused] = useState(false);
-    const errors = (props.errors ?? []).filter(error => props.name === null || error.name === props.name).map(error => error.description);
+    // TODO: Merge inline validation and form errors
+    const formErrors = (props.errors ?? []).filter(error => props.name === null || error.name === props.name).map(error => error.description);
+    const inlineErrors = props.validate ? props.validate() : [];
+    const errors = formErrors.concat(inlineErrors);
     const text = props.text ?? '';
     const textRingColor = errors.length > 0 ? Colors.error : isFocused ? Colors.link : Colors.copyPrimary;
     const textStyle = { position: 'absolute', top: -12, left: 25, backgroundColor: Colors.background, color: Colors.copyPrimary, paddingHorizontal: 5 };

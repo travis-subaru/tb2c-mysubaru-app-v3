@@ -10,7 +10,7 @@ import { Palette, useColorSchemeDynamic, useColors } from '../components/MyColor
 import { PINCheck } from './PINCheck';
 import { TwoStepVerify } from './TwoStepVerify';
 import { Session, useSession } from '../stores/Session';
-import { TwoStepContactInfo } from '../net/TwoStepAuthContact';
+import { TwoStepContactInfo } from '../net/TwoStepAuth';
 
 const App = () => {
     const Colors: Palette = useColors();

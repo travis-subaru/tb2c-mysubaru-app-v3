@@ -13,7 +13,7 @@ import { SessionData } from '../stores/Session';
 import { requestSelectVehicle } from '../net/SelectVehicle';
 import { requestMySAlerts } from '../net/MySAlerts';
 import { requestRefreshVehicles } from '../net/RefreshVehicles';
-import { requestTwoStepAuthContact } from '../net/TwoStepAuthContact';
+import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
 
 // TODO: MySubaru Logo
 // TODO: Helvetica Neue Font Collection

@@ -7,42 +7,43 @@ import { Language, useLanguage } from '../components/MyLanguage';
 import { MyStyleSheet} from '../components/MyStyles';
 import { MyRadioButton } from '../components/MyRadioButton';
 import { MyCheckBox } from '../components/MyCheckbox';
-import { TwoStepContactInfo } from '../net/TwoStepAuthContact';
-import { requestTwoStepAuthSendVerification } from '../net/TwoStepAuthSendVerification';
+import { TwoStepContactInfo, requestTwoStepAuthSendVerification, requestTwoStepAuthVerify } from '../net/TwoStepAuth';
 import { MyTextInput } from '../components/MyTextInput';
+import { checkVerificationCode } from '../model/VerificationCode';
 
 export interface TwoStepsVerifyProps {
     contact?: TwoStepContactInfo
 }
 
-    // "twoStepAuthentication": {
-     //     "authorizeDevice": "Authorize Device",
-    //     "twoStepAuthenticationValidation": {
-    //         "verificationCode": {
-    //             "required": "Verification Code cannot be blank",
-    //             "maxlength": "Verification code must be no more than 6 characters"
-    //         }
-    //     },
-
-    //     "rememberDevice": "Remember this device",
-    //     "rememberHelperText": "I am the only person that will log in to MySubaru with this device.",
-
-    // },
 
 export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     const i18n: Language = useLanguage();
     const [contactMethod, setContactMethod] = useState(undefined);
-    const [verificationCode, setVerificationCode] = useState(undefined);
+    const [verificationCode, setVerificationCode] = useState("");
     const [showCodeEntry, setShowCodeEntry] = useState(false);
     const [rememberDevice, setRememberDevice] = useState(false);
-    const languageCode = useItem("language");
+    const languageCode = useItem("language"); // TODO: remove useItem call
 
     const sendCodeRequest = async () => {
         if (!contactMethod) { return }
         const ok = await requestTwoStepAuthSendVerification({contactMethod: contactMethod, verificationCode: verificationCode, languageCode: languageCode});
-        debugger;
         setShowCodeEntry(ok);
     };
+
+    const authorizeDevice = async () => {
+        if (checkVerificationCode(verificationCode) !== "ok") { return; }
+        await requestTwoStepAuthVerify({contactMethod: contactMethod, verificationCode: verificationCode, languageCode: languageCode});
+    };
+
+    const validateVerificationCode = (): string[] => {
+        const result = checkVerificationCode(verificationCode);
+        switch (result) {
+            case "blank": return [i18n.twoStepAuthentication.twoStepAuthenticationValidation.verificationCode.required];
+            case "partial": return []; // ????: Add error message
+            case "tooLong": return [i18n.twoStepAuthentication.twoStepAuthenticationValidation.verificationCode.maxlength];
+            case "ok": return [];
+        }
+    }
 
     if (!showCodeEntry) {
         return <View style={MyStyleSheet.screen}>
@@ -63,10 +64,10 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
             <MyText style={MyStyleSheet.headlineText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
             <MyText>{i18n.twoStepAuthentication.verifyInputTitle}</MyText>
             <MyText>{i18n.twoStepAuthentication.verifyInputSubTitle}</MyText>
-            <MyTextInput label={i18n.twoStepAuthentication.verificationCodeLabel} onChangeText={text => setVerificationCode(text)}>{verificationCode}</MyTextInput>
+            <MyTextInput label={i18n.twoStepAuthentication.verificationCodeLabel} onChangeText={text => setVerificationCode(text)} validate={validateVerificationCode}>{verificationCode}</MyTextInput>
             <MyCheckBox label={i18n.twoStepAuthentication.rememberDevice} checked={rememberDevice} onChangeValue={(value) => setRememberDevice(value)}></MyCheckBox>
             <MyText>{i18n.twoStepAuthentication.rememberHelperText}</MyText>
-            <MyPrimaryButton onPress={sendCodeRequest} title={i18n.twoStepAuthentication.authorizeDevice}></MyPrimaryButton>
+            <MyPrimaryButton onPress={authorizeDevice} title={i18n.twoStepAuthentication.authorizeDevice}></MyPrimaryButton>
             <MySecondaryButton onPress={sendCodeRequest} title={i18n.twoStepAuthentication.resend}></MySecondaryButton>
         </View>
     }

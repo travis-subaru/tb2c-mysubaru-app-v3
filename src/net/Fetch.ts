@@ -1,4 +1,4 @@
-import { NetworkResponse, postNetworkResponse } from "../stores/Response";
+import { NetworkResponse, postNetworkFailure, postNetworkResponse } from "../stores/Response";
 import { getEnviroment } from "./Environment";
 
 export function parseResponse(json: any): Promise<NetworkResponse> {
@@ -26,21 +26,23 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
             response.json().then((json) => {
                 parseResponse(json).then((responseObject) => {
-                    debugger;
                     postNetworkResponse(responseObject);
                     resolve(responseObject);
                 }).catch((reason) => {
-                    console.log(`Parser error :: ${JSON.stringify(reason)}`);
-                    resolve({success: false, errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint});
+                    const error: NetworkResponse = {success: false, errorCode: "parseError", dataName: "error", data: reason, endpoint: endpoint};
+                    postNetworkResponse(error);
+                    resolve(error);
                 });
             }).catch((reason) => {
-                console.log(`JSON error :: ${JSON.stringify(reason)}`);
-                resolve({success: false, errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint});
+                const error: NetworkResponse = {success: false, errorCode: "jsonError", dataName: "error", data: {original: response.text}, endpoint: endpoint};
+                postNetworkResponse(error);
+                resolve(error);
             });
         }).catch((reason) => {
-            console.log(`Network error :: ${JSON.stringify(reason)}`);
             // TODO: Construct a valid payload with response code (ex: clouddr is currently 501) and return
-            resolve({success: false, errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint});
+            const response: NetworkResponse = {success: false, errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint};
+            postNetworkResponse(error);
+            resolve(error);
         });
     });
 }

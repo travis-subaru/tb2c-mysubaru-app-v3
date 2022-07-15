@@ -25,7 +25,8 @@ interface NetworkResponseListener {
 let listeners: NetworkResponseListener[] = [];
 
 export const postNetworkResponse = (response: NetworkResponse) => {
-    listeners.filter(l => l.dataName == response.dataName).forEach(l => l.fn(response));
+    console.log(`Network Debug :: ${JSON.stringify(response)}`)
+    listeners.filter(l => l.dataName === response.dataName).forEach(l => l.fn(response));
 }
 
 /** Begin listening for network changes. */
