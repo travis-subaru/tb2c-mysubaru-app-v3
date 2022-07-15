@@ -1,9 +1,9 @@
 export type EmailValidationResult = "ok" | "error"
 
 /**
- * Basic e-mail validator, may allow some invalid addresses
+ * Basic e-mail check, may allow some invalid addresses
  */
-export const validateEmail = (email: string): EmailValidationResult => {
+export const checkEmail = (email: string): EmailValidationResult => {
     const parts = email.split("@");
     if (parts.length != 2) { return "error"; }
     const [locals, domains] = [parts[0].split("."), parts[1].split(".")];

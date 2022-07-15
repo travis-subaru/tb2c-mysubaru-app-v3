@@ -2,8 +2,6 @@
 
 import { getNextListenerID, ListenerID } from './Listener';
 
-export type VIN = string;
-
 // ????: Need types
 export interface Customer {
     sessionCustomer: null,

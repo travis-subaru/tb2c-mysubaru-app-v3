@@ -9,7 +9,7 @@ Everything in `src/` should be stored in **exactly one** folder. Examples docume
 TODO: Document exceptions / additions here.
 TODO: Add diagram of modules.
 
-## Shared Components
+## User Interface / Shared Components
 
 Shared components compliant with Subaru's style guide are located in `src/component`. To distinguish between MySubaru components and React Native components, the components are prefixed with My. the Components may move to a separate package in the future.
 
@@ -35,7 +35,11 @@ Instead of awaiting responses, most UI code can listen for changes on an appropr
 
 ## Business Logic and Unit Testing - Jest
 
-Business logic should be disconnected from UI and network concerns. Logic is stored in `src/model`, and corresponding tests go into `__test__` to be run locally and as part of CI. Failing tests are ok on development branches but should be fixed before pushing to main.
+Business logic should be disconnected from UI and network concerns. 
+
+Locally runnable business logic is stored in `src/model`. Functions in this folder use the naming convention `checkModelName`, and corresponding tests go into `__test__` to be run locally and as part of CI. Failing tests are ok on development branches but should be fixed before pushing to main.
+
+Both local and service errors are identified by a string or numeric code. Integrate these errors into return an array of localized strings in functions named `validateModelName`. These can be bundled with appropriate visual components / screens.
 
 ## Translation
 
