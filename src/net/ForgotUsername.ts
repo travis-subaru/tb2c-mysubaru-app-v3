@@ -7,7 +7,7 @@ export const requestForgotUsername = async (vin: string): Promise<string[]> => {
         "body": body,
         "method": "POST",
     });
-    debugger; // TODO: Report to error channel
+    // TODO: Report to error channel
     if (resp.success) {
         return resp.data;
     } else {

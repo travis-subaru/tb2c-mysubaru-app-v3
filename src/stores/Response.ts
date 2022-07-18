@@ -6,14 +6,14 @@ import { getNextListenerID, ListenerID } from './Listener';
 export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount";
 
 // TODO: Document these
-export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error";
+export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error" | "remoteServiceStatus";
 
 export interface NetworkResponse {
     success: boolean
     errorCode: null | ErrorCode
     dataName: null | DataName
     data: any
-    endpoint: string
+    endpoint?: string
 }
 
 interface NetworkResponseListener {
