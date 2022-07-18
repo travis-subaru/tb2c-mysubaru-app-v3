@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { useColors, Palette } from './MyColors';
 import { MyPressable } from './MyPressable';
 import { MyText } from './MyText';
@@ -17,21 +17,26 @@ export interface MyRadioButtonProps {
 
 export const MyRadioButton = (props: MyRadioButtonProps) => {
     const Colors: Palette = useColors();
-    const isChecked = !!props.value && props.value === props.selected
-    const innerColor = isChecked ? Colors.buttonPrimary : undefined;
-    const outerColor = isChecked ? Colors.buttonPrimary : Colors.copySecondary;
-    const image = isChecked ? <Image style={{ width: 20, height: 20 }} source={ require("../../assets/img/checkmark.png")}></Image> : undefined
+    const isChecked = !!props.value && props.value === props.selected;
+    const outerRingSize = 25;
+    const innerRingSize = 17;
+    const innerRing = (() => {
+        if (isChecked) {
+            return <View style={{ width: innerRingSize, height: innerRingSize, backgroundColor: Colors.buttonPrimary, borderRadius: innerRingSize/2, borderWidth: 0 }}></View>
+        } else {
+            return undefined;
+        }
+    })();
     const onPress = () => {
         if (props.value) {
             props.onChangeValue(props.value);
         }
     }
-
     return (<MyPressable style={{ flexDirection: 'row', minHeight: 50 }} onPress={onPress}>
-        <View style={{ width: 25, height: 25, backgroundColor: innerColor, borderColor: outerColor, borderWidth: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            {image}
+        <View style={{ width: outerRingSize, height: outerRingSize, backgroundColor: Colors.background, borderColor: Colors.copySecondary, borderRadius: outerRingSize/2, borderWidth: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            {innerRing}
         </View>
-        <View style={{ height: 25, flexDirection: 'column', justifyContent: 'center', paddingHorizontal: 10 }}>
+        <View style={{ height: outerRingSize, flexDirection: 'column', justifyContent: 'center', paddingHorizontal: 10 }}>
             <MyText>{props.label}</MyText>
         </View>
     </MyPressable>);

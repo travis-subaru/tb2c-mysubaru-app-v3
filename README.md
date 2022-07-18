@@ -15,7 +15,7 @@ Shared components compliant with Subaru's style guide are located in `src/compon
 
 Larger items (logical screens) are in `src/pages`.  
 
-Assets are in folders like `assets/fonts` or `assets/img`. Integration with iOS and Android projects is handled by (React Native Asset)[https://www.npmjs.com/package/react-native-asset] since `react-native link` has been moved out of the base library.
+Assets are in folders like `assets/fonts`. Integration with iOS and Android projects is handled by (React Native Asset)[https://www.npmjs.com/package/react-native-asset] since `react-native link` has been moved out of the base library.
 
 TODO: Long term, anything in pages will have a URL (for routing with react-native-web) and will be connected to react-navigation.
 
