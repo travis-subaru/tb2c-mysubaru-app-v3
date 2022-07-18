@@ -5,9 +5,10 @@ import { MyActionButton, MyLinkButton, MyPrimaryButton } from '../components/MyB
 import { MyText } from '../components/MyText';
 import { Session, setSession, useSession } from '../stores/Session';
 import { MyStyleSheet } from '../components/MyStyles';
-import { Palette, useColors } from '../components/MyColors';
+import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../components/MyLanguage';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
+import { MyAppIcon } from '../components/MyAppIcon';
 
 export const Dashboard = () => {
     const i18n: Language = useLanguage();
@@ -37,7 +38,7 @@ export const Dashboard = () => {
         <View style={MyStyleSheet.screenInner}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <View style={{ alignItems: 'center', justifyContent: 'center', width: 72, height: 72, backgroundColor: C.buttonSecondary}}>
-                    <MyText style={[MyStyleSheet.headlineText, {}]}>Car</MyText>
+                    <MyAppIcon glyph='frontCar' style={{ color: staticWhite, fontSize: 60 }}></MyAppIcon>
                 </View>
                 <View style={{ flexGrow: 1, paddingLeft: 10 }}>
                     <MyText>{vehicle?.nickname}</MyText>
@@ -58,7 +59,7 @@ export const Dashboard = () => {
             </View>
             <View style={{ flexDirection: 'row', flexWrap: 1, justifyContent: 'space-evenly', paddingTop: 10, width: '100%'}}>
                 <MyActionButton></MyActionButton>
-                <MyActionButton title='Engine Start'></MyActionButton>
+                <MyActionButton glyph='powerOn' title='Engine Start'></MyActionButton>
                 <MyActionButton></MyActionButton>
             </View>
             <View style={{flex: 1}}></View>

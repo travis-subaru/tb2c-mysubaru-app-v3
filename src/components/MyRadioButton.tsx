@@ -20,7 +20,7 @@ export const MyRadioButton = (props: MyRadioButtonProps) => {
     const isChecked = !!props.value && props.value === props.selected
     const innerColor = isChecked ? Colors.buttonPrimary : undefined;
     const outerColor = isChecked ? Colors.buttonPrimary : Colors.copySecondary;
-    const image = isChecked ? <Image style={{ width: 20, height: 20 }} source={ require("../../img/checkmark.png")}></Image> : undefined
+    const image = isChecked ? <Image style={{ width: 20, height: 20 }} source={ require("../../assets/img/checkmark.png")}></Image> : undefined
     const onPress = () => {
         if (props.value) {
             props.onChangeValue(props.value);

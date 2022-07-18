@@ -23,7 +23,7 @@ export const MyText = (props: MyTextProps) => {
         });
     }
     const Colors: Palette = useColors();
-    return (<Text style={[{ color: Colors.copyPrimary }, MyStyleSheet.text, props.style]}>
+    return (<Text style={[{ color: Colors.copyPrimary }, props.style]}>
         {text}
     </Text>);
 }

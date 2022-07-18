@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Text  } from 'react-native';
+import { MyAppIcon, MyAppIconGlyph } from './MyAppIcon';
 import { useColors, Palette, staticWhite } from './MyColors';
 import { MyPressable } from './MyPressable';
 import { MyStyleSheet } from './MyStyles';
 
 export interface MyButtonProps {
     title?: string
+    glyph?: MyAppIconGlyph
     onPress?: () => void
     subtitle?: string
     imageName?: string
@@ -70,6 +72,7 @@ export const MyActionButton = (props: MyButtonProps) => {
     })
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.copySecondary, minWidth: 100, minHeight: 100 }, props.style]}>
+        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: staticWhite}}></MyAppIcon> : null}
         {lines}
     </MyPressable>);
 }

@@ -17,7 +17,7 @@ export const MyCheckBox = (props: MyCheckBoxProps) => {
     const isChecked = props.checked ?? false
     const innerColor = isChecked ? Colors.buttonPrimary : undefined;
     const outerColor = isChecked ? Colors.buttonPrimary : Colors.copySecondary;
-    const image = isChecked ? <Image style={{ width: 20, height: 20 }} source={ require("../../img/checkmark.png")}></Image> : undefined
+    const image = isChecked ? <Image style={{ width: 20, height: 20 }} source={ require("../../assets/img/checkmark.png")}></Image> : undefined
 
     return (<MyPressable style={{ flexDirection: 'row', minHeight: 50 }} onPress={() => props.onChangeValue(!isChecked)}>
         <View style={{ width: 25, height: 25, backgroundColor: innerColor, borderColor: outerColor, borderWidth: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
