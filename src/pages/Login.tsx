@@ -14,6 +14,7 @@ import { requestSelectVehicle } from '../net/SelectVehicle';
 import { requestMySAlerts } from '../net/MySAlerts';
 import { requestRefreshVehicles } from '../net/RefreshVehicles';
 import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
+import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 
 // TODO: MySubaru Logo
 // TODO: Helvetica Neue Font Collection
@@ -83,11 +84,10 @@ const Login = () => {
 
     return (
         <View style={MyStyleSheet.screenOuter}>
-            <View style={MyStyleSheet.fauxNavBar}>
-                <MyLinkButton title= " "></MyLinkButton>
-                <MyText style={MyStyleSheet.fauxNavTitle}>// MySUBARU Logo //</MyText>
-                <MyLinkButton title= " "></MyLinkButton>
-            </View>
+            <MySimpleNavBar>
+                <MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem>
+                <MyText style={MyStyleSheet.headlineText}>// MySUBARU //</MyText>
+            </MySimpleNavBar>
             <View style={MyStyleSheet.screenInner}>
                 <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
                 <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} style={{ paddingBottom: 0 }}></MyTextInput>

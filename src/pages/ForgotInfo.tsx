@@ -11,6 +11,7 @@ import { MyTextErrors, MyTextInput } from '../components/MyTextInput';
 import { checkVIN } from '../model/VIN';
 import { requestVINVerify } from '../net/VINVerify';
 import { requestForgotUsername } from '../net/ForgotUsername';
+import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 
 
 export const ForgotInfo = () => {
@@ -82,11 +83,10 @@ export const ForgotInfo = () => {
         }
     })();
     return <View style={MyStyleSheet.screenOuter}>
-        <View style={MyStyleSheet.fauxNavBar}>
-            <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
+        <MySimpleNavBar>
+            <MySimpleNavButtonBarItem onPress={() => setItem("appState", "login")} title= "< Login"></MySimpleNavButtonBarItem>
             <MyText style={MyStyleSheet.fauxNavTitle}>Forgot Something?</MyText>
-            <MyLinkButton title= " "></MyLinkButton>
-        </View>
+        </MySimpleNavBar>
         <View style={MyStyleSheet.screenInner}>
             <View style={{ paddingBottom: 10, alignItems: 'center' }}>
                 <MyText>It happens sometimes.\nTell us what you can remember,\nand we'll look you up in our system.</MyText>

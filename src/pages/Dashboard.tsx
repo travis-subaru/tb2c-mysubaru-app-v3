@@ -7,6 +7,7 @@ import { Session, setSession, useSession } from '../stores/Session';
 import { MyStyleSheet } from '../components/MyStyles';
 import { Palette, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../components/MyLanguage';
+import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 
 export const Dashboard = () => {
     const i18n: Language = useLanguage();
@@ -24,15 +25,15 @@ export const Dashboard = () => {
     };
 
     const remoteStop = () => {
-        
+
     };
 
     return <View style={MyStyleSheet.screenOuter}>
-        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-            <MyLinkButton style={{flexDirection: 'row', justifyContent: 'flex-start'}} onPress={logout} title= "Logout"></MyLinkButton>
+        <MySimpleNavBar style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+            <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-start'}} onPress={logout} title= "Logout"></MySimpleNavButtonBarItem>
             <MyText>Home</MyText>
-            <MyLinkButton style={{flexDirection: 'row', justifyContent: 'flex-end'}} onPress={logout} title= "Vehicles"></MyLinkButton>
-        </View>
+            <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-end'}} onPress={logout} title= "Vehicles"></MySimpleNavButtonBarItem>
+        </MySimpleNavBar>
         <View style={MyStyleSheet.screenInner}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <View style={{ alignItems: 'center', justifyContent: 'center', width: 72, height: 72, backgroundColor: C.buttonSecondary}}>

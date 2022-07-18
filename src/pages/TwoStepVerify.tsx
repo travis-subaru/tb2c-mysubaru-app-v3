@@ -10,6 +10,7 @@ import { MyCheckBox } from '../components/MyCheckbox';
 import { TwoStepContactInfo, requestTwoStepAuthSendVerification, requestTwoStepAuthVerify } from '../net/TwoStepAuth';
 import { MyTextInput } from '../components/MyTextInput';
 import { checkVerificationCode } from '../model/VerificationCode';
+import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 
 export interface TwoStepsVerifyProps {
     contact?: TwoStepContactInfo
@@ -48,11 +49,10 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
 
     if (!showCodeEntry) {
         return <View style={MyStyleSheet.screenOuter}>
-            <View style={MyStyleSheet.fauxNavBar}>
-                <MyLinkButton onPress={() => setItem("appState", "login")} title= "< Login"></MyLinkButton>
+            <MySimpleNavBar style={MyStyleSheet.fauxNavBar}>
+                <MySimpleNavButtonBarItem onPress={() => setItem("appState", "login")} title= "< Login"></MySimpleNavButtonBarItem>
                 <MyText>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
-                <MyLinkButton title= " "></MyLinkButton>
-            </View>
+            </MySimpleNavBar>
             <View style={[MyStyleSheet.screenInner, {alignItems: 'flex-start'}]}>
 
                 <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.chooseContactMethod}</MyText>
@@ -69,11 +69,10 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
         </View>
     } else {
         return <View style={MyStyleSheet.screenOuter}>
-            <View style={MyStyleSheet.fauxNavBar}>
-                <MyLinkButton onPress={() => setShowCodeEntry(false)} title= "< Contact"></MyLinkButton>
+            <MySimpleNavBar>
+                <MySimpleNavButtonBarItem onPress={() => setShowCodeEntry(false)} title= "< Contact"></MySimpleNavButtonBarItem>
                 <MyText>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
-                <MyLinkButton title= ""></MyLinkButton>
-            </View>
+            </MySimpleNavBar>
             <View style={[MyStyleSheet.screenInner, {alignItems: 'flex-start'}]}>
                 <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.verifyInputTitle}</MyText>
                 <MyText>{i18n.twoStepAuthentication.verifyInputSubTitle}</MyText>
