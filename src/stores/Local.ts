@@ -7,7 +7,6 @@
 import { getNextListenerID, ListenerID } from './Listener';
 import { NETEnvironmentID } from '../net/Environment';
 import { TwoStepContactInfo } from '../net/TwoStepAuth';
-import { VIN } from './Vehicles';
 import { LanguageID } from '../components/MyLanguage';
 
 export type AppState = 'login' | 'forgot' | 'pin' ;
@@ -15,7 +14,7 @@ export type AppState = 'login' | 'forgot' | 'pin' ;
 export interface LocalData {
     appState: AppState
     environment: NETEnvironmentID
-    invalidVINs: VIN[]
+    invalidVINs: string[]
     language: LanguageID
     contactInfo?: TwoStepContactInfo
 }
