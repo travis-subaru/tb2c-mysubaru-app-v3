@@ -17,7 +17,6 @@ import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 
 // TODO: MySubaru Logo
-// TODO: Helvetica Neue Font Collection
 // TODO: Actual app version
 // TODO: Environment select
 // TODO: Native hooks to password apps

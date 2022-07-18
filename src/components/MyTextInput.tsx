@@ -28,17 +28,17 @@ export interface MyTextInputProps {
 }
 
 export const MyTextInput = (props: MyTextInputProps) => {
-    const Colors: Palette = useColors();
+    const C: Palette = useColors();
     const [isFocused, setIsFocused] = useState(false);
     // TODO: Merge inline validation and form errors
     const formErrors = (props.errors ?? []).filter(error => props.name === null || error.name === props.name).map(error => error.description);
     const inlineErrors = props.validate ? props.validate() : [];
     const errors = formErrors.concat(inlineErrors);
     const text = props.text ?? '';
-    const textRingColor = errors.length > 0 ? Colors.error : isFocused ? Colors.link : Colors.copyPrimary;
-    const textStyle = { position: 'absolute', top: -12, left: 25, backgroundColor: Colors.background, color: Colors.copyPrimary, paddingHorizontal: 5 };
-    const textInputStyle = { position: 'absolute', top: 5, left: 25, right: 25, bottom: 5, color: Colors.copyPrimary };
-    const textViewStyle = { borderColor: textRingColor, color: Colors.copyPrimary, width: 350 };
+    const textRingColor = errors.length > 0 ? C.error : isFocused ? C.link : C.copyPrimary;
+    const textStyle = { position: 'absolute', top: -12, left: 25, backgroundColor: C.background, color: C.copyPrimary, paddingHorizontal: 5 };
+    const textInputStyle = { position: 'absolute', top: 5, left: 25, right: 25, bottom: 5, color: C.copyPrimary };
+    const textViewStyle = { borderColor: textRingColor, color: C.copyPrimary, width: 350 };
     const usePaddingBottom = props.usePaddingBottom ?? true; // HACK: For last control
     // Use a label or a placeholder but not both
     const [label, placeholder] = (() => {
@@ -51,7 +51,7 @@ export const MyTextInput = (props: MyTextInputProps) => {
     const errorControl = (() => {
         if (errors.length == 0) { return null; }
         return <View style={{ paddingTop: 10}}>
-            {errors.map((line, i) => <Text key={i} style={{color: Colors.error}}>{line}</Text>)}
+            {errors.map((line, i) => <Text key={i} style={{color: C.error}}>{line}</Text>)}
         </View>
     })();
     const onBlur = () => setIsFocused(false);
@@ -59,7 +59,7 @@ export const MyTextInput = (props: MyTextInputProps) => {
     return (<View style={{ paddingBottom: usePaddingBottom ? textInputBottomPadding : 0 }}>
         <View style={[MyStyleSheet.roundedEdge, MyStyleSheet.pressable, textViewStyle]}>
             {label}
-            <TextInput onBlur={onBlur} onFocus={onFocus} placeholder={placeholder} selectionColor={Colors.link} {...props} style={[MyStyleSheet.bodyText, textInputStyle]}>{text}</TextInput>
+            <TextInput onBlur={onBlur} onFocus={onFocus} placeholder={placeholder} placeholderTextColor={C.copySecondary} selectionColor={C.link} {...props} style={[MyStyleSheet.bodyText, textInputStyle]}>{text}</TextInput>
         </View>
         {errorControl}
     </View>);
