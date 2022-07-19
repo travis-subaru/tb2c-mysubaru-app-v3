@@ -52,7 +52,7 @@ export const Dashboard = () => {
                 </View>
             </View>
             <View style={{flex: 1}}></View>
-            <View style={rowStyle}>
+            {/* <View style={rowStyle}>
                 <MySecondaryDashboardButton></MySecondaryDashboardButton>
                 <MySecondaryDashboardButton></MySecondaryDashboardButton>
                 <MySecondaryDashboardButton></MySecondaryDashboardButton>
@@ -78,7 +78,11 @@ export const Dashboard = () => {
                 <MyPrimaryButton/>
                 <MyPrimaryButton/>
                 <MyPrimaryButton/>
-            </View>
+            </View> */}
+            <MyPrimaryDashboardButton
+                        glyph={engineStatus ? 'powerOff' : 'powerOn'}
+                        onPress={engineStatus ? remoteStop : remoteStart}
+                        title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
         </View>
     </View>
 }

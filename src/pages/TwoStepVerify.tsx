@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { setItem, useItem } from '../stores/Local';
 import { MyLinkButton, MyPrimaryButton, MySecondaryButton } from '../components/MyButton';
-import { MyText } from '../components/MyText';
+import { MyText, decodeString } from '../components/MyText';
 import { Language, useLanguage } from '../components/MyLanguage';
 import { MyStyleSheet} from '../components/MyStyles';
 import { MyRadioButton } from '../components/MyRadioButton';
@@ -15,7 +15,6 @@ import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimple
 export interface TwoStepsVerifyProps {
     contact?: TwoStepContactInfo
 }
-
 
 export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     const i18n: Language = useLanguage();
@@ -54,7 +53,6 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
                 <MyText>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
             </MySimpleNavBar>
             <View style={[MyStyleSheet.screenInner, {alignItems: 'flex-start'}]}>
-
                 <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.chooseContactMethod}</MyText>
                 <MyRadioButton label={i18n.common.text + " " + props.contact?.phone} value="text" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
                 <MyRadioButton label={i18n.common.email + " " + props.contact?.userName} value="email" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
@@ -62,7 +60,7 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
                 <MyText style={[MyStyleSheet.boldCopyText, { paddingTop: 10 }]}>{i18n.twoStepAuthentication.dontRecognize}</MyText>
                 <MyText>{i18n.twoStepAuthentication.pleaseVerify}</MyText>
                 <View style={{ flexGrow: 1 }}></View>
-                <MyLinkButton onPress={() => setShowTerms(!showTerms)} title={i18n.twoStepAuthentication.termsToggle}></MyLinkButton>
+                <MyLinkButton onPress={() => setShowTerms(!showTerms)} title={decodeString(i18n.twoStepAuthentication.termsToggle)}></MyLinkButton>
                 <MyText>{showTerms ? i18n.forgotPasswordContactsPanel.termsConditions + '\n' : ''}</MyText>
             </View>
 
@@ -92,3 +90,5 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     }
 
 }
+
+

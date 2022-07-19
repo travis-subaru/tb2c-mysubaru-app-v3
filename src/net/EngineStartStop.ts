@@ -76,7 +76,6 @@ export const executeRemoteStart = async (p: RemoteStartParameters): Promise<Netw
     const e = getEnviroment();
     const jsessionid = getSessionID();
     const body = JSON.stringify(p);
-    debugger;
     const resp = await myFetch(`service/g2/engineStart/execute.json;jsessionid=${jsessionid}`, {
         "headers": {},
         "body": body,

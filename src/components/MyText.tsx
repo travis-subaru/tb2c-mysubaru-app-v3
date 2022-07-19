@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { useColors, Palette } from './MyColors';
-import { MyStyleSheet } from './MyStyles';
 
 export interface MyTextProps {
     key?: string
@@ -9,13 +8,19 @@ export interface MyTextProps {
     children?: any
 }
 
-export const MyText = (props: MyTextProps) => {
-    let text: string = props.children;
+export const decodeString = (text: string) => {
     text = text.replace("<br />", "\n");
-    text = text.replace("<nobr>", "\n");
+    text = text.replace("<nobr>", "");
+    text = text.replace("</nobr>", "");
     text = text.replace("&nbsp;", " ");
     text = text.replace("&amp;", "&");
+    text = text.replace("<strong>Terms & Conditions</strong>", "");
+    text = text.replace("<a href=\"tel:1(800) 782-2783\" class=\"text-link\">(800) 782-2783</a>", "(800) 782-2783");
+    return text;
+}
 
+export const MyText = (props: MyTextProps) => {
+    let text: string = decodeString(props.children);
 
     if (text.includes("\\n")) {
         return text.split("\\n").map((line, i) => {
