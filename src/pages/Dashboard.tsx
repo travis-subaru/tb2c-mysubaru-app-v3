@@ -32,7 +32,7 @@ export const Dashboard = () => {
     // TODO: Remove hardcoded params
     const remoteStop = async () => {
         const resp = await executeRemoteStop({pin: "1234", delay: 0, unlockDoorType: "ALL_DOORS_CMD"});
-        if (resp.success) { setEngineStatus(true); }
+        if (resp.success) { setEngineStatus(false); }
     };
     return <View style={MyStyleSheet.screenOuter}>
         <MySimpleNavBar style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>

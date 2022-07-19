@@ -14,7 +14,10 @@ export function parseResponse(json: any): Promise<NetworkResponse> {
     })
 }
 
-export const stdGETRequest: RequestInit = { headers: {}, body: null, method: "GET" }
+export const JSONHeaders: HeadersInit = { "content-type": "application/json" };
+export const GETRequest: RequestInit = { headers: {}, body: null, method: "GET" };
+export const GETJSONRequest: RequestInit = { headers: JSONHeaders, body: null, method: "GET" };
+
 
 /** Call endpoint with payload.
  * @return Standard response body

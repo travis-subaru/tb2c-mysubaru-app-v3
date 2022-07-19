@@ -1,7 +1,7 @@
 import { NetworkResponse } from "../stores/Response";
 import { getSessionID } from "../stores/Session";
 import { getEnviroment } from "./Environment";
-import { myFetch, stdGETRequest } from "./Fetch";
+import { myFetch, GETRequest, JSONHeaders, GETJSONRequest } from "./Fetch";
 
 export type UnlockDoorType = "ALL_DOORS_CMD"
 
@@ -68,7 +68,7 @@ export const handleRemoteServiceResponse = async (statusEndpoint: string, respon
 export const pollRemoteServiceStatus = async (statusEndpoint: string, serviceRequestId: string): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const ts = (new Date()).getTime();
-    const resp = await myFetch(`${statusEndpoint};jsessionid=${jsessionid}?serviceRequestId=${encodeURIComponent(serviceRequestId)}&_=${ts}`, stdGETRequest);
+    const resp = await myFetch(`${statusEndpoint};jsessionid=${jsessionid}?serviceRequestId=${encodeURIComponent(serviceRequestId)}&_=${ts}`, GETJSONRequest);
     return await handleRemoteServiceResponse(statusEndpoint, resp);
 };
 
@@ -77,41 +77,21 @@ export const executeRemoteStart = async (p: RemoteStartParameters): Promise<Netw
     const jsessionid = getSessionID();
     const body = JSON.stringify(p);
     const resp = await myFetch(`service/g2/engineStart/execute.json;jsessionid=${jsessionid}`, {
-        "headers": {},
+        "headers": JSONHeaders,
         "body": body,
         "method": "POST",
     });
-    return await handleRemoteServiceResponse(`https://${e.domain}/g2v23/service/g2/engineStart/status.json`, resp);
+    return await handleRemoteServiceResponse(`service/g2/engineStart/status.json`, resp);
 }
-
-fetch("https://mobileapi.qa.subarucs.com/g2v23/service/g2/engineStart/execute.json;jsessionid=E4CFE3338A2BD6F3177EAC3E0B7DB82E", {
-  "headers": {
-    "accept": "application/json, text/javascript, */*; q=0.01",
-    "accept-language": "en-US,en;q=0.9",
-    "content-type": "application/json",
-    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Microsoft Edge\";v=\"96\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"macOS\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "cross-site"
-  },
-  "referrer": "http://localhost:8000/",
-  "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": "{\"name\":\"Summer Time\",\"runTimeMinutes\":\"10\",\"climateZoneFrontTemp\":\"65\",\"climateZoneFrontAirMode\":\"FEET_FACE_BALANCED\",\"climateZoneFrontAirVolume\":\"7\",\"outerAirCirculation\":\"outsideAir\",\"heatedRearWindowActive\":\"false\",\"heatedSeatFrontLeft\":\"HIGH_COOL\",\"heatedSeatFrontRight\":\"HIGH_COOL\",\"airConditionOn\":\"false\",\"canEdit\":\"true\",\"disabled\":\"false\",\"presetType\":\"userPreset\",\"startConfiguration\":\"START_ENGINE_ALLOW_KEY_IN_IGNITION\",\"pin\":\"1234\",\"delay\":0,\"vin\":\"4S3BMAA66D1038385\"}",
-  "method": "POST",
-  "mode": "cors",
-  "credentials": "omit"
-});
 
 export const executeRemoteStop = async (p: RemoteStopParameters): Promise<NetworkResponse> => {
     const e = getEnviroment();
     const jsessionid = getSessionID();
     const body = JSON.stringify(p);
     const resp = await myFetch(`service/g2/engineStop/execute.json;jsessionid=${jsessionid}`, {
-        "headers": {},
+        "headers": JSONHeaders,
         "body": body,
         "method": "POST",
     });
-    return await handleRemoteServiceResponse(`https://${e.domain}/g2v23/service/g2/engineStop/status.json`, resp);
+    return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
 }
