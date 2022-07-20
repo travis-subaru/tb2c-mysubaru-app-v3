@@ -17,13 +17,13 @@ const App = () => {
     const isDarkMode = useColorSchemeDynamic() === "dark";
     const appState: AppState = useItem("appState");
     const contactInfo: TwoStepContactInfo = useItem("contactInfo");
+    const pinRequested: boolean = useItem('pinRequested');
     const session: Session = useSession();
     const content = (() => {
         if (session === undefined) {
             switch (appState) {
                 case "login": return <Login />;
                 case "forgot": return <ForgotInfo />;
-                case "pin": return <PINCheck />;
             }
         } else {
             if (session.deviceRegistered) {
@@ -35,10 +35,13 @@ const App = () => {
         }
     })();
 
-    return (<SafeAreaView key={appState} style={{ backgroundColor: Colors.background, flex: 1 }}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        {content}
-    </SafeAreaView>);
+    return (<>
+        <SafeAreaView key={appState} style={{ backgroundColor: Colors.background, flex: 1 }}>
+            <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+            {content}
+        </SafeAreaView>
+        {pinRequested && <PINCheck/>}
+    </>);
 };
 
 export default App;

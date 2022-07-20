@@ -12,8 +12,10 @@ import { MyAppIcon } from '../components/MyAppIcon';
 import { executeRemoteStart, executeRemoteStop } from '../net/EngineStartStop';
 import { useNetworkActivity } from '../stores/Response';
 import { MySnackBar } from '../components/MySnackBar';
+import { withPINCheck } from './PINCheck';
 
 // TODO: Tab Bar
+// TODO: Cancel all commands on logout
 
 export const Dashboard = () => {
     const i18n: Language = useLanguage();
@@ -29,13 +31,20 @@ export const Dashboard = () => {
     };
     // TODO: Remove hardcoded params
     const remoteStart = async () => {
-        const resp = await executeRemoteStart({pin: "1234", delay: 0, unlockDoorType: "ALL_DOORS_CMD", name: "Summer Time", runTimeMinutes: "10", climateZoneFrontTemp: "65", climateZoneFrontAirMode: "FEET_FACE_BALANCED", climateZoneFrontAirVolume: "7", outerAirCirculation: "outsideAir", heatedRearWindowActive: "false", heatedSeatFrontLeft: "HIGH_COOL", heatedSeatFrontRight: "HIGH_COOL", airConditionOn: "false", canEdit: "true", disabled: "false", presetType: "userPreset", startConfiguration: "START_ENGINE_ALLOW_KEY_IN_IGNITION"});
-        if (resp.success) { setEngineStatus(true); }
+        const pin = await withPINCheck();
+        if (pin.ok) {
+            const resp = await executeRemoteStart({pin: pin.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD", name: "Summer Time", runTimeMinutes: "10", climateZoneFrontTemp: "65", climateZoneFrontAirMode: "FEET_FACE_BALANCED", climateZoneFrontAirVolume: "7", outerAirCirculation: "outsideAir", heatedRearWindowActive: "false", heatedSeatFrontLeft: "HIGH_COOL", heatedSeatFrontRight: "HIGH_COOL", airConditionOn: "false", canEdit: "true", disabled: "false", presetType: "userPreset", startConfiguration: "START_ENGINE_ALLOW_KEY_IN_IGNITION"});
+            if (resp.success) { setEngineStatus(true); }
+        }
+
     };
     // TODO: Remove hardcoded params
     const remoteStop = async () => {
-        const resp = await executeRemoteStop({pin: "1234", delay: 0, unlockDoorType: "ALL_DOORS_CMD"});
-        if (resp.success) { setEngineStatus(false); }
+        const pin = await withPINCheck();
+        if (pin.ok) {
+            const resp = await executeRemoteStop({pin: pin.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD"});
+            if (resp.success) { setEngineStatus(false); }
+        }
     };
     return <View style={MyStyleSheet.screenOuter}>
         <MySimpleNavBar style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>

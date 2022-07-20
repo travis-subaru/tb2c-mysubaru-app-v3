@@ -9,7 +9,7 @@ import { NETEnvironmentID } from '../net/Environment';
 import { TwoStepContactInfo } from '../net/TwoStepAuth';
 import { LanguageID } from '../components/MyLanguage';
 
-export type AppState = 'login' | 'forgot' | 'pin' ;
+export type AppState = 'login' | 'forgot' ;
 
 export interface LocalData {
     appState: AppState
@@ -17,6 +17,7 @@ export interface LocalData {
     invalidVINs: string[]
     language: LanguageID
     contactInfo?: TwoStepContactInfo
+    pinRequested: boolean
 }
 
 export type LocalDataKey = keyof LocalData;
@@ -32,6 +33,7 @@ let store: LocalData = {
     environment: "cloudqa",
     invalidVINs: [],
     language: "en",
+    pinRequested: false
 };
 let listeners: Listener[] = [];
 
