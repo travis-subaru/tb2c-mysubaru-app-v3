@@ -6,6 +6,7 @@ import { Appearance } from 'react-native';
 
 export interface Palette {
     background: string;
+    backgroundSecondary: string;
     copyPrimary: string;
     copySecondary: string;
     error: string;
@@ -23,6 +24,7 @@ export const staticWhite = "#FFF";
 
 const midnightPalette: Palette = {
     background: staticMidnight,
+    backgroundSecondary: "#34393F", // midnight-90
     copyPrimary: staticWhite,
     copySecondary: "#91979A", // Light Grey
     error: "#E95756", // Light Red
@@ -34,6 +36,7 @@ const midnightPalette: Palette = {
 
 const whitePalette: Palette = {
     background: staticWhite,
+    backgroundSecondary: "#F7F8F9", // grey-100
     copyPrimary: staticMidnight,
     copySecondary: "#5C6163", // Grey
     error: "#E22828", // Red

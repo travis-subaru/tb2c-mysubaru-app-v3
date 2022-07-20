@@ -15,6 +15,8 @@ import { requestMySAlerts } from '../net/MySAlerts';
 import { requestRefreshVehicles } from '../net/RefreshVehicles';
 import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
+import { MySnackBar } from '../components/MySnackBar';
+import { useNetworkActivity } from '../stores/Response';
 
 // TODO: MySubaru Logo
 // TODO: Actual app version
@@ -28,14 +30,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const [formErrors, setFormErrors] = useState([]);
-    const [active, setActive] = useState(false);
-
-    const loading = (() => {
-        if (!active) { return; }
-        return (<View key="loading" style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.copySecondary, justifyContent: "center", alignItems: "center", width: 350, padding: 20 }]}>
-            <MyText style={{ color: staticWhite }}>Show Login Progress</MyText>
-        </View>);
-    })();
+    const [activity, setActivity] = useNetworkActivity();
 
     const otherErrors = (() => {
         const otherErrors = formErrors.filter(e => e.name != "username" && e.name != "password");
@@ -55,7 +50,6 @@ const Login = () => {
         }
         setFormErrors(localErrors);
         if (localErrors.length == 0) {
-            setActive(true);
             const response = await requestLogin({loginUsername: username, password: password, rememberUserCheck: rememberMe ? "on" : "off"});
             if (response.success && response.dataName) {
                 const session: SessionData = response.data;
@@ -73,7 +67,6 @@ const Login = () => {
                     // ????: No vehicle error?
                 }
             }
-            setActive(false);
         }
     };
 
@@ -87,24 +80,26 @@ const Login = () => {
                 <MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem>
                 <MyText style={MyStyleSheet.headlineText}>// MySUBARU //</MyText>
             </MySimpleNavBar>
-            <View style={MyStyleSheet.screenInner}>
+            <View style={{flex: 1, alignItems: 'center', justifyContent:'flex-start'}}>
                 <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
                 <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} style={{ paddingBottom: 0 }}></MyTextInput>
                 <MyCheckBox label={i18n.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
                 <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={i18n.login.logIn}></MyPrimaryButton>
                 <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>
-                {loading}
+
                 {otherErrors}
                 <View style={{ flexGrow: 1 }} />
+                <MySnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MySnackBar>
                 <View>
-                    <MyText>V. 2.0.0c-longVersion</MyText>
+                    <MyText style={{ marginBottom: 10 }}>V. 2.0.0c-longVersion</MyText>
                 </View>
-                <View style={{width: 350, paddingVertical: 20}}>
+                <View style={{width: 350, marginBottom: 20}}>
                     <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"  }}>
                         <MyAlternateButton title={i18n.login.demoMode}></MyAlternateButton>
                         <MyAlternateButton title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
                     </View>
                 </View>
+
             </View>
         </View>
     );

@@ -1,6 +1,7 @@
-/** Channel to send and receive network based updates. */
-
 import { getNextListenerID, ListenerID } from './Listener';
+import { useState, useEffect } from 'react';
+
+/** Channel to send and receive network based updates. */
 
 // TODO: Document these
 export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount";
@@ -18,25 +19,64 @@ export interface NetworkResponse {
 
 interface NetworkResponseListener {
     id: ListenerID
-    dataName: DataName
+    dataName?: DataName
     fn: (NETResponse) => void
 }
 
-let listeners: NetworkResponseListener[] = [];
+export interface NetworkActivity {
+    status: "progress" | "success" | "error"
+    tag: string
+}
+
+interface NetworkActivityListener {
+    id: ListenerID
+    fn: (NetworkActivity) => void
+}
+
+let activityListeners: NetworkActivityListener[] = [];
+let responseListeners: NetworkResponseListener[] = [];
+
+export const postNetworkRequest = (endpoint: string) => {
+    const activity: NetworkActivity = {status: "progress", tag: endpoint};
+    activityListeners.forEach(l => l.fn(activity));
+}
 
 export const postNetworkResponse = (response: NetworkResponse) => {
-    console.log(`Network ${response.success ? "ok" : "ERROR"} :: ${JSON.stringify(response)}`)
-    listeners.filter(l => l.dataName === response.dataName).forEach(l => l.fn(response));
+    const activity: NetworkActivity = {status: response.success ? "success" : "error", tag: response.success ? "ok" : response.errorCode ?? "generalError"};
+    activityListeners.forEach(l => l.fn(activity));
+    responseListeners.filter(l => l.dataName === response.dataName).forEach(l => l.fn(response));
 }
 
 /** Begin listening for network changes. */
 export const addNetworkListener = (dataName: DataName, handler: (data: NetworkResponse) => void): ListenerID => {
     const id: ListenerID = getNextListenerID();
-    listeners.push({ id: id, dataName: dataName, fn: handler })
+    responseListeners.push({ id: id, dataName: dataName, fn: handler })
     return id;
 }
 
 /** Stop receiving network updates. */
 export const removeNetworkListener = (id: ListenerID): void => {
-    listeners = listeners.filter((l) => l.id != id);
+    responseListeners = responseListeners.filter((l) => l.id != id);
+}
+
+/** Begin listening for network activity (in-progess, success, failure) changes. */
+export const addNetworkActivityListener = (handler: (data: NetworkActivity) => void): ListenerID => {
+    const id: ListenerID = getNextListenerID();
+    activityListeners.push({ id: id, fn: handler })
+    return id;
+}
+
+/** Stop receiving network updates. */
+export const removeNetworkActivityListener = (id: ListenerID): void => {
+    activityListeners = activityListeners.filter((l) => l.id != id);
+}
+
+/** Listener for network updates */
+export const useNetworkActivity = () => {
+    const [get, set] = useState(null);
+    useEffect(() => {
+        const id = addNetworkActivityListener((data) => set(data));
+        return () => removeNetworkActivityListener(id);
+    });
+    return [get, set];
 }

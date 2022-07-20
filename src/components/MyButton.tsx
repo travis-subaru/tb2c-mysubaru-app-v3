@@ -39,12 +39,14 @@ export const MySecondaryButton = (props: MyButtonProps) => {
 
 /** Tappable link */
 export const MyLinkButton = (props: MyButtonProps) => {
-    const Colors: Palette = useColors();
+    const C: Palette = useColors();
     const [pressed, setPressed] = useState(false);
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
+    const color = pressed ? C.copySecondary : C.buttonSecondary;
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[props.style]}>
-        <Text style={[MyStyleSheet.buttonText, { color: Colors.buttonSecondary }]}>{props.title}</Text>
+        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{ color: color }}></MyAppIcon> : null}
+        {props.title ? <Text style={[MyStyleSheet.buttonText, { color: color }]}>{props.title}</Text> : null}
     </MyPressable>);
 }
 
@@ -79,7 +81,7 @@ export const MyAlternateButton = (props: MyButtonProps) => {
     const size = 150;
     const style = { backgroundColor: backgroundColor, borderColor: borderColor, borderRadius: size / 2, borderWidth: 10, minWidth: size, minHeight: size };
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[style, props.style]}>
-        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: textColor}}></MyAppIcon> : null}
+        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: staticWhite}}></MyAppIcon> : null}
         {lines}
     </MyPressable>);
 }
