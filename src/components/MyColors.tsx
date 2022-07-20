@@ -36,7 +36,7 @@ const midnightPalette: Palette = {
 
 const whitePalette: Palette = {
     background: staticWhite,
-    backgroundSecondary: "#F7F8F9", // grey-100
+    backgroundSecondary: "#D1D1D6", // iOS.systemGrey4
     copyPrimary: staticMidnight,
     copySecondary: "#5C6163", // Grey
     error: "#E22828", // Red
