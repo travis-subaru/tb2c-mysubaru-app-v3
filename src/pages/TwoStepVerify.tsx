@@ -48,12 +48,12 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
             case "ok": return [];
         }
     }
-    return <View style={MyStyleSheet.screenOuter}>
-        <MySimpleNavBar style={MyStyleSheet.fauxNavBar}>
+    return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
+        <MySimpleNavBar>
             <MySimpleNavButtonBarItem onPress={() => setItem("appState", "login")} title= "< Login"></MySimpleNavButtonBarItem>
             <MyText>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
         </MySimpleNavBar>
-        <View style={[MyStyleSheet.screenInner, {alignItems: 'flex-start'}]}>
+        <View style={{ flex: 1, alignItems: 'flex-start', justifyContent:'flex-start', paddingHorizontal: 20 }}>
             {(() => {
                 if (activity) {
                     return <MySnackBar status={activity.status} title="In progress" onClose={setActivity(null)}></MySnackBar>

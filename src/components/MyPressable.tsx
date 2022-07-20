@@ -4,7 +4,7 @@ import { MyStyleSheet } from './MyStyles';
 
 export const MyPressable = (props: any) => {
     return (<View>
-        <Pressable {...props} style={[MyStyleSheet.pressable, props.style]}>
+        <Pressable {...props} style={[{ alignItems: 'center', justifyContent: 'center', minWidth: 150, maxWidth: 350, minHeight: 50 }, props.style]}>
             {props.children}
         </Pressable>
     </View>);

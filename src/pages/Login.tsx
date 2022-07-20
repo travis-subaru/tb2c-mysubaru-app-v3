@@ -75,7 +75,7 @@ const Login = () => {
     };
 
     return (
-        <View style={MyStyleSheet.screenOuter}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
             <MySimpleNavBar>
                 <MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem>
                 <MyText style={MyStyleSheet.headlineText}>// MySUBARU //</MyText>

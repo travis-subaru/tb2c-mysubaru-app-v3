@@ -82,12 +82,12 @@ export const ForgotInfo = () => {
             </View>);
         }
     })();
-    return <View style={MyStyleSheet.screenOuter}>
+    return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <MySimpleNavBar>
             <MySimpleNavButtonBarItem onPress={() => setItem("appState", "login")} title= "< Login"></MySimpleNavButtonBarItem>
-            <MyText style={MyStyleSheet.fauxNavTitle}>Forgot Something?</MyText>
+            <MyText style={MyStyleSheet.boldCopyText}>Forgot Something?</MyText>
         </MySimpleNavBar>
-        <View style={MyStyleSheet.screenInner}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start', paddingHorizontal: 20 }}>
             <View style={{ paddingBottom: 10, alignItems: 'center' }}>
                 <MyText>It happens sometimes.\nTell us what you can remember,\nand we'll look you up in our system.</MyText>
             </View>

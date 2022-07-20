@@ -46,7 +46,7 @@ export const Dashboard = () => {
             if (resp.success) { setEngineStatus(false); }
         }
     };
-    return <View style={MyStyleSheet.screenOuter}>
+    return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <MySimpleNavBar style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
             <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-start'}} onPress={logout} title= "Logout"></MySimpleNavButtonBarItem>
             <MyText>Home</MyText>

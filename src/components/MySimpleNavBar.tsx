@@ -12,6 +12,7 @@ import { MyText } from './MyText';
  * If array has one or two children, first element is title, second is left nav.
  */
 export const MySimpleNavBar = (props) => {
+    const barStyle = { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', height: 50, width: '100%'};
     const leftStyle = { paddingLeft: 20 };
     const titleStyle = { flex: 1, alignItems: 'center', justifyContent: 'center' };
     const rightStyle = { paddingRight: 20 };
@@ -22,19 +23,19 @@ export const MySimpleNavBar = (props) => {
             <View style={rightStyle}><MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem></View>
         </View>;
     } else if (props.children.length == 1) {
-        return <View {...props} style={[props.style, MyStyleSheet.fauxNavBar]}>
+        return <View {...props} style={[barStyle, props.style]}>
             <View style={leftStyle}><MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem></View>
             <View style={titleStyle}>{props.children[0]}</View>
             <View style={rightStyle}><MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem></View>
         </View>;
     } else if (props.children.length == 2) {
-        return <View {...props} style={[props.style, MyStyleSheet.fauxNavBar]}>
+        return <View {...props} style={[barStyle, props.style]}>
             <View style={leftStyle}>{props.children[0]}</View>
             <View style={titleStyle}>{props.children[1]}</View>
             <View style={rightStyle}><MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem></View>
         </View>;
     } else {
-        return <View {...props} style={[props.style, MyStyleSheet.fauxNavBar]}>
+        return <View {...props} style={[barStyle, props.style]}>
             <View style={leftStyle}>{props.children[0]}</View>
             <View style={titleStyle}>{props.children[1]}</View>
             <View style={rightStyle}>{props.children[2]}</View>
