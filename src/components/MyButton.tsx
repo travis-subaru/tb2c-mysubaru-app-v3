@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text  } from 'react-native';
+import { Text } from 'react-native';
 import { MyAppIcon, MyAppIconGlyph } from './MyAppIcon';
 import { useColors, Palette, staticWhite, staticMidnight } from './MyColors';
 import { MyPressable } from './MyPressable';

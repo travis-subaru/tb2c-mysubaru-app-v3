@@ -1,7 +1,7 @@
 import { NetworkResponse } from "../stores/Response";
 import { getSessionID } from "../stores/Session";
 import { getEnviroment } from "./Environment";
-import { myFetch, GETRequest, JSONHeaders, GETJSONRequest } from "./Fetch";
+import { myFetch, JSONHeaders, GETJSONRequest } from "./Fetch";
 
 export type UnlockDoorType = "ALL_DOORS_CMD"
 
@@ -61,7 +61,7 @@ export const handleRemoteServiceResponse = async (statusEndpoint: string, respon
             await pollRemoteServiceStatus(statusEndpoint, status.serviceRequestId);
         case "finished":
             // TODO: Post message to channel
-            return {success: true, errorCode: null, dataName: null, data: null};
+            return {success: true, errorCode: null, dataName: null, data: null, endpoint: response.endpoint};
     }
 }
 

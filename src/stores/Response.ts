@@ -1,10 +1,8 @@
 import { getNextListenerID, ListenerID } from './Listener';
 import { useState, useEffect } from 'react';
+import { Code, ErrorCode } from '../model/Code';
 
 /** Channel to send and receive network based updates. */
-
-// TODO: Document these
-export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount";
 
 // TODO: Document these
 export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error" | "remoteServiceStatus";
@@ -14,7 +12,7 @@ export interface NetworkResponse {
     errorCode: null | ErrorCode
     dataName: null | DataName
     data: any
-    endpoint?: string
+    endpoint: string
 }
 
 interface NetworkResponseListener {
@@ -25,7 +23,7 @@ interface NetworkResponseListener {
 
 export interface NetworkActivity {
     status: "progress" | "success" | "error"
-    tag: string
+    tag: Code
 }
 
 interface NetworkActivityListener {
@@ -37,12 +35,14 @@ let activityListeners: NetworkActivityListener[] = [];
 let responseListeners: NetworkResponseListener[] = [];
 
 export const postNetworkRequest = (endpoint: string) => {
-    const activity: NetworkActivity = {status: "progress", tag: endpoint};
+    const activity: NetworkActivity = {status: "progress", tag: {type: 'endpoint', endpoint: endpoint}};
     activityListeners.forEach(l => l.fn(activity));
 }
 
 export const postNetworkResponse = (response: NetworkResponse) => {
-    const activity: NetworkActivity = {status: response.success ? "success" : "error", tag: response.success ? "ok" : response.errorCode ?? "generalError"};
+    const status = response.success ? "success" : "error";
+    const tag: Code = response.success ? { type: 'endpoint', endpoint: response.endpoint } : { type: 'error', code: response.errorCode }
+    const activity: NetworkActivity = {status: status, tag: tag};
     activityListeners.forEach(l => l.fn(activity));
     responseListeners.filter(l => l.dataName === response.dataName).forEach(l => l.fn(response));
 }

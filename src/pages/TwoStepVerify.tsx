@@ -51,12 +51,12 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <MySimpleNavBar>
             <MySimpleNavButtonBarItem onPress={() => setItem("appState", "login")} title= "< Login"></MySimpleNavButtonBarItem>
-            <MyText>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
+            <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
         </MySimpleNavBar>
         <View style={{ flex: 1, alignItems: 'flex-start', justifyContent:'flex-start', paddingHorizontal: 20 }}>
             {(() => {
                 if (activity) {
-                    return <MySnackBar status={activity.status} title="In progress" onClose={setActivity(null)}></MySnackBar>
+                    return <MySnackBar activity={activity} title="In progress" onClose={setActivity(null)}></MySnackBar>
                 }
             })()}
             {(() => {
@@ -73,7 +73,7 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
                         <MyText>{showTerms ? i18n.forgotPasswordContactsPanel.termsConditions + '\n' : ''}</MyText>
                     </View>
                 } else {
-                    return <View>
+                    return <View style={{ alignItems: 'flex-start'}}>
                         <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.verifyInputTitle}</MyText>
                         <MyText>{i18n.twoStepAuthentication.verifyInputSubTitle}</MyText>
                         <View style={{paddingTop: 10}}>
