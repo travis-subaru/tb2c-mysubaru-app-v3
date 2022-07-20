@@ -58,12 +58,12 @@ export const PINCheck = () => {
         const newPIN = PIN + digit;
         await setPIN(newPIN);
         if (newPIN.length == 4) {
-            checkPIN();
+            checkPIN(newPIN);
         }
     }
-    const checkPIN = () => {
+    const checkPIN = (pin: string) => {
         if (resolver) {
-            resolver({ ok: true, pin: PIN});
+            resolver({ ok: true, pin: pin});
             resolver = (_) => {};
         }
         setItem('pinRequested', false);
