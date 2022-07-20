@@ -33,7 +33,7 @@ export const MySecondaryButton = (props: MyButtonProps) => {
     const [pressed, setPressed] = useState(false);
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
 
-    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[{ borderColor: Colors.buttonSecondary }, MyStyleSheet.roundedEdge, props.style]}>
+    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, { borderColor: Colors.buttonSecondary, borderWidth: 1 }, props.style]}>
         <Text style={[MyStyleSheet.buttonText, { color: Colors.buttonSecondary }]}>{props.title}</Text>
     </MyPressable>);
 }

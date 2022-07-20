@@ -47,7 +47,7 @@ export const PINButton = (props: MyButtonProps) => {
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
     const fillColor = pressed ? staticWhite : staticMidnight;
     const strokeColor = pressed ? staticMidnight : staticWhite;
-    const style = { backgroundColor: fillColor, borderColor: strokeColor, color: strokeColor, minWidth: 50, maxWidth: 50, margin: 10 }
+    const style = { backgroundColor: fillColor, borderColor: strokeColor, borderWidth: 1, color: strokeColor, minWidth: 50, maxWidth: 50, margin: 10 }
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, style, props.style]}>
         <Text style={[MyStyleSheet.buttonText, { color: staticWhite }]}>{props.title}</Text>

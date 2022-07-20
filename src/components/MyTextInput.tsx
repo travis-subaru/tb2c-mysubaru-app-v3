@@ -38,7 +38,7 @@ export const MyTextInput = (props: MyTextInputProps) => {
     const textRingColor = errors.length > 0 ? C.error : isFocused ? C.link : C.copyPrimary;
     const textStyle = { position: 'absolute', top: -12, left: 25, backgroundColor: C.background, color: C.copyPrimary, paddingHorizontal: 5 };
     const textInputStyle = { position: 'absolute', top: 5, left: 25, right: 25, bottom: 5, color: C.copyPrimary };
-    const textViewStyle = { borderColor: textRingColor, color: C.copyPrimary, width: 350 };
+    const textViewStyle = { borderColor: textRingColor, borderWidth: 1, color: C.copyPrimary, width: 350 };
     const usePaddingBottom = props.usePaddingBottom ?? true; // HACK: For last control
     // Use a label or a placeholder but not both
     const [label, placeholder] = (() => {

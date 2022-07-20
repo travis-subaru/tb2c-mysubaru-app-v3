@@ -66,7 +66,7 @@ export const ForgotInfo = () => {
     const resultPanel = (() => {
         if (foundAccounts.length > 0) {
             return (<View style={{ paddingVertical: 10, width: 350 }}>
-                <View style={[MyStyleSheet.roundedEdge, { padding: 10, backgroundColor: C.success, borderColor: C.success}]}>
+                <View style={[MyStyleSheet.roundedEdge, { padding: 10, backgroundColor: C.success, borderColor: C.success, borderWidth: 1}]}>
                     <MyText style={[ MyStyleSheet.boldCopyText, { color: staticWhite }]}>{i18n.forgotUsernameSuccessPanel.pageDescription}</MyText>
                     <MyText style={{ color: staticWhite, paddingVertical: 10 }}>{foundAccounts.join("\n")}</MyText>
                     <MyText style={{ color: staticWhite }}>{i18n.forgotUsernameSuccessPanel.pageDescription2}</MyText>

@@ -75,7 +75,7 @@ export const Dashboard = () => {
                 <MySecondaryDashboardButton></MySecondaryDashboardButton>
             </View>*/}
             <View style={rowStyle}>
-                <View style={{ backgroundColor: C.backgroundSecondary, flexDirection: 'row', flexWrap: 0, alignItems: 'center', justifyContent: 'space-evenly', marginVertical: 10, width: '100%' }}>
+                <View style={[MyStyleSheet.roundedEdge, { backgroundColor: C.backgroundSecondary, flexDirection: 'row', flexWrap: 0, alignItems: 'center', justifyContent: 'space-evenly', marginVertical: 10, width: '100%' }]}>
                     <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="gear" title="View\nStart\nSettings"></MyDashboardLinkButton>
                     <MyPrimaryDashboardButton style={{ flexGrow: 1, marginVertical: 10 }} glyph={engineStatus ? 'powerOff' : 'powerOn'} onPress={engineStatus ? remoteStop : remoteStart} title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
                     <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="filters" title="Climate\nPresets"></MyDashboardLinkButton>

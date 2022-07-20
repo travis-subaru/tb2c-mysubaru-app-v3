@@ -12,7 +12,7 @@ export const MyStyleSheet = StyleSheet.create({
     fauxNavTitle: { alignment: 'center', },
     headlineText: { fontFamily: 'Helvetica Neue', fontSize: 32 },
     pressable: { alignItems: 'center', justifyContent: 'center', minWidth: 150, maxWidth: 350, minHeight: 50 },
-    roundedEdge: { borderRadius: 5, borderWidth: 1 },
+    roundedEdge: { borderRadius: 5 },
     screenOuter: { flex: 1, alignItems: 'center', justifyContent:'center' },
     screenInner: { flex: 1, alignItems: 'center', justifyContent:'flex-start', paddingHorizontal: 20 },
 });
