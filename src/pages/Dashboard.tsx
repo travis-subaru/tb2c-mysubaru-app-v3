@@ -10,6 +10,8 @@ import { Language, useLanguage } from '../components/MyLanguage';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 import { MyAppIcon } from '../components/MyAppIcon';
 import { executeRemoteStart, executeRemoteStop } from '../net/EngineStartStop';
+import { useNetworkActivity } from '../stores/Response';
+import { MySnackBar } from '../components/MySnackBar';
 
 // TODO: Tab Bar
 
@@ -18,8 +20,9 @@ export const Dashboard = () => {
     const C: Palette = useColors();
     const session: Session = useSession();
     const [engineStatus, setEngineStatus] = useState(false); // TODO: Listen on VehicleStatus channel
+    const [activity, setActivity] = useNetworkActivity();
     const vehicle = session?.vehicles[session?.currentVehicleIndex];
-    const rowStyle = { flexDirection: 'row', flexWrap: 1, justifyContent: 'space-evenly', paddingTop: 10, width: '100%' };
+    const rowStyle = { flexDirection: 'row', flexWrap: 1, justifyContent: 'space-evenly', paddingTop: 10, paddingHorizontal: 20, width: '100%' };
     const logout = () => {
         setItem("appState", "login");
         setSession(undefined);
@@ -40,8 +43,8 @@ export const Dashboard = () => {
             <MyText>Home</MyText>
             <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-end'}} onPress={logout} title= "Vehicles"></MySimpleNavButtonBarItem>
         </MySimpleNavBar>
-        <View style={MyStyleSheet.screenInner}>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start' }}>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' , paddingHorizontal: 20}}>
                 <View style={{ alignItems: 'center', justifyContent: 'center', width: 72, height: 72, backgroundColor: C.buttonSecondary}}>
                     <MyAppIcon glyph='frontCar' style={{ color: staticWhite, fontSize: 60 }}></MyAppIcon>
                 </View>
@@ -61,28 +64,23 @@ export const Dashboard = () => {
                 <MySecondaryDashboardButton></MySecondaryDashboardButton>
                 <MySecondaryDashboardButton></MySecondaryDashboardButton>
                 <MySecondaryDashboardButton></MySecondaryDashboardButton>
-            </View>
+            </View>*/}
             <View style={rowStyle}>
-                <View style={{ backgroundColor: C.copySecondary, flexDirection: 'row', flexWrap: 1, justifyContent: 'space-evenly', paddingVertical: 10, width: 320 }}>
-                    <MyDashboardLinkButton></MyDashboardLinkButton>
-                    <MyPrimaryDashboardButton
-                        glyph={engineStatus ? 'powerOff' : 'powerOn'}
-                        onPress={engineStatus ? remoteStop : remoteStart}
-                        title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
-                    <MyDashboardLinkButton></MyDashboardLinkButton>
+                <View style={{ backgroundColor: C.backgroundSecondary, flexDirection: 'row', flexWrap: 0, alignItems: 'center', justifyContent: 'space-evenly', marginVertical: 10, width: '100%' }}>
+                    <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="gear" title="View\nStart\nSettings"></MyDashboardLinkButton>
+                    <MyPrimaryDashboardButton style={{ flexGrow: 1, marginVertical: 10 }} glyph={engineStatus ? 'powerOff' : 'powerOn'} onPress={engineStatus ? remoteStop : remoteStart} title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
+                    <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="filters" title="Climate\nPresets"></MyDashboardLinkButton>
                 </View>
             </View>
             <View style={{flex: 1}}></View>
-            <View style={{ flexDirection: 'row', paddingBottom: 10 }}>
+            <MySnackBar activity={activity} style={{}} onClose={() => setActivity(null)}></MySnackBar>
+            <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                 <MyPrimaryButton/>
                 <MyPrimaryButton/>
                 <MyPrimaryButton/>
                 <MyPrimaryButton/>
-            </View> */}
-            <MyPrimaryDashboardButton
-                        glyph={engineStatus ? 'powerOff' : 'powerOn'}
-                        onPress={engineStatus ? remoteStop : remoteStart}
-                        title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
+            </View>
+
         </View>
     </View>
 }

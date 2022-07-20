@@ -4,6 +4,7 @@ import { MyAppIcon, MyAppIconGlyph } from './MyAppIcon';
 import { useColors, Palette, staticWhite, staticMidnight } from './MyColors';
 import { MyPressable } from './MyPressable';
 import { MyStyleSheet } from './MyStyles';
+import { MyText } from './MyText';
 
 export interface MyButtonProps {
     title?: string
@@ -109,11 +110,13 @@ export const MySecondaryDashboardButton = (props: MyButtonProps) => {
  * Designed to flank engine start.
  */
 export const MyDashboardLinkButton = (props: MyButtonProps) => {
-    const Colors: Palette = useColors();
+    const C: Palette = useColors();
     const [pressed, setPressed] = useState(false);
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
+    const color = pressed ? C.copyPrimary : C.buttonSecondary
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[props.style]}>
-        <Text style={[MyStyleSheet.buttonText, { color: Colors.buttonSecondary }]}>{props.title}</Text>
+        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: color }}></MyAppIcon> : null}
+        <MyText style={[MyStyleSheet.buttonText, { textAlign: 'center', color: color, }]}>{props.title}</MyText>
     </MyPressable>);
 }
