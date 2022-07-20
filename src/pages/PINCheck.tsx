@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { MyAppIcon } from '../components/MyAppIcon';
 import { MyButtonProps } from '../components/MyButton';
 import { staticMidnight, staticWhite } from '../components/MyColors';
 import { useLanguage } from '../components/MyLanguage';
@@ -8,7 +9,10 @@ import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';
 import { setItem } from '../stores/Local';
 
-// TODO: PIN Check
+// TODO: Set PIN
+// TODO: Forgot PIN
+// TODO: Check local storage
+// TODO: Biometric pass through
 
 export interface PINCheckResultFailed {
     ok: false
@@ -30,14 +34,6 @@ export const withPINCheck = async (): Promise<PINCheckResult> => {
     });
 }
 
-// "pinPanel": {
-//     "pinRequired": "PIN Required",
-//     "enterYourPin": "Enter Your PIN",
-//     "clear": "CLEAR",
-//     "setupTouchID": "Setup <span class=\"biometricsType\">Touch ID</span> for PIN",
-//     "enterPinAbove": "Please enter your PIN above to complete setup."
-// },
-
 export const PINDigitIndicator = (props: {filled: boolean}) => {
     return <View style={{ margin: 5, width: 10, height: 10, borderColor: staticWhite, borderWidth: 1, borderRadius: 5, backgroundColor: props.filled ? staticWhite : staticMidnight }} />
 }
@@ -47,10 +43,10 @@ export const PINButton = (props: MyButtonProps) => {
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
     const fillColor = pressed ? staticWhite : staticMidnight;
     const strokeColor = pressed ? staticMidnight : staticWhite;
-    const style = { backgroundColor: fillColor, borderColor: strokeColor, borderWidth: 1, color: strokeColor, minWidth: 50, maxWidth: 50, margin: 10 }
+    const style = { backgroundColor: fillColor, borderColor: strokeColor, borderWidth: 1, color: strokeColor, minWidth: 72, maxWidth: 72, minHeight: 72, maxHeight: 72, margin: 10 }
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, style, props.style]}>
-        <Text style={[MyStyleSheet.buttonText, { color: staticWhite }]}>{props.title}</Text>
+        <Text style={[MyStyleSheet.buttonText, { color: strokeColor }]}>{props.title}</Text>
     </MyPressable>);
 }
 
@@ -66,21 +62,31 @@ export const PINCheck = () => {
         }
     }
     const checkPIN = () => {
-        // TODO: Actual check
-
         if (resolver) {
             resolver({ ok: true, pin: PIN});
             resolver = (_) => {};
         }
-
+        setItem('pinRequested', false);
+    }
+    const cancel = () => {
+        if (resolver) {
+            resolver({ ok: false});
+            resolver = (_) => {};
+        }
         setItem('pinRequested', false);
     }
 
     return <SafeAreaView style={{ backgroundColor: staticMidnight, position: 'absolute', width: '100%', height: "100%", zIndex: 9999 }}>
         <StatusBar barStyle={'light-content'} />
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between', backgroundColor: staticMidnight }}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: staticMidnight }}>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <MyText style={[MyStyleSheet.headlineText, textStyle]}>{i18n.pinPanel.pinRequired}</MyText>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <View style={{ width: 50 }} />
+                    <MyText style={[MyStyleSheet.headlineText, { flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center' }, textStyle]}>{i18n.pinPanel.pinRequired}</MyText>
+                    <MyPressable onPress={cancel} style={{ minWidth: 50, maxWidth: 50, width: 50}}>
+                        <MyAppIcon glyph='closeCircle' style={[{ fontSize: 32 }, textStyle]} />
+                    </MyPressable>
+                </View>
                 <MyText style={[MyStyleSheet.text, textStyle]}>{i18n.pinPanel.enterYourPin}</MyText>
                 <View style={{ flexDirection: 'row'}}>
                     <PINDigitIndicator filled={PIN.length >= 1} />
@@ -89,7 +95,7 @@ export const PINCheck = () => {
                     <PINDigitIndicator filled={PIN.length >= 4} />
                 </View>
             </View>
-            <View>
+            <View style={{ marginTop: 20 }}>
                 <View style={{ flexDirection: 'row'}}>
                     <PINButton title="1" onPress={() => pushDigit('1')} />
                     <PINButton title="2" onPress={() => pushDigit('2')} />
@@ -111,9 +117,6 @@ export const PINCheck = () => {
                     {/* TODO Backspace symbol */}
                     <PINButton title={"DEL"} onPress={() => setPIN(PIN.substring(0, PIN.length - 1))} />
                 </View>
-            </View>
-            <View>
-                {/* Empty view for layout */}
             </View>
         </View>
     </SafeAreaView>
