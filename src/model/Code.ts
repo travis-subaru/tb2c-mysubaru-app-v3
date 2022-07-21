@@ -1,6 +1,6 @@
 import { Language } from "../components/MyLanguage"
 
-export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount" | "InvalidCredentials" | "twoStepAuthTooManyAttempts" | "VINLookupFailed";
+export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount" | "InvalidCredentials" | "twoStepAuthTooManyAttempts" | "VINLookupFailed" | "NotImplemented";
 
 export interface Error {
     type: "error"

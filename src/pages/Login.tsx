@@ -17,6 +17,7 @@ import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 import { MySnackBar } from '../components/MySnackBar';
 import { useNetworkActivity } from '../stores/Response';
+import { setEnvironment } from '../net/Environment';
 
 // TODO: MySubaru Logo
 // TODO: Actual app version
@@ -31,7 +32,6 @@ const Login = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const [formErrors, setFormErrors] = useState([]);
     const [activity, setActivity] = useNetworkActivity();
-
     const otherErrors = (() => {
         const otherErrors = formErrors.filter(e => e.name != "username" && e.name != "password");
         if (otherErrors.length == 0) { return; }
@@ -39,7 +39,6 @@ const Login = () => {
             {otherErrors.map((e, i) => <MyText key={i} style={{ color: staticWhite }}>{e.description}</MyText>)}
         </View>);
     })()
-
     const onPressLogin = async () => {
         var localErrors: MyTextErrors[] = [];
         if (username == "") {
@@ -50,30 +49,33 @@ const Login = () => {
         }
         setFormErrors(localErrors);
         if (localErrors.length == 0) {
-            const response = await requestLogin({loginUsername: username, password: password, rememberUserCheck: rememberMe ? "on" : "off"});
-            if (response.success && response.dataName) {
-                const session: SessionData = response.data;
-                // ????: Following existing app, seems overkill
-                if (session.currentVehicleIndex < session.vehicles.length) {
-                    const vin = session.vehicles[session.currentVehicleIndex].vin;
-                    await requestSelectVehicle(vin) && await requestMySAlerts() && await requestRefreshVehicles();
-                    if (!session.deviceRegistered) {
-                        const contactInfo = await requestTwoStepAuthContact();
-                        setItem("contactInfo", contactInfo);
-                    } else {
-                        debugger;
-                    }
-                } else {
-                    // ????: No vehicle error?
+            await startLogin();
+        }
+    };
+    const startLogin = async () => {
+        const response = await requestLogin({loginUsername: username, password: password, rememberUserCheck: rememberMe ? "on" : "off"});
+        if (response.success && response.dataName) {
+            const session: SessionData = response.data;
+            // ????: Following existing app, seems overkill
+            if (session.currentVehicleIndex < session.vehicles.length) {
+                const vin = session.vehicles[session.currentVehicleIndex].vin;
+                await requestSelectVehicle(vin) && await requestMySAlerts() && await requestRefreshVehicles();
+                if (!session.deviceRegistered) {
+                    const contactInfo = await requestTwoStepAuthContact();
+                    setItem("contactInfo", contactInfo);
                 }
+            } else {
+                // ????: No vehicle error?
             }
         }
     };
-
     const onPressForgot = () => {
         setItem("appState", "forgot");
     };
-
+    const startDemoMode = async () => {
+        setEnvironment("demo");
+        await startLogin();
+    };
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
             <MySimpleNavBar>
@@ -86,7 +88,6 @@ const Login = () => {
                 <MyCheckBox label={i18n.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
                 <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={i18n.login.logIn}></MyPrimaryButton>
                 <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>
-
                 {otherErrors}
                 <View style={{ flexGrow: 1 }} />
                 <MySnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MySnackBar>
@@ -95,7 +96,7 @@ const Login = () => {
                 </View>
                 <View style={{width: 350, marginBottom: 20}}>
                     <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"  }}>
-                        <MyAlternateButton title={i18n.login.demoMode}></MyAlternateButton>
+                        <MyAlternateButton onPress={startDemoMode} title={i18n.login.demoMode}></MyAlternateButton>
                         <MyAlternateButton title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
                     </View>
                 </View>

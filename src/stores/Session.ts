@@ -2,6 +2,9 @@
 import { getNextListenerID, ListenerID } from "./Listener";
 import { addNetworkListener } from "./Response"
 import { updateVehicle, Vehicle } from "./Vehicles"
+import { useEffect, useState } from 'react';
+import { setEnvironment } from "../net/Environment";
+import { setItem } from "./Local";
 
 export interface Account {
     createdDate: number,
@@ -81,11 +84,6 @@ export const addSessionListener = (handler: (session: Session) => void): Listene
 export const removeSessionListener = (id: ListenerID): void => {
     _listeners = _listeners.filter((l) => l.id != id);
 }
-
-// TODO: Should react-isms go to a separate file?
-
-import { useEffect, useState } from 'react';
-
 /** React-friendly wrapper for stored data */
 export const useSession = (): Session => {
     const [get, set] = useState(_session);
@@ -96,5 +94,10 @@ export const useSession = (): Session => {
     return get;
 }
 
-
+/** End session and go back to login screen. */
+export const logout = () => {
+    setItem("appState", "login");
+    setItem("environment", "cloudqa")
+    setSession(undefined);
+}
 

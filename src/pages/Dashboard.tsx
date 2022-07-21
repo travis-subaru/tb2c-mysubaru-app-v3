@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { setItem } from '../stores/Local';
 import { MySecondaryDashboardButton, MyLinkButton, MyPrimaryButton, MyPrimaryDashboardButton, MyDashboardLinkButton } from '../components/MyButton';
 import { MyText } from '../components/MyText';
-import { Session, setSession, useSession } from '../stores/Session';
+import { logout, Session, setSession, useSession } from '../stores/Session';
 import { MyStyleSheet } from '../components/MyStyles';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../components/MyLanguage';
@@ -12,7 +11,7 @@ import { MyAppIcon } from '../components/MyAppIcon';
 import { executeRemoteStart, executeRemoteStop } from '../net/EngineStartStop';
 import { useNetworkActivity } from '../stores/Response';
 import { MySnackBar } from '../components/MySnackBar';
-import { PINCheckResult, withPINCheck } from './PINCheck';
+import { withPINCheck } from './PINCheck';
 
 // TODO: Tab Bar
 // TODO: Cancel all commands on logout
@@ -25,9 +24,8 @@ export const Dashboard = () => {
     const [activity, setActivity] = useNetworkActivity();
     const vehicle = session?.vehicles[session?.currentVehicleIndex];
     const rowStyle = { flexDirection: 'row', flexWrap: 1, justifyContent: 'space-evenly', paddingTop: 10, paddingHorizontal: 20, width: '100%' };
-    const logout = () => {
-        setItem("appState", "login");
-        setSession(undefined);
+    const onLogout = () => {
+        logout();
     };
     // TODO: Remove hardcoded params
     const remoteStart = async () => {
@@ -48,9 +46,9 @@ export const Dashboard = () => {
     };
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <MySimpleNavBar style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-            <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-start'}} onPress={logout} title= "Logout"></MySimpleNavButtonBarItem>
+            <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-start'}} onPress={onLogout} title= "Logout"></MySimpleNavButtonBarItem>
             <MyText>Home</MyText>
-            <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-end'}} onPress={logout} title= "Vehicles"></MySimpleNavButtonBarItem>
+            <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-end'}} onPress={onLogout} title= "Vehicles"></MySimpleNavButtonBarItem>
         </MySimpleNavBar>
         <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start' }}>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' , paddingHorizontal: 20}}>

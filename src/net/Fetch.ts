@@ -1,4 +1,5 @@
 import { NetworkResponse, postNetworkRequest, postNetworkResponse } from "../stores/Response";
+import { mockResponseForEndpoint } from "./Demo";
 import { getEnviroment } from "./Environment";
 
 export function parseResponse(json: any, endpoint: string): Promise<NetworkResponse> {
@@ -27,9 +28,15 @@ export const GETJSONRequest: RequestInit = { headers: JSONHeaders, body: null, m
  */
 export const myFetch = async (endpoint: string, init?: RequestInit | undefined): Promise<NetworkResponse> => {
     const e = getEnviroment();
-    // Using .then().catch() pyramids to roll in errors
     return new Promise<NetworkResponse>((resolve, _) => {
         postNetworkRequest(endpoint);
+        if (e.env == "demo") {
+            const responseObject = mockResponseForEndpoint(endpoint);
+            postNetworkResponse(responseObject);
+            resolve(responseObject);
+            return;
+        }
+        // Using .then().catch() pyramids to roll in errors
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
             if (response.status >= 200 && response.status <= 299) {
                 response.json().then((json) => {

@@ -20,6 +20,7 @@ const App = () => {
     const pinRequested: boolean = useItem('pinRequested');
     const session: Session = useSession();
     const content = (() => {
+        debugger;
         if (session === undefined) {
             switch (appState) {
                 case "login": return <Login />;
