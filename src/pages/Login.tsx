@@ -30,7 +30,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
-    const [formErrors, setFormErrors] = useState([]);
+    const [formErrors, setFormErrors] = useState<MyTextErrors[]>([]);
     const [activity, setActivity] = useNetworkActivity();
     const otherErrors = (() => {
         const otherErrors = formErrors.filter(e => e.name != "username" && e.name != "password");

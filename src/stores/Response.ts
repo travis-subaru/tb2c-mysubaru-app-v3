@@ -72,8 +72,8 @@ export const removeNetworkActivityListener = (id: ListenerID): void => {
 }
 
 /** Listener for network updates */
-export const useNetworkActivity = () => {
-    const [get, set] = useState(null);
+export const useNetworkActivity = (): [NetworkActivity | null, React.Dispatch<React.SetStateAction<NetworkActivity | null>>] => {
+    const [get, set] = useState<NetworkActivity|null>(null);
     useEffect(() => {
         const id = addNetworkActivityListener((data) => set(data));
         return () => removeNetworkActivityListener(id);

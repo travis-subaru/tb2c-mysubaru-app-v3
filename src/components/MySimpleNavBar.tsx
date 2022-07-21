@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { MyLinkButton } from './MyButton';
-import { useColors, Palette, staticWhite } from './MyColors';
-import { MyPressable } from './MyPressable';
-import { MyStyleSheet } from './MyStyles';
 import { MyText } from './MyText';
 
 /** Placeholder for navigation until react-navigation is ready.
