@@ -14,21 +14,21 @@ export const decodeString = (text: string) => {
     text = text.replace("</nobr>", "");
     text = text.replace("&nbsp;", " ");
     text = text.replace("&amp;", "&");
-    text = text.replace("<strong>Terms & Conditions</strong>", "");
-    text = text.replace("<a href=\"tel:1(800) 782-2783\" class=\"text-link\">(800) 782-2783</a>", "(800) 782-2783");
+    text = text.replace("<strong>Terms & Conditions</strong>", ""); // TODO: Bold support
+    text = text.replace("<a href=\"tel:1(800) 782-2783\" class=\"text-link\">(800) 782-2783</a>", "(800) 782-2783"); // TODO: Fix phone links
     return text;
 }
 
 export const MyText = (props: MyTextProps) => {
-    let text: string = decodeString(props.children);
+    let text: string = props.children ? decodeString(props.children) : "";
 
     if (text.includes("\\n")) {
         return text.split("\\n").map((line, i) => {
-            return <MyText {...props} key={i}>{line}</MyText>
+            return <MyText {...props} key={i.toString()}>{line}</MyText>;
         });
     }
     const Colors: Palette = useColors();
-    return (<Text style={[{ color: Colors.copyPrimary }, props.style]}>
+    return <Text style={[{ color: Colors.copyPrimary }, props.style]}>
         {text}
-    </Text>);
+    </Text>;
 }

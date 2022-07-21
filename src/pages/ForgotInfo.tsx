@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { setItem, useItem } from '../stores/Local';
-import { MyLinkButton, MyPrimaryButton } from '../components/MyButton';
+import { MyPrimaryButton } from '../components/MyButton';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { checkEmail } from '../model/Email';
 import { Language, useLanguage } from '../components/MyLanguage';
@@ -12,24 +12,42 @@ import { checkVIN } from '../model/VIN';
 import { requestVINVerify } from '../net/VINVerify';
 import { requestForgotUsername } from '../net/ForgotUsername';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
+import { useNetworkActivity } from '../stores/Response';
+import { MySnackBar } from '../components/MySnackBar';
+import { descriptionForCode, Error } from '../model/Code';
 
+interface ForgotPasswordStateInitial { type: "initial" }
+interface ForgotPasswordStateAccountsFound { type: "accountsFound"; accounts: string[] }
+type ForgotPasswordState = ForgotPasswordStateInitial | ForgotPasswordStateAccountsFound | Error
+
+const initialState = { type: "initial" };
 
 export const ForgotInfo = () => {
     const i18n: Language = useLanguage();
     const C: Palette = useColors();
     const [username, setUsername] = useState(""); // mysubaruwatch@yahoo.com
     const [VIN, setVIN] = useState(""); // 4S3BMAA66D1038385
-    const invalidVINs: string[] = useItem("invalidVINs");
-    const [foundAccounts, setFoundAccounts] = useState([]);
+    const [state, setState] = useState<ForgotPasswordState>(initialState);
+    const [activity, setActivity] = useNetworkActivity();
+    const resetPassword = async () => {
+        setState(initialState);
+        
+        setActivity(undefined);
+    }
     const checkForAccount = async () => {
+        setState(initialState);
         const vinOk = await requestVINVerify(VIN);
-        if (!vinOk) { return }
-        const accounts = await requestForgotUsername(VIN);
-        if (accounts.length > 0) {
-            setFoundAccounts(accounts);
+        if (vinOk) {
+            const accounts = await requestForgotUsername(VIN);
+            if (accounts.success && accounts.data.length > 0) {
+                setState({type: "accountsFound", accounts: accounts.data})
+            } else {
+                setState({type: "error", code: "VINLookupFailed"});
+            }
         } else {
-            // TODO
+            setState({type: "error", code: "VINLookupFailed"});
         }
+        setActivity(undefined);
     }
     const [actionButton, formErrors] = (() => {
         let button = <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>;
@@ -50,38 +68,41 @@ export const ForgotInfo = () => {
                 }
             }
         }
-        if (invalidVINs.includes(VIN)) {
-            // ????: Is this the right message?
-            errors.push({name: "vin", description: i18n.forgotSomethingPanel.forgotUsernameFormValidateMessages.vin.remote });
-        }
         if (username != "") {
             if (checkEmail(username) === "ok") {
-                button = <MyPrimaryButton title="Reset Password" style={{ width: 350 }}></MyPrimaryButton>;
+                button = <MyPrimaryButton onPress={resetPassword} title="Reset Password" style={{ width: 350 }}></MyPrimaryButton>;
             } else {
                 errors.push({name: "username", description: i18n.validation.email });
             }
         }
         return [button, errors];
     })();
-    const resultPanel = (() => {
-        if (foundAccounts.length > 0) {
-            return (<View style={{ paddingVertical: 10, width: 350 }}>
-                <View style={[MyStyleSheet.roundedEdge, { padding: 10, backgroundColor: C.success, borderColor: C.success, borderWidth: 1}]}>
-                    <MyText style={[ MyStyleSheet.boldCopyText, { color: staticWhite }]}>{i18n.forgotUsernameSuccessPanel.pageDescription}</MyText>
-                    <MyText style={{ color: staticWhite, paddingVertical: 10 }}>{foundAccounts.join("\n")}</MyText>
-                    <MyText style={{ color: staticWhite }}>{i18n.forgotUsernameSuccessPanel.pageDescription2}</MyText>
-                    <MyText style={[MyStyleSheet.boldCopyText, { color: staticWhite, paddingTop: 5 }]}>{i18n.modernizationNew.contactPhone}</MyText>
-                </View>
-            </View>);
-        } else {
-            return (<View style={{ padding: 20, width: 350}}>
-                <MyText style={MyStyleSheet.boldCopyText}>What is my username?</MyText>
-                <MyText style={{ paddingBottom: 10 }}>Your username is the primary email address on your account.</MyText>
-                <MyText style={MyStyleSheet.boldCopyText}>How do I find my VIN?</MyText>
-                <MyText>{i18n.forgotUsernamePanel.vinDescription}</MyText>
-            </View>);
+    const resultPanel = ((state: ForgotPasswordState) => {
+        switch (state.type) {
+            case "initial":
+                return (<View style={{ padding: 20, width: 350}}>
+                    <MyText style={MyStyleSheet.boldCopyText}>What is my username?</MyText>
+                    <MyText style={{ paddingBottom: 10 }}>Your username is the primary email address on your account.</MyText>
+                    <MyText style={MyStyleSheet.boldCopyText}>How do I find my VIN?</MyText>
+                    <MyText>{i18n.forgotUsernamePanel.vinDescription}</MyText>
+                </View>);
+            case "accountsFound":
+                return (<View style={{ paddingVertical: 10, width: 350 }}>
+                    <View style={[MyStyleSheet.roundedEdge, { padding: 10, backgroundColor: C.success }]}>
+                        <MyText style={[ MyStyleSheet.boldCopyText, { color: staticWhite }]}>{i18n.forgotUsernameSuccessPanel.pageDescription}</MyText>
+                        <MyText style={{ color: staticWhite, paddingVertical: 10 }}>{state.accounts.join("\n")}</MyText>
+                        <MyText style={{ color: staticWhite }}>{i18n.forgotUsernameSuccessPanel.pageDescription2}</MyText>
+                        <MyText style={[MyStyleSheet.boldCopyText, { color: staticWhite, paddingTop: 5 }]}>{i18n.modernizationNew.contactPhone}</MyText>
+                    </View>
+                </View>);
+            case "error":
+                return (<View style={{ paddingVertical: 10, width: 350 }}>
+                    <View style={[MyStyleSheet.roundedEdge, { padding: 10, backgroundColor: C.error }]}>
+                        <MyText style={{ color: staticWhite }}>{descriptionForCode(state, i18n)}</MyText>
+                    </View>
+                </View>);
         }
-    })();
+    })(state);
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <MySimpleNavBar>
             <MySimpleNavButtonBarItem onPress={() => setItem("appState", "login")} title= "< Login"></MySimpleNavButtonBarItem>
@@ -95,6 +116,7 @@ export const ForgotInfo = () => {
             <MyTextInput name="vin" label={i18n.common.vin} errors={formErrors} text={VIN} onChangeText={text => setVIN(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
             {actionButton}
             {resultPanel}
+            <MySnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MySnackBar>
         </View>
     </View>
 }

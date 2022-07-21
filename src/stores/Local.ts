@@ -14,7 +14,6 @@ export type AppState = 'login' | 'forgot' ;
 export interface LocalData {
     appState: AppState
     environment: NETEnvironmentID
-    invalidVINs: string[]
     language: LanguageID
     contactInfo?: TwoStepContactInfo
     pinRequested: boolean
@@ -31,7 +30,6 @@ interface Listener {
 let store: LocalData = {
     appState: "login",
     environment: "cloudqa",
-    invalidVINs: [],
     language: "en",
     pinRequested: false
 };

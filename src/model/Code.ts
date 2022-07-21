@@ -1,6 +1,6 @@
 import { Language } from "../components/MyLanguage"
 
-export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount" | "InvalidCredentials" | "twoStepAuthTooManyAttempts";
+export type ErrorCode = "networkError" | "statusError" | "jsonError" | "parseError" | "invalidAccount" | "InvalidCredentials" | "twoStepAuthTooManyAttempts" | "VINLookupFailed";
 
 export interface Error {
     type: "error"
@@ -15,14 +15,12 @@ export interface Endpoint {
 export type Code = Error | Endpoint;
 
 export const descriptionForCode = (code: Code, i18n: Language): string => {
-    debugger;
     if (code.type == "error") {
-        switch (code.code) {
-            case "invalidAccount": return i18n.login.invalidAccount;
-            case "twoStepAuthTooManyAttempts": return i18n.login.twoStepAuthTooManyAttempts;
-            case "InvalidCredentials": return i18n.remoteService.InvalidCredentials.invalidPin;
-            default: return `${i18n.message.fatalMessage} (${code.code})`;
-        }
+        if (code.code === "invalidAccount") { return i18n.login.invalidAccount;  }
+        if (code.code === "twoStepAuthTooManyAttempts") { return i18n.login.twoStepAuthTooManyAttempts;  }
+        if (code.code === "InvalidCredentials") { return i18n.remoteService.InvalidCredentials.invalidPin;  }
+        if (code.code === "VINLookupFailed") { return i18n.forgotUsernameFailPanel.pageDescription;  }
+        return `${i18n.message.fatalMessage} (${code.code})`
     } else {
         return code.endpoint;
     }

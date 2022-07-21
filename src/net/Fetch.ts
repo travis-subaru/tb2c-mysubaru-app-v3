@@ -1,8 +1,12 @@
 import { NetworkResponse, postNetworkRequest, postNetworkResponse } from "../stores/Response";
 import { getEnviroment } from "./Environment";
 
-export function parseResponse(json: any): Promise<NetworkResponse> {
+export function parseResponse(json: any, endpoint: string): Promise<NetworkResponse> {
     return new Promise<NetworkResponse>((resolve, reject) => {
+        // Some endpoints return just boolean
+        if (json === true || json === false) {
+            resolve({success: json, errorCode: null, dataName: null, data: undefined, endpoint: endpoint}); return;
+        }
         const parsed: NetworkResponse = json;
         // TODO: Parse and validate JSON matches spec, error otherwise
         if (parsed) {
@@ -29,7 +33,7 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
             if (response.status >= 200 && response.status <= 299) {
                 response.json().then((json) => {
-                    parseResponse(json).then((responseObject) => {
+                    parseResponse(json, endpoint).then((responseObject) => {
                         postNetworkResponse(responseObject);
                         resolve(responseObject);
                     }).catch((reason) => {

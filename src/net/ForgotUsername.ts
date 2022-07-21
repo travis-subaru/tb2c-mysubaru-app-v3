@@ -1,16 +1,11 @@
+import { NetworkResponse } from "../stores/Response";
 import { myFetch } from "./Fetch";
 
-export const requestForgotUsername = async (vin: string): Promise<string[]> => {
+export const requestForgotUsername = async (vin: string): Promise<NetworkResponse> => {
     const body = `vin=${vin}`;
-    const resp = await myFetch("forgotUsername.json", {
+    return await myFetch("forgotUsername.json", {
         "headers": {},
         "body": body,
         "method": "POST",
     });
-    // TODO: Report to error channel
-    if (resp.success) {
-        return resp.data;
-    } else {
-        return [];
-    }
 }

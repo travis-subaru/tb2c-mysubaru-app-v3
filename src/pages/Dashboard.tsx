@@ -12,7 +12,7 @@ import { MyAppIcon } from '../components/MyAppIcon';
 import { executeRemoteStart, executeRemoteStop } from '../net/EngineStartStop';
 import { useNetworkActivity } from '../stores/Response';
 import { MySnackBar } from '../components/MySnackBar';
-import { withPINCheck } from './PINCheck';
+import { PINCheckResult, withPINCheck } from './PINCheck';
 
 // TODO: Tab Bar
 // TODO: Cancel all commands on logout
@@ -83,13 +83,9 @@ export const Dashboard = () => {
             </View>
             <View style={{flex: 1}}></View>
             <MySnackBar activity={activity} style={{}} onClose={() => setActivity(null)}></MySnackBar>
-            <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                <MyPrimaryButton/>
-                <MyPrimaryButton/>
-                <MyPrimaryButton/>
-                <MyPrimaryButton/>
-            </View>
+            <View style={{ backgroundColor: C.backgroundSecondary, flexDirection: 'row', paddingTop: 10, height: 50 }}>
 
+            </View>
         </View>
     </View>
 }
