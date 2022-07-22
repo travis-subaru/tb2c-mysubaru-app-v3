@@ -9,5 +9,6 @@ export const MyStyleSheet = StyleSheet.create({
     bodyText: { fontFamily: 'Helvetica Neue', fontSize: 14 },
     buttonText: { fontFamily: 'Helvetica Neue', fontSize: 14, fontWeight: 'bold' },
     headlineText: { fontFamily: 'Helvetica Neue', fontSize: 32 },
+    paddingTextInputBottom: { paddingBottom: 20 },
     roundedEdge: { borderRadius: 5 },
 });

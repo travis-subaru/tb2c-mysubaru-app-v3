@@ -20,7 +20,7 @@ interface ForgotPasswordStateInitial { type: "initial" }
 interface ForgotPasswordStateAccountsFound { type: "accountsFound"; accounts: string[] }
 type ForgotPasswordState = ForgotPasswordStateInitial | ForgotPasswordStateAccountsFound | Error
 
-const initialState = { type: "initial" };
+const initialState: ForgotPasswordStateInitial = { type: "initial" };
 
 export const ForgotInfo = () => {
     const i18n: Language = useLanguage();
@@ -31,8 +31,8 @@ export const ForgotInfo = () => {
     const [activity, setActivity] = useNetworkActivity();
     const resetPassword = async () => {
         setState(initialState);
-        
-        setActivity(undefined);
+        // TODO: Reset Password calls
+        setActivity(null);
     }
     const checkForAccount = async () => {
         setState(initialState);
@@ -47,7 +47,7 @@ export const ForgotInfo = () => {
         } else {
             setState({type: "error", code: "VINLookupFailed"});
         }
-        setActivity(undefined);
+        setActivity(null);
     }
     const [actionButton, formErrors] = (() => {
         let button = <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>;
@@ -112,8 +112,8 @@ export const ForgotInfo = () => {
             <View style={{ paddingBottom: 10, alignItems: 'center' }}>
                 <MyText>It happens sometimes.\nTell us what you can remember,\nand we'll look you up in our system.</MyText>
             </View>
-            <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
-            <MyTextInput name="vin" label={i18n.common.vin} errors={formErrors} text={VIN} onChangeText={text => setVIN(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
+            <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false} style={MyStyleSheet.paddingTextInputBottom}></MyTextInput>
+            <MyTextInput name="vin" label={i18n.common.vin} errors={formErrors} text={VIN} onChangeText={text => setVIN(text)} autoCapitalize='none' autoCorrect={false} style={MyStyleSheet.paddingTextInputBottom}></MyTextInput>
             {actionButton}
             {resultPanel}
             <MySnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MySnackBar>

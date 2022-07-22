@@ -39,10 +39,9 @@ export const MyTextInput = (props: MyTextInputProps) => {
     const textStyle = { position: 'absolute', top: -12, left: 25, backgroundColor: C.background, color: C.copyPrimary, paddingHorizontal: 5 };
     const textInputStyle = { position: 'absolute', top: 5, left: 25, right: 25, bottom: 5, color: C.copyPrimary };
     const textViewStyle = { alignItems: 'center', borderColor: textRingColor, borderWidth: 1, color: C.copyPrimary, justifyContent: 'center', width: 350, minHeight: 50 };
-    const usePaddingBottom = props.usePaddingBottom ?? true; // HACK: For last control
     // Use a label or a placeholder but not both
     const [label, placeholder] = (() => {
-        if (isFocused || text.length > 0) {
+        if (props.label && (isFocused || text.length > 0)) {
             return [<Text style={[MyStyleSheet.bodyText, textStyle]}>{props.label}</Text>, null];
         } else {
             return [null, props.label];
@@ -56,7 +55,7 @@ export const MyTextInput = (props: MyTextInputProps) => {
     })();
     const onBlur = () => setIsFocused(false);
     const onFocus = () => setIsFocused(true);
-    return (<View style={{ paddingBottom: usePaddingBottom ? textInputBottomPadding : 0 }}>
+    return (<View style={props.style}>
         <View style={[MyStyleSheet.roundedEdge, textViewStyle]}>
             {label}
             <TextInput onBlur={onBlur} onFocus={onFocus} placeholder={placeholder} placeholderTextColor={C.copySecondary} selectionColor={C.link} {...props} style={[MyStyleSheet.bodyText, textInputStyle]}>{text}</TextInput>

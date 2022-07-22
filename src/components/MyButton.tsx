@@ -98,8 +98,7 @@ export const MySecondaryDashboardButton = (props: MyButtonProps) => {
     const lines = (props.title?.split('\\n') ?? []).map((line, i) => {
         return <Text key={i} style={[MyStyleSheet.buttonText, { color: staticWhite }]}>{line}</Text>
     })
-
-    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.copySecondary, minWidth: 100, minHeight: 100 }, props.style]}>
+    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.copySecondary, minWidth: 72, minHeight: 72 }, props.style]}>
         {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: staticWhite}}></MyAppIcon> : null}
         {lines}
     </MyPressable>);

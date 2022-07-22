@@ -78,13 +78,13 @@ const Login = () => {
     };
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
-            <MySimpleNavBar>
+            <MySimpleNavBar style={MyStyleSheet.paddingTextInputBottom}>
                 <MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem>
                 <MyText style={MyStyleSheet.headlineText}>// MySUBARU //</MyText>
             </MySimpleNavBar>
             <View style={{flex: 1, alignItems: 'center', justifyContent:'flex-start'}}>
-                <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false}></MyTextInput>
-                <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true} style={{ paddingBottom: 0 }}></MyTextInput>
+                <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false} style={MyStyleSheet.paddingTextInputBottom}></MyTextInput>
+                <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true}></MyTextInput>
                 <MyCheckBox label={i18n.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
                 <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={i18n.login.logIn}></MyPrimaryButton>
                 <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>

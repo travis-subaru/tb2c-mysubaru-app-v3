@@ -4,7 +4,7 @@ import { Palette, useColors } from "./MyColors";
 
 // TODO: Add to build process so new glyphs will append to list
 
-const MyAppIconGlyphMap = {
+export const MyAppIconGlyphMap = {
     rearSeatReminder: "\ue9c1",
     compass2: "\ue9bd",
     valet: "\ue9be",

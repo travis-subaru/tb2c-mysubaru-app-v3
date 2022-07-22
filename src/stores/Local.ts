@@ -60,7 +60,7 @@ export const getItem = (key: LocalDataKey): any => {
 
 /** Set key to new value, and notify all listeners. */
 export const setItem = (key: LocalDataKey, value: any) => {
-    // @ts-ignore :: key is alrady typechecked
+    // @ts-ignore :: key is already typechecked
     store[key] = value;
     listeners.filter(l => l.key == key).forEach(l => l.fn(value));
 }
