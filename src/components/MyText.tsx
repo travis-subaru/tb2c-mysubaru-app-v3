@@ -23,9 +23,11 @@ export const MyText = (props: MyTextProps) => {
     let text: string = props.children ? decodeString(props.children) : "";
 
     if (text.includes("\\n")) {
-        return text.split("\\n").map((line, i) => {
-            return <MyText {...props} key={i.toString()}>{line}</MyText>;
-        });
+        return <>
+            {text.split("\\n").map((line, i) => {
+                return <MyText {...props} key={i.toString()}>{line}</MyText>;
+            })}
+        </>
     }
     const Colors: Palette = useColors();
     return <Text style={[{ color: Colors.copyPrimary }, props.style]}>
