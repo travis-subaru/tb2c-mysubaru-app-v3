@@ -13,6 +13,11 @@ import { useNetworkActivity } from '../stores/Response';
 import { MySnackBar } from '../components/MySnackBar';
 import { withPINCheck } from './PINCheck';
 import { MyPressable } from '../components/MyPressable';
+import { HomeTab } from './HomeTab';
+import { AlertsTab } from './AlertsTab';
+import { OffersTab } from './OffersTab';
+import { SettingsTab } from './SettingsTab';
+import { VehicleTab } from './VehicleTab';
 
 // TODO: Tab Bar
 // TODO: Cancel all commands on logout
@@ -71,35 +76,14 @@ export const Dashboard = () => {
             <MySimpleNavButtonBarItem style={{flexDirection: 'row', justifyContent: 'flex-end'}} onPress={onLogout} title= "Vehicles"></MySimpleNavButtonBarItem>
         </MySimpleNavBar>
         <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start' }}>
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' , paddingHorizontal: 20}}>
-                <View style={{ alignItems: 'center', justifyContent: 'center', width: 72, height: 72, backgroundColor: C.buttonSecondary}}>
-                    <MyAppIcon glyph='frontCar' style={{ color: staticWhite, fontSize: 60 }}></MyAppIcon>
-                </View>
-                <View style={{ flexGrow: 1, paddingLeft: 10 }}>
-                    <MyText>{vehicle?.nickname}</MyText>
-                    <MyText>Health: No Reported Issues</MyText>
-                    <MyText>Last Updated: 2 minutes ago</MyText>
-                </View>
-            </View>
-            <View style={{flex: 1}}></View>
-            {/* <View style={rowStyle}>
-                <MySecondaryDashboardButton></MySecondaryDashboardButton>
-                <MySecondaryDashboardButton></MySecondaryDashboardButton>
-                <MySecondaryDashboardButton></MySecondaryDashboardButton>
-            </View>
-            <View style={rowStyle}>
-                <MySecondaryDashboardButton></MySecondaryDashboardButton>
-                <MySecondaryDashboardButton></MySecondaryDashboardButton>
-                <MySecondaryDashboardButton></MySecondaryDashboardButton>
-            </View>*/}
-            <View style={rowStyle}>
-                <View style={[MyStyleSheet.roundedEdge, { backgroundColor: C.backgroundSecondary, flexDirection: 'row', flexWrap: 0, alignItems: 'center', justifyContent: 'space-evenly', marginVertical: 10, width: '100%' }]}>
-                    <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="gear" title="View\nStart\nSettings"></MyDashboardLinkButton>
-                    <MyPrimaryDashboardButton style={{ flexGrow: 1, marginVertical: 10 }} glyph={engineStatus ? 'powerOff' : 'powerOn'} onPress={engineStatus ? remoteStop : remoteStart} title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
-                    <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="filters" title="Climate\nPresets"></MyDashboardLinkButton>
-                </View>
-            </View>
-            <View style={{flex: 1}}></View>
+            {(() => { return (
+                tab === 'home' ? <HomeTab /> :
+                tab === 'alerts' ? <AlertsTab /> :
+                tab === 'offers' ? <OffersTab /> :
+                tab === 'settings' ? <SettingsTab /> :
+                tab === 'vehicle' ? <VehicleTab /> :
+                undefined
+            )})()}
             <MySnackBar activity={activity} style={{}} onClose={() => setActivity(null)}></MySnackBar>
             <View style={{ backgroundColor: C.backgroundSecondary, flexDirection: 'row', height: 50 }}>
                 <DashboardTabBarButton glyph="home" title="Home" isActive={tab === 'home'} onPress={() => setTab('home')} />
