@@ -94,9 +94,9 @@ export const removeVehicleListener = (id: ListenerID): void => {
 
 /** Network monitors */
 
-import { addNetworkListener } from './Response';
+import { addResponseListener } from './Response';
 
-addNetworkListener("vehicleData", (response) => {
+addResponseListener("vehicleData", (response) => {
     if (response.data.vin) { // Sanity check this is a vehicle
         updateVehicle(response.data);
     }

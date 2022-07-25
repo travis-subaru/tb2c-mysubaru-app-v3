@@ -4,7 +4,7 @@ import { setItem, useItem } from '../stores/Local';
 import { MyPrimaryButton } from '../components/MyButton';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { checkEmail } from '../model/Email';
-import { Language, useLanguage } from '../components/MyLanguage';
+import { Language, useLanguage } from '../model/Language';
 import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';
 import { MyTextErrors, MyTextInput } from '../components/MyTextInput';
@@ -13,12 +13,13 @@ import { requestVINVerify } from '../net/VINVerify';
 import { requestForgotUsername } from '../net/ForgotUsername';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 import { useNetworkActivity } from '../stores/Response';
-import { MySnackBar } from '../components/MySnackBar';
-import { descriptionForCode, Error } from '../model/Code';
+import { MyNetworkSnackBar } from '../components/MySnackBar';
+import { descriptionForErrorCode, ErrorCode } from '../model/Code';
 
 interface ForgotPasswordStateInitial { type: "initial" }
 interface ForgotPasswordStateAccountsFound { type: "accountsFound"; accounts: string[] }
-type ForgotPasswordState = ForgotPasswordStateInitial | ForgotPasswordStateAccountsFound | Error
+interface ForgotPasswordStateError { type: "error"; code: ErrorCode}
+type ForgotPasswordState = ForgotPasswordStateInitial | ForgotPasswordStateAccountsFound | ForgotPasswordStateError;
 
 const initialState: ForgotPasswordStateInitial = { type: "initial" };
 
@@ -98,7 +99,7 @@ export const ForgotInfo = () => {
             case "error":
                 return (<View style={{ paddingVertical: 10, width: 350 }}>
                     <View style={[MyStyleSheet.roundedEdge, { padding: 10, backgroundColor: C.error }]}>
-                        <MyText style={{ color: staticWhite }}>{descriptionForCode(state, i18n)}</MyText>
+                        <MyText style={{ color: staticWhite }}>{descriptionForErrorCode(i18n, state.code)}</MyText>
                     </View>
                 </View>);
         }
@@ -116,7 +117,7 @@ export const ForgotInfo = () => {
             <MyTextInput name="vin" label={i18n.common.vin} errors={formErrors} text={VIN} onChangeText={text => setVIN(text)} autoCapitalize='none' autoCorrect={false} style={MyStyleSheet.paddingTextInputBottom}></MyTextInput>
             {actionButton}
             {resultPanel}
-            <MySnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MySnackBar>
+            <MyNetworkSnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MyNetworkSnackBar>
         </View>
     </View>
 }

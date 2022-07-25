@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { MyText } from '../components/MyText';
 import { Palette, useColors } from '../components/MyColors';
-import { Language, useLanguage } from '../components/MyLanguage';
+import { Language, useLanguage } from '../model/Language';
 import { MyAppIcon, MyAppIconGlyph } from '../components/MyAppIcon';
 import { useNetworkActivity } from '../stores/Response';
-import { MySnackBar } from '../components/MySnackBar';
+import { MyNetworkSnackBar } from '../components/MySnackBar';
 import { MyPressable } from '../components/MyPressable';
 import { HomeTab } from './HomeTab';
 import { AlertsTab } from './AlertsTab';
@@ -46,8 +46,8 @@ export const Dashboard = () => {
                 tab === 'vehicle' ? <VehicleTab /> :
                 undefined
             )})()}
-            <MySnackBar activity={activity} style={{}} onClose={() => setActivity(null)}></MySnackBar>
-            <View style={{ backgroundColor: C.backgroundSecondary, flexDirection: 'row', height: 50 }}>
+            <MyNetworkSnackBar activity={activity} onClose={() => setActivity(null)}></MyNetworkSnackBar>
+            <View style={{ backgroundColor: C.backgroundSecondary, alignItems: 'center', flexDirection: 'row', height: 50 }}>
                 <DashboardTabBarButton glyph="home" title="Home" isActive={tab === 'home'} onPress={() => setTab('home')} />
                 <DashboardTabBarButton glyph="frontCar" title="Vehicles" isActive={tab === 'vehicle'} onPress={() => setTab('vehicle')} />
                 <DashboardTabBarButton glyph="myRetailer" title="Offers" isActive={tab === 'offers'} onPress={() => setTab('offers')} />

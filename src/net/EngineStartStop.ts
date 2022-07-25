@@ -1,9 +1,8 @@
+import { RemoteServiceStatus, UnlockDoorType } from "../model/RemoteService";
 import { NetworkResponse } from "../stores/Response";
 import { getSessionID } from "../stores/Session";
 import { getEnviroment } from "./Environment";
 import { myFetch, JSONHeaders, GETJSONRequest } from "./Fetch";
-
-export type UnlockDoorType = "ALL_DOORS_CMD"
 
 export interface RemoteStartParameters {
     pin: string
@@ -29,20 +28,6 @@ export interface RemoteStopParameters {
     pin: string
     delay: number
     unlockDoorType: UnlockDoorType
-}
-
-export interface RemoteServiceStatus {
-    serviceRequestId: string,
-    success: boolean,
-    cancelled: boolean,
-    remoteServiceType: "engineStart",
-    remoteServiceState: "started" | "scheduled" | "finished",
-    subState: null,
-    errorCode: string | null,
-    result: null,
-    updateTime: number | null,
-    vin: string,
-    errorDescription: string | null
 }
 
 const delay = (ms) => {

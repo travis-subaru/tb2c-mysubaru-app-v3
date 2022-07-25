@@ -1047,14 +1047,12 @@ export interface Language {
         favoriteSpots: string
         trackYourFavoriteLocations: string
         healthIsGood: string
-        healthReport: string
         issueNoted: string
         issuesNoted: string
         recallAlert: string
         repeatRES: string
         adjustDelayedStart: string
         adjustClimateSettings: string
-        setDriverAlerts: string
     },
     hornLightPanel: {
         title: string

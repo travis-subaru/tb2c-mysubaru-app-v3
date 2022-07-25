@@ -1,11 +1,16 @@
 import { getNextListenerID, ListenerID } from './Listener';
 import { useState, useEffect } from 'react';
-import { Code, ErrorCode } from '../model/Code';
+import { ErrorCode } from '../model/Code';
 
 /** Channel to send and receive network based updates. */
 
 // TODO: Document these
 export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error" | "remoteServiceStatus";
+
+export interface NetworkRequest {
+    endpoint: string
+}
+
 
 export interface NetworkResponse {
     success: boolean
@@ -21,10 +26,7 @@ interface NetworkResponseListener {
     fn: (NETResponse) => void
 }
 
-export interface NetworkActivity {
-    status: "progress" | "success" | "error"
-    tag: Code
-}
+export type NetworkActivity = {type: "request", request: NetworkRequest} | {type: "response", response: NetworkResponse};
 
 interface NetworkActivityListener {
     id: ListenerID
@@ -32,37 +34,33 @@ interface NetworkActivityListener {
 }
 
 let activityListeners: NetworkActivityListener[] = [];
-let responseListeners: NetworkResponseListener[] = [];
 
 export const postNetworkRequest = (endpoint: string) => {
-    const activity: NetworkActivity = {status: "progress", tag: {type: 'endpoint', endpoint: endpoint}};
+    const activity: NetworkActivity = {type: "request", request: {endpoint: endpoint}};
     activityListeners.forEach(l => l.fn(activity));
 }
 
 export const postNetworkResponse = (response: NetworkResponse) => {
-    const status = response.success ? "success" : "error";
-    const tag: Code = response.success ? { type: 'endpoint', endpoint: response.endpoint } : { type: 'error', code: response.errorCode }
-    const activity: NetworkActivity = {status: status, tag: tag};
+    const activity: NetworkActivity = {type: "response", response: response};
     activityListeners.forEach(l => l.fn(activity));
-    responseListeners.filter(l => l.dataName === response.dataName).forEach(l => l.fn(response));
-}
-
-/** Begin listening for network changes. */
-export const addNetworkListener = (dataName: DataName, handler: (data: NetworkResponse) => void): ListenerID => {
-    const id: ListenerID = getNextListenerID();
-    responseListeners.push({ id: id, dataName: dataName, fn: handler })
-    return id;
-}
-
-/** Stop receiving network updates. */
-export const removeNetworkListener = (id: ListenerID): void => {
-    responseListeners = responseListeners.filter((l) => l.id != id);
 }
 
 /** Begin listening for network activity (in-progess, success, failure) changes. */
 export const addNetworkActivityListener = (handler: (data: NetworkActivity) => void): ListenerID => {
     const id: ListenerID = getNextListenerID();
     activityListeners.push({ id: id, fn: handler })
+    return id;
+}
+
+/** Convenience function to listen for specific dataName updates. */
+export const addResponseListener = (dataName: DataName, handler: (response: NetworkResponse) => void): ListenerID => {
+    const id: ListenerID = getNextListenerID();
+    const fn = (data: NetworkActivity) => {
+        if (data.type === "response" && data.response.dataName === dataName) {
+            handler(data.response)
+        }
+    }
+    activityListeners.push({ id: id, fn: fn })
     return id;
 }
 

@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { MyAppIcon } from '../components/MyAppIcon';
 import { MyPrimaryButton, MySecondaryButton } from '../components/MyButton';
 import { Palette, useColors } from '../components/MyColors';
-import { Language, useLanguage } from '../components/MyLanguage';
+import { Language, useLanguage } from '../model/Language';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { MyAlternateButton, MyPrimaryButton, MyLinkButton } from '../components/MyButton';
 import { MyCheckBox } from '../components/MyCheckbox';
 import { MyTextErrors, MyTextInput } from '../components/MyTextInput'
 import { MyText } from '../components/MyText';
 import { requestLogin } from '../net/Login';
-import { useLanguage, Language } from '../components/MyLanguage';
+import { useLanguage, Language } from '../model/Language';
 import { setItem } from '../stores/Local';
 import { MyStyleSheet } from '../components/MyStyles';
 import { SessionData } from '../stores/Session';
@@ -14,12 +14,10 @@ import { requestSelectVehicle } from '../net/SelectVehicle';
 import { requestMySAlerts } from '../net/MySAlerts';
 import { requestRefreshVehicles } from '../net/RefreshVehicles';
 import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
-import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
-import { MySnackBar } from '../components/MySnackBar';
+import { MyNetworkSnackBar } from '../components/MySnackBar';
 import { useNetworkActivity } from '../stores/Response';
 import { setEnvironment } from '../net/Environment';
 import { MyLogo } from '../components/MyLogo';
-import { MyAppIcon } from '../components/MyAppIcon';
 
 // TODO: Actual app version
 // TODO: Environment select
@@ -37,7 +35,7 @@ const Login = () => {
         const otherErrors = formErrors.filter(e => e.name != "username" && e.name != "password");
         if (otherErrors.length == 0) { return; }
         return (<View key="error" style={[MyStyleSheet.roundedEdge, { backgroundColor: Colors.error, justifyContent: "center", alignItems: "center", width: 350, padding: 20 }]}>
-            {otherErrors.map((e, i) => <MyText key={i} style={{ color: staticWhite }}>{e.description}</MyText>)}
+            {otherErrors.map((e, i) => <MyText key={`${i}`} style={{ color: staticWhite }}>{e.description}</MyText>)}
         </View>);
     })()
     const onPressLogin = async () => {
@@ -88,7 +86,7 @@ const Login = () => {
                 <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>
                 {otherErrors}
                 <View style={{ flexGrow: 1 }} />
-                <MySnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MySnackBar>
+                <MyNetworkSnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MyNetworkSnackBar>
                 <View>
                     <MyText style={{ marginBottom: 10 }}>V. 2.0.0c-longVersion</MyText>
                 </View>

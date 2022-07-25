@@ -3,7 +3,7 @@ import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { MyAppIcon } from '../components/MyAppIcon';
 import { MyButtonProps } from '../components/MyButton';
 import { staticMidnight, staticWhite } from '../components/MyColors';
-import { useLanguage } from '../components/MyLanguage';
+import { useLanguage } from '../model/Language';
 import { MyPressable } from '../components/MyPressable';
 import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';

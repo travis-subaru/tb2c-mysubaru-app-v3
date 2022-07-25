@@ -72,7 +72,7 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
  * Use this to call a series of endpoints. Returns true if next call is safe. Data and errors are still reported to stores and UI will update accordingly.
  * @return Boolean if call succeeded.
  */
-export const myCheck = async (endpoint: string, init?: RequestInit | undefined): Promise<Boolean> => {
+export const myCheck = async (endpoint: string, init?: RequestInit | undefined): Promise<boolean> => {
     const resp = await myFetch(endpoint, init);
     return resp.success == true;
 }

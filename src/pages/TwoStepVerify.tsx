@@ -3,16 +3,16 @@ import { View } from 'react-native';
 import { setItem, useItem } from '../stores/Local';
 import { MyLinkButton, MyPrimaryButton, MySecondaryButton } from '../components/MyButton';
 import { MyText, decodeString } from '../components/MyText';
-import { Language, useLanguage } from '../components/MyLanguage';
+import { Language, useLanguage } from '../model/Language';
 import { MyStyleSheet} from '../components/MyStyles';
 import { MyRadioButton } from '../components/MyRadioButton';
 import { MyCheckBox } from '../components/MyCheckbox';
-import { TwoStepContactInfo, requestTwoStepAuthSendVerification, requestTwoStepAuthVerify } from '../net/TwoStepAuth';
+import { TwoStepContactInfo, requestTwoStepAuthSendVerification, requestTwoStepAuthVerify, ContactMethodType } from '../net/TwoStepAuth';
 import { MyTextInput } from '../components/MyTextInput';
 import { checkVerificationCode } from '../model/VerificationCode';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 import { NetworkActivity, useNetworkActivity } from '../stores/Response';
-import { MySnackBar } from '../components/MySnackBar';
+import { MyNetworkSnackBar } from '../components/MySnackBar';
 
 export interface TwoStepsVerifyProps {
     contact?: TwoStepContactInfo
@@ -20,7 +20,7 @@ export interface TwoStepsVerifyProps {
 
 export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     const i18n: Language = useLanguage();
-    const [contactMethod, setContactMethod] = useState(undefined);
+    const [contactMethod, setContactMethod] = useState<ContactMethodType | undefined>(undefined);
     const [verificationCode, setVerificationCode] = useState("");
     const [showCodeEntry, setShowCodeEntry] = useState(false);
     const [rememberDevice, setRememberDevice] = useState(false);
@@ -30,13 +30,14 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
 
     const sendCodeRequest = async () => {
         if (!contactMethod) { return }
-        const ok = await requestTwoStepAuthSendVerification({contactMethod: contactMethod, verificationCode: verificationCode, languageCode: languageCode});
+        const ok = await requestTwoStepAuthSendVerification({contactMethod: contactMethod, verificationCode: verificationCode, languageCode: languageCode, deviceName: "DEVICENAME"});
         setShowCodeEntry(ok);
     };
 
     const authorizeDevice = async () => {
+        if (!contactMethod) { return; }
         if (checkVerificationCode(verificationCode) !== "ok") { return; }
-        await requestTwoStepAuthVerify({contactMethod: contactMethod, verificationCode: verificationCode, languageCode: languageCode});
+        await requestTwoStepAuthVerify({contactMethod: contactMethod, verificationCode: verificationCode, languageCode: languageCode, deviceName: "DEVICENAME"});
     };
 
     const validateVerificationCode = (): string[] => {
@@ -54,17 +55,13 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
             <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
         </MySimpleNavBar>
         <View style={{ flex: 1, alignItems: 'flex-start', justifyContent:'flex-start', paddingHorizontal: 20 }}>
-            {(() => {
-                if (activity) {
-                    return <MySnackBar activity={activity} title="In progress" onClose={setActivity(null)}></MySnackBar>
-                }
-            })()}
+            <MyNetworkSnackBar activity={activity} title="In progress" onClose={() => setActivity(null)}></MyNetworkSnackBar>
             {(() => {
                 if (!showCodeEntry) {
                     return <View style={{ alignItems: 'flex-start'}}>
                         <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.chooseContactMethod}</MyText>
-                        <MyRadioButton label={i18n.common.text + " " + props.contact?.phone} value="text" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
-                        <MyRadioButton label={i18n.common.email + " " + props.contact?.userName} value="email" selected={contactMethod} onChangeValue={(value) => setContactMethod(value)}></MyRadioButton>
+                        <MyRadioButton label={i18n.common.text + " " + props.contact?.phone} value="text" selected={contactMethod} onChangeValue={(value) => setContactMethod("text")}></MyRadioButton>
+                        <MyRadioButton label={i18n.common.email + " " + props.contact?.userName} value="email" selected={contactMethod} onChangeValue={(value) => setContactMethod("email")}></MyRadioButton>
                         <MyPrimaryButton onPress={sendCodeRequest} style={{ width: 350 }} title={i18n.common.next}></MyPrimaryButton>
                         <MyText style={[MyStyleSheet.boldCopyText, { paddingTop: 10 }]}>{i18n.twoStepAuthentication.dontRecognize}</MyText>
                         <MyText>{i18n.twoStepAuthentication.pleaseVerify}</MyText>
@@ -77,7 +74,7 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
                         <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.verifyInputTitle}</MyText>
                         <MyText>{i18n.twoStepAuthentication.verifyInputSubTitle}</MyText>
                         <View style={{paddingTop: 10}}>
-                            <MyTextInput label={i18n.twoStepAuthentication.verificationCodeLabel} onChangeText={text => setVerificationCode(text)} validate={validateVerificationCode}>{verificationCode}</MyTextInput>
+                            <MyTextInput label={i18n.twoStepAuthentication.verificationCodeLabel} onChangeText={text => setVerificationCode(text)} text={verificationCode} validate={validateVerificationCode}></MyTextInput>
                         </View>
                         <MyCheckBox label={i18n.twoStepAuthentication.rememberDevice} checked={rememberDevice} onChangeValue={(value) => setRememberDevice(value)}></MyCheckBox>
                         <MyText>{i18n.twoStepAuthentication.rememberHelperText}</MyText>

@@ -1,6 +1,6 @@
 import { getSessionID } from "../stores/Session";
 import { myCheck, myFetch } from "./Fetch";
-import { LanguageID } from "../components/MyLanguage";
+import { LanguageID } from "../model/Language";
 
 
 export interface TwoStepContactInfo {
@@ -8,10 +8,13 @@ export interface TwoStepContactInfo {
     userName?: string
 }
 
+export type ContactMethodType = "text" | "email";
+
 export interface TwoStepAuthSendVerifyParameters {
-    contactMethod: "userName" | "phone"
+    contactMethod: ContactMethodType
     verificationCode?: string
     languageCode: LanguageID
+    deviceName: "DEVICENAME" // TODO
 }
 
 export const requestTwoStepAuthContact = async (): Promise<TwoStepContactInfo> => {

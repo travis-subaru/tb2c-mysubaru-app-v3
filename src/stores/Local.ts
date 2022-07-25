@@ -7,7 +7,7 @@
 import { getNextListenerID, ListenerID } from './Listener';
 import { NETEnvironmentID } from '../net/Environment';
 import { TwoStepContactInfo } from '../net/TwoStepAuth';
-import { LanguageID } from '../components/MyLanguage';
+import { LanguageID } from '../model/Language';
 
 export type AppState = 'login' | 'forgot' ;
 

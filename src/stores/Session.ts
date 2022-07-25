@@ -1,9 +1,8 @@
 /** Channel to send and receive updated session data. */
 import { getNextListenerID, ListenerID } from "./Listener";
-import { addNetworkListener } from "./Response"
+import { addResponseListener } from "./Response"
 import { updateVehicle, Vehicle } from "./Vehicles"
 import { useEffect, useState } from 'react';
-import { setEnvironment } from "../net/Environment";
 import { setItem } from "./Local";
 
 export interface Account {
@@ -44,7 +43,7 @@ export interface SessionData {
 
 export type Session = SessionData | undefined;
 
-addNetworkListener('sessionData', (response) => {
+addResponseListener('sessionData', (response) => {
     if (response.data.sessionId && response.data.vehicles) {
         const session: SessionData = response.data; // TODO: Check all keys
         _session = response.data;
