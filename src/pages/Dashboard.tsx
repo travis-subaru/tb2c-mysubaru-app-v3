@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { MyText } from '../components/MyText';
-import { logout, Session, setSession, useSession } from '../stores/Session';
-import { MyStyleSheet } from '../components/MyStyles';
-import { Palette, staticWhite, useColors } from '../components/MyColors';
+import { Palette, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../components/MyLanguage';
-import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
 import { MyAppIcon, MyAppIconGlyph } from '../components/MyAppIcon';
-import { executeRemoteStart, executeRemoteStop } from '../net/EngineStartStop';
 import { useNetworkActivity } from '../stores/Response';
 import { MySnackBar } from '../components/MySnackBar';
-import { withPINCheck } from './PINCheck';
 import { MyPressable } from '../components/MyPressable';
 import { HomeTab } from './HomeTab';
 import { AlertsTab } from './AlertsTab';
 import { OffersTab } from './OffersTab';
 import { SettingsTab } from './SettingsTab';
 import { VehicleTab } from './VehicleTab';
-import { MySymbols } from './Symbols';
-
-// TODO: Tab Bar
-// TODO: Cancel all commands on logout
 
 export type DashboardTab = 'home' | 'vehicle' | 'offers' | 'alerts' | 'settings'
 

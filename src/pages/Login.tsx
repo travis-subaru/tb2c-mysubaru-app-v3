@@ -18,8 +18,9 @@ import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimple
 import { MySnackBar } from '../components/MySnackBar';
 import { useNetworkActivity } from '../stores/Response';
 import { setEnvironment } from '../net/Environment';
+import { MyLogo } from '../components/MyLogo';
+import { MyAppIcon } from '../components/MyAppIcon';
 
-// TODO: MySubaru Logo
 // TODO: Actual app version
 // TODO: Environment select
 // TODO: Native hooks to password apps
@@ -78,10 +79,7 @@ const Login = () => {
     };
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
-            <MySimpleNavBar style={MyStyleSheet.paddingTextInputBottom}>
-                <MySimpleNavButtonBarItem title=" "></MySimpleNavButtonBarItem>
-                <MyText style={MyStyleSheet.headlineText}>// MySUBARU //</MyText>
-            </MySimpleNavBar>
+            <MyLogo />
             <View style={{flex: 1, alignItems: 'center', justifyContent:'flex-start'}}>
                 <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false} style={MyStyleSheet.paddingTextInputBottom}></MyTextInput>
                 <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true}></MyTextInput>

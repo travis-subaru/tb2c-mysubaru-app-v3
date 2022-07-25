@@ -94,6 +94,8 @@ export const useSession = (): Session => {
     return get;
 }
 
+// TODO: Cancel all commands on logout
+
 /** End session and go back to login screen. */
 export const logout = () => {
     setItem("appState", "login");
