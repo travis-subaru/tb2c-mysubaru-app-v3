@@ -15,6 +15,5 @@ export const MyRule = (props: MyRuleProps) => {
     const Colors: Palette = useColors();
     const thickness = props.thickness ?? 0.5;
     const direction = props.direction === "horizontal" ? { height: thickness, minWidth: '100%' } : { minHeight: '100%', width: thickness };
-    // TODO: HR rule color from style guide
-    return <View style={[{ backgroundColor: Colors.copyPrimary }, direction, props.style]}></View>
+    return <View style={[{ backgroundColor: Colors.rule }, direction, props.style]}></View>
 }

@@ -5,14 +5,15 @@ import { Appearance } from 'react-native';
 // NOTE: "Light Background" fails ADA checker (https://adasitecompliance.com/ada-color-contrast-checker/)
 
 export interface Palette {
-    background: string;
-    backgroundSecondary: string;
-    copyPrimary: string;
-    copySecondary: string;
-    error: string;
-    link: string;
-    buttonPrimary: string;
-    buttonSecondary: string;
+    background: string
+    backgroundSecondary: string
+    copyPrimary: string
+    copySecondary: string
+    rule: string
+    error: string
+    link: string
+    buttonPrimary: string
+    buttonSecondary: string
     success: string;
 }
 
@@ -27,6 +28,7 @@ const midnightPalette: Palette = {
     backgroundSecondary: "#34393F", // midnight-90
     copyPrimary: staticWhite,
     copySecondary: "#91979A", // Light Grey
+    rule: "#3E434D", // Dark HR rule
     error: "#E95756", // Light Red
     link: "#3A8EEE", // Light Blue
     buttonPrimary: "#1971D4", // Blue
@@ -39,6 +41,7 @@ const whitePalette: Palette = {
     backgroundSecondary: "#D1D1D6", // iOS.systemGrey4
     copyPrimary: staticMidnight,
     copySecondary: "#5C6163", // Grey
+    rule: "#E7E7E7", // Light HR rule
     error: "#E22828", // Red
     link: "#1971D4", // Blue
     buttonPrimary: "#1971D4", // Blue
