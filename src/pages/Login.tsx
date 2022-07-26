@@ -15,7 +15,6 @@ import { requestMySAlerts } from '../net/MySAlerts';
 import { requestRefreshVehicles } from '../net/RefreshVehicles';
 import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
 import { MyNetworkSnackBar } from '../components/MySnackBar';
-import { useNetworkActivity } from '../stores/Response';
 import { setEnvironment } from '../net/Environment';
 import { MyLogo } from '../components/MyLogo';
 
@@ -30,7 +29,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const [formErrors, setFormErrors] = useState<MyTextErrors[]>([]);
-    const [activity, setActivity] = useNetworkActivity();
     const otherErrors = (() => {
         const otherErrors = formErrors.filter(e => e.name != "username" && e.name != "password");
         if (otherErrors.length == 0) { return; }
@@ -86,7 +84,6 @@ const Login = () => {
                 <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>
                 {otherErrors}
                 <View style={{ flexGrow: 1 }} />
-                <MyNetworkSnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MyNetworkSnackBar>
                 <View>
                     <MyText style={{ marginBottom: 10 }}>V. 2.0.0c-longVersion</MyText>
                 </View>
@@ -96,8 +93,8 @@ const Login = () => {
                         <MyAlternateButton title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
                     </View>
                 </View>
-
             </View>
+            <MyNetworkSnackBar></MyNetworkSnackBar>
         </View>
     );
 };

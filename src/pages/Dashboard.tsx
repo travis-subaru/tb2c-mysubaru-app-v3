@@ -34,7 +34,6 @@ const DashboardTabBarButton = (props: DashboardTabBarButtonProps) => {
 export const Dashboard = () => {
     const i18n: Language = useLanguage();
     const C: Palette = useColors();
-    const [activity, setActivity] = useNetworkActivity();
     const [tab, setTab] = useState<DashboardTab>('home');
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start' }}>
@@ -46,7 +45,7 @@ export const Dashboard = () => {
                 tab === 'vehicle' ? <VehicleTab /> :
                 undefined
             )})()}
-            <MyNetworkSnackBar activity={activity} onClose={() => setActivity(null)}></MyNetworkSnackBar>
+            <MyNetworkSnackBar></MyNetworkSnackBar>
             <View style={{ backgroundColor: C.backgroundSecondary, alignItems: 'center', flexDirection: 'row', height: 50 }}>
                 <DashboardTabBarButton glyph="home" title="Home" isActive={tab === 'home'} onPress={() => setTab('home')} />
                 <DashboardTabBarButton glyph="frontCar" title="Vehicles" isActive={tab === 'vehicle'} onPress={() => setTab('vehicle')} />

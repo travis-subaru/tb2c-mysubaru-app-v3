@@ -117,7 +117,7 @@ export const ForgotInfo = () => {
             <MyTextInput name="vin" label={i18n.common.vin} errors={formErrors} text={VIN} onChangeText={text => setVIN(text)} autoCapitalize='none' autoCorrect={false} style={MyStyleSheet.paddingTextInputBottom}></MyTextInput>
             {actionButton}
             {resultPanel}
-            <MyNetworkSnackBar activity={activity} style={{ marginBottom: 10 }} onClose={() => setActivity(null)}></MyNetworkSnackBar>
         </View>
+        <MyNetworkSnackBar></MyNetworkSnackBar>
     </View>
 }

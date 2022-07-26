@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { setItem, useItem } from '../stores/Local';
+import { useItem } from '../stores/Local';
 import { MyLinkButton, MyPrimaryButton, MySecondaryButton } from '../components/MyButton';
 import { MyText, decodeString } from '../components/MyText';
 import { Language, useLanguage } from '../model/Language';
@@ -11,8 +11,8 @@ import { TwoStepContactInfo, requestTwoStepAuthSendVerification, requestTwoStepA
 import { MyTextInput } from '../components/MyTextInput';
 import { checkVerificationCode } from '../model/VerificationCode';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
-import { NetworkActivity, useNetworkActivity } from '../stores/Response';
 import { MyNetworkSnackBar } from '../components/MySnackBar';
+import { logout } from '../stores/Session';
 
 export interface TwoStepsVerifyProps {
     contact?: TwoStepContactInfo
@@ -26,7 +26,6 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     const [rememberDevice, setRememberDevice] = useState(false);
     const [showTerms, setShowTerms] = useState(false);
     const languageCode = useItem("language"); // TODO: remove useItem call
-    const [activity, setActivity] = useNetworkActivity();
 
     const sendCodeRequest = async () => {
         if (!contactMethod) { return }
@@ -51,11 +50,10 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     }
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <MySimpleNavBar>
-            <MySimpleNavButtonBarItem onPress={() => setItem("appState", "login")} title= "< Login"></MySimpleNavButtonBarItem>
+            <MySimpleNavButtonBarItem onPress={() => logout()} title= "< Login"></MySimpleNavButtonBarItem>
             <MyText style={MyStyleSheet.boldCopyText}>{i18n.twoStepAuthentication.twoStepHeader}</MyText>
         </MySimpleNavBar>
         <View style={{ flex: 1, alignItems: 'flex-start', justifyContent:'flex-start', paddingHorizontal: 20 }}>
-            <MyNetworkSnackBar activity={activity} title="In progress" onClose={() => setActivity(null)}></MyNetworkSnackBar>
             {(() => {
                 if (!showCodeEntry) {
                     return <View style={{ alignItems: 'flex-start'}}>
@@ -88,6 +86,7 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
                 }
             })()}
         </View>
+        <MyNetworkSnackBar></MyNetworkSnackBar>
     </View>;
 
 

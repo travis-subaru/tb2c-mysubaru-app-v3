@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, View } from "react-native";
 import { descriptionForEndpoint, descriptionForErrorCode } from '../model/Code';
-import { NetworkActivity } from '../stores/Response';
+import { NetworkActivity, useNetworkActivity } from '../stores/Response';
 import { MyAppIcon } from './MyAppIcon';
 import { MyLinkButton } from './MyButton';
 import { Palette, useColors } from "./MyColors";
@@ -40,25 +40,27 @@ export const MySnackBar = (props: MySnackBarProps) => {
     </View>;
 }
 
-export interface MyNetworkSnackBarProps extends MySnackBarProps {
-    activity: NetworkActivity | null
-}
 
-export const MyNetworkSnackBar = (props: MyNetworkSnackBarProps) => {
+export const MyNetworkSnackBar = (props: MySnackBarProps) => {
     const i18n: Language = useLanguage();
-    if (props.activity == null) { return null; }
-    if (props.activity.type === "request") {
-        return <MySnackBar title={descriptionForEndpoint(i18n, props.activity.request.endpoint)} type="progress" onClose={props.onClose} />
+    const [activity, setActivity] = useNetworkActivity();
+    const onClose = () => {
+        if (props.onClose) { props.onClose(); }
+        setActivity(null);
+    }
+    if (activity == null) { return null; }
+    if (activity.type === "request") {
+        return <MySnackBar title={descriptionForEndpoint(i18n, activity.request.endpoint)} type="progress" onClose={onClose} />
     } else {
-        const response = props.activity.response;
+        const response = activity.response;
         const type = response.success ? "success" : "error"
         if (response.errorCode != null) {
-            return <MySnackBar title={descriptionForErrorCode(i18n, response.errorCode)} type={type} onClose={props.onClose} />
+            return <MySnackBar title={descriptionForErrorCode(i18n, response.errorCode)} type={type} onClose={onClose} />
         } else if (response.dataName === "remoteServiceStatus") {
             const status = response.data;
-            return <MySnackBar title={descriptionForRemoteServiceStatus(i18n, status)} type={status.remoteServiceState == "finished" ? type : "progress"} onClose={props.onClose} />
+            return <MySnackBar title={descriptionForRemoteServiceStatus(i18n, status)} type={status.remoteServiceState == "finished" ? type : "progress"} onClose={onClose} />
         } else {
-            return <MySnackBar title={descriptionForEndpoint(i18n, response.endpoint)} type={type} onClose={props.onClose} />
+            return <MySnackBar title={descriptionForEndpoint(i18n, response.endpoint)} type={type} onClose={onClose} />
         }
     }
 }
