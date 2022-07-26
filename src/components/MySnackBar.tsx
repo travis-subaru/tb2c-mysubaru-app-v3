@@ -7,7 +7,7 @@ import { MyLinkButton } from './MyButton';
 import { Palette, useColors } from "./MyColors";
 import { Language, useLanguage } from '../model/Language';
 import { MyText } from './MyText';
-import { descriptionForRemoteServiceStatus } from '../net/RemoteCommand';
+import { descriptionForRemoteServiceStatus, mapEndpointToCommand } from '../net/RemoteCommand';
 
 export interface MySnackBarProps {
     style?: any
@@ -50,7 +50,12 @@ export const MyNetworkSnackBar = (props: MySnackBarProps) => {
     }
     if (activity == null) { return null; }
     if (activity.type === "request") {
-        return <MySnackBar title={descriptionForEndpoint(i18n, activity.request.endpoint)} type="progress" onClose={onClose} />
+        const remoteCommand = mapEndpointToCommand(activity.request.endpoint);
+        if (remoteCommand) {
+            return <MySnackBar title={descriptionForRemoteServiceStatus(i18n, {remoteServiceState: "started", remoteServiceType: remoteCommand})} type="progress" onClose={onClose} />
+        } else {
+            return <MySnackBar title={descriptionForEndpoint(i18n, activity.request.endpoint)} type="progress" onClose={onClose} />
+        }
     } else {
         const response = activity.response;
         const type = response.success ? "success" : "error"

@@ -91,7 +91,7 @@ export const HomeTab = () => {
         <View style={rowStyle}>
             <HomeScreenActionButton glyph={locked ? "unlock" : "lock"} style={buttonStyle} title={locked ? i18n.home.unlockDoors : i18n.home.lockDoors} subtitle='Locked' onPress={locked ? remoteUnlock : remoteLock}></HomeScreenActionButton>
             <HomeScreenActionButton glyph="lights" style={buttonStyle} title="Horn & Lights" subtitle='Off'></HomeScreenActionButton>
-            <HomeScreenActionButton glyph="mapMarker" style={buttonStyle} title="Location" subtitle={`${buttonSize}`}></HomeScreenActionButton>
+            <HomeScreenActionButton glyph="mapMarker" style={buttonStyle} title="Location"></HomeScreenActionButton>
         </View>
         <View style={rowStyle}>
             <View style={[MyStyleSheet.roundedEdge, { backgroundColor: C.backgroundSecondary, flexDirection: 'row', flexWrap: 0, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }]}>

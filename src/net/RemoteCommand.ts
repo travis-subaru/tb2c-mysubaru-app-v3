@@ -5,8 +5,107 @@ import { getSessionID } from "../stores/Session";
 import { myFetch, JSONHeaders, GETJSONRequest } from "./Fetch";
 
 export type RemoteServiceState = "started" | "scheduled" | "finished";
-export type RemoteServiceType = "engineStart" | "engineStop" | "lock" | "unlock";
+export type RemoteServiceType = "engineStart" | "engineStop" | "lock" | "unlock" | "condition";
 export type UnlockDoorType = "ALL_DOORS_CMD" | "FRONT_LEFT_DOOR_CMD" | "TAILGATE_DOOR_CMD";
+export type DoorLockStatus = "LOCKED" | "UNLOCKED";
+// ????: Is there a half-open status?
+export type DoorPosition = "OPEN" | "CLOSED";
+
+// ????: Some endpoints have _={timestamp}. Others don't. Why?
+// ????: Should jsessionId be automatic? Can jsessionId be automatic?
+
+// TODO: Finish types
+export interface RemoteServiceResultSuccess {
+    success: true
+    data: {
+		AVG_FUEL_CONSUMPTION: "0",
+		AVG_FUEL_CONS_RAW_UNIT: "ONE_TENTH_OF_LITERPER100KM",
+		AVG_FUEL_CONS_RAW_VALUE: "65",
+		BATTERY_VOLTAGE: "12.5",
+		DISTANCE_TO_EMPTY_FUEL: "400",
+		DISTANCE_TO_EMPTY_RAW_UNIT: "TEN_OF_KM_10KM",
+		DISTANCE_TO_EMPTY_RAW_VALUE: "150",
+		DOOR_BOOT_LOCK_STATUS: DoorLockStatus,
+		DOOR_BOOT_POSITION: DoorPosition,
+		DOOR_ENGINE_HOOD_LOCK_STATUS: DoorLockStatus,
+		DOOR_ENGINE_HOOD_POSITION: DoorPosition,
+		DOOR_FRONT_LEFT_LOCK_STATUS: DoorLockStatus,
+		DOOR_FRONT_LEFT_POSITION: DoorPosition,
+		DOOR_FRONT_RIGHT_LOCK_STATUS: DoorLockStatus,
+		DOOR_FRONT_RIGHT_POSITION: DoorPosition,
+		DOOR_REAR_LEFT_LOCK_STATUS: DoorLockStatus,
+		DOOR_REAR_LEFT_POSITION: DoorPosition,
+		DOOR_REAR_RIGHT_LOCK_STATUS: DoorLockStatus,
+		DOOR_REAR_RIGHT_POSITION: DoorPosition,
+		EV_CHARGER_STATE_TYPE: "CHARGING",
+		EV_CHARGE_SETTING_AMPERE_TYPE: "LEVEL_8_A",
+		EV_CHARGE_VOLT_TYPE: "CHARGE_LEVEL_2",
+		EV_DISTANCE_TO_EMPTY: "24",
+		EV_IS_PLUGGED_IN: "LOCKED_CONNECTED",
+		EV_STATE_OF_CHARGE_MODE: "EV_MODE",
+		EV_STATE_OF_CHARGE_PERCENT: "12",
+		EV_TIME_TO_FULLY_CHARGED: "304",
+		EV_VEHICLE_TIME_DAYOFWEEK: "-1",
+		EV_VEHICLE_TIME_HOUR: "16",
+		EV_VEHICLE_TIME_MINUTE: "1",
+		EV_VEHICLE_TIME_SECOND: "44",
+		EXT_EXTERNAL_TEMP: "7.5",
+		LAST_UPDATED_DATE: "2022-07-26T18:19:11+0000",
+		ODOMETER: 28086,
+		ODOMETER_RAW_UNIT: "ONE_TENTH_OF_KM",
+		ODOMETER_RAW_VALUE: "452000",
+		POSITION_HEADING_DEGREE: "5",
+		POSITION_SPEED_KMPH: "1",
+		POSITION_TIMESTAMP: "2022-07-26T15:23:30Z",
+		REMAINING_FUEL_PERCENT: "60",
+		SEAT_BELT_STATUS_FRONT_LEFT: "BELTED",
+		SEAT_BELT_STATUS_FRONT_MIDDLE: "NOT_EQUIPPED",
+		SEAT_BELT_STATUS_FRONT_RIGHT: "BELTED",
+		SEAT_BELT_STATUS_SECOND_LEFT: "BELTED",
+		SEAT_BELT_STATUS_SECOND_MIDDLE: "NOT_BELTED",
+		SEAT_BELT_STATUS_SECOND_RIGHT: "NOT_BELTED",
+		SEAT_BELT_STATUS_THIRD_LEFT: "NOT_EQUIPPED",
+		SEAT_BELT_STATUS_THIRD_MIDDLE: "NOT_EQUIPPED",
+		SEAT_BELT_STATUS_THIRD_RIGHT: "NOT_EQUIPPED",
+		SEAT_OCCUPATION_STATUS_FRONT_LEFT: "UNKNOWN",
+		SEAT_OCCUPATION_STATUS_FRONT_MIDDLE: "NOT_EQUIPPED",
+		SEAT_OCCUPATION_STATUS_FRONT_RIGHT: "UNKNOWN",
+		SEAT_OCCUPATION_STATUS_SECOND_LEFT: "UNKNOWN",
+		SEAT_OCCUPATION_STATUS_SECOND_MIDDLE: "UNKNOWN",
+		SEAT_OCCUPATION_STATUS_SECOND_RIGHT: "UNKNOWN",
+		TRANSMISSION_MODE: "DRIVE",
+		TYRE_PRESSURE_FRONT_LEFT: "1970",
+		TYRE_PRESSURE_FRONT_LEFT_RAW_UNIT: "PRESSURE_KPA",
+		TYRE_PRESSURE_FRONT_LEFT_RAW_VALUE: 35.09789702683104,
+		TYRE_PRESSURE_FRONT_RIGHT: "2252",
+		TYRE_PRESSURE_FRONT_RIGHT_RAW_UNIT: "PRESSURE_KPA",
+		TYRE_PRESSURE_FRONT_RIGHT_RAW_VALUE: 30.891950688905006,
+		TYRE_PRESSURE_REAR_LEFT: "2436",
+		TYRE_PRESSURE_REAR_LEFT_RAW_UNIT: "PRESSURE_KPA",
+		TYRE_PRESSURE_REAR_LEFT_RAW_VALUE: 29.29659173313996,
+		TYRE_PRESSURE_REAR_RIGHT: "2164",
+		TYRE_PRESSURE_REAR_RIGHT_RAW_UNIT: "PRESSURE_KPA",
+		TYRE_PRESSURE_REAR_RIGHT_RAW_VALUE: 29.006526468455405,
+		TYRE_STATUS_FRONT_LEFT: "LOW_SOFT_WARN",
+		TYRE_STATUS_FRONT_RIGHT: "NORMAL",
+		TYRE_STATUS_REAR_LEFT: "HIGH",
+		TYRE_STATUS_REAR_RIGHT: "NORMAL",
+		VEHICLE_STATE_TYPE: "ENGINE_ON_REMOTE_START",
+		WINDOW_BACK_STATUS: DoorPosition,
+		WINDOW_FRONT_LEFT_STATUS: DoorPosition,
+		WINDOW_FRONT_RIGHT_STATUS: DoorPosition,
+		WINDOW_REAR_LEFT_STATUS: DoorPosition,
+		WINDOW_REAR_RIGHT_STATUS: DoorPosition,
+		WINDOW_SUNROOF_STATUS: DoorPosition
+    }
+    notes: {
+		failureReason: null,
+		failureDescription: null,
+		errorDescription: null,
+		errorCode: null,
+		errorLabel: null
+    }
+}
 
 export interface RemoteServiceStatus {
     serviceRequestId: string,
@@ -16,7 +115,7 @@ export interface RemoteServiceStatus {
     remoteServiceType: RemoteServiceType,
     subState: null,
     errorCode: string | null,
-    result: null,
+    result: null | RemoteServiceResultSuccess,
     updateTime: number | null,
     vin: string,
     errorDescription: string | null
@@ -30,11 +129,12 @@ export interface RemoteServiceNetworkResponse {
     endpoint: string
 }
 
+// TODO: Finish type annotation
 export interface RemoteStartParameters {
     pin: string
     delay: number
     unlockDoorType: UnlockDoorType
-    name: "Summer Time"
+    name: string
     runTimeMinutes: string
     climateZoneFrontTemp: string
     climateZoneFrontAirMode: "FEET_FACE_BALANCED"
@@ -76,7 +176,8 @@ const presentTenseForType = (type: RemoteServiceType): string => {
         case "engineStart": return "REMOTE ENGINE START";
         case "engineStop": return "REMOTE ENGINE STOP";
         case "lock": return "LOCK DOORS";
-        case "unlock": return "UNLOCK DOORS"
+        case "unlock": return "UNLOCK DOORS";
+        case "condition": return "VEHICLE STATUS";
     }
 }
 
@@ -86,10 +187,12 @@ const pastTenseForType = (type: RemoteServiceType): string => {
         case "engineStop": return "ENGINE STOPPED";
         case "lock": return "DOORS LOCKED";
         case "unlock": return "DOORS UNLOCKED";
+        case "condition": return "VEHICLE STATUS UPDATED";
     }
 }
 
-export const descriptionForRemoteServiceStatus = (i18n: Language, status: RemoteServiceStatus): string => {
+// Using partial RemoteServiceStatus type to allow inter-op with progress indicator
+export const descriptionForRemoteServiceStatus = (i18n: Language, status: {remoteServiceType: RemoteServiceType, remoteServiceState: RemoteServiceState}): string => {
     switch (status.remoteServiceState) {
         case "started": return `Sending ${presentTenseForType(status.remoteServiceType)} to your vehicle`;
         case "scheduled": return `Scheduled Message here for ${presentTenseForType(status.remoteServiceType)}`;
@@ -138,13 +241,28 @@ export const pollRemoteServiceStatus = async (statusEndpoint: string, serviceReq
 };
 
 // TODO: Gen 0 / Gen 1 support?
-const getRemoteCommandEndpoint = (command: RemoteServiceType): string | undefined => {
+const getRemoteCommandEndpoint = (command: RemoteServiceType): string => {
     switch (command) {
         case "engineStart": return "service/g2/engineStart/execute.json";
         case "engineStop": return "service/g2/engineStop/execute.json";
         case "lock": return "service/g2/lock/execute.json";
-        case "unlock": return "service/g2/unlock/execute.json"
+        case "unlock": return "service/g2/unlock/execute.json";
+        case "condition": return "service/g2/condition/execute.json";
     }
+}
+
+export const mapEndpointToCommand = (endpoint: string): RemoteServiceType | undefined => {
+    // Remove ;jsessionid= and recall
+    if (endpoint.includes(";")) {
+        return mapEndpointToCommand(endpoint.split(";")[0])
+    }
+    const commands: RemoteServiceType[] = ["engineStart", "engineStop", "lock", "unlock", "condition"];
+    for (let command of commands) {
+        if (getRemoteCommandEndpoint(command) === endpoint) {
+            return command;
+        }
+    }
+    return undefined;
 }
 
 export const executeRemoteStart = async (p: RemoteStartParameters): Promise<NetworkResponse> => {
@@ -192,32 +310,13 @@ export const executeRemoteUnlock = async (p: RemoteUnlockParameters): Promise<Ne
     return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
 };
 
-export const mapEndpointToCommand = (endpoint: string): RemoteServiceType | undefined => {
-    const commands: RemoteServiceType[] = ["engineStart", "engineStop", "lock", "unlock"];
-    for (let command of commands) {
-        if (getRemoteCommandEndpoint(command) === endpoint) {
-            return command;
-        }
-    }
-    return undefined;
+export const executeConditionCheck = async () => {
+    const jsessionid = getSessionID();
+    const ts = (new Date()).getTime();
+    const resp = await myFetch(`${getRemoteCommandEndpoint("unlock")};jsessionid=${jsessionid}?_=${ts}`, {
+        "headers": JSONHeaders,
+        "body": null,
+        "method": "GET",
+    });
+    return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
 }
-
-// TODO: Condition check
-fetch("https://mobileapi.qa.subarucs.com/g2v23/service/g2/condition/execute.json;jsessionid=486F109DF24A28E8323A5AB384405601?_=1658773958148", {
-  "headers": {
-    "accept": "application/json, text/javascript, */*; q=0.01",
-    "accept-language": "en-US,en;q=0.9",
-    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Microsoft Edge\";v=\"96\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"macOS\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "cross-site"
-  },
-  "referrer": "http://localhost:20924/",
-  "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": null,
-  "method": "GET",
-  "mode": "cors",
-  "credentials": "omit"
-});

@@ -55,6 +55,7 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
                 });
             } else {
                 // Construct a valid payload with response code (ex: clouddr is currently 501) and return
+                // TODO: 401 needs to return user to login
                 const error: NetworkResponse = {success: false, errorCode: "statusError", dataName: "error", data: {status: response.status}, endpoint: endpoint};
                 postNetworkResponse(error);
                 resolve(error);
