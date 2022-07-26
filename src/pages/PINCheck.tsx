@@ -46,7 +46,7 @@ export const PINButton = (props: MyButtonProps) => {
     const style = { backgroundColor: fillColor, borderColor: strokeColor, borderWidth: 1, color: strokeColor, minWidth: 72, maxWidth: 72, minHeight: 72, maxHeight: 72, margin: 10 }
 
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, style, props.style]}>
-        <Text style={[MyStyleSheet.buttonText, { color: strokeColor }]}>{props.title}</Text>
+        <Text style={[MyStyleSheet.headlineText, { color: strokeColor }, props.textStyle]}>{props.title}</Text>
     </MyPressable>);
 }
 
@@ -75,7 +75,6 @@ export const PINCheck = () => {
         }
         setItem('pinRequested', false);
     }
-
     return <SafeAreaView style={{ backgroundColor: staticMidnight, position: 'absolute', width: '100%', height: "100%", zIndex: 9999 }}>
         <StatusBar barStyle={'light-content'} />
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: staticMidnight }}>
@@ -112,10 +111,10 @@ export const PINCheck = () => {
                     <PINButton title="9" onPress={() => pushDigit('9')} />
                 </View>
                 <View style={{ flexDirection: 'row'}}>
-                    <PINButton title={i18n.pinPanel.clear} onPress={() => setPIN('')} />
+                    <PINButton textStyle={MyStyleSheet.buttonText} title={i18n.pinPanel.clear} onPress={() => setPIN('')} />
                     <PINButton title="0" onPress={() => pushDigit('0')} />
                     {/* TODO Backspace symbol */}
-                    <PINButton title={"DEL"} onPress={() => setPIN(PIN.substring(0, PIN.length - 1))} />
+                    <PINButton textStyle={MyStyleSheet.buttonText} title={"DEL"} onPress={() => setPIN(PIN.substring(0, PIN.length - 1))} />
                 </View>
             </View>
         </View>
