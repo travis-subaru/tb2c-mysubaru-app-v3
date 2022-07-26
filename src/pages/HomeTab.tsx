@@ -7,7 +7,7 @@ import { MyStyleSheet } from '../components/MyStyles';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../model/Language';
 import { MyAppIcon } from '../components/MyAppIcon';
-import { executeRemoteStart, executeRemoteStop } from '../net/EngineStartStop';
+import { executeRemoteLock, executeRemoteStart, executeRemoteStop, executeRemoteUnlock } from '../net/RemoteCommand';
 import { withPINCheck } from './PINCheck';
 import { MyPressable } from '../components/MyPressable';
 
@@ -33,6 +33,7 @@ export const HomeTab = () => {
     const C: Palette = useColors();
     const session: Session = useSession();
     const [engineStatus, setEngineStatus] = useState(false); // TODO: Listen on VehicleStatus channel
+    const [locked, setLocked] = useState(true); // TODO: Listen on VehicleStatus channel
     const vehicle = session?.vehicles[session?.currentVehicleIndex];
     const rowStyle = { flexDirection: 'row', flexWrap: 1, alignSelf: 'stretch', justifyContent: 'space-between' };
     const buttonSize = Math.min((Dimensions.get('window').width - 80) / 3, 120) ;
@@ -54,6 +55,22 @@ export const HomeTab = () => {
             if (resp.success) { setEngineStatus(false); }
         }
     };
+    const remoteLock = async () => {
+        if (!vehicle) { return; }
+        const pin = await withPINCheck();
+        if (pin.ok) {
+            const resp = await executeRemoteLock({pin: pin.pin, delay: 0, forceKeyInCar: false, vin: vehicle.vin });
+            if (resp.success) { setLocked(true); }
+        }
+    };
+    const remoteUnlock = async () => {
+        if (!vehicle) { return; }
+        const pin = await withPINCheck();
+        if (pin.ok) {
+            const resp = await executeRemoteUnlock({pin: pin.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD", vin: vehicle.vin });
+            if (resp.success) { setLocked(false); }
+        }
+    };
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start', paddingHorizontal: 20 }}>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
             <View style={{ alignItems: 'center', justifyContent: 'center', width: 72, height: 72, backgroundColor: C.buttonSecondary}}>
@@ -72,7 +89,7 @@ export const HomeTab = () => {
             <HomeScreenActionButton glyph="map" style={buttonStyle} title="Trips"></HomeScreenActionButton>
         </View>
         <View style={rowStyle}>
-            <HomeScreenActionButton glyph="lock" style={buttonStyle} title="Door Locks" subtitle='Locked'></HomeScreenActionButton>
+            <HomeScreenActionButton glyph={locked ? "unlock" : "lock"} style={buttonStyle} title={locked ? i18n.home.unlockDoors : i18n.home.lockDoors} subtitle='Locked' onPress={locked ? remoteUnlock : remoteLock}></HomeScreenActionButton>
             <HomeScreenActionButton glyph="lights" style={buttonStyle} title="Horn & Lights" subtitle='Off'></HomeScreenActionButton>
             <HomeScreenActionButton glyph="mapMarker" style={buttonStyle} title="Location" subtitle={`${buttonSize}`}></HomeScreenActionButton>
         </View>

@@ -7,6 +7,7 @@ import { MyLinkButton } from './MyButton';
 import { Palette, useColors } from "./MyColors";
 import { Language, useLanguage } from '../model/Language';
 import { MyText } from './MyText';
+import { descriptionForRemoteServiceStatus } from '../net/RemoteCommand';
 
 export interface MySnackBarProps {
     style?: any
@@ -53,9 +54,11 @@ export const MyNetworkSnackBar = (props: MyNetworkSnackBarProps) => {
         const type = response.success ? "success" : "error"
         if (response.errorCode != null) {
             return <MySnackBar title={descriptionForErrorCode(i18n, response.errorCode)} type={type} onClose={props.onClose} />
+        } else if (response.dataName === "remoteServiceStatus") {
+            const status = response.data;
+            return <MySnackBar title={descriptionForRemoteServiceStatus(i18n, status)} type={status.remoteServiceState == "finished" ? type : "progress"} onClose={props.onClose} />
         } else {
             return <MySnackBar title={descriptionForEndpoint(i18n, response.endpoint)} type={type} onClose={props.onClose} />
         }
-
     }
 }

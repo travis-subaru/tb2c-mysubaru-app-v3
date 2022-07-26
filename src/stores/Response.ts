@@ -1,18 +1,19 @@
 import { getNextListenerID, ListenerID } from './Listener';
 import { useState, useEffect } from 'react';
 import { ErrorCode } from '../model/Code';
+import { RemoteServiceNetworkResponse } from '../net/RemoteCommand';
 
 /** Channel to send and receive network based updates. */
 
-// TODO: Document these
-export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error" | "remoteServiceStatus";
+// TODO: Remove this type. Replace by unifying NetworkResponse.
+export type DataName = "sessionData" | "vehicleData" | "dataMap" | "error";
 
 export interface NetworkRequest {
     endpoint: string
+    init?: RequestInit | undefined
 }
 
-
-export interface NetworkResponse {
+export interface UnclassifiedNetworkResponse {
     success: boolean
     errorCode: null | ErrorCode
     dataName: null | DataName
@@ -20,11 +21,7 @@ export interface NetworkResponse {
     endpoint: string
 }
 
-interface NetworkResponseListener {
-    id: ListenerID
-    dataName?: DataName
-    fn: (NETResponse) => void
-}
+export type NetworkResponse = UnclassifiedNetworkResponse | RemoteServiceNetworkResponse;
 
 export type NetworkActivity = {type: "request", request: NetworkRequest} | {type: "response", response: NetworkResponse};
 
@@ -35,8 +32,8 @@ interface NetworkActivityListener {
 
 let activityListeners: NetworkActivityListener[] = [];
 
-export const postNetworkRequest = (endpoint: string) => {
-    const activity: NetworkActivity = {type: "request", request: {endpoint: endpoint}};
+export const postNetworkRequest = (endpoint: string, init?: RequestInit | undefined) => {
+    const activity: NetworkActivity = {type: "request", request: {endpoint: endpoint, init: init}};
     activityListeners.forEach(l => l.fn(activity));
 }
 

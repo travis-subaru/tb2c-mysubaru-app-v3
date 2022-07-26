@@ -29,7 +29,7 @@ export const GETJSONRequest: RequestInit = { headers: JSONHeaders, body: null, m
 export const myFetch = async (endpoint: string, init?: RequestInit | undefined): Promise<NetworkResponse> => {
     const e = getEnviroment();
     return new Promise<NetworkResponse>((resolve, _) => {
-        postNetworkRequest(endpoint);
+        postNetworkRequest(endpoint, init);
         if (e.env == "demo") {
             const responseObject = mockResponseForEndpoint(endpoint);
             postNetworkResponse(responseObject);
