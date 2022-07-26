@@ -1,6 +1,6 @@
 import { ErrorCode } from "../model/Code";
 import { Language } from "../model/Language";
-import { NetworkResponse } from "../stores/Response";
+import { NetworkResponse, normalizeEndpoint } from "../stores/Response";
 import { getSessionID } from "../stores/Session";
 import { myFetch, JSONHeaders, GETJSONRequest } from "./Fetch";
 
@@ -204,7 +204,7 @@ export const descriptionForRemoteServiceStatus = (i18n: Language, status: {remot
     }
 }
 
-export const descriptionForUnlockDoorType =  (i18n: Language, type: UnlockDoorType): string => {
+export const descriptionForUnlockDoorType = (i18n: Language, type: UnlockDoorType): string => {
     switch (type) {
         case "ALL_DOORS_CMD": return i18n.unlockSettingPanel.allDoors;
         case "FRONT_LEFT_DOOR_CMD": return i18n.unlockSettingPanel.justDriverDoor;
@@ -252,13 +252,10 @@ const getRemoteCommandEndpoint = (command: RemoteServiceType): string => {
 }
 
 export const mapEndpointToCommand = (endpoint: string): RemoteServiceType | undefined => {
-    // Remove ;jsessionid= and recall
-    if (endpoint.includes(";")) {
-        return mapEndpointToCommand(endpoint.split(";")[0])
-    }
+    const _endpoint = normalizeEndpoint(endpoint);
     const commands: RemoteServiceType[] = ["engineStart", "engineStop", "lock", "unlock", "condition"];
     for (let command of commands) {
-        if (getRemoteCommandEndpoint(command) === endpoint) {
+        if (getRemoteCommandEndpoint(command) === _endpoint) {
             return command;
         }
     }
@@ -296,7 +293,13 @@ export const executeRemoteLock = async (p: RemoteLockParameters): Promise<Networ
         "body": body,
         "method": "POST",
     });
-    return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
+
+    const status = await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
+    if (status.success) {
+        return await executeConditionCheck();
+    } else {
+        return status;
+    }
 };
 
 export const executeRemoteUnlock = async (p: RemoteUnlockParameters): Promise<NetworkResponse> => {
@@ -308,9 +311,9 @@ export const executeRemoteUnlock = async (p: RemoteUnlockParameters): Promise<Ne
         "method": "POST",
     });
     return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
-};
+}
 
-export const executeConditionCheck = async () => {
+export const executeConditionCheck = async (): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const ts = (new Date()).getTime();
     const resp = await myFetch(`${getRemoteCommandEndpoint("unlock")};jsessionid=${jsessionid}?_=${ts}`, {

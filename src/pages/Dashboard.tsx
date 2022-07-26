@@ -4,7 +4,6 @@ import { MyText } from '../components/MyText';
 import { Palette, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../model/Language';
 import { MyAppIcon, MyAppIconGlyph } from '../components/MyAppIcon';
-import { useNetworkActivity } from '../stores/Response';
 import { MyNetworkSnackBar } from '../components/MySnackBar';
 import { MyPressable } from '../components/MyPressable';
 import { HomeTab } from './HomeTab';

@@ -1,7 +1,9 @@
 import { getNextListenerID, ListenerID } from './Listener';
 import { useState, useEffect } from 'react';
-import { ErrorCode } from '../model/Code';
-import { RemoteServiceNetworkResponse } from '../net/RemoteCommand';
+import { descriptionForErrorCode, ErrorCode } from '../model/Code';
+import { descriptionForRemoteServiceStatus, mapEndpointToCommand, RemoteServiceNetworkResponse } from '../net/RemoteCommand';
+import { Language } from '../model/Language';
+import { HTTPStatusErrorResponse } from '../net/Fetch';
 
 /** Channel to send and receive network based updates. */
 
@@ -21,7 +23,7 @@ export interface UnclassifiedNetworkResponse {
     endpoint: string
 }
 
-export type NetworkResponse = UnclassifiedNetworkResponse | RemoteServiceNetworkResponse;
+export type NetworkResponse = UnclassifiedNetworkResponse | RemoteServiceNetworkResponse | HTTPStatusErrorResponse;
 
 export type NetworkActivity = {type: "request", request: NetworkRequest} | {type: "response", response: NetworkResponse};
 
@@ -74,4 +76,43 @@ export const useNetworkActivity = (): [NetworkActivity | null, React.Dispatch<Re
         return () => removeNetworkActivityListener(id);
     });
     return [get, set];
-}
+};
+
+export const normalizeEndpoint = (endpoint: string): string => {
+    if (endpoint.includes(";")) { // Remove ;jsessionid=...
+        return endpoint.split(";")[0];
+    } else {
+        return endpoint;
+    }
+};
+
+export const descriptionForActivity = (i18n: Language, activity: NetworkActivity): string => {
+    if (activity.type === "request") {
+        const remoteCommand = mapEndpointToCommand(activity.request.endpoint);
+        if (remoteCommand) {
+            return descriptionForRemoteServiceStatus(i18n, {remoteServiceState: "started", remoteServiceType: remoteCommand});
+        } else {
+            // TODO: Increase coverage to avoid hitting this
+            return `START (ENDPOINT: ${normalizeEndpoint(activity.request.endpoint)})`
+        }
+    } else {
+        const response = activity.response;
+        if (activity.response.dataName === "remoteServiceStatus") {
+            return descriptionForRemoteServiceStatus(i18n, activity.response.data);
+        }
+        if (activity.response.errorCode === "statusError") {
+            return `${i18n.message.fatalMessage} (HTTP: ${activity.response.data.status})`
+        }
+        if (activity.response.errorCode != null) {
+            return descriptionForErrorCode(i18n, activity.response.errorCode);
+        }
+        if (activity.response.success) {
+            // Catch-all for unhandled successes
+            return `${i18n.common.ok} (ENDPOINT: ${normalizeEndpoint(activity.response.endpoint)})`;
+        } else {
+            // Catch-all for unhandled failures
+            return `${i18n.message.fatalMessage} (ENDPOINT: ${normalizeEndpoint(activity.response.endpoint)})`;
+        }
+
+    }
+};

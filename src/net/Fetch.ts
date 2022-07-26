@@ -1,4 +1,5 @@
 import { NetworkResponse, postNetworkRequest, postNetworkResponse } from "../stores/Response";
+import { logout } from "../stores/Session";
 import { mockResponseForEndpoint } from "./Demo";
 import { getEnviroment } from "./Environment";
 
@@ -8,20 +9,17 @@ export function parseResponse(json: any, endpoint: string): Promise<NetworkRespo
         if (json === true || json === false) {
             resolve({success: json, errorCode: null, dataName: null, data: undefined, endpoint: endpoint}); return;
         }
-        const parsed: NetworkResponse = json;
-        // TODO: Parse and validate JSON matches spec, error otherwise
-        if (parsed) {
-            resolve(parsed);
-        } else {
-            reject({missingKey: "foo"});
-        }
-
+        const success = json["success"] ? true : false;
+        // TODO: Validate dataName and errorCode against whitelists
+        resolve({success: success, data: json["data"], dataName: json["dataName"], errorCode: json["errorCode"], endpoint: endpoint});
     })
 }
 
 export const JSONHeaders: HeadersInit = { "content-type": "application/json" };
 export const GETRequest: RequestInit = { headers: {}, body: null, method: "GET" };
 export const GETJSONRequest: RequestInit = { headers: JSONHeaders, body: null, method: "GET" };
+
+export interface HTTPStatusErrorResponse { success: false, errorCode: "statusError", dataName: "error", data: { status: number }, endpoint: string }
 
 /** Call endpoint with payload.
  * @return Standard response body
@@ -31,6 +29,14 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
     return new Promise<NetworkResponse>((resolve, _) => {
         postNetworkRequest(endpoint, init);
         if (e.env == "demo") {
+            /** TODO: Get mocks for
+             * Engine Start
+             * Engine Stop
+             * Lock
+             * Unlock
+             * Condition
+             * Status
+            */
             const responseObject = mockResponseForEndpoint(endpoint);
             postNetworkResponse(responseObject);
             resolve(responseObject);
@@ -55,10 +61,14 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
                 });
             } else {
                 // Construct a valid payload with response code (ex: clouddr is currently 501) and return
-                // TODO: 401 needs to return user to login
-                const error: NetworkResponse = {success: false, errorCode: "statusError", dataName: "error", data: {status: response.status}, endpoint: endpoint};
+                const error: HTTPStatusErrorResponse = {success: false, errorCode: "statusError", dataName: "error", data: {status: response.status}, endpoint: endpoint};
                 postNetworkResponse(error);
                 resolve(error);
+                // On 401, also send user back to login
+                // TODO: After keychain is implementated, refresh session and retry request
+                if (error.data.status == 401) {
+                    logout();
+                }
             }
         }).catch((reason) => {
             const error: NetworkResponse = {success: false, errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint};
