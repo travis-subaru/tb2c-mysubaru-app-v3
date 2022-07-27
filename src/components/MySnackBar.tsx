@@ -1,13 +1,11 @@
 import React from 'react';
 import { ActivityIndicator, View } from "react-native";
-import { descriptionForErrorCode } from '../model/Code';
 import { descriptionForActivity, useNetworkActivity } from '../stores/Response';
 import { MyAppIcon } from './MyAppIcon';
 import { MyLinkButton } from './MyButton';
 import { Palette, useColors } from "./MyColors";
 import { Language, useLanguage } from '../model/Language';
 import { MyText } from './MyText';
-import { descriptionForRemoteServiceStatus, mapEndpointToCommand } from '../net/RemoteCommand';
 
 export interface MySnackBarProps {
     style?: any
