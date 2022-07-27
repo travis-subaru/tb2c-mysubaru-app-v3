@@ -1,6 +1,6 @@
 {
     "config": {
-        "languageCode": "EN",
+        "languageCode": "EN"
     },
     "common": {
         "notification": "Notification",

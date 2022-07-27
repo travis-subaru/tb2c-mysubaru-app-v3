@@ -9,10 +9,8 @@ export type RemoteServiceState = "started" | "scheduled" | "finished";
 export type RemoteServiceType = "engineStart" | "engineStop" | "lock" | "unlock" | "condition";
 export type UnlockDoorType = "ALL_DOORS_CMD" | "FRONT_LEFT_DOOR_CMD" | "TAILGATE_DOOR_CMD";
 
-
 // ????: Some endpoints have _={timestamp}. Others don't. Why?
 // ????: Should jsessionId be automatic? Can jsessionId be automatic?
-
 
 export interface RemoteServiceResultSuccess {
     success: true
@@ -188,7 +186,7 @@ export const executeRemoteStart = async (p: RemoteStartParameters): Promise<Netw
         "body": body,
         "method": "POST",
     });
-    return await handleRemoteServiceResponse(`service/g2/engineStart/status.json`, resp);
+    return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
 };
 
 
@@ -234,7 +232,7 @@ export const executeRemoteUnlock = async (p: RemoteUnlockParameters): Promise<Ne
 export const executeConditionCheck = async (): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const ts = (new Date()).getTime();
-    const resp = await myFetch(`${getRemoteCommandEndpoint("unlock")};jsessionid=${jsessionid}?_=${ts}`, {
+    const resp = await myFetch(`${getRemoteCommandEndpoint("condition")};jsessionid=${jsessionid}?_=${ts}`, {
         "headers": JSONHeaders,
         "body": null,
         "method": "GET",

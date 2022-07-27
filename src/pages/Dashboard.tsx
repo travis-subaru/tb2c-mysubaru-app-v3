@@ -11,6 +11,7 @@ import { AlertsTab } from './AlertsTab';
 import { OffersTab } from './OffersTab';
 import { SettingsTab } from './SettingsTab';
 import { VehicleTab } from './VehicleTab';
+import { NetworkActivity, normalizeEndpoint } from '../stores/Response';
 
 export type DashboardTab = 'home' | 'vehicle' | 'offers' | 'alerts' | 'settings'
 
@@ -34,6 +35,18 @@ export const Dashboard = () => {
     const i18n: Language = useLanguage();
     const C: Palette = useColors();
     const [tab, setTab] = useState<DashboardTab>('home');
+    const showActivity = (activity: NetworkActivity) => {
+        if (activity.type === "request") {
+            const show: string[] = ["service/g2/engineStart/execute.json", "service/g2/engineStop/execute.json", "service/g2/lock/execute.json", "service/g2/unlock/execute.json"];
+            const endpoint = normalizeEndpoint(activity.request.endpoint);
+            return show.includes(endpoint);
+        } else {
+            const show: string[] = ["service/g2/remoteService/status.json"];
+            const endpoint = normalizeEndpoint(activity.response.endpoint);
+            console.log(endpoint);
+            return show.includes(endpoint);
+        }
+    };
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>
         <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start' }}>
             {(() => { return (
@@ -44,7 +57,7 @@ export const Dashboard = () => {
                 tab === 'vehicle' ? <VehicleTab /> :
                 undefined
             )})()}
-            <MyNetworkSnackBar></MyNetworkSnackBar>
+            <MyNetworkSnackBar showActivity={showActivity}></MyNetworkSnackBar>
             <View style={{ backgroundColor: C.backgroundSecondary, alignItems: 'center', flexDirection: 'row', height: 50 }}>
                 <DashboardTabBarButton glyph="home" title="Home" isActive={tab === 'home'} onPress={() => setTab('home')} />
                 <DashboardTabBarButton glyph="frontCar" title="Vehicles" isActive={tab === 'vehicle'} onPress={() => setTab('vehicle')} />

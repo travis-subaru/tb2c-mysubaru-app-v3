@@ -1,6 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, View } from "react-native";
-import { descriptionForActivity, useNetworkActivity } from '../stores/Response';
+import { descriptionForActivity, NetworkActivity, useNetworkActivity } from '../stores/Response';
 import { MyAppIcon } from './MyAppIcon';
 import { MyLinkButton } from './MyButton';
 import { Palette, useColors } from "./MyColors";
@@ -38,9 +38,13 @@ export const MySnackBar = (props: MySnackBarProps) => {
     </View>;
 }
 
-export const MyNetworkSnackBar = (props: MySnackBarProps) => {
+export interface MyNetworkSnackBarProps extends MySnackBarProps {
+    showActivity?: (activity: NetworkActivity) => boolean
+}
+
+export const MyNetworkSnackBar = (props: MyNetworkSnackBarProps) => {
     const i18n: Language = useLanguage();
-    const [activity, setActivity] = useNetworkActivity();
+    const [activity, setActivity] = useNetworkActivity(props.showActivity);
     if (activity == null) { return null; }
     const onClose = () => {
         if (props.onClose) { props.onClose(); }
