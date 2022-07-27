@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { MyAppIcon } from './MyAppIcon';
-import { useColors, Palette } from './MyColors';
+import { useColors, Palette, staticWhite } from './MyColors';
 import { MyPressable } from './MyPressable';
 import { MyText } from './MyText';
 
@@ -16,7 +16,7 @@ export const MyCheckBox = (props: MyCheckBoxProps) => {
     const isChecked = props.checked ?? false
     const innerColor = isChecked ? Colors.buttonPrimary : undefined;
     const outerColor = isChecked ? Colors.buttonPrimary : Colors.copySecondary;
-    const image = isChecked ? <MyAppIcon glyph='checkmark' style={{fontSize: 17}}></MyAppIcon> : undefined
+    const image = isChecked ? <MyAppIcon glyph='checkmark' style={{ color: staticWhite, fontSize: 17}}></MyAppIcon> : undefined
 
     return (<MyPressable style={{ flexDirection: 'row', minHeight: 50 }} onPress={() => props.onChangeValue(!isChecked)}>
         <View style={{ width: 25, height: 25, backgroundColor: innerColor, borderColor: outerColor, borderWidth: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
