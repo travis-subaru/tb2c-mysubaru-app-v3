@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { MyAlternateButton, MyPrimaryButton, MyLinkButton } from '../components/MyButton';
 import { MyCheckBox } from '../components/MyCheckbox';
-import { MyTextErrors, MyTextInput } from '../components/MyTextInput'
+import { MyPassword, MyTextErrors, MyTextInput } from '../components/MyTextInput'
 import { MyText } from '../components/MyText';
 import { requestLogin } from '../net/Login';
 import { useLanguage, Language } from '../model/Language';
@@ -79,7 +79,7 @@ const Login = () => {
             <MyLogo />
             <View style={{flex: 1, alignItems: 'center', justifyContent:'flex-start'}}>
                 <MyTextInput name="username" label={i18n.login.username} errors={formErrors} text={username} onChangeText={text => setUsername(text)} autoCapitalize='none' autoCorrect={false} style={MyStyleSheet.paddingTextInputBottom}></MyTextInput>
-                <MyTextInput name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)} secureTextEntry={true}></MyTextInput>
+                <MyPassword name="password" label={i18n.login.password} errors={formErrors} text={password} onChangeText={text => setPassword(text)}></MyPassword>
                 <MyCheckBox label={i18n.login.rememberUsernamePassword} checked={rememberMe} onChangeValue={(value) => setRememberMe(value)}></MyCheckBox>
                 <MyPrimaryButton onPress={onPressLogin} style={{width: 350}} title={i18n.login.logIn}></MyPrimaryButton>
                 <MyLinkButton onPress={onPressForgot} style={{width: 350}} title={i18n.login.forgotSomething}></MyLinkButton>

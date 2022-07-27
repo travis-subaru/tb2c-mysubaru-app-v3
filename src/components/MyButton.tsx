@@ -65,28 +65,6 @@ export const MyAlternateButton = (props: MyButtonProps) => {
     </MyPressable>);
 }
 
-/** Primary action button for dashboard
- *
- * Used for engine start / stop.
- */
- export const MyPrimaryDashboardButton = (props: MyButtonProps) => {
-    const C: Palette = useColors();
-    const [pressed, setPressed] = useState(false);
-    const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
-    const backgroundColor = pressed ? staticMidnight : C.buttonPrimary;
-    const borderColor = pressed ? C.buttonPrimary : staticWhite;
-    const textColor = staticWhite;
-    const lines = (props.title?.split('\\n') ?? []).map((line, i) => {
-        return <Text key={i} style={[MyStyleSheet.buttonText, { color: textColor }, props.textStyle]}>{line}</Text>
-    });
-    const size = 150;
-    const style = { backgroundColor: backgroundColor, borderColor: borderColor, borderRadius: size / 2, borderWidth: 10, minWidth: size, minHeight: size };
-    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[style, props.style]}>
-        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: staticWhite}}></MyAppIcon> : null}
-        {lines}
-    </MyPressable>);
-}
-
 /** Secondary action button for dashboard
  *
  * Used for various vehicle commands.
@@ -104,18 +82,3 @@ export const MySecondaryDashboardButton = (props: MyButtonProps) => {
     </MyPressable>);
 }
 
-/** Links for dashboard
- *
- * Designed to flank engine start.
- */
-export const MyDashboardLinkButton = (props: MyButtonProps) => {
-    const C: Palette = useColors();
-    const [pressed, setPressed] = useState(false);
-    const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
-    const color = pressed ? C.copyPrimary : C.buttonSecondary
-
-    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[props.style]}>
-        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: color }}></MyAppIcon> : null}
-        <MyText style={[MyStyleSheet.buttonText, { textAlign: 'center', color: color, }, props.textStyle]}>{props.title}</MyText>
-    </MyPressable>);
-}

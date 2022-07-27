@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput } from 'react-native';
+import { MyAppIcon, MyAppIconGlyph } from './MyAppIcon';
 import { useColors, Palette } from './MyColors';
+import { MyPressable } from './MyPressable';
 import { MyStyleSheet } from './MyStyles';
 
 // TODO: Disabled fields, Multiline, Character count
@@ -25,6 +27,8 @@ export interface MyTextInputProps {
     secureTextEntry?: boolean // Used by Password
     style?: any
     usePaddingBottom?: boolean
+    trailingAccessory?: MyAppIconGlyph
+    trailingAccessoryOnPress?: () => void
 }
 
 export const MyTextInput = (props: MyTextInputProps) => {
@@ -59,7 +63,15 @@ export const MyTextInput = (props: MyTextInputProps) => {
         <View style={[MyStyleSheet.roundedEdge, textViewStyle]}>
             {label}
             <TextInput onBlur={onBlur} onFocus={onFocus} placeholder={placeholder} placeholderTextColor={C.copySecondary} selectionColor={C.link} {...props} style={[MyStyleSheet.bodyText, textInputStyle]}>{text}</TextInput>
+            {props.trailingAccessory ? <MyPressable onPress={props.trailingAccessoryOnPress} style={{ position: 'absolute', top: 3, right: 3, width: 44, height: 44 }}>
+                <MyAppIcon glyph={props.trailingAccessory}></MyAppIcon>
+            </MyPressable> : null}
         </View>
         {errorControl}
     </View>);
+}
+
+export const MyPassword = (props: MyTextInputProps) => {
+    const [hide, setHide] = useState(true);
+    return <MyTextInput {...props} secureTextEntry={hide} trailingAccessory={hide ? "eyeBlocked" : "eye1"} trailingAccessoryOnPress={() => setHide(!hide)}></MyTextInput>;
 }

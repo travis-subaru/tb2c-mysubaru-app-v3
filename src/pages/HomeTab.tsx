@@ -1,15 +1,53 @@
 import React, { useState } from 'react';
-import { View, Dimensions } from 'react-native';
-import { MyPrimaryDashboardButton, MyDashboardLinkButton, MyButtonProps } from '../components/MyButton';
+import { View, Text, Dimensions } from 'react-native';
+import { MyButtonProps } from '../components/MyButton';
 import { MyText } from '../components/MyText';
 import { Session, useSession } from '../stores/Session';
 import { MyStyleSheet } from '../components/MyStyles';
-import { Palette, staticWhite, useColors } from '../components/MyColors';
+import { Palette, staticMidnight, staticWhite, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../model/Language';
 import { MyAppIcon } from '../components/MyAppIcon';
 import { executeRemoteLock, executeRemoteStart, executeRemoteStop, executeRemoteUnlock } from '../net/RemoteCommand';
 import { withPINCheck } from './PINCheck';
 import { MyPressable } from '../components/MyPressable';
+
+/** Primary action button for dashboard
+ *
+ * Used for engine start / stop.
+ */
+ export const MyPrimaryDashboardButton = (props: MyButtonProps) => {
+    const C: Palette = useColors();
+    const [pressed, setPressed] = useState(false);
+    const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
+    const backgroundColor = pressed ? staticMidnight : C.buttonPrimary;
+    const borderColor = pressed ? C.buttonPrimary : staticWhite;
+    const textColor = staticWhite;
+    const lines = (props.title?.split('\\n') ?? []).map((line, i) => {
+        return <Text key={i} style={[MyStyleSheet.buttonText, { color: textColor }, props.textStyle]}>{line}</Text>
+    });
+    const size = 150;
+    const style = { backgroundColor: backgroundColor, borderColor: borderColor, borderRadius: size / 2, borderWidth: 10, width: size, height: size };
+    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[style, props.style]}>
+        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: staticWhite}}></MyAppIcon> : null}
+        {lines}
+    </MyPressable>);
+}
+
+/** Links for dashboard
+ *
+ * Designed to flank engine start.
+ */
+ export const MyDashboardLinkButton = (props: MyButtonProps) => {
+    const C: Palette = useColors();
+    const [pressed, setPressed] = useState(false);
+    const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
+    const color = pressed ? C.copyPrimary : C.buttonSecondary
+
+    return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[props.style]}>
+        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: color }}></MyAppIcon> : null}
+        <MyText style={[MyStyleSheet.buttonText, { textAlign: 'center', color: color, }, props.textStyle]}>{props.title}</MyText>
+    </MyPressable>);
+}
 
 /** Home screen action button
  *
@@ -95,9 +133,9 @@ export const HomeTab = () => {
         </View>
         <View style={rowStyle}>
             <View style={[MyStyleSheet.roundedEdge, { backgroundColor: C.backgroundSecondary, flexDirection: 'row', flexWrap: 0, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'space-evenly', width: '100%' }]}>
-                <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="gear" title="View\nStart\nSettings"></MyDashboardLinkButton>
-                <MyPrimaryDashboardButton style={{ flexGrow: 1, marginVertical: 10 }} glyph={engineStatus ? 'powerOff' : 'powerOn'} onPress={engineStatus ? remoteStop : remoteStart} title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
-                <MyDashboardLinkButton style={{ flexBasis: 50, minWidth: 50, paddingHorizontal: 10 }} glyph="filters" title="Climate\nPresets"></MyDashboardLinkButton>
+                <MyDashboardLinkButton style={{ paddingHorizontal: 10 }} glyph="gear" title="View\nStart\nSettings"></MyDashboardLinkButton>
+                <MyPrimaryDashboardButton style={{ marginVertical: 10 }} glyph={engineStatus ? 'powerOff' : 'powerOn'} onPress={engineStatus ? remoteStop : remoteStart} title={engineStatus ? i18n.home.stopEngine : i18n.home.startEngine} />
+                <MyDashboardLinkButton style={{ paddingHorizontal: 10 }} glyph="filters" title="Climate\nPresets"></MyDashboardLinkButton>
             </View>
         </View>
         <View style={{flex: 1}}></View>

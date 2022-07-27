@@ -25,7 +25,7 @@ export interface DashboardTabBarButtonProps {
 const DashboardTabBarButton = (props: DashboardTabBarButtonProps) => {
     const C: Palette = useColors();
     const color = props.isActive ? C.buttonPrimary : C.copySecondary;
-    return <MyPressable style={{ minWidth: '100%', maxWidth: '20%', width: '100%', flexDirection: 'column' }} {...props}>
+    return <MyPressable style={{ width: '20%', flexDirection: 'column' }} {...props}>
         {props.glyph ? <MyAppIcon glyph={props.glyph} style={{ color: color }}></MyAppIcon> : null}
         <MyText style={{ color: color, fontFamily: 'Helvetica Neue', fontSize: 10 }}>{props.title}</MyText>
     </MyPressable>;
