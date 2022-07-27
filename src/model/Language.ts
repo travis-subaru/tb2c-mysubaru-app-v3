@@ -27,8 +27,16 @@ let langaugeCache = {}
 export const getLanguageData = (lang: LanguageID): Language => {
     if (!langaugeCache[lang]) {
         let data = getLanguageDataNoCache(lang);
+        // If needed, pull data from inherited language file.
         if (data.__inherit) {
-            data = Object.assign(data, getLanguageData(data.__inherit));
+            const inherit = getLanguageData(data.__inherit);
+            for (let key of Object.keys(inherit)) {
+                if (data[key]) {
+                    data[key] = Object.assign({}, inherit[key], data[key]);
+                } else {
+                    data[key] = inherit[key];
+                }
+            }
         }
         langaugeCache[lang] = data;
     }
