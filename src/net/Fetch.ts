@@ -1,7 +1,8 @@
-import { NetworkResponse, postNetworkRequest, postNetworkResponse } from "../stores/Response";
+import { NetworkResponse, normalizeEndpoint, postNetworkRequest, postNetworkResponse } from "../stores/Response";
 import { logout } from "../stores/Session";
 import { mockResponseForEndpoint } from "./Demo";
 import { getEnviroment } from "./Environment";
+import { RemoteServiceType } from "./RemoteCommand";
 
 export function parseResponse(json: any, endpoint: string): Promise<NetworkResponse> {
     return new Promise<NetworkResponse>((resolve, reject) => {
@@ -21,6 +22,8 @@ export const GETJSONRequest: RequestInit = { headers: JSONHeaders, body: null, m
 
 export interface HTTPStatusErrorResponse { success: false, errorCode: "statusError", dataName: "error", data: { status: number }, endpoint: string }
 
+let _demoRemoteServiceType: RemoteServiceType | undefined;
+
 /** Call endpoint with payload.
  * @return Standard response body
  */
@@ -30,14 +33,18 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
         postNetworkRequest(endpoint, init);
         if (e.env == "demo") {
             /** TODO: Get mocks for
-             * Engine Start
-             * Engine Stop
-             * Lock
-             * Unlock
              * Condition
-             * Status
             */
-            const responseObject = mockResponseForEndpoint(endpoint);
+            const responseObject = Object.assign({}, mockResponseForEndpoint(endpoint), {endpoint: normalizeEndpoint(endpoint)});
+            if (responseObject.dataName === "remoteServiceStatus") {
+                if (responseObject.data.remoteServiceState === "started") {
+                    _demoRemoteServiceType = responseObject.data.remoteServiceType;
+                }
+                if (responseObject.data.remoteServiceState === "finished" && _demoRemoteServiceType) {
+                    responseObject.data.remoteServiceType = _demoRemoteServiceType;
+                    _demoRemoteServiceType = undefined;
+                }
+            }
             postNetworkResponse(responseObject);
             resolve(responseObject);
             return;

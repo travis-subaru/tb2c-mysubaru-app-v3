@@ -43,7 +43,6 @@ export const Dashboard = () => {
         } else {
             const show: string[] = ["service/g2/remoteService/status.json"];
             const endpoint = normalizeEndpoint(activity.response.endpoint);
-            console.log(endpoint);
             return show.includes(endpoint);
         }
     };
