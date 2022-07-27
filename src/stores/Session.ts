@@ -96,9 +96,11 @@ export const useSession = (): Session => {
 // TODO: Cancel all commands on logout
 
 /** End session and go back to login screen. */
-export const logout = () => {
+export const logout = (sessionTimeout: boolean = false) => {
     setItem("appState", "login");
-    setItem("environment", "cloudqa")
+    setItem("contactInfo", undefined);
+    setItem("environment", "cloudqa");
+    setItem("sessionTimeout", sessionTimeout);
     setSession(undefined);
 }
 

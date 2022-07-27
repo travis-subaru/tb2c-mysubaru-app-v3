@@ -9,7 +9,7 @@ import { NETEnvironmentID } from '../net/Environment';
 import { TwoStepContactInfo } from '../net/TwoStepAuth';
 import { LanguageID } from '../model/Language';
 
-export type AppState = 'login' | 'forgot' ;
+export type AppState = 'login' | 'forgot';
 
 export interface LocalData {
     appState: AppState
@@ -17,6 +17,7 @@ export interface LocalData {
     language: LanguageID
     contactInfo?: TwoStepContactInfo
     pinRequested: boolean
+    sessionTimeout: boolean
 }
 
 export type LocalDataKey = keyof LocalData;

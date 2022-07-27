@@ -7,14 +7,14 @@ import { MyTextErrors, MyTextInput } from '../components/MyTextInput'
 import { MyText } from '../components/MyText';
 import { requestLogin } from '../net/Login';
 import { useLanguage, Language } from '../model/Language';
-import { setItem } from '../stores/Local';
+import { setItem, useItem } from '../stores/Local';
 import { MyStyleSheet } from '../components/MyStyles';
 import { SessionData } from '../stores/Session';
 import { requestSelectVehicle } from '../net/SelectVehicle';
 import { requestMySAlerts } from '../net/MySAlerts';
 import { requestRefreshVehicles } from '../net/RefreshVehicles';
 import { requestTwoStepAuthContact } from '../net/TwoStepAuth';
-import { MyNetworkSnackBar } from '../components/MySnackBar';
+import { MyNetworkSnackBar, MySnackBar } from '../components/MySnackBar';
 import { setEnvironment } from '../net/Environment';
 import { MyLogo } from '../components/MyLogo';
 
@@ -29,6 +29,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const [formErrors, setFormErrors] = useState<MyTextErrors[]>([]);
+    const [sessionTimeout, clearSessionTimeout] = [useItem("sessionTimeout"), () => { setItem("sessionTimeout", false)}];
     const otherErrors = (() => {
         const otherErrors = formErrors.filter(e => e.name != "username" && e.name != "password");
         if (otherErrors.length == 0) { return; }
@@ -94,7 +95,11 @@ const Login = () => {
                     </View>
                 </View>
             </View>
-            <MyNetworkSnackBar></MyNetworkSnackBar>
+            {
+                sessionTimeout
+                ? <MySnackBar onClose={() => clearSessionTimeout()} title={i18n.message.sessionExpiredTitle + "\n" + i18n.message.sessionExpiredMessage}></MySnackBar>
+                : <MyNetworkSnackBar></MyNetworkSnackBar>
+            }
         </View>
     );
 };

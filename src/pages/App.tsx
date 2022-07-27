@@ -20,18 +20,14 @@ const App = () => {
     const pinRequested: boolean = useItem('pinRequested');
     const session: Session = useSession();
     const content = (() => {
-        debugger;
-        if (session === undefined) {
+        if (session?.deviceRegistered) {
+            return <Dashboard />;
+        } else if (session?.deviceRegistered == false && contactInfo) {
+            return <TwoStepVerify contact={contactInfo} />;
+        } else {
             switch (appState) {
                 case "login": return <Login />;
                 case "forgot": return <ForgotInfo />;
-            }
-        } else {
-            if (session.deviceRegistered) {
-                return <Dashboard />;
-            }
-            if (contactInfo) {
-                return <TwoStepVerify contact={contactInfo} />;
             }
         }
     })();
