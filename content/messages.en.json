@@ -1,4 +1,7 @@
 {
+    "config": {
+        "languageCode": "EN",
+    },
     "common": {
         "notification": "Notification",
         "next": "Next",

@@ -1,7 +1,5 @@
 import { getSessionID } from "../stores/Session";
 import { myCheck, myFetch } from "./Fetch";
-import { LanguageID } from "../model/Language";
-
 
 export interface TwoStepContactInfo {
     phone?: string
@@ -13,7 +11,7 @@ export type ContactMethodType = "text" | "email";
 export interface TwoStepAuthSendVerifyParameters {
     contactMethod: ContactMethodType
     verificationCode?: string
-    languageCode: LanguageID
+    languageCode: string
     deviceName: "DEVICENAME" // TODO
 }
 

@@ -44,7 +44,6 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
         }
         // Using .then().catch() pyramids to roll in errors
         fetch(`https://${e.domain}/g2v23/${endpoint}`, init).then((response) => {
-            if (response.status >= 200 && response.status <= 299) {
                 response.json().then((json) => {
                     parseResponse(json, endpoint).then((responseObject) => {
                         postNetworkResponse(responseObject);
@@ -55,21 +54,22 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
                         resolve(error);
                     });
                 }).catch((reason) => {
-                    const error: NetworkResponse = {success: false, errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint};
-                    postNetworkResponse(error);
-                    resolve(error);
+                    if (response.status >= 200 && response.status <= 299) {
+                        const error: NetworkResponse = {success: false, errorCode: "jsonError", dataName: "error", data: reason, endpoint: endpoint};
+                        postNetworkResponse(error);
+                        resolve(error);
+                    } else {
+                        // Construct a valid payload with response code (ex: clouddr is currently 501) and return
+                        const error: HTTPStatusErrorResponse = {success: false, errorCode: "statusError", dataName: "error", data: {status: response.status}, endpoint: endpoint};
+                        postNetworkResponse(error);
+                        resolve(error);
+                        // On 401, also send user back to login
+                        // TODO: After keychain is implementated, refresh session and retry request
+                        if (error.data.status == 401) {
+                            logout(true);
+                        }
+                    }
                 });
-            } else {
-                // Construct a valid payload with response code (ex: clouddr is currently 501) and return
-                const error: HTTPStatusErrorResponse = {success: false, errorCode: "statusError", dataName: "error", data: {status: response.status}, endpoint: endpoint};
-                postNetworkResponse(error);
-                resolve(error);
-                // On 401, also send user back to login
-                // TODO: After keychain is implementated, refresh session and retry request
-                if (error.data.status == 401) {
-                    logout(true);
-                }
-            }
         }).catch((reason) => {
             const error: NetworkResponse = {success: false, errorCode: "networkError", dataName: "error", data: reason, endpoint: endpoint};
             postNetworkResponse(error);

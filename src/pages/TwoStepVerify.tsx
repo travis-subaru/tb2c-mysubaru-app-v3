@@ -25,7 +25,7 @@ export const TwoStepVerify = (props: TwoStepsVerifyProps) => {
     const [showCodeEntry, setShowCodeEntry] = useState(false);
     const [rememberDevice, setRememberDevice] = useState(false);
     const [showTerms, setShowTerms] = useState(false);
-    const languageCode = useItem("language"); // TODO: remove useItem call
+    const languageCode = i18n.config.languageCode;
 
     const sendCodeRequest = async () => {
         if (!contactMethod) { return }

@@ -55,7 +55,10 @@ export const useLanguage = () => {
 }
 
 export interface Language {
-    __inherit?: LanguageID
+    __inherit?: LanguageID // NEW
+    config: { // NEW
+        languageCode: string // NEW
+    }
     common: {
         next: string
         submit: string
