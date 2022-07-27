@@ -1,41 +1,14 @@
 {
+    "__inherit": "en",
     "common": {
-        "next": "Next",
-        "submit": "Submit",
-        "continue": "Continue",
-        "cancel": "Cancel",
-        "close": "Close",
-        "update": "Update",
-        "back": "Back",
         "skip": "Skip",
         "stop": "Stop",
         "retry": "Retry",
-        "save": "Save",
-        "edit": "Edit",
-        "saveSend": "Save &amp; Send",
-        "delete": "Delete",
         "deleteAll": "Delete All",
-        "yes": "Yes",
-        "no": "No",
-        "vin": "VIN",
-        "notification": "Notification",
-        "password": "Password",
-        "confirmPassword": "Confirm Password",
-        "currentPassword": "Current Password",
-        "contactInformation": "Contact Information",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "Email",
         "push": "Push",
-        "emailAddress": "Email Address",
-        "confirmEmailAddress": "Confirm Email Address",
-        "confirmEmail": "Confirm Email",
-        "streetAddress": "Street Address",
-        "streetAddress2": "Street Address 2",
-        "city": "City",
+
         "state": "State",
         "zip": "ZIP",
-        "username": "Username",
         "subaruStarlinkRemoteServices": "SUBARU STARLINK<sup>\u00AE</sup> Remote Services",
         "starlinkRemoteServices": "STARLINK<sup>\u00AE</sup> Remote Services",
         "scheduleService": "Schedule Service",
@@ -373,7 +346,7 @@
         "edit": "Edit",
         "billingNotification":"Billing Notifications",
         "billingNotificationText": "Billing notifications will always be sent via email, regardless of other methods chosen."
-        
+
     },
     "bluetoothCompatibility": {
         "notAvailableForThisModel": "Bluetooth is not available for this Subaru model! ",
@@ -426,7 +399,7 @@
         "passwordChanged": "Your password has been changed.",
         "incorrectOldPassword": "Incorrect old password.",
         "unableUpdate": "Unable to update password."
-    },   
+    },
     "changePin": {
         "title": "Change PIN",
         "currentPin": "Current PIN",
@@ -1863,13 +1836,13 @@
         "toEditRetailerMessage": "To edit go to My Profile > My Retailer",
         "toEditHomeMessage": "To edit go to My Profile > Contact Information",
         "favDestinationValidateMessages":{
-            "favDestinationName": { 
+            "favDestinationName": {
             "required": "Please enter a valid name",
             "maxlength": "Please enter no more than 50 characters.",
             "alphanumericSpaceWithQuotesAmp": "Trip name must start and end with alphanumeric characters and can contain spaces and symbols like .@_-&'\"."
             }
         },
-        
+
         "tripNameValidateMessages": {
             "TripName": {
                 "required": "Please enter a valid name",
@@ -2744,7 +2717,7 @@
         "biometricsSetupFailed1": "Your ",
         "biometricsSetupFailed2": " setup has failed. Please make sure ",
         "biometricsSetupFailed3": " has been correctly set up in your device settings and try again.",
-        "biometricsRetrievePinFailed": "Please enter your STARLINK PIN."   
+        "biometricsRetrievePinFailed": "Please enter your STARLINK PIN."
     },
     "remoteServiceGen2": {
         "starlinkRemoteServices": "STARLINK<sup>\u00AE</sup></br> Remote Commands",
@@ -2879,7 +2852,7 @@
       "remoteTailgateAccessoryModeError": "Remote Tailgate Unlock is unavailable because your ${1} is currently in Accessory Mode. Please turn off your ${2} and try again.",
       "remoteTailgateIgnitionModeError": "Remote Tailgate Unlock is unavailable because your ${1} is currently in Ignition On Mode. Please turn off your ${2} and try again.",
       "remoteTailgateUnlockError": "We are having trouble unlocking your tailgate. Please make sure your ${1} is not running and try again."
-     
+
     },
     "remoteEngineStart": {
         "createSettings": "Create settings so your vehicle will be comfortable when you are ready to go. Set the temperature, warm the seats, and turn on the front &amp; rear defrost easily with your app.",
@@ -3386,7 +3359,7 @@
         "remoteServiceCommands" : "Remote Service Commands",
         "remoteVehicleAlerts": "Remote Vehicle Alerts",
         "vehicleDiagnosticAlerts": "Vehicle Diagnostic Alerts",
-        "sendVehicleLocation":"Send Vehicle Location at Ignition-Off <button style=\"margin-top:-5px\" class=\"btn btn--link btn--auto p-0 openModalDynamic\" data-modal-type=\"textModal\" data-modal-header=\"Vehicle Location\" data-modal-title=\"\" data-modal-content=\"<p>If you choose to opt out of this service, MySubaru will not collect your vehicle location when you turn your ignition off. You will still be able to locate your vehicle by sending a remote command through the MySubaru app.</p>\" data-modal-button=\"OK\"><i class=\"font-size-xl icon icon-info-circle\"></i></button>"  
+        "sendVehicleLocation":"Send Vehicle Location at Ignition-Off <button style=\"margin-top:-5px\" class=\"btn btn--link btn--auto p-0 openModalDynamic\" data-modal-type=\"textModal\" data-modal-header=\"Vehicle Location\" data-modal-title=\"\" data-modal-content=\"<p>If you choose to opt out of this service, MySubaru will not collect your vehicle location when you turn your ignition off. You will still be able to locate your vehicle by sending a remote command through the MySubaru app.</p>\" data-modal-button=\"OK\"><i class=\"font-size-xl icon icon-info-circle\"></i></button>"
     },
     "driverProfileLanding": {
         "welcomeToDriverProfile": "Welcome to Driver&nbsp;Profile Settings",
@@ -3438,7 +3411,7 @@
        "deleteConfirm1" : "Are you sure you want to delete the ",
        "deleteConfirm2" : "<br> This action cannot be undone.",
        "disclaimerShowText" : "After sending a profile to the vehicle, you will need to accept that profile within the vehicle's display screen for the profile to take effect.",
-       "disclaimerShowCheckbox" : "Don't show this message again" 
+       "disclaimerShowCheckbox" : "Don't show this message again"
 	},
 	"resPresets": {
         "resPresets": "Climate Control Presets",
@@ -3551,11 +3524,11 @@
         "vehicleTurnedOn":"Next: Vehicle Turned On",
         "saveAndSendSettings":"Save &amp; Send Settings",
         "updateNotificationOptions":"In order to update these notification options, Valet Mode must first be deactivated.",
-        "configurationInfo":"While Valet Mode is active all other driver alerts will be temporarily suspended. This includes Curfew, Speed and Boundary Alerts as well as any active trip tracking. Once Valet Mode is turned off, your alerts will resume.", 
+        "configurationInfo":"While Valet Mode is active all other driver alerts will be temporarily suspended. This includes Curfew, Speed and Boundary Alerts as well as any active trip tracking. Once Valet Mode is turned off, your alerts will resume.",
         "configurationInfo2":"Other features such as resetting your Valet Mode Passcode, updating your Valet Mode settings, accessing Enhanced Roadside Assistance, and all Concierge services will be restricted.",
         "deactivate":"Deactivate",
         "locateDetails":"Locate Vehicle",
-        "notificationOptions":"Notification Options",  
+        "notificationOptions":"Notification Options",
         "on" :"On",
         "off":"Off",
         "receiveNotification":"You will receive a notification when the vehicle exceeds",
@@ -3568,7 +3541,7 @@
         "deactivateValetMode": "Deactivate Valet Mode",
         "notificationPreferences": "Notification Preferences",
         "changingTheseNotificationPreferences": "Changing these notification preferences will update your STARLINK<sup>&reg;</sup> communication preferences.",
-        "mailAlert": "Email",   
+        "mailAlert": "Email",
         "saveNotificationPreferences": "Save Notification Preferences",
         "viewLocationDetails": "View Location Details",
         "valetRefresh": "Refresh",
@@ -3600,7 +3573,7 @@
         "deleteAllDrivingJournal":"Delete All Driving Journals",
         "confirmDelete": "Are you sure you want to delete ",
         "confirmJournalEntryDelete": "Are you sure you want to remove this trip log from the ",
-        "confirmLastJournalEntryDelete1" : "Are you sure? <br> By removing the last Trip Log from ", 
+        "confirmLastJournalEntryDelete1" : "Are you sure? <br> By removing the last Trip Log from ",
         "confirmLastJournalEntryDelete2" : " you will delete this driving journal.",
         "confirmDeleteAllJournal": "Are you sure you want to delete all Driving Journals?",
         "deleteJournalTitle": "Delete Driving Journal",
@@ -3624,8 +3597,8 @@
         "view": "View",
         "successfulTripUpdate": "Your Trip dates have been Successfully updated to ",
         "tripDuration": "Trip Duration",
-        "noTripLogs":"You currently do not have any trip logs.",  
-        "tripLogs1": "Trip Logs:",      
+        "noTripLogs":"You currently do not have any trip logs.",
+        "tripLogs1": "Trip Logs:",
         "mileage":"Mileage:",
         "drivetime":"Drive time:",
         "addtriplogs":"Add Trip Logs",
@@ -3810,7 +3783,7 @@
         "tirePressureInfo3":"and may not reflect the tire pressure when the tires were cold. Always use a tire pressure gauge to ensure an accurate reading. </p><p> For more information, the tire placard is located on the door pillar on the driver's side. Use a pressure gauge to adjust the tire's pressure to the values shown on the door. Check the tire pressure when the tires are cold. ",
         "VehicleInfoMessage": "For the most accurate information, please refer to your vehicle.",
         "referVehicleMessage":"Always refer to your vehicle for the most up-to-date information."
-        
+
     },
     "collisionCenter" : {
         "banner": {
@@ -3835,9 +3808,9 @@
             },
             "quality": {
                 "title":"Built to Last",
-                "description":"The durability of Genuine Subaru Collision Parts is a result of the materials used to manufacture them. Engineers have tested Genuine Subaru Body Panels against aftermarket versions in simulated, real-world and rust-causing conditions to demonstrate the differences in the types of protective layers that help prevent corrosion to sheet metal. Other tests have shown that Genuine Subaru Replacement Bumpers have better low-speed impact and concentrated-impact resistance than aftermarket replacement bumpers."               
+                "description":"The durability of Genuine Subaru Collision Parts is a result of the materials used to manufacture them. Engineers have tested Genuine Subaru Body Panels against aftermarket versions in simulated, real-world and rust-causing conditions to demonstrate the differences in the types of protective layers that help prevent corrosion to sheet metal. Other tests have shown that Genuine Subaru Replacement Bumpers have better low-speed impact and concentrated-impact resistance than aftermarket replacement bumpers."
             }
         }
     }
-    
+
 }

@@ -1,38 +1,11 @@
 {
+    "__inherit": "en",
     "common": {
-        "next": "Next",
-        "submit": "Submit",
-        "continue": "Continue",
-        "cancel": "Cancel",
-        "close": "Close",
         "dismiss": "Dismiss",
-        "update": "Update",
-        "back": "Back",
         "start": "Start",
-        "stop": "Stop",
-        "save": "Save",
-        "edit": "Edit",
-        "saveSend": "Save &amp; Send",
-        "delete": "Delete",
-        "yes": "Yes",
-        "no": "No",
-        "vin": "VIN",
-        "password": "Password",
-        "confirmPassword": "Confirm Password",
-        "currentPassword": "Current Password",
-        "contactInformation": "Contact Information",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "Email",
-        "emailAddress": "Email Address",
-        "confirmEmailAddress": "Confirm Email Address",
-        "confirmEmail": "Confirm Email",
-        "streetAddress": "Street Address",
-        "streetAddress2": "Street Address 2",
-        "city": "City",
+
         "state": "Province",
         "zip": "Postal Code",
-        "username": "Username",
         "subaruStarlinkRemoteServices": "SUBARU STARLINK<sup>&reg;</sup> Connected Services",
         "starlinkPluginPlus": "SUBARU Starlink<sup>&reg;</sup> Connected Services Plug-In",
         "scheduleService": "Schedule Service",
@@ -40,7 +13,6 @@
         "curfewAlerts": "Curfew Alerts",
         "speedAlerts": "Speed Alerts",
         "maintenanceSchedule": "Maintenance Schedule",
-        "notification": "Notification",
         "success": "Success",
         "failure": "Failure",
         "error": "Error",
@@ -258,7 +230,7 @@
         "securityQuestion": "Security Question",
         "securityQuestionHere": "(security question here)",
         "tryDifferentQuestion": "Try a different question",
-        "noSecurityQuestions": "No Security Questions"        
+        "noSecurityQuestions": "No Security Questions"
     },
     "authorizedUserEdit" : {
         "invalidMarket": "This user could not be added because this email address was already authorized to an account in a different country.",
@@ -313,7 +285,7 @@
         "userError": "Authorized User Error",
         "incorrectPassword": "Incorrect password",
         "authorizedUserFormValidateMessages": {
-            "firstName":  { 
+            "firstName":  {
                 "required": "This field is required.",
                 "maxlength": "Please enter no more than 20 characters.",
                 "minlength": "Please enter at least 2 characters",
@@ -321,7 +293,7 @@
                 "alphanumericSpaceNoSpaceStart": "Cannot start with a space",
                 "alphanumericSpaceNoSpaceEnd": "Cannot end with a space"
             },
-            "lastName":  { 
+            "lastName":  {
                 "required": "This field is required.",
                 "maxlength": "Please enter no more than 20 characters.",
                 "minlength": "Please enter at least 2 characters",
@@ -329,8 +301,8 @@
                 "alphanumericSpaceNoSpaceStart": "Cannot start with a space",
                 "alphanumericSpaceNoSpaceEnd": "Cannot end with a space"
             },
-            "gender":  { 
-                "required": "This field is required." 
+            "gender":  {
+                "required": "This field is required."
             },
             "email": {
                 "email": "Please enter valid email.",
@@ -344,21 +316,21 @@
             "phone": {
                 "required": "This field is required.",
                 "minlength" : "Please enter valid phone number.",
-                "phoneValidation" : "Please enter valid phone number."                
+                "phoneValidation" : "Please enter valid phone number."
             },
-            "city":  { 
-                "required": "Please enter city." 
+            "city":  {
+                "required": "Please enter city."
             },
-            "postalCode":  { 
+            "postalCode":  {
                 "required": "Please enter postal code",
                 "postalCodeCA": "Please specify a valid postal code.",
                 "minlength": "Please enter a valid Postal Code.",
-                "maxlength": "Please enter a valid Postal Code." 
+                "maxlength": "Please enter a valid Postal Code."
             },
-            "state" : { 
-                "required" : "Please select province." 
+            "state" : {
+                "required" : "Please select province."
             },
-            "streetAddress1" : { 
+            "streetAddress1" : {
                 "required": "Please enter address",
                 "maxlength": "Please enter no more than 50 characters.",
                 "alphanumericSpaceAddress" : "Special characters (@ _ - . : ) are allowed.",
@@ -366,11 +338,11 @@
                 "alphanumericSpaceNoSpaceEnd": "Cannot end with a space",
                 "alphanumericApostropheSpaceAddress" : "Special characters (@ _ - .': ) are allowed"
             },
-            "streetAddress2" : { 
+            "streetAddress2" : {
                 "alphanumericSpaceAddress" : "Special characters (@ _ - . : ) are allowed.",
                 "alphanumericApostropheSpaceAddress" : "Special characters (@ _ - .': ) are allowed"
             },
-            "emergencyContactRelationShip" : { 
+            "emergencyContactRelationShip" : {
                 "required" : "Please select a relationship"
             }
         },
@@ -439,7 +411,7 @@
             },
             "pin": {
                 "required" : "Please enter your new PIN",
-                "minlength" : "Your new PIN must have at least 4 digits",                
+                "minlength" : "Your new PIN must have at least 4 digits",
                 "maxlength" : "PIN must be 4 digits",
                 "digits" : "PIN must be 4 digits",
                 "notEqualTo" : "Your new PIN may not match your old PIN"
@@ -836,13 +808,13 @@
                 "maxlength": "VIN must be 17 characters."
             }
         }
-    }, 
+    },
     "forgotUsernamePanel" : {
         "forgotUsername": "Forgot Username/I'm not sure if I have an account",
         "enterYourVin": "Enter your VIN",
         "enterVinDescription": "(Hint: Your username is the primary email address on your account.) Please enter your vehicle's VIN so we can find your account.",
         "vinDescription": "Your VIN is the 17-character vehicle identification number that can be found on your vehicle registration, insurance card, or by looking through the windshield on the driver's side of the dashboard, or on a plate inside the driver's doorjamb."
-    }, 
+    },
     "forgotUsernameSuccessPanel" : {
         "pageDescription": "Possible matching accounts for your vehicle:",
         "pageDescription2": "If you are still unable to access your account, call SUBARU STARLINK<sup>&reg;</sup> Connected Services Representative."
@@ -926,7 +898,7 @@
         "subaruStarlink": "SUBARU STARLINK<sup>&reg;</sup>",
         "remoteServices": "Remote Commands",
         "controlVehicle": "Control your vehicle from anywhere.",
-        "servicesNotFunction": "There is a problem with STARLINK<sup>&reg;</sup> Connected Services in your ", 
+        "servicesNotFunction": "There is a problem with STARLINK<sup>&reg;</sup> Connected Services in your ",
         "servicesNotFunction1": ". Please contact STARLINK Customer Care at <nobr><a href=\"tel://18002638802\" class=\"text-link\">1 (800) 263-8802</a></nobr> and reference error code PROV-A.",
         "vehicleReportedStolen": "Your vehicle has been reported as stolen. Your connected services have been disabled for your safety. To re-enable connected services please contact SUBARU STARLINK® Connected Services Representative at 1 (800) 263-8802.",
         "locateVehicle": "Locate Vehicle",
@@ -1296,9 +1268,9 @@
             "address": { "required": "Please enter address",
             "alphanumericSpaceAddress" : "Special characters (@ _ - . : ) are allowed" ,
             "alphanumericApostropheSpaceAddress" : "Special characters (@ _ - .': ) are allowed" },
-            "address2": { 
+            "address2": {
             "alphanumericSpaceAddress" : "Special characters (@ _ - . : ) are allowed",
-              "alphanumericApostropheSpaceAddress" : "Special characters (@ _ - .': ) are allowed" 
+              "alphanumericApostropheSpaceAddress" : "Special characters (@ _ - .': ) are allowed"
              }
         },
         "customerInfoError": "Error fetching customer information.",
@@ -1322,7 +1294,7 @@
         "editEmailInfoMessage1": "Changing your email address will also change your MySubaru login Username as well as the email address we use for the personal, business or *fleet account with Subaru Canada, Inc.",
         "editEmailInfoMessage2": "*Fleet Accounts: Please contact Subaru Canada's Fleet department to make any changes to your master account.",
         "editPhoneInfoMessage1": "Changing your phone number will also change the phone number details we use for the personal, business or *fleet account within Subaru Canada, Inc.",
-        "editPhoneInfoMessage2": "*Fleet Accounts: Please contact Subaru Canada's Fleet department to make any changes to your master account.",        
+        "editPhoneInfoMessage2": "*Fleet Accounts: Please contact Subaru Canada's Fleet department to make any changes to your master account.",
         "editMailaddressInfoMessage1": "Changing your street address will also change the address details we use for the personal, business or *fleet account within Subaru Canada, Inc.",
         "editMailaddressInfoMessage2": "*Fleet Accounts: Please contact Subaru Canada's Fleet department to make any changes to your master account.",
         "contactInfoDescription": "Title, First and Last name cannot be altered for security reasons. To change this information please contact Subaru Customer Care (1 (800) 894-4212).",
@@ -1569,17 +1541,17 @@
         "autoRenews": "Auto-Renews: ",
         "exp": "Exp: ",
         "vehicleInfoValidateMessages": {
-            "vin": { 
+            "vin": {
                 "inputText": "Please enter vin"
             },
             "nickname":  {
                 "required": "Please enter vehicle's nickname."
             },
             "licensePlate": {
-                "required" : "License Plate is required if License Plate Province is provided" 
+                "required" : "License Plate is required if License Plate Province is provided"
             },
             "licensePlateState": {
-                "required" : "Province is required" 
+                "required" : "Province is required"
             },
             "timeZone" : {
                 "required" : "Timezone is required"
@@ -1894,7 +1866,7 @@
         "toEditRetailerMessage": "To edit go to My Profile > My Dealer",
         "toEditHomeMessage": "To edit go to My Profile > Contact Information",
         "favDestinationValidateMessages":{
-            "favDestinationName": { 
+            "favDestinationName": {
             "required": "Please enter a valid name",
             "maxlength": "Please enter no more than 50 characters.",
             "alphanumericSpace": "Trip name must start and end with alphanumeric characters and can contain spaces and symbols like .@_-."
@@ -1916,7 +1888,7 @@
         "deleteTripConfirm1": "Are you sure you want to delete the ",
         "deleteTripConfirm2": " trip?",
         "setWorkMessage": "Please use the search field above to select your work address.",
-        "restaurants" : "Restaurants", 
+        "restaurants" : "Restaurants",
         "coffee" : "Coffee",
         "bars" : "Bars",
         "gasStations" : "Gas Stations",
@@ -2096,13 +2068,13 @@
         "howDoIEnableFaceID": "How do I enable Face ID?",
         "howDoIEnableFingerprint": "How do I enable Face/Fingerprint Unlock?",
         "howDoIEnableFaceIDAnswer": "To enable Face ID you can go to the settings page in the menu and turn Face ID on by tapping the toggle and entering your current PIN. You can also enable on the PIN panel of any remote function, by selecting \"setup Face ID\" and entering your current PIN.",
-        "howDoIEnablTouchIDAnswer":"To enable Touch ID you can go to the settings page in the menu and turn Touch ID on by tapping the toggle and entering your current PIN. You can also enable on the PIN panel of any remote function, by selecting \"setup Touch ID\" and entering your current PIN.", 
+        "howDoIEnablTouchIDAnswer":"To enable Touch ID you can go to the settings page in the menu and turn Touch ID on by tapping the toggle and entering your current PIN. You can also enable on the PIN panel of any remote function, by selecting \"setup Touch ID\" and entering your current PIN.",
         "howDoIEnableFingerprintAnswer": "To enable Face/Fingerprint Unlock you can go to the settings page in the menu and turn Face/Fingerprint Unlock on by tapping the toggle and entering your current PIN. You can also enable on the PIN panel of any remote function, by selecting \"setup Face/Fingerprint Unlock \" and entering your current PIN.",
         "howDoIDisableTouchID": "How do I disable Touch ID?",
         "howDoIDisableFaceID": "How do I disable Face ID?",
         "howDoIDisableFingerprint": "How do I disable Face/Fingerprint Unlock?",
         "howDoIDisableFaceIDAnswer": "To disable Face ID you can go to the settings page in the menu and turn Face ID off by tapping the toggle and confirming you would like to disable.",
-        "howDoIDisableTouchIDAnswer":"To disable Touch ID you can go to the settings page in the menu and turn Touch ID off by tapping the toggle and confirming you would like to disable.", 
+        "howDoIDisableTouchIDAnswer":"To disable Touch ID you can go to the settings page in the menu and turn Touch ID off by tapping the toggle and confirming you would like to disable.",
         "howDoIDisableFingerprintAnswer": "To disable Face/Fingerprint Unlock you can go to the settings page in the menu and turn Face/Fingerprint Unlock off by tapping the toggle and confirming you would like to disable.",
         "howDoIEnableBiometrics": "How do I enable ",
         "howDoIEnableBiometricsAnswer1": "To enable",
@@ -2369,7 +2341,7 @@
         "starlinkSubscription": "STARLINK<sup>&reg;</sup> Subscription",
         "safetyComesFirst": "Safety Comes First",
         "safetyPlusDescription": "STARLINK<sup>&reg;</sup> Safety Plus is there to help alert you to the heath of your vehicle and assist you in case of emergencies.",
-        "chooseTheLengthOfYourPlan": "Choose the Length of Your Plan:", 
+        "chooseTheLengthOfYourPlan": "Choose the Length of Your Plan:",
         "includesFree3YearTrial": "*Includes <strong>Free</strong> 3 Year Trial",
         "sosEmergencyAssistance": "SOS Emergency Assistance",
         "enhancedRoadsideAssistance": "Enhanced Roadside Assistance",
@@ -2379,14 +2351,14 @@
         "vehicleConditionCheck": "Vehicle Condition Check",
         "diagnosticAlerts": "Diagnostic Alerts",
         "serviceAppointmentScheduler": "Service Appointment Scheduler",
-        "securityPlus": "Security Plus", 
+        "securityPlus": "Security Plus",
         "enhanceYourRemoteServices": "Enhance Your Connected Services",
         "conciergeService": "Concierge Service",
-        "currentPlan": "Current Plan", 
+        "currentPlan": "Current Plan",
         "planWillBeCancelled": "This plan will be cancelled and a refund will be issued.",
-        "newPlan": "New Plan", 
+        "newPlan": "New Plan",
         "newPlanWillBeginLater": "This new plan will begin after your order has been submitted.",
-        "promoCode": "Promo Code", 
+        "promoCode": "Promo Code",
         "code": "Code",
         "yourSubTotal": "Your Subtotal",
         "tax": "Tax",
@@ -2691,7 +2663,7 @@
         "maintenanceScheduleError": "Error fetching maintenance schedules.",
         "mileageDescription2":"If you have an active SUBARU STARLINK<sup>&reg;</sup> subscription, your mileage will be updated automatically every ignition off. Time for the maintenance schedule is calculated from the original sale date of the vehicle, or if not on file with your preferred dealer, from January of the model year of the vehicle. You may still be notified about upcoming maintenance for your vehicle, even if you've had it serviced elsewhere.",
         "mileageDescription3":"MySubaru provides an estimated mileage in an effort to give timely maintenance notifications. If you have your vehicle serviced at an authorized Subaru dealer, your mileage will be updated automatically afterwards. Time for the maintenance schedule is calculated from the original sale date of the vehicle, or if not on file with your preferred dealer, from January of the model year of the vehicle. You may still be notified about upcoming maintenance for your vehicle, even if you've had it serviced elsewhere."
-        
+
     },
     "serviceLanding": {
         "serviceHistory": "Service History",
@@ -2920,7 +2892,7 @@
         "NegativeAcknowledge:ignitionIsOn": "Your vehicle is running. This request cannot be executed. Please turn off your vehicle and try again.",
         "NegativeAcknowledge:runningOnBackupBattery": "Your vehicle is running on backup battery. This command cannot be executed.",
         "NEGATIVE_ACKNOWLEDGE:[RUNNINGONBACKUPBATTERY]": "Your vehicle is running on backup battery. This command cannot be executed.",
-        "NegativeAcknowledge:vehicleNotStationary": "This request cannot be executed while your vehicle is in motion.",      
+        "NegativeAcknowledge:vehicleNotStationary": "This request cannot be executed while your vehicle is in motion.",
         "NegativeAcknowledge:maxNumRemoteEngineStartExceeded": "Remote Start is unavailable because you have reached the total combined maximum idle runtime of 20 minutes. You must manually restart your vehicle before using Remote Start again.",
         "NegativeAcknowledge:fuelLevelTooLow": "Remote Start is unavailable because of low fuel. Please add at least 5 gallons of fuel and try again.",
         "NegativeAcknowledge:doorNotClosed": "Your vehicle could not be remotely started because your doors are ajar.",
@@ -2931,14 +2903,14 @@
         "NegativeAcknowledge:securityAlarmOn":"This request cannot be executed while your security alarm is active. Please turn off your security alarm and try again.",
         "NegativeAcknowledge:mfdInUse":"This request cannot be executed while multifunctional display is in use. Please end the session with the multifunctional display unit and send this request again.",
         "DEVICE_NOT_AUTHENTICATED": "Device needs to be authenticated for triggering remote services",
-        "TimeframePassed:null": "STARLINK<sup>&reg;</sup>Services are temporarily unavailable. \n\nPlease manually start your Subaru to ensure your system is not dormant, if it has not been driven recently. \n\nOtherwise, please ensure your Subaru is parked in a location with good cellular signal and try again later.",       
+        "TimeframePassed:null": "STARLINK<sup>&reg;</sup>Services are temporarily unavailable. \n\nPlease manually start your Subaru to ensure your system is not dormant, if it has not been driven recently. \n\nOtherwise, please ensure your Subaru is parked in a location with good cellular signal and try again later.",
         "disclaimer": "By setting this alert, you confirm you have obtained the consent of the driver and any passenger(s) of the vehicle to being monitored in this manner.",
         "InvalidCredentials": {
             "invalidPin": "The PIN you entered is invalid. Please try again.",
             "lockedPin": "You have reached the maximum amount of PIN code attempts. Your account is locked for 60 minutes.",
             "pinNotSet": "PIN not set. To set pin, visit My Profile -> Forgot PIN."
         },
-        "cancelLock": "Cancel Remote Door Lock", 
+        "cancelLock": "Cancel Remote Door Lock",
 		"cancelUnlock": "Cancel Remote Door Lock",
 		"cancelHorn&Lights": "Cancel Remote Horn & Lights",
 		"cancelLights": "Cancel Remote Lights",
@@ -3008,7 +2980,7 @@
         "vehicleNotStationaryDynamic3": " and try again.",
         "vehicleNotStationaryDefault": "This request cannot be executed while your vehicle is in motion.",
         "remoteTailgateAccessoryModeError": "Remote Tailgate Unlock is unavailable because your [MODEL] is currently in Accessory Mode. Please turn off your [MODEL] and try again.",
-        "remoteTailgateIgnitionModeError": "Remote Tailgate Unlock is unavailable because your [MODEL] is currently in Ignition On Mode. Please turn off your [MODEL] and try again."      
+        "remoteTailgateIgnitionModeError": "Remote Tailgate Unlock is unavailable because your [MODEL] is currently in Ignition On Mode. Please turn off your [MODEL] and try again."
     },
     "statusBar": {
       "sending": "Sending ",
@@ -3449,7 +3421,7 @@
                 "maxlength": "Comments should not be > 500 chars",
                 "alphanumericSpace": "Comments should be alpha numeric characters only",
                 "alphanumericSpaceNoSpaceStart": "Comments should not start with space",
-                "alphanumericSpaceNoSpaceEnd": "Comments should not end with space"        
+                "alphanumericSpaceNoSpaceEnd": "Comments should not end with space"
             }
         }
     },
@@ -3495,7 +3467,7 @@
             },
             "additionalEmailConfirm": {
                 "equalTo": "Please enter same email as above"
-            }, 
+            },
             "primaryPhone": {
                 "required": "Please enter a Phone Number",
                 "minlength": "Please enter valid phone number"
@@ -3563,16 +3535,16 @@
         "errorFetchingMaintenanceSchedules": "Error fetching maintenance schedules",
         "maintenanceScheduleError": "Maintenance Schedule Error",
         "serviceEntryValidateMessages": {
-            "serviceProvider": { 
+            "serviceProvider": {
                 "inputText": "Please enter service provider"
             },
-            "mileage":  { 
+            "mileage":  {
                 "inputText": "Please enter mileage"
             },
-            "vehicleNotes":  { 
+            "vehicleNotes":  {
                 "inputText": "Please enter services performed"
             },
-            "serviceDate": { 
+            "serviceDate": {
                 "inputText": "Please select service date"
             }
         },
@@ -3581,17 +3553,17 @@
         "unableToRetrieveServiceHistory": "Unable to retrieve service history.",
         "verifyRemoval": "Are you sure you want to remove?",
         "addServiceEntryValidateMessages": {
-            "serviceProvider": { 
+            "serviceProvider": {
                 "inputText": "Please enter service provider"
             },
             "maintenanceInterval": "Please select mileage interval",
-            "mileage":  { 
+            "mileage":  {
                 "inputText": "Please enter mileage"
             },
-            "vehicleNotes":  { 
+            "vehicleNotes":  {
                 "inputText": "Please enter services performed"
             },
-            "serviceDate": { 
+            "serviceDate": {
                 "inputText": "Please select service date"
             }
         },
@@ -3800,7 +3772,7 @@
         "confirmDeleteProfile2":"driver profile? This action cannot be undone.",
         "deletProfile" : "Delete Profile",
         "disclaimerShowText" : "After sending a profile to the vehicle, you will need to accept that profile within the vehicle's display screen for the profile to take effect.",
-        "disclaimerShowCheckbox" : "Don't show this message again" 
+        "disclaimerShowCheckbox" : "Don't show this message again"
     },
     "driverProfileSetting": {
         "myDriverProfileSettings" : "My Driver Profile Settings",
@@ -3963,7 +3935,7 @@
         },
        "deletebdayAnni" : "Delete ",
        "deleteConfirm1" : "Are you sure you want to delete the ",
-       "deleteConfirm2" : "<br> This action cannot be undone." 
+       "deleteConfirm2" : "<br> This action cannot be undone."
     },
     "resPresets": {
         "resPresets": "Climate Control Presets",
@@ -4084,11 +4056,11 @@
         "vehicleTurnedOn":"Next: Vehicle Ignition On",
         "saveAndSendSettings":"Save & Send Settings",
         "updateNotificationOptions":"In order to update these notification options, Valet Mode must first be deactivated.",
-        "configurationInfo":"While Valet Mode is active all other driver alerts will be suspended. This includes Curfew, Speed and Boundary Alerts as well as any active trip tracking. Once Valet Mode is turned off, your alerts will resume.", 
+        "configurationInfo":"While Valet Mode is active all other driver alerts will be suspended. This includes Curfew, Speed and Boundary Alerts as well as any active trip tracking. Once Valet Mode is turned off, your alerts will resume.",
         "configurationInfo2":" Other features such as sending a Driver Profile, resetting your Valet Mode Passcode, updating your Valet Mode settings, accessing Enhanced Roadside Assistance as well as Concierge services will be restricted.",
         "deactivate":"Deactivate",
         "locateDetails":"Locate Vehicle",
-        "notificationOptions":"Notification Options",  
+        "notificationOptions":"Notification Options",
         "on" :"On",
         "off":"Off",
         "receiveNotification":"You will receive a notification when the vehicle exceeds",
@@ -4098,7 +4070,7 @@
         "deactivateValetMode": "Deactivate Valet Mode",
         "notificationPreferences": "Notification Preferences",
         "changingTheseNotificationPreferences": "Changing these notification preferences will update your global STARLINK<sup>&reg;</sup> Communication preferences.",
-        "mailAlert": "Email",   
+        "mailAlert": "Email",
         "saveNotificationPreferences": "Save Notification Preferences",
         "viewLocationDetails": "View Location Details",
         "valetRefresh": "Refresh",

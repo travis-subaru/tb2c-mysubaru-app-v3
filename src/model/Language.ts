@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { addListener, getItem, removeListener, setItem } from '../stores/Local';
 
-export type LanguageID = "en_US" | "en_CA" | "es_US" | "fr_CA" | "jp_JP"
+export type LanguageID = "en" | "en_US" | "en_CA" | "es_US" | "fr_CA" | "jp_JP"
 
 export const getLanguages = (): LanguageID[] => {
     return ["en_US", "es_US"];
@@ -13,6 +13,7 @@ export const setLanguage = (lang: LanguageID) => {
 
 export const getLanguageDataNoCache = (lang: LanguageID): Language => {
     switch (lang) {
+        case "en": return require("../../content/messages.en");
         case "en_US": return require("../../content/messages.en_US");
         case "en_CA": return require("../../content/messages.en_CA");
         case "es_US": return require("../../content/messages.es_US");
@@ -25,7 +26,11 @@ let langaugeCache = {}
 
 export const getLanguageData = (lang: LanguageID): Language => {
     if (!langaugeCache[lang]) {
-        langaugeCache[lang] = getLanguageDataNoCache(lang);
+        let data = getLanguageDataNoCache(lang);
+        if (data.__inherit) {
+            data = Object.assign(data, getLanguageData(data.__inherit));
+        }
+        langaugeCache[lang] = data;
     }
     return langaugeCache[lang];
 }
@@ -42,9 +47,7 @@ export const useLanguage = () => {
 }
 
 export interface Language {
-    modernizationNew: {
-        contactPhone: string
-    },
+    __inherit?: LanguageID
     common: {
         next: string
         submit: string
