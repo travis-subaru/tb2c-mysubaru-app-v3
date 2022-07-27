@@ -30,8 +30,9 @@ interface Listener {
 let store: LocalData = {
     appState: "login",
     environment: "cloudqa",
-    language: "en",
-    pinRequested: false
+    language: "en_US",
+    pinRequested: false,
+    sessionTimeout: false,
 };
 let listeners: Listener[] = [];
 

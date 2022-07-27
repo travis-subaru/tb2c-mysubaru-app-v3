@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { setItem, useItem } from '../stores/Local';
+import { setItem } from '../stores/Local';
 import { MyPrimaryButton } from '../components/MyButton';
 import { Palette, staticWhite, useColors } from '../components/MyColors';
 import { checkEmail } from '../model/Email';
@@ -93,7 +93,8 @@ export const ForgotInfo = () => {
                         <MyText style={[ MyStyleSheet.boldCopyText, { color: staticWhite }]}>{i18n.forgotUsernameSuccessPanel.pageDescription}</MyText>
                         <MyText style={{ color: staticWhite, paddingVertical: 10 }}>{state.accounts.join("\n")}</MyText>
                         <MyText style={{ color: staticWhite }}>{i18n.forgotUsernameSuccessPanel.pageDescription2}</MyText>
-                        <MyText style={[MyStyleSheet.boldCopyText, { color: staticWhite, paddingTop: 5 }]}>{i18n.modernizationNew.contactPhone}</MyText>
+                        {/* TODO Re-add to locale files */}
+                        <MyText style={[MyStyleSheet.boldCopyText, { color: staticWhite, paddingTop: 5 }]}>(800)-SUBARU3 | (800)-782-2783</MyText>
                     </View>
                 </View>);
             case "error":

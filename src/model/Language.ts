@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { addListener, getItem, removeListener, setItem } from '../stores/Local';
 
-export type LanguageID = "en" | "es" | "fr" | "jp"
+export type LanguageID = "en_US" | "en_CA" | "es_US" | "fr_CA" | "jp_JP"
 
 export const getLanguages = (): LanguageID[] => {
-    return ["en", "fr"];
+    return ["en_US", "es_US"];
 }
 
 export const setLanguage = (lang: LanguageID) => {
@@ -13,10 +13,11 @@ export const setLanguage = (lang: LanguageID) => {
 
 export const getLanguageDataNoCache = (lang: LanguageID): Language => {
     switch (lang) {
-        case "en": return require("../../content/messages.en");
-        case "es": return require("../../content/messages.es");
-        case "fr": return require("../../content/messages.fr");
-        case "jp": return require("../../content/messages.jp");
+        case "en_US": return require("../../content/messages.en_US");
+        case "en_CA": return require("../../content/messages.en_CA");
+        case "es_US": return require("../../content/messages.es_US");
+        case "fr_CA": return require("../../content/messages.fr_CA");
+        case "jp_JP": return require("../../content/messages.jp_JP");
     }
 }
 

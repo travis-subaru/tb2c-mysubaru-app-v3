@@ -67,7 +67,7 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
                 // On 401, also send user back to login
                 // TODO: After keychain is implementated, refresh session and retry request
                 if (error.data.status == 401) {
-                    logout();
+                    logout(true);
                 }
             }
         }).catch((reason) => {
