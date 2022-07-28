@@ -8,8 +8,21 @@ import { getNextListenerID, ListenerID } from './Listener';
 import { NETEnvironmentID } from '../net/Environment';
 import { TwoStepContactInfo } from '../net/TwoStepAuth';
 import { Language, LanguageID } from '../model/Language';
+import { useEffect, useState } from 'react';
+import { MySimpleChoiceModalViewModel, MySimpleChoiceResult } from '../components/MySimpleChoiceModal';
+import { PINCheckResult, PINViewModel } from '../pages/PINCheck';
 
 export type AppState = 'login' | 'forgot';
+
+export interface ModalCancelled { type: "cancel" }
+
+export type ModalViewModel = MySimpleChoiceModalViewModel | PINViewModel;
+export type ModalResult = ModalCancelled | MySimpleChoiceResult | PINCheckResult;
+
+export interface Modal {
+    viewModel: ModalViewModel
+    resolver: (ModalResult) => void
+}
 
 export interface LocalData {
     appState: AppState
@@ -17,7 +30,7 @@ export interface LocalData {
     language: LanguageID
     languageData?: Language
     contactInfo?: TwoStepContactInfo
-    pinRequested: boolean
+    modals: Modal[]
     sessionTimeout: boolean
 }
 
@@ -33,7 +46,7 @@ let store: LocalData = {
     appState: "login",
     environment: "cloudqa",
     language: "en_US",
-    pinRequested: false,
+    modals: [],
     sessionTimeout: false,
 };
 let listeners: Listener[] = [];
@@ -68,9 +81,19 @@ export const setItem = (key: LocalDataKey, value: any) => {
     listeners.filter(l => l.key == key).forEach(l => l.fn(value));
 }
 
-// TODO: Should react-isms go to a separate file?
+/** Present a modal on top of application */
+export const presentModal = async (viewModel: ModalViewModel): Promise<ModalResult> => {
+    return new Promise((resolve, _) => {
+        const resolver = (result: ModalResult) => {
+            store.modals = store.modals.filter((m) => { return m.viewModel !== viewModel});
+            listeners.filter(l => l.key == "modals").forEach(l => l.fn(store.modals));
+            resolve(result);
+        }
+        setItem("modals", store.modals.concat({viewModel: viewModel, resolver: resolver}));
+    });
+}
 
-import { useEffect, useState } from 'react';
+// TODO: Should react-isms go to a separate file?
 
 /** React-friendly wrapper for stored data */
 export const useItem = (key: LocalDataKey) => {

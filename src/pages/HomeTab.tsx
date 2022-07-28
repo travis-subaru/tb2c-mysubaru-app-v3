@@ -7,9 +7,10 @@ import { MyStyleSheet } from '../components/MyStyles';
 import { Palette, staticMidnight, staticWhite, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../model/Language';
 import { MyAppIcon } from '../components/MyAppIcon';
-import { executeRemoteLock, executeRemoteStart, executeRemoteStop, executeRemoteUnlock } from '../net/RemoteCommand';
-import { withPINCheck } from './PINCheck';
+import { descriptionForUnlockDoorType, executeRemoteLock, executeRemoteStart, executeRemoteStop, executeRemoteUnlock, UnlockDoorType } from '../net/RemoteCommand';
 import { MyPressable } from '../components/MyPressable';
+import { presentModal } from '../stores/Local';
+import { ListItem } from '../components/MySimpleChoiceModal';
 
 /** Primary action button for dashboard
  *
@@ -78,36 +79,37 @@ export const HomeTab = () => {
     const buttonStyle = { width: buttonSize, height: buttonSize, marginBottom: 20 };
     // TODO: Remove hardcoded params
     const remoteStart = async () => {
-        const pin = await withPINCheck();
-        if (pin.ok) {
-            const resp = await executeRemoteStart({pin: pin.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD", name: "Summer Time", runTimeMinutes: "10", climateZoneFrontTemp: "65", climateZoneFrontAirMode: "FEET_FACE_BALANCED", climateZoneFrontAirVolume: "7", outerAirCirculation: "outsideAir", heatedRearWindowActive: "false", heatedSeatFrontLeft: "HIGH_COOL", heatedSeatFrontRight: "HIGH_COOL", airConditionOn: "false", canEdit: "true", disabled: "false", presetType: "userPreset", startConfiguration: "START_ENGINE_ALLOW_KEY_IN_IGNITION"});
-            if (resp.success) { setEngineStatus(true); }
-        }
-
+        const pinResult = await presentModal({ type: "PIN" });
+        if (pinResult.type !== "pin") { return; }
+        const resp = await executeRemoteStart({pin: pinResult.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD", name: "Summer Time", runTimeMinutes: "10", climateZoneFrontTemp: "65", climateZoneFrontAirMode: "FEET_FACE_BALANCED", climateZoneFrontAirVolume: "7", outerAirCirculation: "outsideAir", heatedRearWindowActive: "false", heatedSeatFrontLeft: "HIGH_COOL", heatedSeatFrontRight: "HIGH_COOL", airConditionOn: "false", canEdit: "true", disabled: "false", presetType: "userPreset", startConfiguration: "START_ENGINE_ALLOW_KEY_IN_IGNITION"});
+        if (resp.success) { setEngineStatus(true); }
     };
     // TODO: Remove hardcoded params
     const remoteStop = async () => {
-        const pin = await withPINCheck();
-        if (pin.ok) {
-            const resp = await executeRemoteStop({pin: pin.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD"});
-            if (resp.success) { setEngineStatus(false); }
-        }
+        const pinResult = await presentModal({ type: "PIN" });
+        if (pinResult.type !== "pin") { return; }
+        const resp = await executeRemoteStop({pin: pinResult.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD"});
+        if (resp.success) { setEngineStatus(false); }
     };
     const remoteLock = async () => {
         if (!vehicle) { return; }
-        const pin = await withPINCheck();
-        if (pin.ok) {
-            const resp = await executeRemoteLock({pin: pin.pin, delay: 0, forceKeyInCar: false, vin: vehicle.vin });
-            if (resp.success) { setLocked(true); }
-        }
+        const pinResult = await presentModal({ type: "PIN" });
+        if (pinResult.type !== "pin") { return; }
+        const resp = await executeRemoteLock({pin: pinResult.pin, delay: 0, forceKeyInCar: false, vin: vehicle.vin });
+        if (resp.success) { setLocked(true); }
     };
     const remoteUnlock = async () => {
         if (!vehicle) { return; }
-        const pin = await withPINCheck();
-        if (pin.ok) {
-            const resp = await executeRemoteUnlock({pin: pin.pin, delay: 0, unlockDoorType: "ALL_DOORS_CMD", vin: vehicle.vin });
-            if (resp.success) { setLocked(false); }
-        }
+        const unlockTypes: UnlockDoorType[] = ["ALL_DOORS_CMD", "FRONT_LEFT_DOOR_CMD", "TAILGATE_DOOR_CMD"];
+        const unlockItems: ListItem[] = unlockTypes.map((u) => { return {value: u, description: descriptionForUnlockDoorType(i18n, u)}; })
+        const choiceResult = await presentModal({ type: "MySimpleChoice", title: i18n.home.unlockDoors, items: unlockItems });
+        if (choiceResult.type !== "choice") { return; }
+        // @ts-ignore unlockTypes is type constrained
+        const unlockDoorType: UnlockDoorType = choiceResult.selection.value;
+        const pinResult = await presentModal({ type: "PIN" });
+        if (pinResult.type !== "pin") { return; }
+        const resp = await executeRemoteUnlock({pin: pinResult.pin, delay: 0, unlockDoorType: unlockDoorType, vin: vehicle.vin });
+        if (resp.success) { setLocked(false); }
     };
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start', paddingHorizontal: 20 }}>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>

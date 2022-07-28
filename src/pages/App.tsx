@@ -1,23 +1,22 @@
-// TODO: Connect navigator for subsequent screens
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { Dashboard } from './Dashboard';
 import { ForgotInfo } from './ForgotInfo';
-import { AppState, useItem } from '../stores/Local';
-import Login from './Login';
+import { AppState, useItem, Modal } from '../stores/Local';
+import { Login } from './Login';
 import { Palette, useColorSchemeDynamic, useColors } from '../components/MyColors'
 import { PINCheck } from './PINCheck';
 import { TwoStepVerify } from './TwoStepVerify';
 import { Session, useSession } from '../stores/Session';
 import { TwoStepContactInfo } from '../net/TwoStepAuth';
+import { MySimpleChoiceModal } from '../components/MySimpleChoiceModal';
 
-const App = () => {
+export const App = () => {
     const Colors: Palette = useColors();
     const isDarkMode = useColorSchemeDynamic() === "dark";
     const appState: AppState = useItem("appState");
     const contactInfo: TwoStepContactInfo = useItem("contactInfo");
-    const pinRequested: boolean = useItem('pinRequested');
+    const modals: Modal[] = useItem("modals");
     const session: Session = useSession();
     const content = (() => {
         if (session?.deviceRegistered) {
@@ -31,14 +30,19 @@ const App = () => {
             }
         }
     })();
-
     return (<>
         <SafeAreaView key={appState} style={{ backgroundColor: Colors.background, flex: 1 }}>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
             {content}
         </SafeAreaView>
-        {pinRequested && <PINCheck/>}
+        {modals.map((m) => {
+            switch (m.viewModel.type) {
+                case "MySimpleChoice":
+                    return <MySimpleChoiceModal items={m.viewModel.items} title={m.viewModel.title} onCancel={() => m.resolver({type: "cancel"})} onSelect={(item) => m.resolver({type: "choice", selection: item})} />;
+                case "PIN":
+                    return <PINCheck onCancel={() => m.resolver({type: "pin", ok: false})} onSelect={(pin) => m.resolver({type: "pin", ok: true, pin: pin})}/>;
+            }
+        })}
     </>);
 };
 
-export default App;

@@ -7,7 +7,7 @@ import { MyPassword, MyTextErrors, MyTextInput } from '../components/MyTextInput
 import { MyText } from '../components/MyText';
 import { requestLogin } from '../net/Login';
 import { useLanguage, Language } from '../model/Language';
-import { setItem, useItem } from '../stores/Local';
+import { presentModal, setItem, useItem } from '../stores/Local';
 import { MyStyleSheet } from '../components/MyStyles';
 import { SessionData } from '../stores/Session';
 import { requestSelectVehicle } from '../net/SelectVehicle';
@@ -22,7 +22,7 @@ import { MyLogo } from '../components/MyLogo';
 // TODO: Environment select
 // TODO: Native hooks to password apps
 
-const Login = () => {
+export const Login = () => {
     const Colors: Palette = useColors();
     const i18n: Language = useLanguage();
     const [username, setUsername] = useState("");
@@ -91,7 +91,9 @@ const Login = () => {
                 <View style={{width: 350, marginBottom: 20}}>
                     <View style={{flexDirection: 'row', justifyContent: "space-between", alignItems: "center"  }}>
                         <MyAlternateButton onPress={startDemoMode} title={i18n.login.demoMode}></MyAlternateButton>
-                        <MyAlternateButton title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
+                        <MyAlternateButton onPress={async () => {
+                            const result = await presentModal({type: "MySimpleChoice", title: "TEST", items: [{value: "1", description: "One"}, {value: "2", description: "Two"}]});
+                        }} title="Need Assistance?\nTap Here to Chat."></MyAlternateButton>
                     </View>
                 </View>
             </View>
@@ -103,5 +105,3 @@ const Login = () => {
         </View>
     );
 };
-
-export default Login;
