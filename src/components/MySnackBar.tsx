@@ -10,7 +10,7 @@ import { MyText } from './MyText';
 export interface MySnackBarProps {
     style?: any
     title?: string
-    type?: "progress" | "success" | "error"
+    type?: "progress" | "success" | "error" | "info"
     onClose?: () => void
 }
 
@@ -22,10 +22,11 @@ export const MySnackBar = (props: MySnackBarProps) => {
     return <View style={[{ backgroundColor: C.backgroundSecondary, minHeight: 50, maxWidth: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }, props.style]}>
         <View style={{ flexBasis: 50, justifyContent: 'center', alignItems: 'center' }}>
             {(() => {
-                switch (props.type) {
+                switch (props.type ?? "info") {
                     case "error": return <MyAppIcon glyph='alert' style={{ color: C.error }}></MyAppIcon>;
                     case "progress": return <ActivityIndicator size='large' color={C.buttonPrimary}></ActivityIndicator>
                     case "success": return <MyAppIcon glyph='checkmarkCircleFilled' style={{ color: C.success }}></MyAppIcon>
+                    case "info": return <MyAppIcon glyph='alertInfo' style={{ color: C.copyPrimary }}></MyAppIcon>
                 }
             })()}
         </View>
