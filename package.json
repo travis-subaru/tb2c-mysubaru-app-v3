@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "prestart": "node helper/language.ts && node helper/mocks.ts",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."

@@ -9,11 +9,11 @@ export const mockResponseForEndpoint = (endpoint: string): NetworkResponse => {
 	if (normalized === 'mysAlerts.json') { return require('../mocks/mysAlerts.json'); }
 	if (normalized === 'refreshVehicles.json') { return require('../mocks/refreshVehicles.json'); }
 	if (normalized === 'selectVehicle.json') { return require('../mocks/selectVehicle.json'); }
-    if (normalized === 'service_g2_condition_execute.json') { return require('../mocks/service_g2_condition_execute.json'); }
+	if (normalized === 'service_g2_condition_execute.json') { return require('../mocks/service_g2_condition_execute.json'); }
 	if (normalized === 'service_g2_engineStart_execute.json') { return require('../mocks/service_g2_engineStart_execute.json'); }
 	if (normalized === 'service_g2_engineStop_execute.json') { return require('../mocks/service_g2_engineStop_execute.json'); }
 	if (normalized === 'service_g2_lock_execute.json') { return require('../mocks/service_g2_lock_execute.json'); }
-    if (normalized === 'service_g2_unlock_execute.json') { return require('../mocks/service_g2_unlock_execute.json'); }
-    if (normalized === 'service_g2_remoteService_status.json') { return require('../mocks/service_g2_remoteService_status.json'); }
-    return {success: false, errorCode: 'NotImplemented', data: null, dataName: null, endpoint: normalized};
+	if (normalized === 'service_g2_remoteService_status.json') { return require('../mocks/service_g2_remoteService_status.json'); }
+	if (normalized === 'service_g2_unlock_execute.json') { return require('../mocks/service_g2_unlock_execute.json'); }
+	return {success: false, errorCode: 'NotImplemented', data: null, dataName: null, endpoint: normalized};
 }

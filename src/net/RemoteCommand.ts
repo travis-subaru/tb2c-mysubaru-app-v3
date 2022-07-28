@@ -6,7 +6,7 @@ import { getSessionID } from "../stores/Session";
 import { myFetch, JSONHeaders, GETJSONRequest } from "./Fetch";
 
 export type RemoteServiceState = "started" | "scheduled" | "finished";
-export type RemoteServiceType = "engineStart" | "engineStop" | "lock" | "unlock" | "condition";
+export type RemoteServiceType = "engineStart" | "engineStop" | "lock" | "unlock" | "condition" | "hornLights";
 export type UnlockDoorType = "ALL_DOORS_CMD" | "FRONT_LEFT_DOOR_CMD" | "TAILGATE_DOOR_CMD";
 
 // ????: Some endpoints have _={timestamp}. Others don't. Why?
@@ -87,6 +87,12 @@ export interface RemoteUnlockParameters {
     vin: string
 }
 
+export interface HornLightsParameters {
+    pin: string
+    delay: number
+    vin: string
+}
+
 // TODO: Locale mapping
 const presentTenseForType = (type: RemoteServiceType): string => {
     switch (type) {
@@ -95,8 +101,9 @@ const presentTenseForType = (type: RemoteServiceType): string => {
         case "lock": return "LOCK DOORS";
         case "unlock": return "UNLOCK DOORS";
         case "condition": return "VEHICLE STATUS";
+        case "hornLights": return "HORN & LIGHTS";
     }
-}
+};
 
 const pastTenseForType = (type: RemoteServiceType): string => {
     switch (type) {
@@ -105,8 +112,9 @@ const pastTenseForType = (type: RemoteServiceType): string => {
         case "lock": return "DOORS LOCKED";
         case "unlock": return "DOORS UNLOCKED";
         case "condition": return "VEHICLE STATUS UPDATED";
+        case "hornLights": return "HORN & LIGHTS FLASHING"; // TODO: Doesn't match existing app
     }
-}
+};
 
 // Using partial RemoteServiceStatus type to allow inter-op with progress indicator
 export const descriptionForRemoteServiceStatus = (i18n: Language, status: {remoteServiceType: RemoteServiceType, remoteServiceState: RemoteServiceState}): string => {
@@ -119,7 +127,7 @@ export const descriptionForRemoteServiceStatus = (i18n: Language, status: {remot
             return `${pastTenseForType(status.remoteServiceType)} at ${now}`
         }
     }
-}
+};
 
 export const descriptionForUnlockDoorType = (i18n: Language, type: UnlockDoorType): string => {
     switch (type) {
@@ -127,7 +135,7 @@ export const descriptionForUnlockDoorType = (i18n: Language, type: UnlockDoorTyp
         case "FRONT_LEFT_DOOR_CMD": return i18n.unlockSettingPanel.justDriverDoor;
         case "TAILGATE_DOOR_CMD": return i18n.unlockSettingPanel.tailgate;
     }
-}
+};
 
 export const delay = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -164,12 +172,13 @@ const getRemoteCommandEndpoint = (command: RemoteServiceType): string => {
         case "lock": return "service/g2/lock/execute.json";
         case "unlock": return "service/g2/unlock/execute.json";
         case "condition": return "service/g2/condition/execute.json";
+        case "hornLights": return "service/g2/hornLights/execute.json";
     }
 }
 
 export const mapEndpointToCommand = (endpoint: string): RemoteServiceType | undefined => {
     const _endpoint = normalizeEndpoint(endpoint);
-    const commands: RemoteServiceType[] = ["engineStart", "engineStop", "lock", "unlock", "condition"];
+    const commands: RemoteServiceType[] = ["engineStart", "engineStop", "lock", "unlock", "condition", "hornLights"];
     for (let command of commands) {
         if (getRemoteCommandEndpoint(command) === _endpoint) {
             return command;
@@ -188,7 +197,6 @@ export const executeRemoteStart = async (p: RemoteStartParameters): Promise<Netw
     });
     return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
 };
-
 
 export const executeRemoteStop = async (p: RemoteStopParameters): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
@@ -227,7 +235,7 @@ export const executeRemoteUnlock = async (p: RemoteUnlockParameters): Promise<Ne
         "method": "POST",
     });
     return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
-}
+};
 
 export const executeConditionCheck = async (): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
@@ -238,4 +246,14 @@ export const executeConditionCheck = async (): Promise<NetworkResponse> => {
         "method": "GET",
     });
     return await handleRemoteServiceResponse(`service/g2/remoteService/status.json`, resp);
-}
+};
+
+export const executeHornLights = async (p: HornLightsParameters): Promise<NetworkResponse> => {
+    const jsessionid = getSessionID();
+    const resp = await myFetch(`${getRemoteCommandEndpoint("hornLights")};jsessionid=${jsessionid}`, {
+        "headers": JSONHeaders,
+        "body": null,
+        "method": "GET",
+    });
+    return await handleRemoteServiceResponse(`service/g2/hornLights/status.json`, resp);
+};

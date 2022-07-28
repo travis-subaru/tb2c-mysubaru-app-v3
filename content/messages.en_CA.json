@@ -3,96 +3,36 @@
     "common": {
         "dismiss": "Dismiss",
         "start": "Start",
-
+        "skip": "** MISSING **",
+        "retry": "** MISSING **",
+        "deleteAll": "Delete ALL",
+        "push": "** MISSING **",
         "state": "Province",
         "zip": "Postal Code",
         "subaruStarlinkRemoteServices": "SUBARU STARLINK<sup>&reg;</sup> Connected Services",
         "starlinkPluginPlus": "SUBARU Starlink<sup>&reg;</sup> Connected Services Plug-In",
-        "scheduleService": "Schedule Service",
-        "boundaryAlerts": "Boundary Alerts",
-        "curfewAlerts": "Curfew Alerts",
-        "speedAlerts": "Speed Alerts",
-        "maintenanceSchedule": "Maintenance Schedule",
-        "success": "Success",
-        "failure": "Failure",
-        "error": "Error",
-        "failed": "Failed",
-        "provider": "Provider",
-        "date": "Date",
-        "mileage": "Mileage",
-        "notes": "Notes",
-        "exportToExcel": "Export to Excel",
-        "print": "Print",
-        "completed": "Completed",
-        "deleteSettingMessage": "Are you sure you want to delete this setting?",
+        "starlinkRemoteServices": "** MISSING **",
         "findRetailer": "Find a Dealer",
         "selectState": "Select Province",
-        "remove": "Remove",
-        "ok": "OK",
-        "learnMore": "Learn More",
         "starlinkSafetyPlus": "STARLINK<sup>&reg;</sup> Safety Plus",
         "starlinkSecurityPlus": "STARLINK<sup>&reg;</sup> Security Plus",
         "starlinkConcierge": "STARLINK<sup>&reg;</sup> Concierge",
         "starlinkSafetyAndSecurity": "STARLINK<sup>&reg;</sup> Safety &amp; Security Plus",
+        "starlinkSafetyAndSecurityPHEV": "** MISSING **",
         "starlinkSafetySecurityAndConcierge": "STARLINK<sup>&reg;</sup> Safety &amp; Security Plus Concierge",
-        "off": "OFF",
-        "on": "ON",
-        "loadingVehicle": "Loading Vehicle...",
-        "alert": "Alert",
-        "confirm": "Confirm",
         "myRetailer": "My Dealer",
-        "service": "Service",
-        "sales": "Sales",
-        "parts": "Parts",
-        "select": "Select",
-        "sun": "Sun",
-        "mon": "Mon",
-        "tue": "Tue",
-        "wed": "Wed",
-        "thu": "Thu",
-        "fri": "Fri",
-        "sat": "Sat",
-        "call": "Call",
-        "scheduleAppointment": "Schedule a Service Appointment",
-        "recordAService": "Record a Service",
+        "serviceAndMaintenance": "** MISSING **",
+        "shopPartsAccessories": "** MISSING **",
         "selectRetailer": "Select a Preferred Dealer",
-        "callService": "Call Service",
-        "expiration": "Expiration",
-        "confirmation": "Confirmation",
-        "mobilePhoneNumber": "Mobile Phone Number",
-        "phone": "Phone",
-        "mobilePhone": "Mobile Phone",
         "viewTutorial": "<span class=\"underline\">View Tutorial</span>",
-        "deleteAlert": "Delete <br/>Alert",
-        "editAlert": "Edit <br/>Alert",
-        "sendToVehicle": "Send To<br>Vehicle",
-        "deactivateAlert": "Deactivate Alert",
-        "trackDispatch": "Track Dispatch",
         "pleaseSelectAState": "Please Select A Province",
-        "callSales": "Call Sales",
         "retailerWebsite": "Dealer<br />Website",
-        "getDirections": "Get<br />Directions",
         "findRetailerWithBreak": "Find a<br/> Dealer",
-        "recordAServiceWithBreak": "Record a<br/> Service",
         "myStarlinkAccount": "My STARLINK<sup>&reg;</sup>&nbsp;Account",
         "manageStarlinkSubscription": "Manage STARLINK<sup>&reg;</sup>&nbsp;Subscription",
-        "communicationPreferences": "Communication Preferences",
         "starlinkCommunicationPreferences": "STARLINK<sup>&reg;</sup>&nbsp;Communication Preferences",
-        "termsAndConditions": "Terms &amp; Conditions",
-        "profile": "Profile",
-        "text": "Text",
-        "automatedPhoneCall": "Automated Phone Call",
-        "remoteEngineStart": "Remote Engine Start",
+        "starlinkNotifications": "** MISSING **",
         "recalls": "Recalls &amp; Service Campaigns",
-        "subaruHawaii": "Subaru of Hawaii",
-        "myFirstSubaru": "My First Subaru",
-        "exitDemoMode": "Exit Demo Mode",
-        "MySubaru": "MySubaru",
-        "demoCar": "Demo Car",
-        "info": "Info",
-        "updateAvailable": "Update Available",
-        "unavailable": "Unavailable",
-        "apply": "Apply",
         "title": "Title",
         "gender": "Gender",
         "male": "Male",
@@ -103,10 +43,8 @@
         "en": "English",
         "fr": "Fran&ccedil;ais",
         "driverAlertsDisclaimer" : "By setting this alert, you confirm you have obtained the consent of the driver and any passenger(s) of the vehicle to being monitored in this manner.",
-        "systemFailed": "System Failed",
         "subscribeNow": "Subscribe Now",
         "termsOfUseAndPrivacy": "Terms of Use &amp; Privacy",
-        "attention": "Attention",
         "starlinkConnectedServices": "SUBARU Starlink<sup>&reg;</sup> Connected Services",
         "starlinkConnectedServicesMenuLink": "STARLINK<sup>&reg;</sup> Connected Services",
         "safetyFeatures": "Safety Features",
@@ -117,22 +55,18 @@
         "defaultEmailText": "name@email.com",
         "pleaseSelect": "Please select",
         "selectTitle": "Select Title",
-        "phoneType": "Phone Type",
-        "fingerID": "Touch ID",
-        "faceID": "Face ID",
-        "fingerprintScanner": "Fingerprint Scanner",
-        "faceUnlock": "Face Unlock",
-        "androidBiometrics": "Face/Fingerprint Unlock",
-        "at": "at",
         "sendRetailerPOI": "Send Dealer Address To Vehicle",
-        "details": "Details",
-        "support": "Support",
-        "closeX": "X",
-        "deleteAll": "Delete ALL",
-        "addToTrip": "Add To Trip",
-        "getDirectionsLink": "Get Directions",
+        "selectYourVehicle": "** MISSING **",
+        "or": "** MISSING **",
+        "searchOtherVehicles": "** MISSING **",
+        "toggle": "** MISSING **",
+        "closeX": "** MISSING **",
         "changeFindRetailer": "Find a Different Dealer",
         "retailerDetails": "Dealer Details",
+        "verificationAccessLabel": "** MISSING **",
+        "mph": "** MISSING **",
+        "active": "** MISSING **",
+        "inactive": "** MISSING **",
         "sorry": "Sorry",
         "edt": "EDT",
         "est": "EST",
@@ -147,7 +81,6 @@
         "nst": "NST",
         "ndt": "NDT",
         "utc": "UTC",
-        "set": "Set",
         "remoteCommandsLink":"Remote Commands"
     },
     "accountCheckPanel" : {
@@ -761,16 +694,9 @@
         "resetMessage": "To reset your PIN please go to <a data-exturl=\"https://www.mysubaru.ca\" class=\"textLink extWeblink\">www.mysubaru.ca</a> or contact SUBARU STARLINK<sup>&reg;</sup> Connected Services Representatives at <a href=\"tel://18002638802\" data-calltarget=\"CRS\" class=\"text-link\">1 (800) 263-8802</a>",
         "forgotPin": "Forgot PIN?"
     },
-    "forgotSomethingPanel" : {
-        "howCanWeHelp" : "How Can We Help?",
-        "forgotUsername" : "I forgot my username",
-        "forgotPassword" : "I forgot my password",
-        "notSureAccount" : "I'm not sure if I have an account",
-        "NEW_PASSWORD_MATCHES_CURRENT": "Your new password may not match your old password.",
+    "forgotSomethingPanel": {
         "forgotPasswordFormValidateMessages": {
             "email": {
-                "required": "Email is required",
-                "email": "Please enter a valid email address",
                 "maxlength": "Email should not be > 60 chars"
             }
         },
@@ -780,50 +706,10 @@
                 "maxlength": "Access Code should not be > 10 chars"
             }
         },
-        "codeIncorrect": "The provided verification code is either incorrect or expired.",
-        "accountLocked": "You have reached the maximum number of verification code attempts and your account has been locked. To unlock your account, please contact Customer Support at 1 (800) 894-4212.",
-        "forgotPasswordEnterNewFormValidateMessages": {
-            "password": {
-                "required": "Please enter your new password",
-                "minlength": "Your new password must have at least 8 characters"
-            },
-            "passwordConfirmation": {
-                "required": "Please confirm your new password",
-                "equalTo": "Passwords do not match"
-            }
-        },
-        "forgotUsernameFormValidateMessages": {
-            "vin": {
-                "required": "Please enter your VIN.",
-                "remote": "Please enter a valid VIN.",
-                "minlength": "VIN must be 17 characters.",
-                "maxlength": "VIN must be 17 characters."
-            }
-        },
-        "accountCheckFormValidateMessages": {
-            "vin": {
-                "required": "Please enter your VIN.",
-                "remote": "Please enter a valid VIN.",
-                "minlength": "VIN must be 17 characters.",
-                "maxlength": "VIN must be 17 characters."
-            }
-        }
-    },
-    "forgotUsernamePanel" : {
-        "forgotUsername": "Forgot Username/I'm not sure if I have an account",
-        "enterYourVin": "Enter your VIN",
-        "enterVinDescription": "(Hint: Your username is the primary email address on your account.) Please enter your vehicle's VIN so we can find your account.",
-        "vinDescription": "Your VIN is the 17-character vehicle identification number that can be found on your vehicle registration, insurance card, or by looking through the windshield on the driver's side of the dashboard, or on a plate inside the driver's doorjamb."
+        "accountLocked": "You have reached the maximum number of verification code attempts and your account has been locked. To unlock your account, please contact Customer Support at 1 (800) 894-4212."
     },
     "forgotUsernameSuccessPanel" : {
-        "pageDescription": "Possible matching accounts for your vehicle:",
         "pageDescription2": "If you are still unable to access your account, call SUBARU STARLINK<sup>&reg;</sup> Connected Services Representative."
-    },
-    "forgotUsernameFailPanel" : {
-        "pageDescription": "The VIN you have entered is not associated with a MySubaru account. Please create a new MySubaru account at"
-    },
-    "forgotPasswordPanel" : {
-        "forgotPassword": "Forgot Password"
     },
     "forgotPasswordContactsPanel" : {
         "pageDescription": "Select the contact method that you would like to have the reset access code delivered to.",
@@ -1038,12 +924,15 @@
         "menu": "Menu",
         "myVehicle": "My Vehicle",
         "myVehicles": "My Vehicles",
+        "startlink": "** MISSING **",
         "starlinkConnectedServices": "STARLINK<span class=\"trademark\"><sup>&reg;</sup></span> Connected Services",
+        "remoteCommands": "** MISSING **",
         "logout": "Logout",
         "visitInfotainmentApp": "Visit the STARLINK<sup>&reg;</sup> Infotainment App",
         "driverAlerts": "Driver Alerts",
         "subscriptionServices": "Manage Subscriptions",
         "subscriptionServices2": "Subscriptions & Services",
+        "manageServices": "** MISSING **",
         "invoices": "Invoices",
         "userGuides": "STARLINK<sup>&reg;</sup> User Guides",
         "wifiSubscription": "Wifi Subscription Status",
@@ -1056,9 +945,12 @@
         "securitySettings": "Security Settings",
         "password": "Password",
         "securityQuestions": "Security Questions",
+        "dustingOffRoadMap": "** MISSING **",
+        "preparingForAdventure": "** MISSING **",
+        "packingUpTheSubaru": "** MISSING **",
         "back": "Back",
-        "service": "Vehicle Service &amp; Maintenance"
-
+        "service": "Vehicle Service &amp; Maintenance",
+        "certifiedCollisionCenters":"** MISSING **"
     },
     "interestsAndActivity": {
         "title": "Interests &amp; Activities",
@@ -1132,38 +1024,9 @@
         "forMysubaru": " for \"MySubaru\""
     },
     "login": {
-        "username": "Email",
-        "password": "Password",
-        "welcome": "Hello",
-        "rememberUsernamePassword": "Remember Username/Password",
-        "autoLogin" : "Keep Me Logged In",
-        "logIn": "Log In",
-        "forgotSomething": "Forgot Something?",
         "demoMode": "Demo Mode",
-        "lastSignOn": "Your last sign on was",
-        "sendUpdateAfterSave": "We will need to send this updated setting to your vehicle after you press save.",
-        "loginFormValidateMessages": {
-            "loginUsername": "Email is required",
-            "password": "Password is required"
-        },
-        "accountCreationAged": "Account Creation Aged",
-        "accountCreationRecent": "Account Creation Recent",
-        "loginError": "Login Error",
-        "mySubaruAppVersion": "MySubaru App Version ",
-        "versionInfo": "Version Info",
-        "invalidPassword": "The password entered is incorrect. Please try again.",
-        "passwordWarning": "Forgot your password? Please use the password recovery feature below the login form.",
         "accountLocked": "We are unable to authenticate your credentials. Please contact SUBARU STARLINK<sup>&reg;</sup>Connected Services Representatives at 1 (800) 263-8802 for further assistance.",
-        "noVehiclesOnAccount": "No vehicles on account. Unable to login.",
-        "accountNotFound": "The email address you entered was not found. Please create a new MySubaru account.",
-        "invalidAccount": "The username or password is incorrect. Please try again or use the 'Forgot Something?' feature below the login form.",
-        "noSecurityQuestionsConfigured": "No security questions have been configured. Please go to MySubaru to setup your security questions first.",
         "tooManyAttemptsDescription": "You have reached the maximum number of security question attempts and your account has been locked. To unlock your account, please contact Subaru Customer Support at 1 (800) 894-4212",
-        "loginErrorDefault": "Internal issue, please check back later.",
-        "tooManyAttempts": "Too Many Attempts",
-        "unableToAddDevice": "Unable to Add Device",
-        "unableToAddDeviceDescription": "Unable to add new Device. Please try again later",
-        "unableToLogin": "Unable to Login: ",
         "twoStepAuthTooManyAttempts": "You have reached the maximum number of verification code attempts and your account has been locked. To unlock your account, please contact Customer Support at 1 (800) 894-4212."
     },
     "mailSub": {
@@ -1222,7 +1085,6 @@
 
     },
     "myProfile": {
-        "title": "My Profile",
         "starlinkCommunicationPreferences": "<span class=\"btn--prefBlock\"> STARLINK<sup>&reg; </sup>  Communication Preferences </span>"
     },
     "myProfileEdit": {
@@ -1333,28 +1195,8 @@
         "retailer": "Dealer Name"
     },
     "message": {
-        "unknown": "Unknown message",
-        "invalidPassword": "Your Password is Invalid",
-        "fatalMessage": "Something went wrong. Please try again later.",
         "fatalTitle": "Fatal Error",
-        "apiTimeoutMessage": "There was a problem contacting the server. Please try again later.",
-        "apiTimeoutTitle": "Network Error",
-        "validationTitle": "Validation Error",
-        "validationMessage": "Server is unable to validate your request.",
-        "okButton": "Ok",
-        "sessionExpiredMessage": "Your session has expired. Please log in again.",
-        "sessionExpiredTitle": "Session Expired",
-        "notConnected": "Uh oh, you don't have a connection right now. Try switching to Wi-Fi or moving to an area with clearer reception, if you haven't already.",
-        "notConnectedRemoteCommands": "Uh oh, you don't have a connection right now, which may affect your ability to send remote commands. Try switching to Wi-Fi or moving to an area with clearer reception, if you haven't already.",
-        "notConnectedTitle": "Bad Connection"
-    },
-    "pages": {
-        "unableSendCommand": "Unable to send command: ",
-        "unableGetStatus": "Unable to get Status: ",
-        "notSetProperly": "Your vehicle account is not set up properly. Please contact Subaru Helpdesk. ",
-        "showOnlyActive": "Your vehicles have been updated to show only active vehicles that you own",
-        "vehiclesUpdated": "Vehicles Updated.",
-        "unableRetrieveRetailer": "Unable to retrieve dealer."
+        "apiTimeoutMessage": "There was a problem contacting the server. Please try again later."
     },
     "warrantyFaqs": {
         "title": "Warranty FAQs",
@@ -2197,39 +2039,15 @@
         "failedSecurityCheckDescription": "Failed Security Answer Check"
     },
     "twoStepAuthentication": {
-        "title": "Enter Verification Code",
-        "authorizeDevice": "Authorize Device",
-        "twoStepAuthenticationValidation": {
-            "verificationCode": {
-                "required": "Verification Code cannot be blank",
-                "maxlength": "Verification code must be no more than 6 characters"
-            }
-        },
-        "unableToAuthenticateDevice": "Unable to authorize device",
-        "invalidRequest": "Invalid request",
-        "errorValidatingVerificationCode": "Error validating verification code.",
-        "badVerificationCode": "The verification code you entered is invalid or has expired. Please try again or select \"Resend\".",
-        "twoStepHeader": "2-Step Verification",
-        "dontRecognize": "We don't recognize the device you're using.",
-        "pleaseVerify": "Please verify your identity so we can keep your account secure.",
-        "chooseContactMethod": "Choose how you prefer to receive your temporary verification code:",
         "helpDisclaimer": "If you are having trouble logging in, please call Subaru Customer Support for assistance at <a href=\"tel://18008944212\" class=\"text-link\">1 (800) 894-4212</a>.",
         "termsConditions": "<strong>Terms &amp; Conditions</strong><br />Text Messages: By selecting a phone number you agree to receive notifications via Text from Subaru. Message frequency depends on settings. Message and Data rates may apply. Mobile carriers are not liable for delayed or undelivered messages. Reply STOP to cancel. Support: <a href=\"tel://18008944212\" class=\"text-link\">1 (800) 894-4212</a>",
-        "termsToggle": "Terms &amp; Conditions",
         "verifyInputTitle": "Your verification code<br />is on the way.",
-        "enterCode": "Enter code",
-        "resend": "Resend",
-        "verificationCodeLabel": "Verification Code",
-        "rememberDevice": "Remember this device",
-        "rememberHelperText": "I am the only person that will log in to MySubaru with this device.",
+        "verifyInputSubTitle": "Please allow up to 20 seconds to receive the code prior to clicking&nbsp;\"Resend\".",
         "didYouKnow": "Did you know that you can name your device and track usage? Go&nbsp;to <a class=\"text-link extWeblink\" data-exturl=\"https://www.mysubaru.ca/profile/authorizedDevices.html\">MySubaru.ca</a> to get started.",
-        "havingTroubleTitle": "Having trouble with verification?",
         "havingTroubleText": "Please call Subaru Customer Support for assistance at&nbsp;<a href=\"tel://18008944212\" class=\"text-link\">1&nbsp;(800)&nbsp;894-4212</a>.",
         "accountLockedTitle": "We're Sorry. Your account has been locked.",
-        "lockedOutText": "You have entered a code five times incorrectly, and for security reasons, we have locked your account.",
         "accountLocked": "You have reached the maximum number of verification code attempts and your account has been locked. To unlock your account, please contact Customer Support at at&nbsp;<a href=\"tel://18008944212\" class=\"text-link\">1&nbsp;(800)&nbsp;894-4212</a>.",
-        "accountLocked2": "To unlock your account, please call Subaru Customer Support for assistance at&nbsp;<a href=\"tel://18008944212\" class=\"text-link\">1&nbsp;(800)&nbsp;894-4212</a>.",
-        "verifyInputSubTitle": "Please allow up to 20 seconds to receive the code prior to clicking&nbsp;\"Resend\"."
+        "accountLocked2": "To unlock your account, please call Subaru Customer Support for assistance at&nbsp;<a href=\"tel://18008944212\" class=\"text-link\">1&nbsp;(800)&nbsp;894-4212</a>."
     },
     "subscriptionServices": {
         "title": "Subscriptions &amp; Services",
@@ -2908,6 +2726,7 @@
         "InvalidCredentials": {
             "invalidPin": "The PIN you entered is invalid. Please try again.",
             "lockedPin": "You have reached the maximum amount of PIN code attempts. Your account is locked for 60 minutes.",
+            "lockedPinG2G3" : "** MISSING **",
             "pinNotSet": "PIN not set. To set pin, visit My Profile -> Forgot PIN."
         },
         "cancelLock": "Cancel Remote Door Lock",
@@ -3242,11 +3061,7 @@
         "status": "Status:"
     },
     "pinPanel": {
-        "pinRequired": "PIN Required",
-        "enterYourPin": "Enter Your PIN",
-        "clear": "CLEAR",
         "setupTouchID": "Setup <span class=\"text-blue biometricsType\">Touch ID</span> for PIN",
-        "enterPinAbove": "Please enter your PIN above to complete setup.",
         "saveTime": "Save time by enabling <span class=\"biometricsType\">Touch ID</span> in place of&nbsp;PIN.",
         "oneLastStep": "One Last Step",
         "enterPinAbove2": "Enter your PIN above to complete setup.",
@@ -3426,32 +3241,10 @@
         }
     },
     "validation": {
-        "passwordRules": "Password does not meet requirements",
-        "hasCapitalLetter": "Must contain at least one capital letter",
-        "hasDigit": "Must contain at least one digit",
-        "alphanumeric": "Must contain only alphanumeric characters",
-        "alphanumericWithOutSpace": "Must contain only Alphanumeric Characters",
-        "alphanumericSpace": "Must contain only alphanumeric characters, space and only symbols like .@_-",
-        "alphanumericSpaceNoSpaceStart": "Cannot start with a space",
-        "alphanumericSpaceNoSpaceEnd": "Cannot end with a space",
-        "alphanumericSpaceAddress": "Must contain only alphanumeric characters and only symbols like .@_-:",
-        "alphanumericApostropheSpaceAddress" : "Must contain only alphanumeric characters and only symbols like .@_-':",
-        "alphanumericNoSplChar": "Must contain only alphanumeric characters and only symbols like .@_- with no spaces in between",
-        "passwordAlphanumericNoSplChar": "Must contain only alphanumeric characters and only symbols like  (@ ! # $ ^ % * ( ) + = - \\ ; , . / : ? ~`) with no spaces in between",
-        "phoneNumber": "Please enter a valid phone number",
-        "email": "Please enter a valid email address",
-        "emailSpecialChar":"Must contain only alphanumeric characters and only symbols like .@_-+",
+        "alphanumericSpace2": "** MISSING **",
+        "licensePlate": "** MISSING **",
         "zipCode": "The specified Canada Postal Code is invalid.",
-        "nonZeroNumber": "Must be non zero value",
-        "inputText": "Cannot be blank",
-        "cityValidation": "Must contain only Alphabets and Spaces.",
-        "zipcodeUS": "The specified Canada Postal Code is invalid.",
-        "postalCodeCA": "Please specify a valid postal code.",
-        "vinUS1": "The specified vehicle identification number (VIN) is invalid.",
-        "creditCardNumber": "Please enter a valid credit card number.",
-        "notEqualTo": "Values must not be the same.",
-        "phoneValidation": "Please enter valid phone number.",
-        "anotherNotEqualTo": "Please enter same email as above."
+        "zipcodeUS": "The specified Canada Postal Code is invalid."
     },
     "starlinkNotifications": {
         "notificationPreferencesValidateMessages": {

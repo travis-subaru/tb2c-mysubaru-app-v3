@@ -3,7 +3,7 @@ import { SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { MyAppIcon } from '../components/MyAppIcon';
 import { MyButtonProps } from '../components/MyButton';
 import { staticMidnight, staticWhite } from '../components/MyColors';
-import { useLanguage } from '../model/Language';
+import { Language, useLanguage } from '../model/Language';
 import { MyPressable } from '../components/MyPressable';
 import { MyStyleSheet } from '../components/MyStyles';
 import { MyText } from '../components/MyText';
@@ -40,7 +40,7 @@ export const PINButton = (props: MyButtonProps) => {
 }
 
 export const PINCheck = (props: {onSelect: (string) => void, onCancel: () => void}) => {
-    const i18n = useLanguage();
+    const i18n: Language = useLanguage();
     const textStyle = { color: staticWhite, paddingBottom: 10 };
     let [PIN, setPIN] = useState("");
     const pushDigit = async (digit: string) => {

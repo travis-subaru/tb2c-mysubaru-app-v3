@@ -59,11 +59,13 @@ import { ListItem } from '../components/MySimpleChoiceModal';
     const [pressed, setPressed] = useState(false);
     const [onPressIn, onPressOut] = [() => setPressed(true), () => setPressed(false)];
     const backgroundColor = pressed ? C.buttonPrimary : C.background;
+    const foregroundColor = pressed ? staticWhite : C.copyPrimary;
+    const subtitleColor = pressed ? staticWhite : C.copySecondary
     const style = { backgroundColor: backgroundColor, borderColor: C.copyPrimary, borderWidth: 1, padding: 8, alignItems: 'flex-start', justifyContent: 'flex-start' };
     return (<MyPressable onPressIn={onPressIn} onPressOut={onPressOut} {...props} style={[MyStyleSheet.roundedEdge, style, props.style]}>
-        {props.glyph ? <MyAppIcon glyph={props.glyph}></MyAppIcon> : null}
-        {props.title ? <MyText>{props.title}</MyText> : null}
-        {props.subtitle ? <MyText style={{color: C.copySecondary}}>{props.subtitle}</MyText> : null}
+        {props.glyph ? <MyAppIcon glyph={props.glyph} style={{color: foregroundColor}}></MyAppIcon> : null}
+        {props.title ? <MyText style={{color: foregroundColor}}>{props.title}</MyText> : null}
+        {props.subtitle ? <MyText style={{color: subtitleColor}}>{props.subtitle}</MyText> : null}
     </MyPressable>);
 }
 
@@ -104,13 +106,16 @@ export const HomeTab = () => {
         const unlockItems: ListItem[] = unlockTypes.map((u) => { return {value: u, description: descriptionForUnlockDoorType(i18n, u)}; })
         const choiceResult = await presentModal({ type: "MySimpleChoice", title: i18n.home.unlockDoors, items: unlockItems });
         if (choiceResult.type !== "choice") { return; }
-        // @ts-ignore unlockTypes is type constrained
+        // @ts-ignore unlockTypes is already type constrained
         const unlockDoorType: UnlockDoorType = choiceResult.selection.value;
         const pinResult = await presentModal({ type: "PIN" });
         if (pinResult.type !== "pin") { return; }
         const resp = await executeRemoteUnlock({pin: pinResult.pin, delay: 0, unlockDoorType: unlockDoorType, vin: vehicle.vin });
         if (resp.success) { setLocked(false); }
     };
+    const hornLights = async () => {
+        
+    }
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start', paddingHorizontal: 20 }}>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
             <View style={{ alignItems: 'center', justifyContent: 'center', width: 72, height: 72, backgroundColor: C.buttonSecondary}}>
