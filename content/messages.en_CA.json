@@ -17,9 +17,9 @@
         "starlinkSafetyPlus": "STARLINK<sup>&reg;</sup> Safety Plus",
         "starlinkSecurityPlus": "STARLINK<sup>&reg;</sup> Security Plus",
         "starlinkConcierge": "STARLINK<sup>&reg;</sup> Concierge",
-        "starlinkSafetyAndSecurity": "STARLINK<sup>&reg;</sup> Safety &amp; Security Plus",
+        "starlinkSafetyAndSecurity": "STARLINK<sup>&reg;</sup> Safety \u0026 Security Plus",
         "starlinkSafetyAndSecurityPHEV": "** MISSING **",
-        "starlinkSafetySecurityAndConcierge": "STARLINK<sup>&reg;</sup> Safety &amp; Security Plus Concierge",
+        "starlinkSafetySecurityAndConcierge": "STARLINK<sup>&reg;</sup> Safety \u0026 Security Plus Concierge",
         "myRetailer": "My Dealer",
         "serviceAndMaintenance": "** MISSING **",
         "shopPartsAccessories": "** MISSING **",
@@ -32,7 +32,7 @@
         "manageStarlinkSubscription": "Manage STARLINK<sup>&reg;</sup>&nbsp;Subscription",
         "starlinkCommunicationPreferences": "STARLINK<sup>&reg;</sup>&nbsp;Communication Preferences",
         "starlinkNotifications": "** MISSING **",
-        "recalls": "Recalls &amp; Service Campaigns",
+        "recalls": "Recalls \u0026 Service Campaigns",
         "title": "Title",
         "gender": "Gender",
         "male": "Male",
@@ -44,7 +44,7 @@
         "fr": "Fran&ccedil;ais",
         "driverAlertsDisclaimer" : "By setting this alert, you confirm you have obtained the consent of the driver and any passenger(s) of the vehicle to being monitored in this manner.",
         "subscribeNow": "Subscribe Now",
-        "termsOfUseAndPrivacy": "Terms of Use &amp; Privacy",
+        "termsOfUseAndPrivacy": "Terms of Use \u0026 Privacy",
         "starlinkConnectedServices": "SUBARU Starlink<sup>&reg;</sup> Connected Services",
         "starlinkConnectedServicesMenuLink": "STARLINK<sup>&reg;</sup> Connected Services",
         "safetyFeatures": "Safety Features",
@@ -176,9 +176,9 @@
         "postalCode": "Postal Code *",
         "accessLevel": "Access Level",
         "level1Access": "Level 1 Access",
-        "level1Description": "<li>Remote Lock</li><li>Remote Unlock</li><li>Remote Horn/Lights</li><li>Remote Vehicle Condition Check</li><li class=\"capabilityRES\">Remote Engine Starter &amp; Climate Control</li><li>Monthly Vehicle Health Report</li><li>Remote Vehicle Locator</li><li class=\"capabilityRCC\">Remote Climate Control for PHEV</li><li class=\"capabilityPHEV\">Remote Battery Charging Timer</li><li>Boundary Alert</li><li>Speed Alert</li><li>Curfew Alert</li><li>Service Appointment Scheduler</li>",
+        "level1Description": "<li>Remote Lock</li><li>Remote Unlock</li><li>Remote Horn/Lights</li><li>Remote Vehicle Condition Check</li><li class=\"capabilityRES\">Remote Engine Starter \u0026 Climate Control</li><li>Monthly Vehicle Health Report</li><li>Remote Vehicle Locator</li><li class=\"capabilityRCC\">Remote Climate Control for PHEV</li><li class=\"capabilityPHEV\">Remote Battery Charging Timer</li><li>Boundary Alert</li><li>Speed Alert</li><li>Curfew Alert</li><li>Service Appointment Scheduler</li>",
         "level2Access": "Level 2 Access",
-        "level2Description": "<li>Remote Lock</li><li>Remote Unlock</li><li>Remote Horn/Lights</li><li>Remote Vehicle Condition Check</li><li class=\"capabilityRES\">Remote Engine Starter &amp; Climate Control</li><li>Monthly Vehicle Health Report</li><li>Remote Vehicle Locator</li><li class=\"capabilityRCC\">Remote Climate Control for PHEV</li><li class=\"capabilityPHEV\">Remote Battery Charging Timer</li><li>Service Appointment Scheduler</li>",
+        "level2Description": "<li>Remote Lock</li><li>Remote Unlock</li><li>Remote Horn/Lights</li><li>Remote Vehicle Condition Check</li><li class=\"capabilityRES\">Remote Engine Starter \u0026 Climate Control</li><li>Monthly Vehicle Health Report</li><li>Remote Vehicle Locator</li><li class=\"capabilityRCC\">Remote Climate Control for PHEV</li><li class=\"capabilityPHEV\">Remote Battery Charging Timer</li><li>Service Appointment Scheduler</li>",
         "addContacts": "Add To List Of Emergency Contacts",
         "relationship": "Relationship *",
         "setContacts": "Set as primary Emergency Contact",
@@ -442,7 +442,7 @@
     },
     "climateControlInfo": {
         "climateControl": "Climate Control",
-        "description": "Create settings so your vehicle will be comfortable when you are ready to go. Set the temperature, warm the seats, and turn on the front &amp; rear defrost with a touch on your app.",
+        "description": "Create settings so your vehicle will be comfortable when you are ready to go. Set the temperature, warm the seats, and turn on the front \u0026 rear defrost with a touch on your app.",
         "createNew": "Create a New Climate Control Setting"
     },
     "climateControlSetting" : {
@@ -462,9 +462,9 @@
         "10minutes": "10 minutes",
         "airFlow": "Air Flow",
         "face": "FACE",
-        "faceFeet": "FACE &amp; FEET",
+        "faceFeet": "FACE \u0026 FEET",
         "feet": "FEET",
-        "defrosterFeet": "DEFROSTER &amp; FEET",
+        "defrosterFeet": "DEFROSTER \u0026 FEET",
         "frontDefroster": "FRONT DEFROSTER",
         "heatedSeats": "Heated Seats",
         "driver": "DRIVER",
@@ -588,7 +588,7 @@
     "driverAlertsGen2": {
         "driverAlertsSettings": "Driver Alerts Settings",
         "currentPlan": "Current Plan",
-        "enrollRenewMessage": "To access STARLINK<sup>&reg;</sup> connected services, please enroll/renew your STARLINK<sup>&reg;</sup> Safety Plus &amp; Security Plus Plan by going to www.mysubaru.ca."
+        "enrollRenewMessage": "To access STARLINK<sup>&reg;</sup> connected services, please enroll/renew your STARLINK<sup>&reg;</sup> Safety Plus \u0026 Security Plus Plan by going to www.mysubaru.ca."
     },
     "emailSub": {
         "title": "Email Subscriptions",
@@ -714,7 +714,7 @@
     "forgotPasswordContactsPanel" : {
         "pageDescription": "Select the contact method that you would like to have the reset access code delivered to.",
         "contactMethod": "Contact Method",
-        "termsConditions": "<strong>Terms &amp; Conditions</strong><br />Text Messages: By selecting a phone number you agree to receive notifications via Text from Subaru. Message frequency depends on settings. Message and Data rates may apply. Mobile carriers are not liable for delayed or undelivered messages. Reply STOP to cancel. Support: <nobr>1 (800) 894-4212</nobr>"
+        "termsConditions": "<strong>Terms \u0026 Conditions</strong><br />Text Messages: By selecting a phone number you agree to receive notifications via Text from Subaru. Message frequency depends on settings. Message and Data rates may apply. Mobile carriers are not liable for delayed or undelivered messages. Reply STOP to cancel. Support: <nobr>1 (800) 894-4212</nobr>"
     },
     "forgotPasswordVerificationPanel" : {
         "pageDescriptiona": "Enter the access code that was provided to you.",
@@ -776,7 +776,7 @@
         "nameAlreadyExists": "Name already exists."
     },
     "helpAndSupport": {
-        "support": "Owner Support &amp; Resources"
+        "support": "Owner Support \u0026 Resources"
     },
     "home": {
         "welcome": "Welcome",
@@ -790,13 +790,13 @@
         "locateVehicle": "Locate Vehicle",
         "lockDoors": "Lock",
         "unlockDoors": "Unlock",
-        "hornLights": "Horn &amp; Lights",
+        "hornLights": "Horn \u0026 Lights",
         "safetyPlus": "Safety Plus",
         "servicesNotFunction2": "Your Subaru STARLINK<sup>&reg;</sup> Services may not be functioning as expected. <br /> Please schedule an appointment with your preferred dealer.",
         "notSubscribed": "You are currently not subscribed.",
         "startEngine": "Start<br />Engine",
         "stopEngine": "Stop<br />Engine",
-        "viewBatteryCharge": "View Battery &amp; Charge",
+        "viewBatteryCharge": "View Battery \u0026 Charge",
         "remoteClimateControl": "Remote<br />Climate<br />Control",
         "climateControlStop": "Climate<br />Control<br />Stop",
         "chargeNow": "Charge<br />Now",
@@ -809,7 +809,7 @@
         "vehicleConditionCheck": "Vehicle<br />Condition Check",
         "serviceReminder": "Service<br />Reminder",
         "messages": "Messages",
-        "specialOffersEvents": "View your Special Offers &amp; Events",
+        "specialOffersEvents": "View your Special Offers \u0026 Events",
         "receiveRecall": "Receive recall info, service reminders <span style=\"display: inline-block;\">and more</span>",
         "specialOffers": "Special<br />Offers",
         "subaruEvents": "Subaru <br />Events",
@@ -842,8 +842,8 @@
         "vehicleRecallAlert": "Vehicle recall/campaign alert!",
         "vehicleRecallAlertTitle": "VEHICLE RECALL/CAMPAIGN ALERT",
         "seeDetails": "See Details",
-        "offersEventsNoBr": "Offers &amp; Events",
-        "subscriptionServices": "Subscription &amp; Services",
+        "offersEventsNoBr": "Offers \u0026 Events",
+        "subscriptionServices": "Subscription \u0026 Services",
         "upgradeNow": "Upgrade Now",
         "service": "Service<br />&nbsp;",
         "starlinkRemoteServices": "Subaru STARLINK<sup>&reg;</sup> Remote Services",
@@ -855,13 +855,13 @@
         "lessThanExpect": "A new Subaru for less than you might expect.",
         "learnMore": "Learn More",
         "starlinkErrorHeader": "STARLINK<sup>&reg;</sup> Error",
-        "adjustClimateControl": "Adjust Climate &amp; Delay Settings",
+        "adjustClimateControl": "Adjust Climate \u0026 Delay Settings",
         "adjustDelaySettings": "Adjust Delayed Start Settings",
         "batteryCharge": "Battery &amp;<br />Charge",
         "setDriverAlerts": "Set Driver Alerts",
         "subscriptionUpgradeText": "Upgrade your STARLINK<sup>&reg;</sup> Safety Plus plan with added security and convenience features such as remote services, stolen vehicle recovery, security alarm notification and more. Upgrade now!",
         "contactCustomerSupport": "Contact Customer Support",
-        "adjustClimateSettings": "Adjust Climate &amp; Delay Settings",
+        "adjustClimateSettings": "Adjust Climate \u0026 Delay Settings",
         "repeatRES": "Repeat this action to add more runtime <nobr>(Limited to 20 consecutive minutes)</nobr>",
         "healthIsGood": "Health Report: Normal",
         "healthReport": "Health Report: ",
@@ -904,11 +904,7 @@
         "footerDescription": "Recalls issued prior to 2010 are not included in search results.<br />For general information regarding Recalls, please contact the <a data-exturl=\"https://www.subaru.ca/contactus\" class=\"text-link textLink extWeblink disclaimer-block__link\">Subaru&nbsp;Customer&nbsp;Service</a> team.",
         "footerHawaiiDescription": "Recalls issued prior to 2010 are not included in search results.<br />For general information regarding Recalls, please contact the <a data-exturl=\"http://www.subaruhawaii.com/find-a-dealer\" class=\"text-link textLink extWeblink disclaimer-block__link\">local dealer</a>."
     },
-    "hornLightPanel": {
-        "title": "Remote Horn &amp; Lights",
-        "hornLights": "Horn &amp; Lights",
-        "justLights": "Just Lights"
-    },
+
     "importantMessage": {
         "title": "Important Messages",
         "renewalNotice": "STARLINK<sup>&reg;</sup> Renewal Notice",
@@ -949,11 +945,11 @@
         "preparingForAdventure": "** MISSING **",
         "packingUpTheSubaru": "** MISSING **",
         "back": "Back",
-        "service": "Vehicle Service &amp; Maintenance",
+        "service": "Vehicle Service \u0026 Maintenance",
         "certifiedCollisionCenters":"** MISSING **"
     },
     "interestsAndActivity": {
-        "title": "Interests &amp; Activities",
+        "title": "Interests \u0026 Activities",
         "subscribeAllLifestyles": "Subscribe to all Lifestyles",
         "adventureFestivals": "Adventure / Festivals",
         "antiques": "Antiques",
@@ -962,7 +958,7 @@
     },
     "invoices": {
         "title": "Invoices",
-        "invoicesRefundNotices": "STARLINK<sup>&reg;</sup> Invoice &amp; Refund History",
+        "invoicesRefundNotices": "STARLINK<sup>&reg;</sup> Invoice \u0026 Refund History",
         "viewAll": "View a copy of your recent STARLINK<sup>&reg;</sup> invoices and refund receipts below.",
         "manualRefundCopy": "Lease, finance and some credit card plans cannot be automatically refunded when cancelled. You should have received an email with next steps for processing your refund. If you need further assistance please contact STARLINK<sup>&reg;</sup> Connected Services Representatives at 1 (800) 263-8802.",
         "invoiceNumber": "Number",
@@ -1044,7 +1040,7 @@
         "maintenanceInterval": "Based on your vehicle's estimated mileage <strong class=\"estimatedMileage\"></strong> and service history you may be due for the following maintenance interval:",
         "updateMileage": "Update Mileage",
         "contactRetailer": "Please contact your preferred dealer for next service details.",
-        "recommendedMaintenance": "The most accurate recommended maintenance intervals are based on mileage or time elapsed since last service - whichever occurs first. For simplicity, the intervals shown are based on mileage only and are the recommended minimums. More frequent maintenance may be needed depending on road conditions, weather and individual driving habits*, to name a few. See your Warranty &amp; Maintenance Booklet for more details.",
+        "recommendedMaintenance": "The most accurate recommended maintenance intervals are based on mileage or time elapsed since last service - whichever occurs first. For simplicity, the intervals shown are based on mileage only and are the recommended minimums. More frequent maintenance may be needed depending on road conditions, weather and individual driving habits*, to name a few. See your Warranty \u0026 Maintenance Booklet for more details.",
         "severeDrivingCondition": "*Examples of Severe Driving Condition:",
         "severeDrivingConditionList": "<li>Repeated short distance driving.</li><li>Driving on rough and/ or muddy roads.</li><li>Driving in dusty conditions.</li><li>Driving in extremely cold weather.</li><li>Driving in areas where road salts or other corrosive materials are used.</li><li>Living in coastal areas.</li><li>Repeated trailer towing.</li>",
         "futureServices": "Future Services",
@@ -1571,13 +1567,10 @@
         "currentPwd": "Current Password",
         "newPwd": "New Password",
         "confirmPwd": "Confirm Password",
-        "agreeToTerms": "I agree to the&nbsp;<a data-exturl=\"https://www.subaru.ca/privacy\" class=\"textLink text-link extWeblink\">Terms of Use &amp; Privacy</a>"
+        "agreeToTerms": "I agree to the&nbsp;<a data-exturl=\"https://www.subaru.ca/privacy\" class=\"textLink text-link extWeblink\">Terms of Use \u0026 Privacy</a>"
     },
     "unlockSettingPanel": {
-        "unlock": "Unlock",
-        "allDoors": "All Doors",
-        "justDriverDoor": "Just Driver Door",
-        "tailgate": "Tailgate"
+        "justDriverDoor": "Just Driver Door"
     },
     "tutorials": {
         "title": "Tutorials",
@@ -1847,13 +1840,13 @@
         "howDoIChangeMyPreferredRetailer": "How do I change my preferred dealer?",
         "howDoIChangeMyPreferredRetailerAnswer": "Select \"My Dealer\" in the menu navigation. Locate the button that is center aligned titled \"Find a Different Dealer\". Enter the postal code or city, province of the Dealer you wish to change and select the name of the Dealer from the list. Locate the button titled \"Make This Your Dealer\" to change preferred dealers.",
         "howDoIScheduleAnAppointment": "How do I schedule an appointment?",
-        "howDoIScheduleAnAppointmentAnswer": "Select \"Vehicle Service &amp; Maintenance\" in the menu navigation and then select \"Schedule Service\". Select the button titled \"Schedule a Service Appointment\" to schedule an appointment at your preferred dealer.",
+        "howDoIScheduleAnAppointmentAnswer": "Select \"Vehicle Service \u0026 Maintenance\" in the menu navigation and then select \"Schedule Service\". Select the button titled \"Schedule a Service Appointment\" to schedule an appointment at your preferred dealer.",
         "howDoICancelAnAppointment": "How do I cancel an appointment?",
         "howDoICancelAnAppointmentAnswer": "Select \"Manage Subscriptions\" in the menu navigation and then select \"Subscription & Services\". Open the \"My SUBARU STARLINK<sup>&reg;</sup> Subscriptions\" drop down and select the \"Manage Your Subscriptions\" button.",
         "howDoIFindInformationAboutMyPreferredRetailer": "How do I find information about my preferred dealer?",
         "howDoIFindInformationAboutMyPreferredRetailerAnswer": "Select \"My Profile\" in the menu navigation and then select \"My Dealer\" to see details about your preferred dealer.",
         "howDoIRecordAPreviousServiceVisit": "How do I record a previous service visit?",
-        "howDoIRecordAPreviousServiceVisitAnswer": "Select \"Vehicle Service &amp; Maintenance\" in the menu navigation and then select \"Enter Service Record\".",
+        "howDoIRecordAPreviousServiceVisitAnswer": "Select \"Vehicle Service \u0026 Maintenance\" in the menu navigation and then select \"Enter Service Record\".",
         "starlinkRemoteServices": "STARLINK<sup>&reg;</sup> Connected Services",
         "howDoIKnowWhatMyTirePressureIs": "How do I know what my tire pressure is?",
         "howDoIKnowWhatMyTirePressureIsAnswer": "Select \"STARLINK<sup>&reg;</sup>\" in the menu navigation and then select \"Vehicle Condition Check\" from the menu drop down. The Vehicle Condition Check page will show you what the current tire pressure is for each tire.",
@@ -1875,7 +1868,7 @@
         "howDoIDowngrade": "How do I downgrade?",
         "howDoIDowngradeAnswer": "Select \"STARLINK<sup>&reg;</sup>\" in the menu navigation and then select \"Manage Subscriptions\". Open the \"My SUBARU STARLINK<sup>&reg;</sup> Subscriptions\" drop down and select the \"Manage Your Subscriptions\" button.",
         "howDoICancelASubscription": "How do I cancel a subscription?",
-        "howDoICancelASubscriptionAnswer": "Select \"Manage Subscriptions\" in the menu navigation and then select \"Subscription &amp; Services\". Open the \"My SUBARU STARLINK<sup>\u00AE</sup> Subscriptions\" drop down and select the \"Manage Your Subscriptions\" button.",
+        "howDoICancelASubscriptionAnswer": "Select \"Manage Subscriptions\" in the menu navigation and then select \"Subscription \u0026 Services\". Open the \"My SUBARU STARLINK<sup>\u00AE</sup> Subscriptions\" drop down and select the \"Manage Your Subscriptions\" button.",
         "refundInformation": "Refund Information",
         "subscriptionServices": "Subscription Services",
         "howDoICreateABoundaryAlert": "How do I create/change a boundary alert?",
@@ -2040,7 +2033,7 @@
     },
     "twoStepAuthentication": {
         "helpDisclaimer": "If you are having trouble logging in, please call Subaru Customer Support for assistance at <a href=\"tel://18008944212\" class=\"text-link\">1 (800) 894-4212</a>.",
-        "termsConditions": "<strong>Terms &amp; Conditions</strong><br />Text Messages: By selecting a phone number you agree to receive notifications via Text from Subaru. Message frequency depends on settings. Message and Data rates may apply. Mobile carriers are not liable for delayed or undelivered messages. Reply STOP to cancel. Support: <a href=\"tel://18008944212\" class=\"text-link\">1 (800) 894-4212</a>",
+        "termsConditions": "<strong>Terms \u0026 Conditions</strong><br />Text Messages: By selecting a phone number you agree to receive notifications via Text from Subaru. Message frequency depends on settings. Message and Data rates may apply. Mobile carriers are not liable for delayed or undelivered messages. Reply STOP to cancel. Support: <a href=\"tel://18008944212\" class=\"text-link\">1 (800) 894-4212</a>",
         "verifyInputTitle": "Your verification code<br />is on the way.",
         "verifyInputSubTitle": "Please allow up to 20 seconds to receive the code prior to clicking&nbsp;\"Resend\".",
         "didYouKnow": "Did you know that you can name your device and track usage? Go&nbsp;to <a class=\"text-link extWeblink\" data-exturl=\"https://www.mysubaru.ca/profile/authorizedDevices.html\">MySubaru.ca</a> to get started.",
@@ -2050,7 +2043,7 @@
         "accountLocked2": "To unlock your account, please call Subaru Customer Support for assistance at&nbsp;<a href=\"tel://18008944212\" class=\"text-link\">1&nbsp;(800)&nbsp;894-4212</a>."
     },
     "subscriptionServices": {
-        "title": "Subscriptions &amp; Services",
+        "title": "Subscriptions \u0026 Services",
         "starlinkSubscriptions": "My SUBARU STARLINK<sup>&reg;</sup> Subscriptions",
         "currentlyNoSubscription": "You are not currently subscribed to STARLINK<sup>&reg;</sup> Connected Services.",
         "startYourSubscription": "Start Your Subscription",
@@ -2107,7 +2100,7 @@
       "starlinkConciergeDescription1": "This service allows you to press the blue \"i\" button in vehicle and be connected to a STARLINK<sup>&reg;</sup> Connected Services Representatives Representative. The concierge can search for Points of Interest for you and send them to your vehicle's navigation system (if applicable). The concierge can also assist with making restaurant reservations, booking a hotel, finding event tickets, or scheduling a service appointment at a Subaru Dealer.",
       "monthlyConciergeSubscription": "Monthly Concierge Subscription",
       "conciergeServiceExtended": "Concierge Service<br />Extended to Safety Plus<br />Renewal Date",
-      "allSafetyAndSecurityPlusFeatures": "All STARLINK<sup>&reg;</sup> Safety Plus &amp; Security Plus Features",
+      "allSafetyAndSecurityPlusFeatures": "All STARLINK<sup>&reg;</sup> Safety Plus \u0026 Security Plus Features",
       "hotelReservations": "Hotel - Locating and securing reservations",
       "rentalCar": "Rental car",
       "uberOrTaxi": "Uber or Taxi",
@@ -2247,15 +2240,15 @@
         "vertexError": "There was an issue validating the address that was provided for your MySubaru account. Please verify the physical home address created for your MySubaru account by going to the Menu > My Profile > Contact Information. Please update with the correct address and proceed with enrollment. If you continue to experience this issue, please contact STARLINK<sup>&reg;</sup> Connected Services Representatives at 1 (800) 263-8802.",
         "selectATimeZone": "Select a time zone",
         "bestOfBothWorlds": "The Best Of Both Worlds",
-        "starlinkSafetyAndSecurity": "STARLINK<sup>&reg;</sup> SAFETY&nbsp;PLUS &amp; SECURITY&nbsp;PLUS",
-        "receiveTenYearsFree": "Receive STARLINK<sup>&reg;</sup> Safety Plus &amp; Security Plus for 10 year free. Receive vehicle health alerts, assistance in case of emergencies and access to your vehicle's features from anywhere. Track your vehicle and activate features remotely through your desktop or the MySubaru app, giving you control 24/7.",
+        "starlinkSafetyAndSecurity": "STARLINK<sup>&reg;</sup> SAFETY&nbsp;PLUS \u0026 SECURITY&nbsp;PLUS",
+        "receiveTenYearsFree": "Receive STARLINK<sup>&reg;</sup> Safety Plus \u0026 Security Plus for 10 year free. Receive vehicle health alerts, assistance in case of emergencies and access to your vehicle's features from anywhere. Track your vehicle and activate features remotely through your desktop or the MySubaru app, giving you control 24/7.",
         "freeTrial": "Free Trial",
         "annualSubscription": "Annual Subscription",
         "renewsOn": "Renews on",
         "tcTextPart1": "I agree to the",
 		"tcTextPart2": " SUBARU STARLINK<sup>&reg;</sup> Connected Services Terms of Use",
 		"tcTextPart3": ", including Over-the-Air Updates, to the",
-		"tcTextPart4": " Websites &amp; Mobile Apps Terms of Use",
+		"tcTextPart4": " Websites \u0026 Mobile Apps Terms of Use",
 		"tcTextPart5": " and to the",
 		"tcTextPart6": " SUBARU STARLINK<sup>&reg;</sup> Connected Services Privacy Policy",
 		"through": "through",
@@ -2420,11 +2413,11 @@
     "starlinkPlan": {
         "subscriptionDetails": "Subscription Details",
         "currentStarlinkPlan": "Current SUBARU STARLINK<sup>&reg;</sup> Plan",
-        "safetyAndSecurityPlan": "Safety Plus &amp; Security Plan",
+        "safetyAndSecurityPlan": "Safety Plus \u0026 Security Plan",
         "packageIncludes": "Package includes:",
         "safetyPlusPackage": "SAFETY PLUS Package",
         "stolenVehicleRecovery": "Stolen Vehicle Recovery",
-        "remoteHornLights": "Remote Horn &amp; Lights",
+        "remoteHornLights": "Remote Horn \u0026 Lights",
         "manageAccount": "Manage Account"
     },
     "starlinkLocation": {
@@ -2467,7 +2460,7 @@
         "serviceHistoryDue": "and service history you may be due for the following maintenance interval:",
         "updateMileage": "Update Mileage",
         "noServiceReminders": "There are currently no service reminders",
-        "recommendedIntervals": "The most accurate recommended maintenance intervals are based on mileage or time elapsed since last service - whichever occurs first. For simplicity, the intervals shown are based on mileage only and are the recommended minimums. More frequent maintenance may be needed depending on road conditions, weather and individual driving habits*, to name a few. See your Warranty &amp; Maintenance Booklet for more details.",
+        "recommendedIntervals": "The most accurate recommended maintenance intervals are based on mileage or time elapsed since last service - whichever occurs first. For simplicity, the intervals shown are based on mileage only and are the recommended minimums. More frequent maintenance may be needed depending on road conditions, weather and individual driving habits*, to name a few. See your Warranty \u0026 Maintenance Booklet for more details.",
         "examples": "*Examples of Severe Driving Condition:",
         "severeDrivingListItem1": "Repeated short distance driving.",
         "severeDrivingListItem2": "Driving on rough and/ or muddy roads.",
@@ -2546,13 +2539,13 @@
         "primaryPhoneNumber": "Primary Phone Number",
         "lockVehicle": "Lock Vehicle",
         "unlockVehicle": "Unlock Vehicle",
-        "hornLights": "Horn &amp; Lights",
+        "hornLights": "Horn \u0026 Lights",
         "alarm": "Alarm",
         "stolenVehicleTracker": "Stolen Vehicle Tracker",
         "vehicleHealthPreferences": "Vehicle Health Preferences",
         "emailCommunicationsSentTo": "Email Communications will be sent to:",
         "warningLightsCommunications": "Warning Lights Communications",
-        "vehicleHealthAndUsageReport": "Vehicle Health &amp; Usage Report",
+        "vehicleHealthAndUsageReport": "Vehicle Health \u0026 Usage Report",
         "serviceScheduleSupport": "Service Schedule Support",
         "phone": "Phone"
     },
@@ -2654,7 +2647,7 @@
         "locateVehicle": "Locate Vehicle",
         "lockDoors": "Lock Doors",
         "unlockDoors": "Unlock Doors",
-        "hornLights": "Horn &amp; Lights",
+        "hornLights": "Horn \u0026 Lights",
         "trips": "Destinations"
     },
     "remoteServiceCommunicationsGen2": {
@@ -2665,8 +2658,8 @@
         "vehicleDiagnosticAlerts": "Vehicle Diagnostic Alerts",
         "subaruCommunications": "Subaru Communications",
         "sendVehicleLocation": "Send Vehicle Location at Ignition-Off",
-        "termsConditionsCheckBoxDescription": "Terms &amp; Conditions: Text Messages: By Checking this box you agree to receive notifications via Text from Subaru. Message frequency depends on settings. Message and Data rates may apply. Mobile carriers are not liable for delayed or undelivered messages. Reply STOP to cancel. Support:",
-        "termsAndConditionsContent": "I agree to the Terms &amp; Conditions",
+        "termsConditionsCheckBoxDescription": "Terms \u0026 Conditions: Text Messages: By Checking this box you agree to receive notifications via Text from Subaru. Message frequency depends on settings. Message and Data rates may apply. Mobile carriers are not liable for delayed or undelivered messages. Reply STOP to cancel. Support:",
+        "termsAndConditionsContent": "I agree to the Terms \u0026 Conditions",
         "push": "Push",
         "pushNotifications": "Push Notifications",
         "pushNotificationsContent": "In order to receive push notifications, please make sure you have enabled push notifications for the MySubaru app in your device's settings.",
@@ -2693,8 +2686,8 @@
         "change": "Change"
     },
     "remoteService": {
-        "currentlySubscribed": "You are currently subscribed to STARLINK<sup>&reg;</sup> Safety Plus Plan. To access STARLINK<sup>&reg;</sup> connected services, please upgrade to STARLINK<sup>&reg;</sup> Safety Plus &amp; Security Plan by going to www.mysubaru.ca.",
-        "accessRemoteServices": "To access STARLINK<sup>&reg;</sup> connected services, please enroll/renew your STARLINK<sup>&reg;</sup> Safety Plus &amp; Security Plus Plan by going to www.mysubaru.ca.",
+        "currentlySubscribed": "You are currently subscribed to STARLINK<sup>&reg;</sup> Safety Plus Plan. To access STARLINK<sup>&reg;</sup> connected services, please upgrade to STARLINK<sup>&reg;</sup> Safety Plus \u0026 Security Plan by going to www.mysubaru.ca.",
+        "accessRemoteServices": "To access STARLINK<sup>&reg;</sup> connected services, please enroll/renew your STARLINK<sup>&reg;</sup> Safety Plus \u0026 Security Plus Plan by going to www.mysubaru.ca.",
         "vehicleDoesNotHaveRemoteServices": "Your vehicle does not have connected services. Learn more by clicking link below.",
         "DOOR_AJAR": "Your vehicle could not be remotely started because your doors are ajar.",
         "OTHER": "This command is unavailable. Please try again later.",
@@ -3004,7 +2997,7 @@
       "fetchVehicleStatusFinished": "<strong>VEHICLE STATUS</strong><br />retrieved at "
     },
     "remoteEngineStart": {
-        "createSettings": "Create settings so your vehicle will be comfortable when you are ready to go. Set the temperature, warm the seats, and turn on the front &amp; rear defrost easily with your app.",
+        "createSettings": "Create settings so your vehicle will be comfortable when you are ready to go. Set the temperature, warm the seats, and turn on the front \u0026 rear defrost easily with your app.",
         "createNewEngineSetting": "Create a New Start Engine Setting"
     },
     "remoteEngineSetting": {
@@ -3101,7 +3094,7 @@
         "starlinkLocation": "Starlink<sup>&reg;</sup>Location",
         "remoteServiceCommunications": "Remote Service Communications",
         "rsc_preview": "Remote Service Communications Preview",
-        "hornLightPanel": "Horn &amp; Light Panel",
+        "hornLightPanel": "Horn \u0026 Light Panel",
         "authorizeDevicePanel": "Authorized Device Panel",
         "larryTest": "Larry's Test [Date Format/Dialog]",
         "starlinkPlan": "Starlink<sup>&reg;</sup>Plan",
@@ -3119,7 +3112,7 @@
         "warranty": "Warranty Page",
         "addVehicle": "Add Vehicle Page",
         "manageVehicle": "Manage Vehicle Page",
-        "tipsInfo": "Tips &amp; Info",
+        "tipsInfo": "Tips \u0026 Info",
         "tipVideos": "Tip Videos",
         "tipVideo": "Tip Video",
         "tipFAQs": "Tip FAQs",

@@ -7,7 +7,7 @@ import { MyStyleSheet } from '../components/MyStyles';
 import { Palette, staticMidnight, staticWhite, useColors } from '../components/MyColors';
 import { Language, useLanguage } from '../model/Language';
 import { MyAppIcon } from '../components/MyAppIcon';
-import { descriptionForUnlockDoorType, executeRemoteLock, executeRemoteStart, executeRemoteStop, executeRemoteUnlock, UnlockDoorType } from '../net/RemoteCommand';
+import { descriptionForUnlockDoorType, executeHornLights, executeLightsOnly, executeRemoteLock, executeRemoteStart, executeRemoteStop, executeRemoteUnlock, HornLightsParameters, stopHornLights, UnlockDoorType } from '../net/RemoteCommand';
 import { MyPressable } from '../components/MyPressable';
 import { presentModal } from '../stores/Local';
 import { ListItem } from '../components/MySimpleChoiceModal';
@@ -75,6 +75,7 @@ export const HomeTab = () => {
     const session: Session = useSession();
     const [engineStatus, setEngineStatus] = useState(false); // TODO: Listen on VehicleStatus channel
     const [locked, setLocked] = useState(true); // TODO: Listen on VehicleStatus channel
+    const [flashing, setFlashing] = useState(false); // TODO: Listen on VehicleStatus channel
     const vehicle = session?.vehicles[session?.currentVehicleIndex];
     const rowStyle = { flexDirection: 'row', flexWrap: 1, alignSelf: 'stretch', justifyContent: 'space-between' };
     const buttonSize = Math.min((Dimensions.get('window').width - 80) / 3, 120) ;
@@ -113,9 +114,28 @@ export const HomeTab = () => {
         const resp = await executeRemoteUnlock({pin: pinResult.pin, delay: 0, unlockDoorType: unlockDoorType, vin: vehicle.vin });
         if (resp.success) { setLocked(false); }
     };
-    const hornLights = async () => {
-        
-    }
+    const hornLightsStart = async () => {
+        if (!vehicle) { return; }
+        const items: ListItem[] = [
+            {value: "hornLights", description: i18n.hornLightPanel.hornLights},
+            {value: "lightsOnly", description: i18n.hornLightPanel.justLights}
+        ];
+        const choiceResult = await presentModal({ type: "MySimpleChoice", title: i18n.hornLightPanel.title, items: items });
+        if (choiceResult.type !== "choice") { return; }
+        const selection = choiceResult.selection.value;
+        const pinResult = await presentModal({ type: "PIN" });
+        if (pinResult.type !== "pin") { return; }
+        const parameters: HornLightsParameters = {delay: 0, pin: pinResult.pin, vin: vehicle.vin};
+        const resp = await (selection === "hornLights" ? executeHornLights : executeLightsOnly)(parameters);
+        if (resp.success) { setFlashing(true); }
+    };
+    const hornLightsStop = async () => {
+        if (!vehicle) { return; }
+        const pin = "1234"; // TODO: Read from local storage
+        const parameters: HornLightsParameters = {delay: 0, pin: pin, vin: vehicle.vin};
+        const resp = await stopHornLights(parameters);
+        if (resp.success) { setFlashing(false); }
+    };
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'flex-start', paddingHorizontal: 20 }}>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
             <View style={{ alignItems: 'center', justifyContent: 'center', width: 72, height: 72, backgroundColor: C.buttonSecondary}}>
@@ -129,13 +149,13 @@ export const HomeTab = () => {
         </View>
         <View style={{flex: 1}}></View>
         <View style={rowStyle}>
-            <HomeScreenActionButton glyph="alertInfo" style={buttonStyle} title="Driver Alerts" subtitle='When Leaving'></HomeScreenActionButton>
-            <HomeScreenActionButton glyph="lights" style={buttonStyle} title="Horn & Lights" subtitle='Off'></HomeScreenActionButton>
+            <HomeScreenActionButton glyph="alertInfo" style={buttonStyle} title="Driver Alerts" subtitle='Off'></HomeScreenActionButton>
+            <HomeScreenActionButton glyph="valet" style={buttonStyle} title="Valet Mode" subtitle='Off'></HomeScreenActionButton>
             <HomeScreenActionButton glyph="map" style={buttonStyle} title="Trips"></HomeScreenActionButton>
         </View>
         <View style={rowStyle}>
-            <HomeScreenActionButton glyph={locked ? "unlock" : "lock"} style={buttonStyle} title={locked ? i18n.home.unlockDoors : i18n.home.lockDoors} subtitle='Locked' onPress={locked ? remoteUnlock : remoteLock}></HomeScreenActionButton>
-            <HomeScreenActionButton glyph="lights" style={buttonStyle} title="Horn & Lights" subtitle='Off'></HomeScreenActionButton>
+            <HomeScreenActionButton glyph={locked ? "unlock" : "lock"} style={buttonStyle} title={locked ? i18n.home.unlockDoors : i18n.home.lockDoors} onPress={locked ? remoteUnlock : remoteLock}></HomeScreenActionButton>
+            <HomeScreenActionButton glyph={flashing ? "hornLights" : "lights"} style={buttonStyle} title={i18n.hornLightPanel.hornLights} subtitle={flashing ? "Flashing" : "Off"} onPress={flashing ? hornLightsStop : hornLightsStart}></HomeScreenActionButton>
             <HomeScreenActionButton glyph="mapMarker" style={buttonStyle} title="Location"></HomeScreenActionButton>
         </View>
         <View style={rowStyle}>

@@ -11,6 +11,9 @@ export function parseResponse(json: any, endpoint: string): Promise<NetworkRespo
             resolve({success: json, errorCode: null, dataName: null, data: undefined, endpoint: endpoint}); return;
         }
         const success = json["success"] ? true : false;
+        if (json["errorCode"] === "error" && json["errorMessage"]) {
+            console.log("SERVER ERROR :: " + json["errorMessage"]);
+        }
         // TODO: Validate dataName and errorCode against whitelists
         resolve({success: success, data: json["data"], dataName: json["dataName"], errorCode: json["errorCode"], endpoint: endpoint});
     })

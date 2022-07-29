@@ -882,11 +882,6 @@
         "adjustClimateSettings": "Adjust Climate &amp; Delay Settings",
         "setDriverAlerts": "Set Driver Alerts"
     },
-    "hornLightPanel": {
-        "title": "Remote Horn &amp; Lights",
-        "hornLights": "Horn &amp; Lights",
-        "justLights": "Just Lights"
-    },
     "importantMessage": {
         "title": "Important Messages",
         "renewalNotice": "STARLINK<sup>\u00AE</sup> Renewal Notice",
@@ -1581,10 +1576,7 @@
         "confirmPwd": "Confirm Password"
     },
     "unlockSettingPanel": {
-        "unlock": "Unlock",
-        "allDoors": "All Doors",
-        "justDriverDoor": "Driver Door Only",
-        "tailgate": "Tailgate Only"
+        "justDriverDoor": "Driver Door Only"
     },
     "tutorials": {
         "title": "Tutorials",
@@ -1637,7 +1629,7 @@
         "deleteAllFavoritesError": "We were unable to delete all of your favorite destinations at this time. Please try again. If problem persists please contact STARLINK<sup>\u00AE</sup> customer care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",
         "deleteAllTripsError": "We were unable to delete all of your trips. Please try again later. If this problem persists, please contact STARLINK<sup>\u00AE</sup> Customer Care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",
         "updateFavoriteError": "We were unable to update your favorite destination at this time. Please try again. If problem persists please contact STARLINK<sup>\u00AE</sup> customer care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",
-        "saveWorkError": "We were unable to save your work address at this time. Please try again. If problem persists please contact <sup>\u0026</sup> customer care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",
+        "saveWorkError": "We were unable to save your work address at this time. Please try again. If problem persists please contact <sup>\u0026 </sup> customer care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",
         "saveTripError": "We were unable to save your trip. Please try again later. If this problem persists, please contact STARLINK<sup>\u00AE</sup> Customer Care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",
         "deleteTripError": "We were unable to delete your trip at this time. Please try again. If problem persists please contact STARLINK<sup>\u00AE</sup> customer care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",
         "retrieveFavoritesError": "We were unable to retrieve you favorite destinations at this time. Please try again later. If problem persists please contact STARLINK<sup>\u00AE</sup> customer care at <a href=\"tel://18557532495\" class=\"text-link\">(855) 753-2495</a>.",

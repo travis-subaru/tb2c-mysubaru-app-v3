@@ -1,12 +1,12 @@
 import { ErrorCode } from "../model/Code";
 import { Language } from "../model/Language";
 import { VehicleCondition } from "../model/VehicleCondition";
-import { NetworkResponse, normalizeEndpoint } from "../stores/Response";
+import { NetworkResponse } from "../stores/Response";
 import { getSessionID } from "../stores/Session";
 import { myFetch, JSONHeaders, GETJSONRequest } from "./Fetch";
 
-export type RemoteServiceState = "started" | "scheduled" | "finished";
-export type RemoteServiceType = "engineStart" | "engineStop" | "lock" | "unlock" | "condition" | "hornLights";
+export type RemoteServiceState = "started" | "scheduled" | "finished" | "stopping";
+export type RemoteServiceType = "engineStart" | "engineStop" | "lock" | "unlock" | "condition" | "hornLights" | "lightsOnly";
 export type UnlockDoorType = "ALL_DOORS_CMD" | "FRONT_LEFT_DOOR_CMD" | "TAILGATE_DOOR_CMD";
 
 // ????: Some endpoints have _={timestamp}. Others don't. Why?
@@ -105,17 +105,50 @@ export const delay = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
 
+export interface RemoteServiceHistoryItem {
+    originalStatus: RemoteServiceStatus
+    currentState: RemoteServiceState
+}
+
+let _history: RemoteServiceHistoryItem[] = [];
+
+export const getRemoteServiceStatus = (serviceRequestId: string): RemoteServiceHistoryItem | undefined => {
+    return _history.filter((i) => { return i.originalStatus.serviceRequestId === serviceRequestId; })[0];
+}
+
+const pushRemoteServiceStatus = (status: RemoteServiceStatus) => {
+    console.log("START " + status.serviceRequestId);
+    const ids = _history.map((h, i) => { return {id: h.originalStatus.serviceRequestId, n: i}});
+    console.log("ids " + JSON.stringify(ids));
+    const match = ids.filter((p) => { return p.id == status.serviceRequestId }).map((id) => id.n);
+    console.log("match " + JSON.stringify(match));
+    if (match.length == 0) {
+        const item = {originalStatus: status, currentState: status.remoteServiceState }
+        _history.push(item);
+        console.log("INSERT " + status.serviceRequestId);
+    } else {
+        const index = match[0];
+        _history[index].currentState = status.remoteServiceState;
+        console.log("UPDATE " + status.serviceRequestId);
+    }
+    console.log("_history " + _history);
+}
+
 export const handleRemoteServiceResponse = async (statusEndpoint: string, response: NetworkResponse): Promise<NetworkResponse> => {
     if (response.success == false) { return response; }
     if (response.dataName !== "remoteServiceStatus") { return response; }
     const status: RemoteServiceStatus = response.data;
+    pushRemoteServiceStatus(response.data);
     switch (status.remoteServiceState) {
         case "started":
-            await delay(3000); // ????: Can I get a call time here
+            await delay(3000); // TODO: Some services should have longer pauses
             return await pollRemoteServiceStatus(statusEndpoint, status.serviceRequestId);
         case "scheduled":
-            await delay(3000); // ????: Can I get a call time here
+            await delay(3000); // TODO: Half distance to goal?
             await pollRemoteServiceStatus(statusEndpoint, status.serviceRequestId);
+        case "stopping":
+            await delay(3000); // TODO: Some services should have longer pauses
+            return await pollRemoteServiceStatus(statusEndpoint, status.serviceRequestId);
         case "finished":
             return {success: true, errorCode: null, dataName: null, data: null, endpoint: response.endpoint};
     }
@@ -129,21 +162,11 @@ export const pollRemoteServiceStatus = async (statusEndpoint: string, serviceReq
 };
 
 // TODO: Gen 0 / Gen 1 support?
-export const getRemoteCommandEndpoint = (command: RemoteServiceType): string => {
-    switch (command) {
-        case "engineStart": return "service/g2/engineStart/execute.json";
-        case "engineStop": return "service/g2/engineStop/execute.json";
-        case "lock": return "service/g2/lock/execute.json";
-        case "unlock": return "service/g2/unlock/execute.json";
-        case "condition": return "service/g2/condition/execute.json";
-        case "hornLights": return "service/g2/hornLights/execute.json";
-    }
-}
 
 export const executeRemoteStart = async (p: RemoteStartParameters): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const body = JSON.stringify(p);
-    const resp = await myFetch(`${getRemoteCommandEndpoint("engineStart")};jsessionid=${jsessionid}`, {
+    const resp = await myFetch(`service/g2/engineStart/execute.json;jsessionid=${jsessionid}`, {
         "headers": JSONHeaders,
         "body": body,
         "method": "POST",
@@ -154,7 +177,7 @@ export const executeRemoteStart = async (p: RemoteStartParameters): Promise<Netw
 export const executeRemoteStop = async (p: RemoteStopParameters): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const body = JSON.stringify(p);
-    const resp = await myFetch(`${getRemoteCommandEndpoint("engineStop")};jsessionid=${jsessionid}`, {
+    const resp = await myFetch(`service/g2/engineStop/execute.json;jsessionid=${jsessionid}`, {
         "headers": JSONHeaders,
         "body": body,
         "method": "POST",
@@ -165,7 +188,7 @@ export const executeRemoteStop = async (p: RemoteStopParameters): Promise<Networ
 export const executeRemoteLock = async (p: RemoteLockParameters): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const body = JSON.stringify(p);
-    const resp = await myFetch(`${getRemoteCommandEndpoint("lock")};jsessionid=${jsessionid}`, {
+    const resp = await myFetch(`service/g2/lock/execute.json;jsessionid=${jsessionid}`, {
         "headers": JSONHeaders,
         "body": body,
         "method": "POST",
@@ -182,7 +205,7 @@ export const executeRemoteLock = async (p: RemoteLockParameters): Promise<Networ
 export const executeRemoteUnlock = async (p: RemoteUnlockParameters): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const body = JSON.stringify(p);
-    const resp = await myFetch(`${getRemoteCommandEndpoint("unlock")};jsessionid=${jsessionid}`, {
+    const resp = await myFetch(`service/g2/unlock/execute.json;jsessionid=${jsessionid}`, {
         "headers": JSONHeaders,
         "body": body,
         "method": "POST",
@@ -193,7 +216,7 @@ export const executeRemoteUnlock = async (p: RemoteUnlockParameters): Promise<Ne
 export const executeConditionCheck = async (): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
     const ts = (new Date()).getTime();
-    const resp = await myFetch(`${getRemoteCommandEndpoint("condition")};jsessionid=${jsessionid}?_=${ts}`, {
+    const resp = await myFetch(`service/g2/condition/execute.json;jsessionid=${jsessionid}?_=${ts}`, {
         "headers": JSONHeaders,
         "body": null,
         "method": "GET",
@@ -203,10 +226,33 @@ export const executeConditionCheck = async (): Promise<NetworkResponse> => {
 
 export const executeHornLights = async (p: HornLightsParameters): Promise<NetworkResponse> => {
     const jsessionid = getSessionID();
-    const resp = await myFetch(`${getRemoteCommandEndpoint("hornLights")};jsessionid=${jsessionid}`, {
+    const body = JSON.stringify(p);
+    const resp = await myFetch(`service/g2/hornLights/execute.json;jsessionid=${jsessionid}`, {
         "headers": JSONHeaders,
-        "body": null,
-        "method": "GET",
+        "body": body,
+        "method": "POST",
     });
     return await handleRemoteServiceResponse(`service/g2/hornLights/status.json`, resp);
+};
+
+export const stopHornLights = async (p: HornLightsParameters): Promise<NetworkResponse> => {
+    const jsessionid = getSessionID();
+    const body = JSON.stringify(p);
+    const resp = await myFetch(`service/g2/hornLights/stop.json;jsessionid=${jsessionid}`, {
+        "headers": JSONHeaders,
+        "body": body,
+        "method": "POST",
+    });
+    return await handleRemoteServiceResponse(`service/g2/hornLights/status.json`, resp);
+};
+
+export const executeLightsOnly = async (p: HornLightsParameters): Promise<NetworkResponse> => {
+    const jsessionid = getSessionID();
+    const body = JSON.stringify(p);
+    const resp = await myFetch(`service/g2/lightsOnly/execute.json;jsessionid=${jsessionid}`, {
+        "headers": JSONHeaders,
+        "body": body,
+        "method": "POST",
+    });
+    return await handleRemoteServiceResponse(`service/g2/lightsOnly/status.json`, resp);
 };

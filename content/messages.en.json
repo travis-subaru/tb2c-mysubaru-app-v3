@@ -22,7 +22,7 @@
         "retry": "Retry",
         "save": "Save",
         "edit": "Edit",
-        "saveSend": "Save &amp; Send",
+        "saveSend": "Save \u0026 Send",
         "delete": "Delete",
         "yes": "Yes",
         "no": "No",
@@ -120,12 +120,12 @@
         "manageStarlinkSubscription": "Manage STARLINK<sup>&reg;</sup>&nbsp;Subscription",
         "communicationPreferences": "Communication Preferences",
         "starlinkCommunicationPreferences": "STARLINK<sup>&reg;</sup>&nbsp;Communication Preferences",
-        "termsAndConditions": "Terms &amp; Conditions",
+        "termsAndConditions": "Terms \u0026 Conditions",
         "profile": "Profile",
         "text": "Text",
         "automatedPhoneCall": "Automated Phone Call",
         "remoteEngineStart": "Remote Engine Start",
-        "recalls": "Recalls &amp; Service Campaigns",
+        "recalls": "Recalls \u0026 Service Campaigns",
         "subaruHawaii": "Subaru of Hawaii",
         "myFirstSubaru": "My First Subaru",
         "exitDemoMode": "Exit Demo Mode",
@@ -147,7 +147,7 @@
         "driverAlertsDisclaimer" : "By setting this alert, you confirm you have obtained the consent of the driver and any passenger(s) of the vehicle to being monitored in this manner.",
         "systemFailed": "System Failed",
         "subscribeNow": "Subscribe Now",
-        "termsOfUseAndPrivacy": "Terms of Use &amp; Privacy",
+        "termsOfUseAndPrivacy": "Terms of Use \u0026 Privacy",
         "attention": "Attention",
         "starlinkConnectedServices": "SUBARU Starlink<sup>&reg;</sup> Connected Services",
         "starlinkConnectedServicesMenuLink": "STARLINK<sup>&reg;</sup> Connected Services",
@@ -268,6 +268,11 @@
         "startEngine": "Start<br />Engine",
         "stopEngine": "Stop<br />Engine"
     },
+    "hornLightPanel": {
+        "title": "Remote Horn \u0026 Lights",
+        "hornLights": "Horn \u0026 Lights",
+        "justLights": "Just Lights"
+    },
     "index": {
         "menu": "Menu",
         "myVehicle": "My Vehicle",
@@ -278,13 +283,13 @@
         "logout": "Log Out",
         "visitInfotainmentApp": "Visit the STARLINK<sup>\u00AE</sup> Infotainment App",
         "driverAlerts": "Driver Alerts",
-        "subscriptionServices": "Subscriptions &amp; Services",
+        "subscriptionServices": "Subscriptions \u0026 Services",
         "subscriptionServices2": "** MISSING **",
-        "manageServices": "Manage &amp; Services",
+        "manageServices": "Manage \u0026 Services",
         "invoices": "Invoices",
         "userGuides": "STARLINK<sup>&reg;</sup> User Guides",
         "wifiSubscription": "Wifi Subscription Status",
-        "warrantyExtended": "Warranty &amp; Extended Services",
+        "warrantyExtended": "Warranty \u0026 Extended Services",
         "customerSupport": "STARLINK<sup>\u00AE</sup> Customer Support",
         "communicationPreferences": "STARLINK<sup>\u00AE</sup> Communications",
         "editMyVehicle": "Edit My Vehicle",
@@ -298,7 +303,7 @@
         "preparingForAdventure": "Preparing for adventure...",
         "packingUpTheSubaru": "Packing up the Subaru...",
         "back":"Back",
-        "service": "Vehicle Service &amp; Maintenance",
+        "service": "Vehicle Service \u0026 Maintenance",
         "certifiedCollisionCenters":"Certified Collision Centers"
     },
     "loadingAnimation": {
@@ -611,7 +616,7 @@
         "chooseContactMethod": "Choose how you prefer to receive your temporary verification code:",
         "helpDisclaimer": "** OVERRIDE WITH PHONE NUMBER **",
         "termsConditions": "** OVERRIDE WITH PHONE NUMBER **",
-        "termsToggle": "Terms &amp; Conditions",
+        "termsToggle": "Terms \u0026 Conditions",
         "verifyInputTitle": "** ASK ABOUT &nsbp; **",
         "verifyInputSubTitle": "Please allow up to 20 seconds to receive the code prior to clicking&nbsp;\"Resend.\"",
         "enterCode": "Enter code",
@@ -626,6 +631,12 @@
         "lockedOutText": "You have entered a code five times incorrectly, and for security reasons, we have locked your account.",
         "accountLocked": "** OVERRIDE WITH PHONE NUMBER **",
         "accountLocked2": "** OVERRIDE WITH PHONE NUMBER **"
+    },
+    "unlockSettingPanel": {
+        "unlock": "Unlock",
+        "allDoors": "All Doors",
+        "justDriverDoor": "Driver Door Only",
+        "tailgate": "Tailgate Only"
     },
     "validation": {
         "passwordRules": "Password does not meet requirements",

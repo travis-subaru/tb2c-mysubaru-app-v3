@@ -273,6 +273,11 @@ export interface I18N {
 		startEngine: string
 		stopEngine: string
 	}
+	hornLightPanel: {
+		title: string
+		hornLights: string
+		justLights: string
+	}
 	index: {
 		menu: string
 		myVehicle: string
@@ -599,6 +604,12 @@ export interface I18N {
 		lockedOutText: string
 		accountLocked: string
 		accountLocked2: string
+	}
+	unlockSettingPanel: {
+		unlock: string
+		allDoors: string
+		justDriverDoor: string
+		tailgate: string
 	}
 	validation: {
 		passwordRules: string

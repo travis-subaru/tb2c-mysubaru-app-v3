@@ -6,7 +6,7 @@ import { MyLinkButton } from './MyButton';
 import { Palette, useColors } from "./MyColors";
 import { Language, useLanguage } from '../model/Language';
 import { MyText } from './MyText';
-import { RemoteServiceStatus } from '../net/RemoteCommand';
+import { getRemoteServiceStatus, RemoteServiceStatus } from '../net/RemoteCommand';
 import { descriptionForErrorCode } from '../model/Code';
 
 export interface MySnackBarProps {
@@ -50,21 +50,39 @@ export const descriptionForRemoteServiceStatus = (i18n: Language, status: Remote
                 case "lock": return i18n.statusBar.lockDoorsStarted;
                 case "unlock": return i18n.statusBar.unlockDoorsStarted;
                 case "hornLights": return i18n.statusBar.hornLightsStarted;
+                case "lightsOnly": return i18n.statusBar.lightsOnlyStarted;
+            }
+        }
+        case "stopping": {
+            switch (status.remoteServiceType) {
+                case "hornLights": return i18n.statusBar.stopHornLightsStarted;
+                case "lightsOnly": return i18n.statusBar.stopLightsStarted;
             }
         }
         case "finished": {
             const message = (() => {
-                switch (status.remoteServiceType) {
-                    case "engineStart": return i18n.statusBar.remoteEngineStartFinished;
-                    case "engineStop": return i18n.statusBar.remoteEngineStopFinished;
-                    case "lock": return i18n.statusBar.lockDoorsFinished;
-                    case "unlock": return i18n.statusBar.unlockDoorsFinished;
-                    case "hornLights": return i18n.statusBar.hornLightsFinished;
+                const originalStatus = getRemoteServiceStatus(status.serviceRequestId)?.originalStatus.remoteServiceState;
+                console.log(JSON.stringify(originalStatus));
+                if (originalStatus === "stopping") {
+                    switch (status.remoteServiceType) {
+                        case "hornLights": return i18n.statusBar.stopHornLightsFinished;
+                        case "lightsOnly": return i18n.statusBar.stopLightsFinished;
+                    }
+                } else {
+                    switch (status.remoteServiceType) {
+                        case "engineStart": return i18n.statusBar.remoteEngineStartFinished;
+                        case "engineStop": return i18n.statusBar.remoteEngineStopFinished;
+                        case "lock": return i18n.statusBar.lockDoorsFinished;
+                        case "unlock": return i18n.statusBar.unlockDoorsFinished;
+                        case "hornLights": return i18n.statusBar.hornLightsFinished;
+                        case "lightsOnly": return i18n.statusBar.lightsOnlyFinished;
+                    }
                 }
             })()
+            if (!message) { return undefined; }
             const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric' };
             const now = (new Date()).toLocaleString('en-US', options);
-            return `${message}${now}`
+            return `${message}${now}`;
         }
     }
 
@@ -86,6 +104,9 @@ export const descriptionForActivity = (i18n: Language, activity: NetworkActivity
             case "service/g2/lock/execute.json": return i18n.statusBar.lockDoorsSent;
             case "service/g2/unlock/execute.json": return i18n.statusBar.unlockDoorsSent;
             case "service/g2/hornLights/execute.json": return i18n.statusBar.hornLightsSent;
+            case "service/g2/lightsOnly/execute.json": return i18n.statusBar.lightsOnlySent;
+            case "service/g2/hornLights/stop.json": return i18n.statusBar.stopHornLightsSent;
+            case "service/g2/condition/execute.json": return undefined;
             default: return `SENT: ${endpoint}`;
         }
     } else {

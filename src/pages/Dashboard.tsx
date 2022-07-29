@@ -11,7 +11,7 @@ import { AlertsTab } from './AlertsTab';
 import { OffersTab } from './OffersTab';
 import { SettingsTab } from './SettingsTab';
 import { VehicleTab } from './VehicleTab';
-import { NetworkActivity, normalizeEndpoint } from '../stores/Response';
+import { NetworkActivity } from '../stores/Response';
 
 export type DashboardTab = 'home' | 'vehicle' | 'offers' | 'alerts' | 'settings'
 
@@ -37,13 +37,11 @@ export const Dashboard = () => {
     const [tab, setTab] = useState<DashboardTab>('home');
     const showActivity = (activity: NetworkActivity) => {
         if (activity.type === "request") {
-            const show: string[] = ["service/g2/engineStart/execute.json", "service/g2/engineStop/execute.json", "service/g2/lock/execute.json", "service/g2/unlock/execute.json"];
-            const endpoint = normalizeEndpoint(activity.request.endpoint);
-            return show.includes(endpoint);
+            const endpoint = activity.request.endpoint;
+            return endpoint.includes("service/g2") && !endpoint.includes("status");
         } else {
-            const show: string[] = ["service/g2/remoteService/status.json"];
-            const endpoint = normalizeEndpoint(activity.response.endpoint);
-            return show.includes(endpoint);
+            const endpoint = activity.response.endpoint;
+            return endpoint.includes("service/g2");
         }
     };
     return <View style={{ flex: 1, alignItems: 'center', justifyContent:'center' }}>

@@ -61,8 +61,8 @@
     "starlinkSafetyPlus": "STARLINK<sup>&reg;</sup> Safety Plus",
     "starlinkSecurityPlus": "STARLINK<sup>&reg;</sup> Security Plus",
     "starlinkConcierge": "STARLINK<sup>&reg;</sup> Concierge",
-    "starlinkSafetyAndSecurity": "STARLINK<sup>&reg;</sup> Safety &amp; Security Plus",
-    "starlinkSafetySecurityAndConcierge": "STARLINK<sup>&reg;</sup> Safety &amp; Security Plus Concierge",
+    "starlinkSafetyAndSecurity": "STARLINK<sup>&reg;</sup> Safety \u0026 Security Plus",
+    "starlinkSafetySecurityAndConcierge": "STARLINK<sup>&reg;</sup> Safety \u0026 Security Plus Concierge",
     "off": "OFF (désactivé)",
     "on": "ON (marche)",
     "loadingVehicle": "Chargement du véhicule...",
@@ -314,7 +314,7 @@
     "userError": "Erreur avec l'utilisateur autorisé",
     "incorrectPassword": "Mot de passe incorrect",
     "authorizedUserFormValidateMessages": {
-      "firstName":  { 
+      "firstName":  {
           "required": "Ce champ est requis.",
           "maxlength": "Veuillez limiter la saisie à 20 caractères.",
           "minlength": "Veuillez saisir au moins 2 caractères.",
@@ -322,7 +322,7 @@
           "alphanumericSpaceNoSpaceStart": "Ne peut commencer par un espace",
           "alphanumericSpaceNoSpaceEnd": "Ne peut se terminer par un espace"
       },
-      "lastName":  { 
+      "lastName":  {
           "required": "Ce champ est requis.",
           "maxlength": "Veuillez limiter la saisie à 20 caractères.",
           "minlength": "Veuillez saisir au moins 2 caractères.",
@@ -330,8 +330,8 @@
           "alphanumericSpaceNoSpaceStart": "Ne peut commencer par un espace",
           "alphanumericSpaceNoSpaceEnd": "Ne peut se terminer par un espace"
       },
-      "gender":  { 
-          "required": "Ce champ est requis." 
+      "gender":  {
+          "required": "Ce champ est requis."
       },
       "email": {
           "email": "Veuillez entrer une adresse courriel valide",
@@ -345,19 +345,19 @@
       "phone": {
           "required": "Ce champ est requis.",
           "minlength": "Veuillez entrer un numéro de téléphone valide",
-          "phoneValidation": "Veuillez entrer un numéro de téléphone valide"          
+          "phoneValidation": "Veuillez entrer un numéro de téléphone valide"
       },
-      "city": { 
-          "required": "Veuillez entrer la ville" 
+      "city": {
+          "required": "Veuillez entrer la ville"
       },
-      "postalCode": { 
+      "postalCode": {
           "required": "Veuillez entrer code postal",
           "postalCodeCA": "Veuillez spécifier un code postal valide.",
           "minlength": "Veuillez entrer un code postal valide.",
           "maxlength": "Veuillez entrer un code postal valide."
       },
-      "state": { 
-          "required": "Veuillez sélectionner la province" 
+      "state": {
+          "required": "Veuillez sélectionner la province"
       },
       "streetAddress1": {
           "required": "Veuillez entrer votre adresse",
@@ -367,12 +367,12 @@
           "alphanumericSpaceNoSpaceEnd": "Ne peut se terminer par un espace",
           "alphanumericApostropheSpaceAddress": "Les caractères spéciaux (@ _ - . ' : ) sont permis."
       },
-      "streetAddress2": { 
+      "streetAddress2": {
           "alphanumericSpaceAddress": "Les caractères spéciaux (@ _ - . : ) sont permis." ,
           "alphanumericApostropheSpaceAddress": "Les caractères spéciaux (@ _ - . ' : ) sont permis."
       },
-      "emergencyContactRelationShip": { 
-          "required": "Veuillez sélectionner un lien" 
+      "emergencyContactRelationShip": {
+          "required": "Veuillez sélectionner un lien"
       }
     },
     "wantDelete": "Voulez-vous vraiment supprimer cet élément?",
@@ -439,9 +439,9 @@
         "digits": "Le NIP doit compter 4 chiffres"
       },
       "pin": {
-        "required": "Veuillez entrer votre nouveau NIP",        
+        "required": "Veuillez entrer votre nouveau NIP",
         "minlength": "Votre nouveau NIP doit contenir au moins 4 chiffres",
-        "maxlength": "Le NIP doit compter 4 chiffres",        
+        "maxlength": "Le NIP doit compter 4 chiffres",
         "digits": "Le NIP doit compter 4 chiffres",
         "notEqualTo": "Votre nouveau NIP ne peut pas être identique à votre ancien NIP"
       },
@@ -457,7 +457,7 @@
       "pin": {
         "required": "Veuillez entrer votre nouveau NIP",
         "minlength": "Votre nouveau NIP doit contenir au moins 4 chiffres",
-        "maxlength": "Le NIP doit compter 4 chiffres",     
+        "maxlength": "Le NIP doit compter 4 chiffres",
         "digits": "Le NIP doit compter 4 chiffres"
       },
       "pinConfirmation": {
@@ -483,7 +483,7 @@
     },
     "pinSet": "Votre NIP a été défini avec succès.",
     "unableSet": "Impossible de définir le NIP. Veuillez réessayer plus tard.",
-    "enableTouchIdForPin": "Activer <span class=\"biometricsType\">Touch ID</span> pour le NIP" 
+    "enableTouchIdForPin": "Activer <span class=\"biometricsType\">Touch ID</span> pour le NIP"
   },
   "chargeReview": {
     "chargeNow": "Recharger maintenant",
@@ -957,8 +957,8 @@
     "climateControlStop": "Arrêt<br />du contrôle<br />de température",
     "chargeNow": "Recharger<br />maintenant",
     "biometricAuthentication": "Authentification biométrique",
-    "biometricAuthenticationDescription": "Touch / Face ID est un moyen plus rapide et pratique d’activer les fonctions à distance à partir de votre appli MySubaru.", 
-    "biometricAuthenticationDescription2": "Activez l’authentification biométrique sur votre appareil iOS: <ol><li>Ouvrez l’appli MySubaru  </li><li>Touchez Menu</li><li>Sélectionnez Réglage Face ID / Touch ID </li><li>Touchez « Configurer Face / Touch ID »</li></ol>", 
+    "biometricAuthenticationDescription": "Touch / Face ID est un moyen plus rapide et pratique d’activer les fonctions à distance à partir de votre appli MySubaru.",
+    "biometricAuthenticationDescription2": "Activez l’authentification biométrique sur votre appareil iOS: <ol><li>Ouvrez l’appli MySubaru  </li><li>Touchez Menu</li><li>Sélectionnez Réglage Face ID / Touch ID </li><li>Touchez « Configurer Face / Touch ID »</li></ol>",
     "vehicleStatus": "Statut du véhicule",
     "monitorStatus": "Surveiller le statut de votre véhicule<br />",
     "vehicleHealth": "Santé<br />du véhicule",
@@ -966,7 +966,7 @@
     "serviceReminder": "Rappel<br />d'entretien",
     "messages": "Messages",
     "viewBatteryCharge": "Afficher la batterie et la charge",
-    "specialOffersEvents": "View your Special Offers &amp; Events",
+    "specialOffersEvents": "View your Special Offers \u0026 Events",
     "receiveRecall": "Recevez des informations sur les rappels, des rappels d'entretien <span style=\"display: inline-block;\">et davantage</span>",
     "specialOffers": "Special<br />Offers",
     "subaruEvents": "Subaru <br />Événements",
@@ -1111,7 +1111,7 @@
     "title": "Invoices",
     "invoicesRefundNotices": "Facture STARLINK<sup>&reg;</sup> et historique de remboursement",
     "viewAll": "Voir ci-dessous une copie de vos factures et avis de remboursement STARLINK<sup>&reg;</sup> récents.",
-    "manualRefundCopy": "Les plans de location, de financement et de certaines cartes de crédit ne peuvent être remboursés automatiquement lors d’une annulation. Vous devriez avoir reçu un courriel détaillant les prochaines étapes à suivre pour traiter votre remboursement. Pour toute assistance additionnelle, contactez l’Assistance client STARLINK<sup>&reg;</sup> au 1 (800) 263-8802.",    
+    "manualRefundCopy": "Les plans de location, de financement et de certaines cartes de crédit ne peuvent être remboursés automatiquement lors d’une annulation. Vous devriez avoir reçu un courriel détaillant les prochaines étapes à suivre pour traiter votre remboursement. Pour toute assistance additionnelle, contactez l’Assistance client STARLINK<sup>&reg;</sup> au 1 (800) 263-8802.",
     "invoiceNumber": "Numéro de facture",
     "type": "Type",
     "amount": "Montant",
@@ -1141,7 +1141,7 @@
     "noInvoicesAndRefunds":"Aucune facture et aucun remboursement n’est actuellement disponible.",
     "starlinkSafety": "STARLINK<sup>&reg;</sup> Safety Plus",
     "starlinkRemoteServices": "STARLINK<sup>&reg;</sup> Security Plus",
-    "starlinkConcierge": "STARLINK<sup>&reg;</sup> Concierge" 
+    "starlinkConcierge": "STARLINK<sup>&reg;</sup> Concierge"
   },
   "legalDisclaimers": {
     "title": "Notices légales",
@@ -1270,13 +1270,13 @@
     "emailUsername": "Adresse de courriel / Identifiant",
     "confirmEmailAddress": "Confirmer adresse courriel",
     "editEmail": "Modifier adresse courriel",
-    "editTelephone": "Modifier téléphone",  
+    "editTelephone": "Modifier téléphone",
     "telephone": "Téléphone",
     "changeUsernameAlert": "En changeant votre adresse courriel, vous allez mettre à jour vos renseignements de connexion à MySubaru.",
     "homePhone": "Téléphone à la résidence",
     "workPhone": "Téléphone au travail",
     "editPhoneNumbers": "Modifier numéros de téléphone",
-    "mailingAddress":"Votre adresse postale",    
+    "mailingAddress":"Votre adresse postale",
     "address": "Adresse",
     "address2": "Adresse 2",
     "editAddress": "Modifier l’adresse postale",
@@ -1334,7 +1334,7 @@
     "editEmailInfoMessage1": "Le fait de modifier votre adresse courriel changera également votre identifiant de connexion MySubaru, ainsi que l'adresse courriel que nous utilisons pour votre compte personnel, commercial ou *de parc auprès de Subaru Canada, Inc.",
     "editEmailInfoMessage2": "*Comptes parcs : Veuillez communiquer avec le service des parcs de Subaru Canada pour apporter tout changement à votre compte principal.",
     "editPhoneInfoMessage1": "Le fait de modifier votre numéro de téléphone changera également les détails de votre numéro de téléphone que nous utilisons pour votre compte personnel, commercial ou *de parc auprès de Subaru Canada, Inc.",
-    "editPhoneInfoMessage2": "*Comptes parcs : Veuillez communiquer avec le service des parcs de Subaru Canada pour apporter tout changement à votre compte principal.",        
+    "editPhoneInfoMessage2": "*Comptes parcs : Veuillez communiquer avec le service des parcs de Subaru Canada pour apporter tout changement à votre compte principal.",
     "editMailaddressInfoMessage1": "Le fait de modifier votre adresse postale changera également les détails de votre adresse que nous utilisons pour votre compte personnel, commercial ou *de parc auprès de Subaru Canada, Inc.",
     "editMailaddressInfoMessage2": "*Comptes parcs : Veuillez communiquer avec le service des parcs de Subaru Canada pour apporter tout changement à votre compte principal.",
     "contactInfoDescription": "Les nom et prénom ne peuvent être modifiés pour des questions de sécurité. Veuillez contacter Service à la clientèle Subaru 1 (800) 894-4212.",
@@ -1463,7 +1463,7 @@
     "seatBeltWarranty": "Garantie à vie sur les ceintures de sécurité",
     "warrantyfaqs": "Garantie – Foire aux questions",
     "errorFetchingInformation": "EErreur lors de la récupération de l'information de garantie."
-  }, 
+  },
   "tripLog":{
     "startNewTrip": "Démarrer un nouveau trajet",
     "stopCurrentTrip":"Arrêter le trajet actuel",
@@ -1480,7 +1480,7 @@
     "tripSetToExpire":"Votre trajet prend fin le",
     "noThanks":"Non merci",
     "likeToModifyTrip":"  Voulez-vous modifier votre trajet?"
-    
+
     },
     "tripLogAddJournal":{
     	"addToJournal":"Ajouter au journal",
@@ -1497,7 +1497,7 @@
     	"totalMileage":"Distance totale/Kilom鴲age total :",
         "totalTime":"Dur饠totale?:",
     	 "noTripError":"Veuillez choisir au moins un trajet ࠡjouter au Journal",
-        "select": "S鬥ctionner",		
+        "select": "S鬥ctionner",
         "cancel":	"Annuler",
     	"newJournalDescription":"Description du nouveau journal de conduite ",
     	"journalAddToJournalTitle": "Ajouter au journal de conduite",
@@ -1516,19 +1516,19 @@
                 "inputText": "Veuillez entrer la description du journal"
             }
         },
-        "odometerStart": "Odom贲e d颵t",		
-        "odometerEnd": "Odom贲e fin",		
-        "fuelComsumption": "Consommation de carburant",		
-        "remainingFuel": "Carburant restant",		
-        "milesPerGallon":	"Milles au galon (moy.)",	
-       "deleteAllJournals": "Supprimer tous les journaux de conduite",		
-        "deleteJournal": "Supprimer le journal de conduite",		
+        "odometerStart": "Odom贲e d颵t",
+        "odometerEnd": "Odom贲e fin",
+        "fuelComsumption": "Consommation de carburant",
+        "remainingFuel": "Carburant restant",
+        "milesPerGallon":	"Milles au galon (moy.)",
+       "deleteAllJournals": "Supprimer tous les journaux de conduite",
+        "deleteJournal": "Supprimer le journal de conduite",
         "deleteFromDrivingJournal": "Effacer du journal de conduite",
-        "noJournals": "Vous n'avez aucun journal de conduite sauvegard頰our l'instant",		
-        "viewTutorial": "Visionner tutoriel",		
-        "newJournalName": "Nom du nouveau journal de conduite",		
-        "charactersMax": "30 caract貥s maximum",		
-        "newJournalDescription": "Description du nouveau journal de conduite",		
+        "noJournals": "Vous n'avez aucun journal de conduite sauvegard頰our l'instant",
+        "viewTutorial": "Visionner tutoriel",
+        "newJournalName": "Nom du nouveau journal de conduite",
+        "charactersMax": "30 caract貥s maximum",
+        "newJournalDescription": "Description du nouveau journal de conduite",
         "addToJournalCategory": "Ajouter ࠬa cat駯rie de journal"
     },
   "vehicleStatusLanding": {
@@ -1928,7 +1928,7 @@
     "toEditRetailerMessage": "Pour modifier, aller à Mon profil > Mon détaillant",
     "toEditHomeMessage": "Pour modifier, aller à Mon profil > Coordonnées",
     "favDestinationValidateMessages":{
-      "favDestinationName": { 
+      "favDestinationName": {
       "required": "Veuillez entrer un nom valide",
       "maxlength": "Veuillez limiter la saisie à 50 caractères.",
       "alphanumericSpace": "Le nom de l'itinéraire doit commencer et se terminer par des caractères alphanumériques et peut contenir des espaces et des symboles comme .@_-."
@@ -1950,7 +1950,7 @@
     "deleteTripConfirm1": "Voulez-vous vraiment supprimer  ",
     "deleteTripConfirm2": " l'itinéraire?",
     "setWorkMessage": "Veuillez utiliser le champ de recherche ci-dessus pour sélectionner votre adresse professionnelle.",
-    "restaurants" : "Restaurants", 
+    "restaurants" : "Restaurants",
     "coffee" : "Café",
     "bars" : "Bars",
     "gasStations" : "Stations-service",
@@ -2119,32 +2119,32 @@
     "howDoIReportMyVehicleStolenAnswer2": "Pour en savoir davantage, <a class=\"text-link textLink extWeblink\" data-exturl=\"https://www.youtube.com/watch?v=kH7WRnFg5_c\" target=\"_blank\">regardez cette vidéo</a>.",
     "wifi": "WIFI",
     "howDoISignUpForWifi": "How do I sign up for my in vehicle WIFI Hotspot?",
-    "howDoISignUpForWifiAnswer1": "To sign up for your vehicle's WiFi Hotspot using the MySubaru app, select \u00AB STARLINK<sup>&reg;</sup> \u00BB from the menu and then select \u00AB Subscription &amp; Services \u00BB. Scroll down to the section labelled \u00AB AT&amp;T WiFi Subscription \u00BB and click on the arrow and then the \u00AB CREATE A NEW WIFI ACCOUNT \u00BB button. You will be directed to the WiFi Hotspot enrollment page. Click on \u00AB Sign Up \u00BB to create a new account and select a subscription.",
+    "howDoISignUpForWifiAnswer1": "To sign up for your vehicle's WiFi Hotspot using the MySubaru app, select \u00AB STARLINK<sup>&reg;</sup> \u00BB from the menu and then select \u00AB Subscription \u0026 Services \u00BB. Scroll down to the section labelled \u00AB AT&amp;T WiFi Subscription \u00BB and click on the arrow and then the \u00AB CREATE A NEW WIFI ACCOUNT \u00BB button. You will be directed to the WiFi Hotspot enrollment page. Click on \u00AB Sign Up \u00BB to create a new account and select a subscription.",
     "howDoISignUpForWifiAnswer2": "To enroll in your vehicle, make sure your vehicle is turned on. On your head unit, click on \u00AB Settings \u00BB and scroll down to the section for \u00AB WiFi Hotspot \u00BB. Make sure your Hotspot is set to \u00AB On \u00BB. Click on the \u00AB WiFi Hotspot Settings \u00BB option on your head unit to find the name of the WiFi Hotspot and the password for the Hotspot.  Using a WiFi enabled device, connect to the WiFi Hotspot name listed on your head unit and enter the password. Upon connecting to the WiFi Hotspot, you will be redirected to the enrollment screens. Click on \u00AB Sign Up \u00BB to create a new account and select a subscription.",
     "howDoICancelMyWifi": "How do I cancel my WIFI?",
     "howDoIEnablTouchID": "Comment activer Touch ID?",
     "howDoIEnableFaceID": "Comment activer la reconnaissance faciale Face ID?",
     "howDoIEnableFingerprint": "Comment activer le Déverrouillage par reconnaissance faciale/empreinte digitale?",
     "howDoIEnableFaceIDAnswer": "Vous pouvez activer la reconnaissance faciale Face ID en allant à la page de réglages dans le menu puis en activant Face ID avec la touche à bascule et en entrant votre NIP actuel. Vous pouvez également activer sur l'écran NIP n'importe quelle fonction à distance en sélectionnant \u00AB Configurer Face ID \u00BB puis en entrant votre NIP actuel.",
-    "howDoIEnablTouchIDAnswer":"Pour activer Touch ID, vous devez aller à la page de réglages dans le menu et activer Touch ID avec la touche à bascule puis en entrant votre NIP actuel. Vous pouvez également activer sur l'écran NIP n'importe quelle fonction à distance en sélectionnant \u00AB Configurer Touch ID \u00BB puis en entrant votre NIP actuel.", 
+    "howDoIEnablTouchIDAnswer":"Pour activer Touch ID, vous devez aller à la page de réglages dans le menu et activer Touch ID avec la touche à bascule puis en entrant votre NIP actuel. Vous pouvez également activer sur l'écran NIP n'importe quelle fonction à distance en sélectionnant \u00AB Configurer Touch ID \u00BB puis en entrant votre NIP actuel.",
     "howDoIEnableFingerprintAnswer": "Pour activer le Déverrouillage par reconnaissance faciale/empreinte digitale, vous devez aller à la page de réglages dans le menu et activer le Déverrouillage par reconnaissance faciale/empreinte digitale avec la touche à bascule et en entrant votre NIP actuel. \u00AB Vous pouvez également activer sur l'écran NIP n'importe quelle fonction à distance en sélectionnant \u00AB Configurer le lecteur d'empreinte digitale \u00BB puis en entrant votre NIP actuel.",
     "howDoIDisableTouchID": "Comment désactiver les fonctions Touch ID?",
     "howDoIDisableFaceID": "Comment désactiver les fonctions Face ID?",
     "howDoIDisableFingerprint": "Comment désactiver le déverrouillage par reconnaissance faciale/empreinte digitale?",
     "howDoIDisableFaceIDAnswer": "Pour désactiver les fonctions Face ID, aller à la page de réglages dans le menu et désactiver ces fonctions à l'aide de la touche à bascule, puis confirmer la désactivation.",
-    "howDoIDisableTouchIDAnswer":"Pour désactiver les fonctions Touch ID, aller à la page de réglages dans le menu et désactiver ces fonctions à l'aide de la touche à bascule, puis confirmer la désactivation.", 
+    "howDoIDisableTouchIDAnswer":"Pour désactiver les fonctions Touch ID, aller à la page de réglages dans le menu et désactiver ces fonctions à l'aide de la touche à bascule, puis confirmer la désactivation.",
     "howDoIDisableFingerprintAnswer": "Pour désactiver les fonctions lecteur d'empreinte digitale, aller à la page de réglages dans le menu et désactiver ces fonctions à l'aide de la touche à bascule, puis confirmer la désactivation.",
     "howDoIEnableBiometrics": "Comment activer la fonction ",
-    "howDoIEnableBiometricsAnswer1": "Pour activer la fonction", 
-    "howDoIEnableBiometricsAnswer2": "vous pouvez aller à la ", 
+    "howDoIEnableBiometricsAnswer1": "Pour activer la fonction",
+    "howDoIEnableBiometricsAnswer2": "vous pouvez aller à la ",
     "howDoIEnableBiometricsAnswer2a": " page des réglages du menu  et activer ",
-    "howDoIEnableBiometricsAnswer3": "en touchant la bascule et en entrant votre NIP actuel. Vous pouvez aussi activer à partir de l’écran NIP de n’importe quelle fonction à distance, en sélectionnant \"configuration ", 
-    "howDoIEnableBiometricsAnswer4": " et en entrant votre NIP actuel.", 
-    "howDoIDisableBiometrics": "Comment désactiver la fonction ", 
-    "howDoIDisableBiometricsAnswer1": "Pour désactiver la fonction ", 
-    "howDoIDisableBiometricsAnswer2": " vous pouvez aller à la ", 
+    "howDoIEnableBiometricsAnswer3": "en touchant la bascule et en entrant votre NIP actuel. Vous pouvez aussi activer à partir de l’écran NIP de n’importe quelle fonction à distance, en sélectionnant \"configuration ",
+    "howDoIEnableBiometricsAnswer4": " et en entrant votre NIP actuel.",
+    "howDoIDisableBiometrics": "Comment désactiver la fonction ",
+    "howDoIDisableBiometricsAnswer1": "Pour désactiver la fonction ",
+    "howDoIDisableBiometricsAnswer2": " vous pouvez aller à la ",
     "howDoIDisableBiometricsAnswer2a": " page des réglages du menu et désactiver",
-    "howDoIDisableBiometricsAnswer3": " en touchant la bascule et en confirmant que vous désirez désactiver.", 
+    "howDoIDisableBiometricsAnswer3": " en touchant la bascule et en confirmant que vous désirez désactiver.",
     "multimedia": "Multimédia",
     "bluetoothCompatibility": "Compatibilité Bluetooth",
     "bluetoothCompatibilityAnswer": "Veuillez <a data-exturl=\"http://growoffice.com/subaru-simulator_v7/#\" class=\"text-link textLink extWeblink accordion__content-body--no-width\">visiter</a>.",
@@ -2351,7 +2351,7 @@
     "starlinkConciergeDescription1": "Ce service vous permet, par le truchement du bouton ble \"i\" du véhicule, de communiquer avec un représentant de l'Assistance client Subaru STARLINK<sup>&reg;</sup>. Le Concierge rechercher des Points d'intérêt à votre place, puis les envoyer au système de navigation de votre véhicule (le cas échéant). Le Concierge peut également vous aider à prendre un rendez-vous d'entretien chez un concessionnaire Subaru.",
     "monthlyConciergeSubscription": "Monthly Concierge Subscription",
     "conciergeServiceExtended": "Concierge Service<br />Extended to Safety Plus<br />Renewal Date",
-    "allSafetyAndSecurityPlusFeatures": "All STARLINK<sup>&reg;</sup> Safety Plus &amp; Security Plus Features",
+    "allSafetyAndSecurityPlusFeatures": "All STARLINK<sup>&reg;</sup> Safety Plus \u0026 Security Plus Features",
     "hotelReservations": "Hotel - Locating and securing reservations",
     "rentalCar": "Rental car",
     "uberOrTaxi": "Uber or Taxi",
@@ -2490,8 +2490,8 @@
     "vertexError": "Un problème est survenu pendant la validation de l'adresse fournie pour votre compte MySubaru. Veuillez vérifier l'adresse résidentielle physique inscrite à votre compte MySubaru en allant dans le Menu > Mon Profil > Coordonnées. Veuillez mettre à jour l'adresse avant de poursuivre l'inscription. Si le problème persiste, veuillez contacter l'Assistance client Subaru STARLINK\u1D39\u1D30 au 1 (800) 263-8802",
     "selectATimeZone": "Sélectionner fuseau horaire",
     "bestOfBothWorlds": "The Best Of Both Worlds",
-    "starlinkSafetyAndSecurity": "STARLINK\u1D39\u1D30 SAFETY&nbsp;PLUS &amp; SECURITY&nbsp;PLUS",
-    "receiveTenYearsFree": "Receive STARLINK\u1D39\u1D30 Safety Plus &amp; Security Plus for 10 year free. Receive vehicle health alerts, assistance in case of emergencies and access to your vehicle's features from anywhere. Track your vehicle and activate features remotely through your desktop or the MySubaru app, giving you control 24/7.",
+    "starlinkSafetyAndSecurity": "STARLINK\u1D39\u1D30 SAFETY&nbsp;PLUS \u0026 SECURITY&nbsp;PLUS",
+    "receiveTenYearsFree": "Receive STARLINK\u1D39\u1D30 Safety Plus \u0026 Security Plus for 10 year free. Receive vehicle health alerts, assistance in case of emergencies and access to your vehicle's features from anywhere. Track your vehicle and activate features remotely through your desktop or the MySubaru app, giving you control 24/7.",
     "freeTrial": "Essai gratuit",
     "annualSubscription": "Abonnement Annuel",
     "renewsOn": "Renouvellement le",
@@ -2722,15 +2722,15 @@
     "mileService": "Entretien selon kilométrage",
     "recommendedMaintenance": "Entretien recommandé",
     "maintenanceScheduleError": "Nous éprouvons des difficultés avec notre serveur et ne parvenons pas à trouver l’intervalle d’entretien courant pour le moment. Veuillez réessayer plus tard ou contacter votre détaillant Subaru. Vous trouverez également les intervalles d’entretien dans le livret de garantie et d’entretien de votre véhicule.",
-    "mileageDescription2": "Si vous détenez un abonnement SUBARU STARLINK<sup>&reg;</sup> actif, votre kilométrage sera mis à jour automatiquement chaque fois que vous éteignez le moteur. Les intervalles du calendrier d'entretien sont calculés à partir de la date de vente initiale du véhicule ou, si cette date ne figure pas au dossier de votre détaillant, à partir du mois de janvier de l'année modèle du véhicule. Il est possible que vous receviez une notification pour un entretien à venir sur votre véhicule même si vous avez déjà effectué l'entretien ailleurs.",  
-    "mileageDescription3": "MySubaru indique un kilométrage estimatif dans le but de fournir en temps opportun les notifications d'entretien. Si vous faites effectuer un entretien chez un détaillant autorisé Subaru, votre kilométrage sera automatiquement mis à jour après votre visite. Les intervalles du calendrier d'entretien sont calculés à partir de la date de vente initiale du véhicule ou, si cette date ne figure pas au dossier de votre détaillant, à partir du mois de janvier de l'année modèle du véhicule. Il est possible que vous receviez une notification pour un entretien à venir sur votre véhicule même si vous avez déjà effectué l'entretien ailleurs."  
+    "mileageDescription2": "Si vous détenez un abonnement SUBARU STARLINK<sup>&reg;</sup> actif, votre kilométrage sera mis à jour automatiquement chaque fois que vous éteignez le moteur. Les intervalles du calendrier d'entretien sont calculés à partir de la date de vente initiale du véhicule ou, si cette date ne figure pas au dossier de votre détaillant, à partir du mois de janvier de l'année modèle du véhicule. Il est possible que vous receviez une notification pour un entretien à venir sur votre véhicule même si vous avez déjà effectué l'entretien ailleurs.",
+    "mileageDescription3": "MySubaru indique un kilométrage estimatif dans le but de fournir en temps opportun les notifications d'entretien. Si vous faites effectuer un entretien chez un détaillant autorisé Subaru, votre kilométrage sera automatiquement mis à jour après votre visite. Les intervalles du calendrier d'entretien sont calculés à partir de la date de vente initiale du véhicule ou, si cette date ne figure pas au dossier de votre détaillant, à partir du mois de janvier de l'année modèle du véhicule. Il est possible que vous receviez une notification pour un entretien à venir sur votre véhicule même si vous avez déjà effectué l'entretien ailleurs."
   },
   "serviceLanding": {
     "serviceHistory": "Historique d'entretien",
     "enterService": "Entrer dossier d'entretien"
   },
   "serviceHistory": {
-    "info":"Voici votre page d'historique d'entretien personnelle. Utilisez cette page pour consigner les travaux d'entretien, les réparations, les accessoires installés et toute autre information relative à l'historique d'entretien de votre véhicule.",  
+    "info":"Voici votre page d'historique d'entretien personnelle. Utilisez cette page pour consigner les travaux d'entretien, les réparations, les accessoires installés et toute autre information relative à l'historique d'entretien de votre véhicule.",
     "noteDescription": "Remarque : Les dossiers ajoutés automatiquement peuvent prendre jusqu'à 30 jours pour s'afficher dans vos dossiers. Il est possible que votre concessionnaire sélectionné vous notifie si des services sont à venir sur votre véhicule même si vous avez effectué l'entretien ailleurs.",
     "addServiceHistory": "Ajouter historique d'entretien",
     "enteredBy": "Entré par: ",
@@ -2966,14 +2966,14 @@
     "NegativeAcknowledge:securityAlarmOn":"Cette requête ne peut être exécutée pendant que l'alarme du véhicule est activée. Veuillez désactiver l'alarme de sécurité et essayer à nouveau.",
     "NegativeAcknowledge:mfdInUse":"Cette requête ne peut être exécutée pendant que l'afficheur multifonction est utilisé. Veuillez terminer la session sur l'afficheur multifonction et envoyer la requête à nouveau.",
     "DEVICE_NOT_AUTHENTICATED": "Device needs to be authenticated for triggering remote services",
-	  "TimeframePassed:null": "Les services STARLINK\u1D39\u1D30 sont temporairement indisponibles. \n\nVeuillez démarrer manuellement votre Subaru pour vous assurer que votre système ne soit pas inactif, si vous ne l'avez pas conduit récemment. \n\nAutrement, veuillez vous assurer que votre Subaru est garée dans un endroit disposant d'une bonne réception cellulaire et essayez de nouveau plus tard.",	
+	  "TimeframePassed:null": "Les services STARLINK\u1D39\u1D30 sont temporairement indisponibles. \n\nVeuillez démarrer manuellement votre Subaru pour vous assurer que votre système ne soit pas inactif, si vous ne l'avez pas conduit récemment. \n\nAutrement, veuillez vous assurer que votre Subaru est garée dans un endroit disposant d'une bonne réception cellulaire et essayez de nouveau plus tard.",
     "disclaimer": "En activant cette alerte, vous confirmez avoir obtenu le consentement du conducteur et des passagers du véhicule à être surveillés de cette manière.",
     "InvalidCredentials": {
       "invalidPin": "Le NIP que vous avez saisi n’est pas valide. Veuillez essayer à nouveau.",
       "lockedPin": "Vous avez atteint le nombre maximum de tentatives pour inscrire le NIP. Votre compte sera verrouillé pendant 60 minutes.",
       "pinNotSet": "NIP non défini. Pour définir un NIP, allez à Mon profil -> NIP oublié."
     },
-    "cancelLock": "Annuler le verrouillage des portières à distance", 
+    "cancelLock": "Annuler le verrouillage des portières à distance",
 		"cancelUnlock": "Annuler le déverrouillage des portières à distance",
 		"cancelHorn&Lights": "Annuler l’activation à distance du klaxon/éclairage",
 		"cancelLights": "Annuler éclairages à distance ",
@@ -3041,7 +3041,7 @@
     "vehicleNotStationaryDynamic3": " et essayer à nouveau.",
     "vehicleNotStationaryDefault": "Cette requête ne peut être exécutée pendant que le véhicule est en mouvement.",
     "remoteTailgateAccessoryModeError": "Remote Tailgate Unlock is unavailable because your [MODEL] is currently in Accessory Mode. Please turn off your [MODEL] and try again.",
-    "remoteTailgateIgnitionModeError": "Remote Tailgate Unlock is unavailable because your [MODEL] is currently in Ignition On Mode. Please turn off your [MODEL] and try again."      
+    "remoteTailgateIgnitionModeError": "Remote Tailgate Unlock is unavailable because your [MODEL] is currently in Ignition On Mode. Please turn off your [MODEL] and try again."
   },
   "statusBar": {
     "sending": "Envoi ",
@@ -3066,7 +3066,7 @@
     "unlockDoorsStarted": "Envoi de la requête<br /><strong> Déverrouiller les portières</strong><br /> à votre véhicule",
     "unlockDoorsFailed": "La requête<strong> Déverrouiller les portières</strong><br /> a échoué le ",
     "unlockDoorsFinished": "<strong>Portières déverrouillées</strong><br /> le ",
-    
+
     "unlockTailgate": "UNLOCK TAILGATE",
     "unlockTailgateSent": "Sending<br /><strong>UNLOCK TAILGATE</strong><br />to your vehicle",
     "unlockTailgateStarted": "Sending<br /><strong>UNLOCK TAILGATE</strong><br />to your vehicle",
@@ -3310,7 +3310,7 @@
     "pinRequired": "NIP requis",
     "enterYourPin": "Saisissez votre NIP",
     "clear": "EFFACER",
-    "setupTouchID": "Configurer <span class=\"text-blue biometricsType\">Touch ID</span> pour le NIP ", 
+    "setupTouchID": "Configurer <span class=\"text-blue biometricsType\">Touch ID</span> pour le NIP ",
     "enterPinAbove": "Veuillez entrer votre NIP ci-dessus pour compléter la configuration.",
     "saveTime": "Gagnez du temps en activant <span class=\"biometricsType\">Touch ID </span> au lieu du&nbsp;NIP.",
     "oneLastStep": "Une dernière étape.",
@@ -3833,7 +3833,7 @@
       "confirmDeleteProfile2":"profil de conducteur? Cette action ne peut pas être annulée.",
       "deletProfile" : "Supprimer profils",
       "disclaimerShowText" : "After sending a profile to the vehicle, you will need to accept that profile within the vehicle's display screen for the profile to take effect.",
-      "disclaimerShowCheckbox" : "Don't show this message again" 
+      "disclaimerShowCheckbox" : "Don't show this message again"
   },
   "driverProfileSetting": {
       "myDriverProfileSettings" : "Réglages de mon profil de conducteur",
@@ -3996,7 +3996,7 @@
     },
    "deletebdayAnni" : "Delete ",
    "deleteConfirm1" : "Are you sure you want to delete the ",
-   "deleteConfirm2" : "<br> This action cannot be undone." 
+   "deleteConfirm2" : "<br> This action cannot be undone."
   },
     "resPresets": {
         "resPresets": "Préréglages du contrôle de température",
@@ -4117,11 +4117,11 @@
         "vehicleTurnedOn":"Next: Vehicle Ignition On",
         "saveAndSendSettings":"Save & Send Settings",
         "updateNotificationOptions":"In order to update these notification options, Valet Mode must first be deactivated.",
-        "configurationInfo":"While Valet Mode is active all other driver alerts will be suspended. This includes Curfew, Speed and Boundary Alerts as well as any active trip tracking. Once Valet Mode is turned off, your alerts will resume.", 
+        "configurationInfo":"While Valet Mode is active all other driver alerts will be suspended. This includes Curfew, Speed and Boundary Alerts as well as any active trip tracking. Once Valet Mode is turned off, your alerts will resume.",
         "configurationInfo2":" Other features such as sending a Driver Profile, resetting your Valet Mode Passcode, updating your Valet Mode settings, accessing Enhanced Roadside Assistance as well as Concierge services will be restricted.",
         "deactivate":"Deactivate",
         "locateDetails":"Locate Vehicle",
-        "notificationOptions":"Notification Options",  
+        "notificationOptions":"Notification Options",
         "on" :"On",
         "off":"Off",
         "receiveNotification":"You will receive a notification when the vehicle exceeds",
@@ -4131,7 +4131,7 @@
         "deactivateValetMode": "Deactivate Valet Mode",
         "notificationPreferences": "Notification Preferences",
         "changingTheseNotificationPreferences": "Changing these notification preferences will update your global STARLINK<sup>&reg;</sup> Communication preferences.",
-        "mailAlert": "Email",   
+        "mailAlert": "Email",
         "saveNotificationPreferences": "Save Notification Preferences",
         "viewLocationDetails": "View Location Details",
         "valetRefresh": "Refresh",
