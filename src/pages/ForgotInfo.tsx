@@ -12,7 +12,6 @@ import { checkVIN } from '../model/VIN';
 import { requestVINVerify } from '../net/VINVerify';
 import { requestForgotUsername } from '../net/ForgotUsername';
 import { MySimpleNavBar, MySimpleNavButtonBarItem } from '../components/MySimpleNavBar';
-import { useNetworkActivity } from '../stores/Response';
 import { MyNetworkSnackBar } from '../components/MySnackBar';
 import { descriptionForErrorCode, ErrorCode } from '../model/Code';
 
@@ -29,11 +28,8 @@ export const ForgotInfo = () => {
     const [username, setUsername] = useState(""); // mysubaruwatch@yahoo.com
     const [VIN, setVIN] = useState(""); // 4S3BMAA66D1038385
     const [state, setState] = useState<ForgotPasswordState>(initialState);
-    const [activity, setActivity] = useNetworkActivity();
     const resetPassword = async () => {
         setState(initialState);
-        // TODO: Reset Password calls
-        setActivity(null);
     }
     const checkForAccount = async () => {
         setState(initialState);
@@ -48,7 +44,6 @@ export const ForgotInfo = () => {
         } else {
             setState({type: "error", code: "VINLookupFailed"});
         }
-        setActivity(null);
     }
     const [actionButton, formErrors] = (() => {
         let button = <MyPrimaryButton title="Enter Email or VIN" style={{ width: 350, backgroundColor: C.copySecondary }}></MyPrimaryButton>;

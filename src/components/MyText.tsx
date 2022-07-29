@@ -10,12 +10,16 @@ export interface MyTextProps {
 
 export const decodeString = (text: string) => {
     text = text.replace("<br />", "\n");
+    text = text.replace("<br />", "\n");
     text = text.replace("<nobr>", "");
     text = text.replace("</nobr>", "");
     text = text.replace("&nbsp;", " ");
     text = text.replace("&amp;", "&");
-    text = text.replace("<strong>Terms & Conditions</strong>", ""); // TODO: Bold support
-    text = text.replace("<a href=\"tel:1(800) 782-2783\" class=\"text-link\">(800) 782-2783</a>", "(800) 782-2783"); // TODO: Fix phone links
+    // TODO: Bold support
+    text = text.replace("<strong>", "");
+    text = text.replace("</strong>", "");
+    // TODO: Links
+    text = text.replace("<a href=\"tel:1(800) 782-2783\" class=\"text-link\">(800) 782-2783</a>", "(800) 782-2783");
     return text;
 }
 

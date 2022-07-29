@@ -32,9 +32,6 @@ export const myFetch = async (endpoint: string, init?: RequestInit | undefined):
     return new Promise<NetworkResponse>((resolve, _) => {
         postNetworkRequest(endpoint, init);
         if (e.env == "demo") {
-            /** TODO: Get mocks for
-             * Condition
-            */
             const responseObject = Object.assign({}, mockResponseForEndpoint(endpoint), {endpoint: normalizeEndpoint(endpoint)});
             if (responseObject.dataName === "remoteServiceStatus") {
                 if (responseObject.data.remoteServiceState === "started") {

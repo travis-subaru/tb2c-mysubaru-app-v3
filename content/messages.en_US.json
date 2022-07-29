@@ -2687,6 +2687,9 @@
       "remoteTailgateUnlockError": "We are having trouble unlocking your tailgate. Please make sure your ${1} is not running and try again."
 
     },
+    "statusBar": {
+        "__MISSING": "Only in mysubaru-canada"
+    },
     "remoteEngineStart": {
         "createSettings": "Create settings so your vehicle will be comfortable when you are ready to go. Set the temperature, warm the seats, and turn on the front &amp; rear defrost easily with your app.",
         "createNewEngineSetting": "Create a New Start Engine Setting",
@@ -3111,6 +3114,9 @@
         "close": "X",
         "mySubaruChat": "MySubaru Chat",
         "experienceDifficulties": "Experiencing difficulties using the MySubaru app? Use MySubaru Chat to get help in real time, without a phone call. Note: Chat can only be accessed on the MySubaru app and website login pages."
+    },
+    "loadingAnimation": {
+        "__MISSING": "Only in mysubaru-canada"
     },
     "3gSunset": {
         "alertBanner1": "<strong>STARLINK<sup>\u00AE</sup> System Update Required</strong><br>Your ",

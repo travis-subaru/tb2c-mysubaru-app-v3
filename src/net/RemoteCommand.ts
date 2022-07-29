@@ -93,42 +93,6 @@ export interface HornLightsParameters {
     vin: string
 }
 
-// TODO: Locale mapping
-const presentTenseForType = (type: RemoteServiceType): string => {
-    switch (type) {
-        case "engineStart": return "REMOTE ENGINE START";
-        case "engineStop": return "REMOTE ENGINE STOP";
-        case "lock": return "LOCK DOORS";
-        case "unlock": return "UNLOCK DOORS";
-        case "condition": return "VEHICLE STATUS";
-        case "hornLights": return "HORN & LIGHTS";
-    }
-};
-
-const pastTenseForType = (type: RemoteServiceType): string => {
-    switch (type) {
-        case "engineStart": return "ENGINE STARTED";
-        case "engineStop": return "ENGINE STOPPED";
-        case "lock": return "DOORS LOCKED";
-        case "unlock": return "DOORS UNLOCKED";
-        case "condition": return "VEHICLE STATUS UPDATED";
-        case "hornLights": return "HORN & LIGHTS FLASHING"; // TODO: Doesn't match existing app
-    }
-};
-
-// Using partial RemoteServiceStatus type to allow inter-op with progress indicator
-export const descriptionForRemoteServiceStatus = (i18n: Language, status: {remoteServiceType: RemoteServiceType, remoteServiceState: RemoteServiceState}): string => {
-    switch (status.remoteServiceState) {
-        case "started": return `Sending ${presentTenseForType(status.remoteServiceType)} to your vehicle`;
-        case "scheduled": return `Scheduled Message here for ${presentTenseForType(status.remoteServiceType)}`;
-        case "finished": {
-            const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric' };
-            const now = (new Date()).toLocaleString('en-US', options);
-            return `${pastTenseForType(status.remoteServiceType)} at ${now}`
-        }
-    }
-};
-
 export const descriptionForUnlockDoorType = (i18n: Language, type: UnlockDoorType): string => {
     switch (type) {
         case "ALL_DOORS_CMD": return i18n.unlockSettingPanel.allDoors;
@@ -165,7 +129,7 @@ export const pollRemoteServiceStatus = async (statusEndpoint: string, serviceReq
 };
 
 // TODO: Gen 0 / Gen 1 support?
-const getRemoteCommandEndpoint = (command: RemoteServiceType): string => {
+export const getRemoteCommandEndpoint = (command: RemoteServiceType): string => {
     switch (command) {
         case "engineStart": return "service/g2/engineStart/execute.json";
         case "engineStop": return "service/g2/engineStop/execute.json";
@@ -174,17 +138,6 @@ const getRemoteCommandEndpoint = (command: RemoteServiceType): string => {
         case "condition": return "service/g2/condition/execute.json";
         case "hornLights": return "service/g2/hornLights/execute.json";
     }
-}
-
-export const mapEndpointToCommand = (endpoint: string): RemoteServiceType | undefined => {
-    const _endpoint = normalizeEndpoint(endpoint);
-    const commands: RemoteServiceType[] = ["engineStart", "engineStop", "lock", "unlock", "condition", "hornLights"];
-    for (let command of commands) {
-        if (getRemoteCommandEndpoint(command) === _endpoint) {
-            return command;
-        }
-    }
-    return undefined;
 }
 
 export const executeRemoteStart = async (p: RemoteStartParameters): Promise<NetworkResponse> => {

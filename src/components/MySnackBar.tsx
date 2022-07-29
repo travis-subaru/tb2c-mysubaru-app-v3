@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from "react-native";
-import { descriptionForActivity, NetworkActivity, useNetworkActivity } from '../stores/Response';
+import { addNetworkActivityListener, NetworkActivity, normalizeEndpoint, removeNetworkActivityListener } from '../stores/Response';
 import { MyAppIcon } from './MyAppIcon';
 import { MyLinkButton } from './MyButton';
 import { Palette, useColors } from "./MyColors";
 import { Language, useLanguage } from '../model/Language';
 import { MyText } from './MyText';
+import { RemoteServiceStatus } from '../net/RemoteCommand';
+import { descriptionForErrorCode } from '../model/Code';
 
 export interface MySnackBarProps {
     style?: any
@@ -39,13 +41,92 @@ export const MySnackBar = (props: MySnackBarProps) => {
     </View>;
 }
 
+export const descriptionForRemoteServiceStatus = (i18n: Language, status: RemoteServiceStatus): string | undefined => {
+    switch (status.remoteServiceState) {
+        case "started": {
+            switch (status.remoteServiceType) {
+                case "engineStart": return i18n.statusBar.remoteEngineStartStarted;
+                case "engineStop": return i18n.statusBar.remoteEngineStopStarted;
+                case "lock": return i18n.statusBar.lockDoorsStarted;
+                case "unlock": return i18n.statusBar.unlockDoorsStarted;
+                case "hornLights": return i18n.statusBar.hornLightsStarted;
+            }
+        }
+        case "finished": {
+            const message = (() => {
+                switch (status.remoteServiceType) {
+                    case "engineStart": return i18n.statusBar.remoteEngineStartFinished;
+                    case "engineStop": return i18n.statusBar.remoteEngineStopFinished;
+                    case "lock": return i18n.statusBar.lockDoorsFinished;
+                    case "unlock": return i18n.statusBar.unlockDoorsFinished;
+                    case "hornLights": return i18n.statusBar.hornLightsFinished;
+                }
+            })()
+            const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric' };
+            const now = (new Date()).toLocaleString('en-US', options);
+            return `${message}${now}`
+        }
+    }
+
+    return undefined;
+};
+
+export const descriptionForActivity = (i18n: Language, activity: NetworkActivity): string | undefined => {
+    if (activity.type === "request") {
+        const endpoint = normalizeEndpoint(activity.request.endpoint);
+        switch (endpoint) {
+            case "login.json": return i18n.loadingAnimation.title;
+            case "selectVehicle.json": return i18n.loadingAnimation.text1;
+            case "refreshVehicles.json": return i18n.loadingAnimation.text2;
+            case "twoStepAuthContacts.json": return i18n.loadingAnimation.text3;
+            case "twoStepAuthSendVerification.json": return "TODO 1";
+            case "twoStepAuthVerify.json": return "TODO 2"
+            case "service/g2/engineStart/execute.json": return i18n.statusBar.remoteEngineStartSent;
+            case "service/g2/engineStop/execute.json": return i18n.statusBar.remoteEngineStopSent;
+            case "service/g2/lock/execute.json": return i18n.statusBar.lockDoorsSent;
+            case "service/g2/unlock/execute.json": return i18n.statusBar.unlockDoorsSent;
+            case "service/g2/hornLights/execute.json": return i18n.statusBar.hornLightsSent;
+            default: return `SENT: ${endpoint}`;
+        }
+    } else {
+        const r = activity.response;
+        if (r.dataName === "remoteServiceStatus") {
+            return descriptionForRemoteServiceStatus(i18n, r.data);
+        }
+        if (r.errorCode === "statusError") {
+            return `${i18n.message.fatalMessage} (HTTP: ${r.data.status})`
+        }
+        if (r.errorCode != null) {
+            return descriptionForErrorCode(i18n, r.errorCode);
+        }
+        if (r.success) {
+            // Catch-all for unhandled successes
+            return `${i18n.common.ok}: ${normalizeEndpoint(activity.response.endpoint)}`;
+        } else {
+            // Catch-all for unhandled failures
+            return `${i18n.message.fatalMessage}: ${normalizeEndpoint(activity.response.endpoint)}`;
+        }
+    }
+};
+
 export interface MyNetworkSnackBarProps extends MySnackBarProps {
     showActivity?: (activity: NetworkActivity) => boolean
 }
 
 export const MyNetworkSnackBar = (props: MyNetworkSnackBarProps) => {
     const i18n: Language = useLanguage();
-    const [activity, setActivity] = useNetworkActivity(props.showActivity);
+    const [activity, setActivity] = useState<NetworkActivity|null>(null);
+    useEffect(() => {
+        const id = addNetworkActivityListener((activity) => {
+            if (!props.showActivity || props.showActivity(activity)) {
+                const description = descriptionForActivity(i18n, activity);
+                if (description) {
+                    setActivity(activity);
+                }
+            }
+        });
+        return () => removeNetworkActivityListener(id);
+    });
     if (activity == null) { return null; }
     const onClose = () => {
         if (props.onClose) { props.onClose(); }
