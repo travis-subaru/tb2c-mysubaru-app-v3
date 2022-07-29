@@ -41,7 +41,7 @@ export const App = () => {
                 case "MySimpleChoice":
                     return <MySimpleChoiceModal key={key} items={m.viewModel.items} title={m.viewModel.title} onCancel={() => m.resolver({type: "cancel"})} onSelect={(item) => m.resolver({type: "choice", selection: item})} />;
                 case "PIN":
-                    return <PINCheck key={key} onCancel={() => m.resolver({type: "pin", ok: false})} onSelect={(pin) => m.resolver({type: "pin", ok: true, pin: pin})}/>;
+                    return <PINCheck key={key} onCancel={() => m.resolver({type: "cancel"})} onSelect={(pin) => m.resolver({type: "pin", pin: pin})}/>;
             }
         })}
     </>);
