@@ -12,6 +12,11 @@ export const mockResponseForEndpoint = (endpoint: string): NetworkResponse => {
 	if (normalized === 'service_g2_condition_execute.json') { return require('../mocks/service_g2_condition_execute.json'); }
 	if (normalized === 'service_g2_engineStart_execute.json') { return require('../mocks/service_g2_engineStart_execute.json'); }
 	if (normalized === 'service_g2_engineStop_execute.json') { return require('../mocks/service_g2_engineStop_execute.json'); }
+	if (normalized === 'service_g2_hornLights_execute.json') { return require('../mocks/service_g2_hornLights_execute.json'); }
+	if (normalized === 'service_g2_hornLights_status.json') { return require('../mocks/service_g2_hornLights_status.json'); }
+	if (normalized === 'service_g2_hornLights_stop.json') { return require('../mocks/service_g2_hornLights_stop.json'); }
+	if (normalized === 'service_g2_lightsOnly_execute.json') { return require('../mocks/service_g2_lightsOnly_execute.json'); }
+	if (normalized === 'service_g2_lightsOnly_status.json') { return require('../mocks/service_g2_lightsOnly_status.json'); }
 	if (normalized === 'service_g2_lock_execute.json') { return require('../mocks/service_g2_lock_execute.json'); }
 	if (normalized === 'service_g2_remoteService_status.json') { return require('../mocks/service_g2_remoteService_status.json'); }
 	if (normalized === 'service_g2_unlock_execute.json') { return require('../mocks/service_g2_unlock_execute.json'); }
