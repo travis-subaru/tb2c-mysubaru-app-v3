@@ -35,12 +35,13 @@ export const App = () => {
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
             {content}
         </SafeAreaView>
-        {modals.map((m) => {
+        {modals.map((m, i) => {
+            const key = `${m.viewModel.type}-${i}`
             switch (m.viewModel.type) {
                 case "MySimpleChoice":
-                    return <MySimpleChoiceModal items={m.viewModel.items} title={m.viewModel.title} onCancel={() => m.resolver({type: "cancel"})} onSelect={(item) => m.resolver({type: "choice", selection: item})} />;
+                    return <MySimpleChoiceModal key={key} items={m.viewModel.items} title={m.viewModel.title} onCancel={() => m.resolver({type: "cancel"})} onSelect={(item) => m.resolver({type: "choice", selection: item})} />;
                 case "PIN":
-                    return <PINCheck onCancel={() => m.resolver({type: "pin", ok: false})} onSelect={(pin) => m.resolver({type: "pin", ok: true, pin: pin})}/>;
+                    return <PINCheck key={key} onCancel={() => m.resolver({type: "pin", ok: false})} onSelect={(pin) => m.resolver({type: "pin", ok: true, pin: pin})}/>;
             }
         })}
     </>);
